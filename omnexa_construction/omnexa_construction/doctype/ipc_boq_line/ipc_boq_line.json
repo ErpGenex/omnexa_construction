@@ -1,0 +1,22 @@
+{
+ "actions": [],
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "boq_item",
+  "section_name",
+  "item_description",
+  "period_value"
+ ],
+ "fields": [
+  {"fieldname": "boq_item", "fieldtype": "Link", "label": "BOQ Item", "options": "BOQ Item", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "section_name", "fieldtype": "Data", "label": "Section", "read_only": 1, "in_list_view": 1},
+  {"fieldname": "item_description", "fieldtype": "Data", "label": "Description", "read_only": 1, "in_list_view": 1},
+  {"fieldname": "period_value", "fieldtype": "Currency", "label": "Period Value", "default": "0", "reqd": 1, "in_list_view": 1, "description": "Amount for this BOQ line certified in this IPC period (should sum to Period Gross Amount when lines are used)."}
+ ],
+ "istable": 1,
+ "module": "Omnexa Construction",
+ "name": "IPC BOQ Line",
+ "permissions": []
+}

@@ -1,0 +1,31 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SDR-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["project", "report_date", "section_break_links", "boq_item", "pm_wbs_task", "weather", "work_summary", "labor_count", "equipment_hours", "material_consumed_cost", "safety_notes", "company", "branch"],
+ "fields": [
+  {"fieldname": "project", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "report_date", "fieldtype": "Date", "label": "Report Date", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "section_break_links", "fieldtype": "Section Break", "label": "Progress links"},
+  {"fieldname": "boq_item", "fieldtype": "Link", "label": "BOQ Item", "options": "BOQ Item", "description": "Optional BOQ line this report mainly supports."},
+  {"fieldname": "pm_wbs_task", "fieldtype": "Link", "label": "PM WBS Task", "options": "PM WBS Task", "description": "Optional schedule task for site-to-schedule traceability."},
+  {"fieldname": "weather", "fieldtype": "Data", "label": "Weather"},
+  {"fieldname": "work_summary", "fieldtype": "Small Text", "label": "Work Summary", "reqd": 1},
+  {"fieldname": "labor_count", "fieldtype": "Int", "label": "Labor Count", "default": "0"},
+  {"fieldname": "equipment_hours", "fieldtype": "Float", "label": "Equipment Hours", "default": "0"},
+  {"fieldname": "material_consumed_cost", "fieldtype": "Currency", "label": "Material Consumed Cost", "default": "0"},
+  {"fieldname": "safety_notes", "fieldtype": "Small Text", "label": "Safety Notes"},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "module": "Omnexa Construction",
+ "name": "Site Daily Report",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 0}
+ ],
+ "track_changes": 1
+}
+

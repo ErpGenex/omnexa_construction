@@ -1,0 +1,14 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "module": "Omnexa Construction",
+ "name": "Project Profitability (Construction)",
+ "prepared_report": 0,
+ "ref_doctype": "Project Contract",
+ "report_name": "Project Profitability (Construction)",
+ "report_type": "Script Report",
+ "roles": [{"role": "System Manager"}, {"role": "Project Manager"}, {"role": "Finance Manager"}]
+}
+

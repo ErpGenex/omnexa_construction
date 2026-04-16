@@ -1,0 +1,28 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SCW-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["project_contract", "subcontractor", "scope_of_work", "contract_value", "progress_percent", "amount_certified", "amount_paid", "status", "company", "branch"],
+ "fields": [
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "subcontractor", "fieldtype": "Link", "label": "Subcontractor", "options": "Supplier", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "scope_of_work", "fieldtype": "Small Text", "label": "Scope of Work", "reqd": 1},
+  {"fieldname": "contract_value", "fieldtype": "Currency", "label": "Contract Value", "default": "0"},
+  {"fieldname": "progress_percent", "fieldtype": "Percent", "label": "Progress %", "default": "0"},
+  {"fieldname": "amount_certified", "fieldtype": "Currency", "label": "Amount Certified", "read_only": 1},
+  {"fieldname": "amount_paid", "fieldtype": "Currency", "label": "Amount Paid", "default": "0"},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nActive\nCompleted\nClosed", "default": "Draft", "in_list_view": 1},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "module": "Omnexa Construction",
+ "name": "Subcontract Work Order",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1}
+ ],
+ "track_changes": 1
+}
+

@@ -1,0 +1,14 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "module": "Omnexa Construction",
+ "name": "BOQ Progress",
+ "prepared_report": 0,
+ "ref_doctype": "BOQ Item",
+ "report_name": "BOQ Progress",
+ "report_type": "Script Report",
+ "roles": [{"role": "System Manager"}, {"role": "Project Manager"}, {"role": "Site Engineer"}]
+}
+

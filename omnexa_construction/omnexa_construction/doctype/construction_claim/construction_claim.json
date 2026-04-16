@@ -1,0 +1,43 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:CLM-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project_contract",
+  "claim_date",
+  "claim_reference",
+  "claim_type",
+  "claimed_amount",
+  "claimed_delay_days",
+  "related_extension_of_time",
+  "related_change_order",
+  "description",
+  "status",
+  "company",
+  "branch"
+ ],
+ "fields": [
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "claim_date", "fieldtype": "Date", "label": "Claim / notice date", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "claim_reference", "fieldtype": "Data", "label": "Claim reference", "description": "Contractor’s claim or notice number (e.g. FIDIC Sub-Clause 20.1)."},
+  {"fieldname": "claim_type", "fieldtype": "Select", "label": "Claim type", "options": "Cost\nTime\nCost & Time\nOther", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "claimed_amount", "fieldtype": "Currency", "label": "Claimed amount", "default": "0", "description": "Monetary claim where applicable."},
+  {"fieldname": "claimed_delay_days", "fieldtype": "Int", "label": "Claimed delay (calendar days)", "default": "0"},
+  {"fieldname": "related_extension_of_time", "fieldtype": "Link", "label": "Related EOT", "options": "Construction Extension of Time"},
+  {"fieldname": "related_change_order", "fieldtype": "Link", "label": "Related change order", "options": "Construction Change Order"},
+  {"fieldname": "description", "fieldtype": "Small Text", "label": "Basis / narrative", "reqd": 1},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nSubmitted\nUnder Review\nAccepted\nRejected\nWithdrawn", "default": "Draft", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "module": "Omnexa Construction",
+ "name": "Construction Claim",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+  {"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 0}
+ ],
+ "track_changes": 1
+}

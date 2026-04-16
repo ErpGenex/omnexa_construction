@@ -1,0 +1,25 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WIP-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["project_contract", "snapshot_date", "cost_to_date", "revenue_recognized", "wip_balance", "company", "branch"],
+ "fields": [
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "snapshot_date", "fieldtype": "Date", "label": "Snapshot Date", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "cost_to_date", "fieldtype": "Currency", "label": "Cost to Date", "default": "0"},
+  {"fieldname": "revenue_recognized", "fieldtype": "Currency", "label": "Revenue Recognized", "default": "0"},
+  {"fieldname": "wip_balance", "fieldtype": "Currency", "label": "WIP Balance", "read_only": 1},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "module": "Omnexa Construction",
+ "name": "Project WIP Snapshot",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Finance Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1}
+ ],
+ "track_changes": 1
+}
+

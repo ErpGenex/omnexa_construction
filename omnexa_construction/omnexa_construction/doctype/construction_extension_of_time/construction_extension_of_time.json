@@ -1,0 +1,43 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:EOT-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project_contract",
+  "application_date",
+  "notice_reference",
+  "cause_category",
+  "delay_days_claimed",
+  "delay_days_approved",
+  "revised_completion_date",
+  "related_change_order",
+  "description",
+  "status",
+  "company",
+  "branch"
+ ],
+ "fields": [
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "application_date", "fieldtype": "Date", "label": "Application / notice date", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "notice_reference", "fieldtype": "Data", "label": "Notice reference", "description": "Contractor’s delay notice or claim reference (e.g. FIDIC Sub-Clause 20.1)."},
+  {"fieldname": "cause_category", "fieldtype": "Select", "label": "Cause category", "options": "\nEmployer / Engineer\nForce majeure\nUnforeseeable physical conditions\nLate instructions / variations\nOther", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "delay_days_claimed", "fieldtype": "Int", "label": "Delay (calendar days claimed)", "default": "0"},
+  {"fieldname": "delay_days_approved", "fieldtype": "Int", "label": "Delay (calendar days approved)", "default": "0"},
+  {"fieldname": "revised_completion_date", "fieldtype": "Date", "label": "Revised completion date (if granted)"},
+  {"fieldname": "related_change_order", "fieldtype": "Link", "label": "Related change order", "options": "Construction Change Order", "description": "Optional link if EOT tied to a formal variation."},
+  {"fieldname": "description", "fieldtype": "Small Text", "label": "Narrative", "reqd": 1},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nSubmitted\nApproved\nRejected", "default": "Draft", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "module": "Omnexa Construction",
+ "name": "Construction Extension of Time",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+  {"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 0}
+ ],
+ "track_changes": 1
+}

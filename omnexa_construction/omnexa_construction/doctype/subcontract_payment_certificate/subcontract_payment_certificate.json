@@ -1,0 +1,42 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SPC-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["subcontract_work_order", "certificate_date", "project_contract", "subcontractor", "certified_amount", "previously_paid", "retention_percent", "retention_amount", "net_payable", "status", "payment_date", "mode_of_payment", "bank_account", "payment_entry", "retention_release_date", "retention_mode_of_payment", "retention_bank_account", "retention_payment_entry", "journal_entry", "expense_account", "payable_account", "company", "branch"],
+ "fields": [
+  {"fieldname": "subcontract_work_order", "fieldtype": "Link", "label": "Subcontract Work Order", "options": "Subcontract Work Order", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "certificate_date", "fieldtype": "Date", "label": "Certificate Date", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "read_only": 1},
+  {"fieldname": "subcontractor", "fieldtype": "Link", "label": "Subcontractor", "options": "Supplier", "read_only": 1},
+  {"fieldname": "certified_amount", "fieldtype": "Currency", "label": "Certified Amount", "reqd": 1},
+  {"fieldname": "previously_paid", "fieldtype": "Currency", "label": "Previously Paid", "default": "0"},
+  {"fieldname": "retention_percent", "fieldtype": "Percent", "label": "Retention %", "default": "5"},
+  {"fieldname": "retention_amount", "fieldtype": "Currency", "label": "Retention Amount", "read_only": 1},
+  {"fieldname": "net_payable", "fieldtype": "Currency", "label": "Net Payable", "read_only": 1},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nApproved\nPaid\nRetention Released", "default": "Draft", "in_list_view": 1, "allow_on_submit": 1},
+  {"fieldname": "payment_date", "fieldtype": "Date", "label": "Payment Date", "allow_on_submit": 1},
+  {"fieldname": "mode_of_payment", "fieldtype": "Link", "label": "Mode of Payment", "options": "Mode of Payment", "allow_on_submit": 1},
+  {"fieldname": "bank_account", "fieldtype": "Link", "label": "Bank Account", "options": "Bank Account", "allow_on_submit": 1},
+  {"fieldname": "payment_entry", "fieldtype": "Link", "label": "Payment Entry", "options": "Payment Entry", "read_only": 1},
+  {"fieldname": "retention_release_date", "fieldtype": "Date", "label": "Retention Release Date", "allow_on_submit": 1},
+  {"fieldname": "retention_mode_of_payment", "fieldtype": "Link", "label": "Retention Mode of Payment", "options": "Mode of Payment", "allow_on_submit": 1},
+  {"fieldname": "retention_bank_account", "fieldtype": "Link", "label": "Retention Bank Account", "options": "Bank Account", "allow_on_submit": 1},
+  {"fieldname": "retention_payment_entry", "fieldtype": "Link", "label": "Retention Payment Entry", "options": "Payment Entry", "read_only": 1},
+  {"fieldname": "journal_entry", "fieldtype": "Link", "label": "Journal Entry", "options": "Journal Entry", "read_only": 1},
+  {"fieldname": "expense_account", "fieldtype": "Link", "label": "Subcontract Expense Account", "options": "Account"},
+  {"fieldname": "payable_account", "fieldtype": "Link", "label": "Subcontract Payable Account", "options": "Account"},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "module": "Omnexa Construction",
+ "name": "Subcontract Payment Certificate",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+  {"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+  {"role": "Accounts User", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1}
+ ],
+ "track_changes": 1
+}
+

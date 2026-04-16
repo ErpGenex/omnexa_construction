@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:BOQ-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project_contract",
+  "parent_boq_item",
+  "is_group",
+  "section_name",
+  "cost_code",
+  "item_description",
+  "quantity",
+  "unit_of_measure",
+  "unit_cost",
+  "selling_price",
+  "labor_cost",
+  "material_cost",
+  "equipment_cost",
+  "planned_cost",
+  "actual_cost",
+  "completion_percent",
+  "section_break_schedule",
+  "pm_wbs_task",
+  "company",
+  "branch"
+ ],
+ "fields": [
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "parent_boq_item", "fieldtype": "Link", "label": "Parent BOQ Item", "options": "BOQ Item", "description": "Optional parent line for multi-level BOQ (same project contract)."},
+  {"fieldname": "is_group", "fieldtype": "Check", "label": "Is Group", "default": "0", "description": "Group lines roll up planned cost from child BOQ items."},
+  {"fieldname": "section_name", "fieldtype": "Data", "label": "Section", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "cost_code", "fieldtype": "Data", "label": "Cost / BOQ code", "description": "Employer bill code, CSI, UniClass, or internal WBS cost code for international reporting."},
+  {"fieldname": "item_description", "fieldtype": "Data", "label": "Item Description", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "quantity", "fieldtype": "Float", "label": "Quantity", "default": "0", "reqd": 1},
+  {"fieldname": "unit_of_measure", "fieldtype": "Data", "label": "Unit"},
+  {"fieldname": "unit_cost", "fieldtype": "Currency", "label": "Unit Cost", "default": "0"},
+  {"fieldname": "selling_price", "fieldtype": "Currency", "label": "Selling Price", "default": "0"},
+  {"fieldname": "labor_cost", "fieldtype": "Currency", "label": "Labor Cost", "default": "0"},
+  {"fieldname": "material_cost", "fieldtype": "Currency", "label": "Material Cost", "default": "0"},
+  {"fieldname": "equipment_cost", "fieldtype": "Currency", "label": "Equipment Cost", "default": "0"},
+  {"fieldname": "planned_cost", "fieldtype": "Currency", "label": "Planned Cost", "read_only": 1},
+  {"fieldname": "actual_cost", "fieldtype": "Currency", "label": "Actual Cost", "default": "0"},
+  {"fieldname": "completion_percent", "fieldtype": "Percent", "label": "Completion %", "default": "0"},
+  {"fieldname": "section_break_schedule", "fieldtype": "Section Break", "label": "Schedule Integration"},
+  {"fieldname": "pm_wbs_task", "fieldtype": "Link", "label": "PM WBS Task", "options": "PM WBS Task", "description": "Optional link to a schedule task for earned value / progress alignment."},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+ ],
+ "links": [
+  {"group": "Billing", "link_doctype": "IPC BOQ Line", "link_fieldname": "boq_item"}
+ ],
+ "module": "Omnexa Construction",
+ "name": "BOQ Item",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1, "print": 1, "email": 1, "share": 1},
+  {"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 0, "print": 1, "email": 0},
+  {"role": "Cost Controller", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1, "print": 1, "email": 1}
+ ],
+ "track_changes": 1
+}
+
