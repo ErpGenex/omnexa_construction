@@ -25,8 +25,8 @@
   {"fieldname": "retention_bank_account", "fieldtype": "Link", "label": "Retention Bank Account", "options": "Bank Account", "allow_on_submit": 1},
   {"fieldname": "retention_payment_entry", "fieldtype": "Link", "label": "Retention Payment Entry", "options": "Payment Entry", "read_only": 1},
   {"fieldname": "journal_entry", "fieldtype": "Link", "label": "Journal Entry", "options": "Journal Entry", "read_only": 1},
-  {"fieldname": "expense_account", "fieldtype": "Link", "label": "Subcontract Expense Account", "options": "Account"},
-  {"fieldname": "payable_account", "fieldtype": "Link", "label": "Subcontract Payable Account", "options": "Account"},
+  {"fieldname": "expense_account", "fieldtype": "Link", "label": "Subcontract Expense Account", "options": "GL Account"},
+  {"fieldname": "payable_account", "fieldtype": "Link", "label": "Subcontract Payable Account", "options": "GL Account"},
   {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
   {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
  ],

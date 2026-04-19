@@ -1,50 +1,452 @@
 {
- "charts": [],
- "content": "[{\"id\":\"c-h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Construction</b></span>\",\"col\":12}},{\"id\":\"c-c1\",\"type\":\"card\",\"data\":{\"card_name\":\"Contracts & BOQ\",\"col\":4}},{\"id\":\"c-c2\",\"type\":\"card\",\"data\":{\"card_name\":\"Operations\",\"col\":4}},{\"id\":\"c-c3\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"c-c4\",\"type\":\"card\",\"data\":{\"card_name\":\"Procurement\",\"col\":4}},{\"id\":\"c-c5\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"c-c6\",\"type\":\"card\",\"data\":{\"card_name\":\"Engineering (RIBA)\",\"col\":4}}]",
+ "charts": [
+  {
+   "chart_name": "Construction \u00b7 Status Bar",
+   "label": "Status Bar"
+  },
+  {
+   "chart_name": "Construction \u00b7 Project Contract Mix",
+   "label": "Project Contract Mix"
+  },
+  {
+   "chart_name": "Construction \u00b7 Subcontract Work Order Mix",
+   "label": "Subcontract Work Order Mix"
+  }
+ ],
+ "content": "[{\"id\":\"construction-h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Construction</b></span>\",\"col\":12}},{\"id\":\"construction-nc0\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Project Contract\",\"col\":4}},{\"id\":\"construction-nc1\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"BOQ Item\",\"col\":4}},{\"id\":\"construction-nc2\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Site Daily Report\",\"col\":4}},{\"id\":\"construction-nc3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Subcontract Work Order\",\"col\":4}},{\"id\":\"construction-nc4\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Construction Change Order\",\"col\":4}},{\"id\":\"construction-nc5\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Extension of Time (EOT)\",\"col\":4}},{\"id\":\"construction-nc6\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Construction Claim\",\"col\":4}},{\"id\":\"construction-nc7\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"IPC Certificate\",\"col\":4}},{\"id\":\"construction-ch0\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Status Bar\",\"col\":4}},{\"id\":\"construction-ch1\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Project Contract Mix\",\"col\":4}},{\"id\":\"construction-ch2\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Subcontract Work Order Mix\",\"col\":4}},{\"id\":\"construction-ops\",\"type\":\"header\",\"data\":{\"text\":\"<b>Quick Actions</b>\",\"col\":12}},{\"id\":\"construction-sc0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Contract\",\"col\":3}},{\"id\":\"construction-sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOQ Item\",\"col\":3}},{\"id\":\"construction-sc2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"PM WBS Task\",\"col\":3}},{\"id\":\"construction-sc3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Site Daily Report\",\"col\":3}},{\"id\":\"construction-sc4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Work Order\",\"col\":3}},{\"id\":\"construction-sc5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction Change Order\",\"col\":3}},{\"id\":\"construction-sc6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Extension of Time (EOT)\",\"col\":3}},{\"id\":\"construction-sc7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction Claim\",\"col\":3}},{\"id\":\"construction-sc8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"IPC Certificate\",\"col\":3}},{\"id\":\"construction-sc9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Payment Certificate\",\"col\":3}},{\"id\":\"construction-sc10\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project WIP Snapshot\",\"col\":3}},{\"id\":\"construction-sc11\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Order\",\"col\":3}},{\"id\":\"construction-sc12\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":3}},{\"id\":\"construction-sc13\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOQ Progress\",\"col\":3}}]",
+ "creation": "2026-04-17 23:42:59.727027",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
  "hide_custom": 0,
  "icon": "tool",
+ "idx": 0,
  "is_hidden": 0,
  "label": "Construction",
  "links": [
-  {"hidden": 0, "label": "Contracts & BOQ", "type": "Card Break"},
-  {"hidden": 0, "icon": "file-text", "label": "Project Contract", "link_to": "Project Contract", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "list", "label": "BOQ Item", "link_to": "BOQ Item", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Schedule (PM)", "type": "Card Break"},
-  {"hidden": 0, "icon": "tree", "label": "PM WBS Task", "link_to": "PM WBS Task", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Operations", "type": "Card Break"},
-  {"hidden": 0, "icon": "clipboard", "label": "Site Daily Report", "link_to": "Site Daily Report", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "users", "label": "Subcontract Work Order", "link_to": "Subcontract Work Order", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "shuffle", "label": "Construction Change Order", "link_to": "Construction Change Order", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "clock", "label": "Extension of Time (EOT)", "link_to": "Construction Extension of Time", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "file-warning", "label": "Construction Claim", "link_to": "Construction Claim", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Billing", "type": "Card Break"},
-  {"hidden": 0, "icon": "credit-card", "label": "IPC Certificate", "link_to": "IPC Certificate", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "file-plus", "label": "Subcontract Payment Certificate", "link_to": "Subcontract Payment Certificate", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "activity", "label": "Project WIP Snapshot", "link_to": "Project WIP Snapshot", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Procurement", "type": "Card Break"},
-  {"hidden": 0, "icon": "shopping-cart", "label": "Purchase Order", "link_to": "Purchase Order", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "truck", "label": "Supplier", "link_to": "Supplier", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "label": "Reports", "type": "Card Break"},
-  {"hidden": 0, "icon": "bar-chart-2", "is_query_report": 1, "label": "BOQ Progress", "link_to": "BOQ Progress", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "icon": "layers", "is_query_report": 1, "label": "Construction Contract Control", "link_to": "Construction Contract Control", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "icon": "activity", "is_query_report": 1, "label": "Project Profitability (Construction)", "link_to": "Project Profitability (Construction)", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "icon": "alert-circle", "label": "BOQ Cost Overrun", "link_to": "BOQ Cost Overrun", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "icon": "globe", "label": "Contract International Summary", "link_to": "Construction Contract International Summary", "link_type": "Report", "type": "Link"},
-  {"hidden": 0, "label": "Engineering (RIBA)", "type": "Card Break"},
-  {"hidden": 0, "icon": "map", "label": "Engineering Stage", "link_to": "Engineering Stage", "link_type": "DocType", "type": "Link"},
-  {"hidden": 0, "icon": "file-text", "label": "Engineering Submittal", "link_to": "Engineering Submittal", "link_type": "DocType", "type": "Link"}
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Contracts & BOQ",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "file-text",
+   "is_query_report": 0,
+   "label": "Project Contract",
+   "link_count": 0,
+   "link_to": "Project Contract",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "list",
+   "is_query_report": 0,
+   "label": "BOQ Item",
+   "link_count": 0,
+   "link_to": "BOQ Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Schedule (PM)",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "tree",
+   "is_query_report": 0,
+   "label": "PM WBS Task",
+   "link_count": 0,
+   "link_to": "PM WBS Task",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Operations",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "clipboard",
+   "is_query_report": 0,
+   "label": "Site Daily Report",
+   "link_count": 0,
+   "link_to": "Site Daily Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "users",
+   "is_query_report": 0,
+   "label": "Subcontract Work Order",
+   "link_count": 0,
+   "link_to": "Subcontract Work Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "shuffle",
+   "is_query_report": 0,
+   "label": "Construction Change Order",
+   "link_count": 0,
+   "link_to": "Construction Change Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "clock",
+   "is_query_report": 0,
+   "label": "Extension of Time (EOT)",
+   "link_count": 0,
+   "link_to": "Construction Extension of Time",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "file-warning",
+   "is_query_report": 0,
+   "label": "Construction Claim",
+   "link_count": 0,
+   "link_to": "Construction Claim",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Billing",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "credit-card",
+   "is_query_report": 0,
+   "label": "IPC Certificate",
+   "link_count": 0,
+   "link_to": "IPC Certificate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "file-plus",
+   "is_query_report": 0,
+   "label": "Subcontract Payment Certificate",
+   "link_count": 0,
+   "link_to": "Subcontract Payment Certificate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "activity",
+   "is_query_report": 0,
+   "label": "Project WIP Snapshot",
+   "link_count": 0,
+   "link_to": "Project WIP Snapshot",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Procurement",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "shopping-cart",
+   "is_query_report": 0,
+   "label": "Purchase Order",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "truck",
+   "is_query_report": 0,
+   "label": "Supplier",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "bar-chart-2",
+   "is_query_report": 1,
+   "label": "BOQ Progress",
+   "link_count": 0,
+   "link_to": "BOQ Progress",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "layers",
+   "is_query_report": 1,
+   "label": "Construction Contract Control",
+   "link_count": 0,
+   "link_to": "Construction Contract Control",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "activity",
+   "is_query_report": 1,
+   "label": "Project Profitability (Construction)",
+   "link_count": 0,
+   "link_to": "Project Profitability (Construction)",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "alert-circle",
+   "is_query_report": 0,
+   "label": "BOQ Cost Overrun",
+   "link_count": 0,
+   "link_to": "BOQ Cost Overrun",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "BOQ Item",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "globe",
+   "is_query_report": 0,
+   "label": "Contract International Summary",
+   "link_count": 0,
+   "link_to": "Construction Contract International Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Project Contract",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Engineering (RIBA)",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "map",
+   "is_query_report": 0,
+   "label": "Engineering Stage",
+   "link_count": 0,
+   "link_to": "Engineering Stage",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "file-text",
+   "is_query_report": 0,
+   "label": "Engineering Submittal",
+   "link_count": 0,
+   "link_to": "Engineering Submittal",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
  ],
+ "modified": "2026-04-17 23:45:47.437952",
+ "modified_by": "Administrator",
  "module": "Omnexa Construction",
  "name": "Construction",
- "number_cards": [],
+ "number_cards": [
+  {
+   "label": "Project Contract",
+   "number_card_name": "Project Contract"
+  },
+  {
+   "label": "BOQ Item",
+   "number_card_name": "BOQ Item"
+  },
+  {
+   "label": "Site Daily Report",
+   "number_card_name": "Site Daily Report"
+  },
+  {
+   "label": "Subcontract Work Order",
+   "number_card_name": "Subcontract Work Order"
+  },
+  {
+   "label": "Construction Change Order",
+   "number_card_name": "Construction Change Order"
+  },
+  {
+   "label": "Extension of Time (EOT)",
+   "number_card_name": "Extension of Time (EOT)"
+  },
+  {
+   "label": "Construction Claim",
+   "number_card_name": "Construction Claim"
+  },
+  {
+   "label": "IPC Certificate",
+   "number_card_name": "IPC Certificate"
+  }
+ ],
+ "owner": "Administrator",
  "public": 1,
  "quick_lists": [],
  "roles": [],
  "sequence_id": 8.3,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Cyan",
+   "doc_view": "List",
+   "label": "Project Contract",
+   "link_to": "Project Contract",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "BOQ Item",
+   "link_to": "BOQ Item",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "List",
+   "label": "PM WBS Task",
+   "link_to": "PM WBS Task",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Site Daily Report",
+   "link_to": "Site Daily Report",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Subcontract Work Order",
+   "link_to": "Subcontract Work Order",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "label": "Construction Change Order",
+   "link_to": "Construction Change Order",
+   "type": "DocType"
+  },
+  {
+   "color": "Teal",
+   "doc_view": "List",
+   "label": "Extension of Time (EOT)",
+   "link_to": "Construction Extension of Time",
+   "type": "DocType"
+  },
+  {
+   "color": "Pink",
+   "doc_view": "List",
+   "label": "Construction Claim",
+   "link_to": "Construction Claim",
+   "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "List",
+   "label": "IPC Certificate",
+   "link_to": "IPC Certificate",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Subcontract Payment Certificate",
+   "link_to": "Subcontract Payment Certificate",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "List",
+   "label": "Project WIP Snapshot",
+   "link_to": "Project WIP Snapshot",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Purchase Order",
+   "link_to": "Purchase Order",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Supplier",
+   "link_to": "Supplier",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "",
+   "label": "BOQ Progress",
+   "link_to": "BOQ Progress",
+   "report_ref_doctype": "BOQ Item",
+   "type": "Report"
+  }
+ ],
  "title": "Construction"
 }
