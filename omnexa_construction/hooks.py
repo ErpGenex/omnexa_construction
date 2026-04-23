@@ -1,8 +1,8 @@
 app_name = "omnexa_construction"
 app_title = "ErpGenEx — Construction"
-app_publisher = "Omnexa"
+app_publisher = "ErpGenEx"
 app_description = "Construction management vertical"
-app_email = "dev@omnexa.com"
+app_email = "dev@erpgenex.com"
 app_license = "mit"
 
 # Apps
