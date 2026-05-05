@@ -5,12 +5,14 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"project_contract",
 		"order_date",
 		"title",
 		"column_break_omnexa_1",
 		"contract_clause_reference",
 		"description",
+		"tab_break_details",
 		"cost_impact",
 		"time_impact_days",
 		"column_break_omnexa_2",
@@ -20,6 +22,16 @@
 		"change_ticket"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_details",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
 		{
 			"fieldname": "project_contract",
 			"fieldtype": "Link",

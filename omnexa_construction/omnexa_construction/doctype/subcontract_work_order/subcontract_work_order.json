@@ -5,12 +5,14 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"project_contract",
 		"subcontractor",
 		"scope_of_work",
 		"column_break_omnexa_1",
 		"contract_value",
 		"progress_percent",
+		"tab_break_details",
 		"amount_certified",
 		"amount_paid",
 		"column_break_omnexa_2",
@@ -20,6 +22,16 @@
 		"work_order_owner"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_details",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
 		{
 			"fieldname": "project_contract",
 			"fieldtype": "Link",

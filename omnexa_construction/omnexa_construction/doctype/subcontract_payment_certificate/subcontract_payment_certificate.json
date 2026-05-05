@@ -5,6 +5,7 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"subcontract_work_order",
 		"certificate_date",
 		"project_contract",
@@ -18,6 +19,7 @@
 		"status",
 		"payment_date",
 		"mode_of_payment",
+		"tab_break_details",
 		"bank_account",
 		"payment_entry",
 		"retention_release_date",
@@ -33,6 +35,16 @@
 		"payment_reference"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_details",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
 		{
 			"fieldname": "subcontract_work_order",
 			"fieldtype": "Link",
