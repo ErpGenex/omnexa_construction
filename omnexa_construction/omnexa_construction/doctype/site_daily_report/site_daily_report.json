@@ -5,8 +5,10 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"project",
 		"report_date",
+		"tab_break_1",
 		"section_break_links",
 		"boq_item",
 		"pm_wbs_task",
@@ -23,6 +25,16 @@
 		"report_reference"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_1",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
 		{
 			"fieldname": "project",
 			"fieldtype": "Link",

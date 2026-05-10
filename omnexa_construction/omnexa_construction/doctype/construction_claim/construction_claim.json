@@ -5,6 +5,7 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"project_contract",
 		"claim_date",
 		"claim_reference",
@@ -12,6 +13,7 @@
 		"column_break_omnexa_1",
 		"claimed_amount",
 		"claimed_delay_days",
+		"tab_break_details",
 		"related_extension_of_time",
 		"related_change_order",
 		"column_break_omnexa_2",
@@ -22,6 +24,16 @@
 		"claim_owner"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_details",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
 		{
 			"fieldname": "project_contract",
 			"fieldtype": "Link",
