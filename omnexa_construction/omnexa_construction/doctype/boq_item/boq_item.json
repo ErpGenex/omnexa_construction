@@ -5,6 +5,7 @@
 	"doctype": "DocType",
 	"engine": "InnoDB",
 	"field_order": [
+		"tab_break_overview",
 		"project_contract",
 		"parent_boq_item",
 		"is_group",
@@ -23,6 +24,7 @@
 		"planned_cost",
 		"actual_cost",
 		"completion_percent",
+		"tab_break_1",
 		"section_break_schedule",
 		"pm_wbs_task",
 		"company",
@@ -31,6 +33,16 @@
 		"classification_code"
 	],
 	"fields": [
+		{
+			"fieldname": "tab_break_overview",
+			"fieldtype": "Tab Break",
+			"label": "Overview"
+		},
+		{
+			"fieldname": "tab_break_1",
+			"fieldtype": "Tab Break",
+			"label": "Details"
+		},
 		{
 			"fieldname": "project_contract",
 			"fieldtype": "Link",
