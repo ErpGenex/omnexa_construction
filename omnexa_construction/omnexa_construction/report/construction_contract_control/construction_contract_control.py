@@ -24,10 +24,10 @@ def execute(filters=None):
 	)
 
 	return [
-		{"label": "Project Contract", "fieldname": "name", "fieldtype": "Link", "options": "Project Contract", "width": 180},
-		{"label": "Contract Value", "fieldname": "contract_value", "fieldtype": "Currency", "width": 140},
-		{"label": "Approved Change Orders", "fieldname": "change_orders", "fieldtype": "Currency", "width": 170},
-		{"label": "Revised Value", "fieldname": "revised_value", "fieldtype": "Currency", "width": 140},
-		{"label": "IPC Net Billed", "fieldname": "ipc_net", "fieldtype": "Currency", "width": 140},
-		{"label": "Remaining", "fieldname": "remaining", "fieldtype": "Currency", "width": 130},
+		{"label": _("Project Contract"), "fieldname": "name", "fieldtype": "Link", "options": "Project Contract", "width": 180},
+		{"label": _("Contract Value"), "fieldname": "contract_value", "fieldtype": "Currency", "width": 140},
+		{"label": _("Approved Change Orders"), "fieldname": "change_orders", "fieldtype": "Currency", "width": 170},
+		{"label": _("Revised Value"), "fieldname": "revised_value", "fieldtype": "Currency", "width": 140},
+		{"label": _("IPC Net Billed"), "fieldname": "ipc_net", "fieldtype": "Currency", "width": 140},
+		{"label": _("Remaining"), "fieldname": "remaining", "fieldtype": "Currency", "width": 130},
 	], data
