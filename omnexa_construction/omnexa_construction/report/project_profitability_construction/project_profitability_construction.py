@@ -1,13 +1,25 @@
 import frappe
 from frappe import _
+
+from omnexa_core.omnexa_core.report_print.report_query_filters import (
+	get_all_filters,
+	policy_version_filters,
+	prepare_filters,
+	sql_conditions,
+)
+
+
+from frappe import _
 from frappe.utils import flt
 
 from omnexa_construction.contract_financials import billable_contract_value
 
 
 def execute(filters=None):
+	filters = prepare_filters(filters)
 	contracts = frappe.get_all(
 		"Project Contract",
+		filters=get_all_filters(filters, "Project Contract", company=True, branch=True, extra_links={"name": "project_contract"}),
 		fields=["name", "contract_value", "company", "branch"],
 		limit_page_length=1000,
 	)

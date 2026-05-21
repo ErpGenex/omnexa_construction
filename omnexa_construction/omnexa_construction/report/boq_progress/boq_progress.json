@@ -9,6 +9,32 @@
  "ref_doctype": "BOQ Item",
  "report_name": "BOQ Progress",
  "report_type": "Script Report",
- "roles": [{"role": "System Manager"}, {"role": "Project Manager"}, {"role": "Site Engineer"}]
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Project Manager"
+  },
+  {
+   "role": "Site Engineer"
+  }
+ ],
+ "filters": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "width": "180px"
+  },
+  {
+   "fieldname": "project_contract",
+   "fieldtype": "Link",
+   "label": "Project Contract",
+   "options": "Project Contract",
+   "width": "200px"
+  }
+ ]
 }
-
