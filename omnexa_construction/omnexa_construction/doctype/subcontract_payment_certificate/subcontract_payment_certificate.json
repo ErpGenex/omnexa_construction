@@ -216,6 +216,7 @@
 			"fieldtype": "Column Break"
 		}
 	],
+	"is_submittable": 1,
 	"module": "Omnexa Construction",
 	"name": "Subcontract Payment Certificate",
 	"permissions": [
