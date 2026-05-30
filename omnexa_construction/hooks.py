@@ -43,9 +43,7 @@ required_apps = ["omnexa_core"]
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {
-	"Company": "public/js/company_construction_demo.js",
-}
+# Company demo buttons: omnexa_core/public/js/company_demo_data_hub.js
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
