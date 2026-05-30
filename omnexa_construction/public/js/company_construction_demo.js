@@ -3,8 +3,9 @@
 
 function setup_company_construction_demo_buttons(frm) {
 	const grp = __("Construction demo");
+	const demo_btn = (label, fn) => erpgenex.company_demo.demo_btn(frm, label, fn, grp);
 
-	frm.add_custom_button(
+	demo_btn(
 		__("Seed 5 projects (owners, IPC, subcontractors, costs)"),
 		() => {
 			frappe.confirm(
@@ -49,7 +50,6 @@ function setup_company_construction_demo_buttons(frm) {
 				},
 			);
 		},
-		grp,
 	);
 }
 
