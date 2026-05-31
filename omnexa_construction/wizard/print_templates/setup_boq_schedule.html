@@ -1,31 +1,75 @@
-<div class="print-format">
-  <h2>{{ _("BOQ Schedule") }} — {{ doc.contract_title or doc.name }}</h2>
-  <p><b>{{ _("Type") }}:</b> {{ doc.building_type }} | <b>{{ _("Template") }}:</b> {{ doc.boq_template }}</p>
-  <p><b>{{ _("Contract Value") }}:</b> {{ frappe.utils.fmt_money(doc.estimated_contract_value, currency=doc.contract_currency) }}</p>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>{{ _("Code") }}</th>
-        <th>{{ _("Description") }}</th>
-        <th>{{ _("Qty") }}</th>
-        <th>{{ _("UOM") }}</th>
-        <th>{{ _("Planned Cost") }}</th>
-        <th>{{ _("Finish") }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in doc.boq_lines %}
-      {% if row.include and not row.is_group %}
-      <tr>
-        <td>{{ row.cost_code }}</td>
-        <td>{{ row.item_description }}</td>
-        <td class="text-right">{{ row.quantity }}</td>
-        <td>{{ row.unit_of_measure }}</td>
-        <td class="text-right">{{ frappe.utils.fmt_money(row.planned_cost, currency=doc.contract_currency) }}</td>
-        <td>{{ row.planned_finish or "" }}</td>
-      </tr>
-      {% endif %}
-      {% endfor %}
-    </tbody>
-  </table>
+{% set ctx = frappe.call("omnexa_construction.construction_forms.setup_print.build_setup_print_context", setup_name=doc.name) %}
+{% set cur = doc.contract_currency or ctx.currency %}
+<div class="omx-setup ar-form print-format">
+
+<table class="meta">
+<tr>
+	<td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+	<td width="48%">
+		<b class="label">الشركة:</b> {{ ctx.company_name }}<br>
+		{% if ctx.branch_name %}<b class="label">الفرع:</b> {{ ctx.branch_name }}<br>{% endif %}
+		<b class="label">العميل:</b> {{ ctx.client_name or "—" }}<br>
+		<b class="label">المشروع:</b> {{ ctx.contract_title }}
+	</td>
+	<td width="40%">
+		<div class="doc-title">جدول الكميات BOQ</div>
+		<div class="doc-subtitle">Bill of Quantities Schedule</div>
+		<b class="label">رقم الإعداد:</b> {{ doc.name }}<br>
+		<b class="label">تاريخ الطباعة:</b> {{ frappe.format(ctx.print_date, {"fieldtype": "Date"}) }}
+	</td>
+</tr>
+</table>
+
+<div class="info-bar">
+	<div class="cell"><b class="label">نوع المبنى:</b> {{ ctx.building_type or "—" }}</div>
+	<div class="cell"><b class="label">قالب BOQ:</b> {{ ctx.boq_template or "—" }}</div>
+	<div class="cell"><b class="label">المعيار:</b> {{ ctx.governing_standard or "—" }}</div>
+	<div class="cell"><b class="label">قيمة العقد التقديرية:</b> {{ frappe.utils.fmt_money(doc.estimated_contract_value, currency=cur) if doc.estimated_contract_value else "—" }}</div>
+</div>
+
+<div class="section-head">بنود جدول الكميات</div>
+<table class="grid">
+	<thead>
+		<tr>
+			<th width="10%">الكود</th>
+			<th width="34%">البيان</th>
+			<th width="10%">الكمية</th>
+			<th width="8%">الوحدة</th>
+			<th width="16%">التكلفة المخططة</th>
+			<th width="12%">تاريخ الانتهاء</th>
+			<th width="10%">المرحلة</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% set ns = namespace(total=0) %}
+		{% for row in doc.boq_lines %}
+		{% if row.include and not row.is_group %}
+		{% set ns.total = ns.total + (row.planned_cost or 0) %}
+		<tr>
+			<td>{{ row.cost_code }}</td>
+			<td class="desc">{{ row.item_description }}</td>
+			<td>{{ row.quantity }}</td>
+			<td>{{ row.unit_of_measure }}</td>
+			<td>{{ frappe.utils.fmt_money(row.planned_cost, currency=cur) if row.planned_cost else "—" }}</td>
+			<td>{{ row.planned_finish or "—" }}</td>
+			<td>{{ row.phase_code or "—" }}</td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+		<tr class="total-row">
+			<td colspan="4">إجمالي التكلفة المخططة</td>
+			<td colspan="3">{{ frappe.utils.fmt_money(ns.total, currency=cur) }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="sig">
+	<tr>
+		<td><div class="sig-title">إعداد</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">مراجعة</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">اعتماد</div><div class="sig-line"></div>الاسم: _______________</td>
+	</tr>
+</table>
+
+<div class="page-footer">Omnexa Construction — {{ ctx.contract_title }} — BOQ Schedule — {{ doc.name }}</div>
 </div>

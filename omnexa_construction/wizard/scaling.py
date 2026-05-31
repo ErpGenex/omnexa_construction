@@ -14,6 +14,9 @@ QUALITY_MULTIPLIERS = {
 	"Luxury": 1.35,
 }
 
+LUMP_SUM_UOMS = frozenset({"ls", "lot", "item", "no", "l.s.", "lump sum"})
+AREA_DRIVERS = frozenset({"GFA", "PLOT", "FLOORS", "UNITS"})
+
 _ALLOWED_OPS = {
 	ast.Add: op.add,
 	ast.Sub: op.sub,
@@ -67,6 +70,13 @@ def resolve_quantity(line, drivers: dict[str, float], regional_factor: float = 1
 	driver = (line.get("quantity_driver") if isinstance(line, dict) else line.quantity_driver) or "FIXED"
 	base_qty = flt(line.get("base_quantity") if isinstance(line, dict) else line.base_quantity) or 1.0
 	formula = line.get("driver_formula") if isinstance(line, dict) else line.driver_formula
+	uom = (
+		(line.get("unit_of_measure") if isinstance(line, dict) else getattr(line, "unit_of_measure", None))
+		or ""
+	).strip().lower()
+
+	if driver in AREA_DRIVERS and uom in LUMP_SUM_UOMS:
+		driver = "FIXED"
 
 	if driver == "FIXED":
 		qty = base_qty

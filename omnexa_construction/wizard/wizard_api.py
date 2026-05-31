@@ -7,7 +7,100 @@ from frappe.utils import today
 from omnexa_construction.wizard.boq_helpers import expand_default_boq_details, suggest_phases_and_ipc
 from omnexa_construction.wizard.pricing import recalculate_setup_pricing
 from omnexa_construction.wizard.apply_template_defaults import apply_template_defaults
-from omnexa_construction.wizard.template_packs import BUILDING_TYPE_META, BOQ_TEMPLATES
+from omnexa_construction.wizard.template_packs import BOQ_TEMPLATES, BUILDING_TYPE_META, TEMPLATE_PACKS
+
+
+def _sanitize_company_branch(
+	company: str | None,
+	branch: str | None,
+) -> tuple[str | None, str | None]:
+	"""Drop invalid Link values sent from desk (labels, stale boot cache, etc.)."""
+	company = (company or "").strip() or None
+	branch = (branch or "").strip() or None
+	if branch in ("__ALL__", "ALL", "all"):
+		branch = None
+	if company and not frappe.db.exists("Company", company):
+		branch_guess = frappe.db.get_value("Branch", {"branch_name": company}, "name")
+		if branch_guess:
+			branch = branch or branch_guess
+		company = None
+	if branch and not frappe.db.exists("Branch", branch):
+		branch = None
+	if branch and company and frappe.db.get_value("Branch", branch, "company") != company:
+		branch = None
+	return company, branch
+
+
+def _resolve_company_branch(
+	company: str | None = None,
+	branch: str | None = None,
+	*,
+	required: bool = True,
+) -> tuple[str | None, str | None]:
+	"""Resolve company/branch using ErpGenEx desk context and branch access fallbacks."""
+	from omnexa_core.omnexa_core.branch_access import get_default_branch, get_default_company
+	from omnexa_core.omnexa_core.session_context import get_view_context
+
+	company, branch = _sanitize_company_branch(company, branch)
+
+	if not company:
+		ctx = get_view_context()
+		company = _sanitize_company_branch(ctx.get("company"), None)[0] or get_default_company()
+
+	if not company and required:
+		frappe.throw(
+			_(
+				"Company is required. Set a default Company in User Preferences or select one from the desk company/branch switcher."
+			),
+			title=_("Wizard"),
+		)
+
+	if company and not branch:
+		ctx = get_view_context()
+		ctx_company, ctx_branch = _sanitize_company_branch(ctx.get("company"), ctx.get("branch"))
+		if ctx_company == company and ctx_branch and not ctx.get("view_all_branches"):
+			branch = ctx_branch
+		if not branch:
+			branch = get_default_branch(company)
+		if not branch:
+			branch = frappe.db.get_value(
+				"Branch",
+				{"company": company},
+				"name",
+				order_by="is_head_office desc, creation asc",
+			)
+
+	if company and required and not branch:
+		frappe.throw(
+			_("No branch is configured for company {0}. Create a Branch or assign User Branch Access.").format(
+				company
+			),
+			title=_("Wizard"),
+		)
+
+	return company, branch
+
+
+def _boq_template_available(template_code: str | None) -> bool:
+	"""True when a BOQ template exists in DB or can be loaded from seed packs."""
+	if not template_code:
+		return False
+	if frappe.db.exists("Construction BOQ Template", template_code):
+		return True
+	return template_code in TEMPLATE_PACKS
+
+
+def _ensure_boq_template_in_db(template_code: str | None) -> bool:
+	"""Create or refresh a Construction BOQ Template from seed packs when missing."""
+	if not template_code:
+		return False
+	if frappe.db.exists("Construction BOQ Template", template_code):
+		return True
+	for tpl in BOQ_TEMPLATES:
+		if tpl.get("template_code") == template_code:
+			_upsert_boq_template(tpl, replace_lines=True)
+			return True
+	return False
 
 
 @frappe.whitelist()
@@ -15,17 +108,15 @@ def get_building_types() -> list[dict]:
 	"""Building types available in Phase 4 MVP wizard."""
 	out = []
 	for code, meta in BUILDING_TYPE_META.items():
+		template_code = meta.get("template_code")
 		out.append(
 			{
 				"code": code,
 				"label_en": meta.get("label_en", code),
 				"label_ar": meta.get("label_ar", code),
 				"segment": meta.get("segment"),
-				"template_code": meta.get("template_code"),
-				"has_template": bool(
-					meta.get("template_code")
-					and frappe.db.exists("Construction BOQ Template", meta.get("template_code"))
-				),
+				"template_code": template_code,
+				"has_template": _boq_template_available(template_code),
 			}
 		)
 	return out
@@ -34,12 +125,7 @@ def get_building_types() -> list[dict]:
 @frappe.whitelist()
 def create_setup(company: str | None = None, branch: str | None = None) -> dict:
 	"""Create a draft Construction Project Setup with company/branch defaults."""
-	if not company:
-		company = frappe.defaults.get_user_default("Company")
-	if not company:
-		frappe.throw(_("Company is required."), title=_("Wizard"))
-	if not branch:
-		branch = frappe.db.get_value("Branch", {"company": company}, "name", order_by="creation asc")
+	company, branch = _resolve_company_branch(company, branch)
 	currency = frappe.db.get_value("Company", company, "default_currency") or "EGP"
 	doc = frappe.get_doc(
 		{
@@ -56,26 +142,117 @@ def create_setup(company: str | None = None, branch: str | None = None) -> dict:
 			"basement_levels": 0,
 		}
 	)
+	doc.flags.wizard_save = True
 	doc.insert(ignore_permissions=True)
 	return {"name": doc.name, "company": company, "branch": branch}
 
 
-@frappe.whitelist()
-def get_wizard_context(setup_name: str | None = None) -> dict:
-	if setup_name and frappe.db.exists("Construction Project Setup", setup_name):
-		setup = frappe.get_doc("Construction Project Setup", setup_name)
-	else:
-		created = create_setup()
-		setup = frappe.get_doc("Construction Project Setup", created["name"])
-	return {
-		"setup": setup.as_dict(),
-		"building_types": get_building_types(),
-		"templates": frappe.get_all(
-			"Construction BOQ Template",
-			filters={"is_active": 1},
-			fields=["name", "template_name", "template_name_ar", "building_type", "project_segment"],
-		),
+def _setup_dict_for_wizard(setup) -> dict:
+	"""Lean, JSON-safe setup payload for the desk wizard."""
+	child_tables = (
+		"boq_lines",
+		"phases",
+		"ipc_plan",
+		"boq_details",
+		"assignments",
+	)
+	row = setup.as_dict(convert_dates_to_str=True)
+	for table in child_tables:
+		row.pop(table, None)
+	return row
+
+
+def _find_open_setup(company: str, branch: str | None = None) -> str | None:
+	"""Reuse the user's latest in-progress wizard draft when possible."""
+	filters = {
+		"owner": frappe.session.user,
+		"company": company,
+		"status": "Draft",
+		"docstatus": 0,
+		"project_contract": ("is", "not set"),
 	}
+	if branch:
+		filters["branch"] = branch
+	return frappe.db.get_value(
+		"Construction Project Setup",
+		filters,
+		"name",
+		order_by="modified desc",
+	)
+
+
+def _ensure_setup_company_branch(setup) -> None:
+	"""Back-fill company/branch on older wizard drafts."""
+	if setup.get("company") and setup.get("branch"):
+		return
+	company, branch = _resolve_company_branch(setup.get("company"), setup.get("branch"))
+	if company and setup.get("company") != company:
+		setup.company = company
+	if branch and setup.get("branch") != branch:
+		setup.branch = branch
+	if setup.has_value_changed("company") or setup.has_value_changed("branch"):
+		setup.flags.wizard_save = True
+		setup.flags.ignore_permissions = True
+		setup.save()
+
+
+def _load_setup_doc(setup_name: str | None, company: str | None, branch: str | None):
+	if setup_name and frappe.db.exists("Construction Project Setup", setup_name):
+		try:
+			setup = frappe.get_doc("Construction Project Setup", setup_name)
+			_ensure_setup_company_branch(setup)
+			return setup
+		except Exception:
+			frappe.log_error(
+				title="Construction Wizard — setup load failed",
+				message=frappe.get_traceback(),
+			)
+
+	company, branch = _resolve_company_branch(company, branch)
+	open_name = _find_open_setup(company, branch)
+	if open_name:
+		setup = frappe.get_doc("Construction Project Setup", open_name)
+		_ensure_setup_company_branch(setup)
+		return setup
+
+	created = create_setup(company=company, branch=branch)
+	return frappe.get_doc("Construction Project Setup", created["name"])
+
+
+@frappe.whitelist()
+def get_wizard_context(
+	setup_name: str | None = None,
+	company: str | None = None,
+	branch: str | None = None,
+) -> dict:
+	"""Load or create a wizard draft; company/branch are resolved server-side when omitted."""
+	try:
+		setup = _load_setup_doc(setup_name, company, branch)
+		return {
+			"setup": _setup_dict_for_wizard(setup),
+			"building_types": get_building_types(),
+		}
+	except frappe.ValidationError:
+		raise
+	except Exception as exc:
+		frappe.log_error(title="Construction Wizard — get_wizard_context", message=frappe.get_traceback())
+		frappe.throw(
+			_("Could not load the wizard: {0}").format(str(exc) or _("Unknown error")),
+			title=_("Wizard"),
+		)
+
+
+@frappe.whitelist()
+def select_building_type(setup_name: str, building_type: str) -> dict:
+	"""Save building type and apply BOQ template pack in one request."""
+	if not setup_name or not frappe.db.exists("Construction Project Setup", setup_name):
+		frappe.throw(_("Wizard draft not found. Reload the page."), title=_("Wizard"))
+	if not building_type:
+		frappe.throw(_("Building type is required."), title=_("Wizard"))
+	save_wizard_step(setup_name, 2, {"building_type": building_type})
+	result = load_building_type_template(setup_name)
+	result["wizard_step"] = 2
+	return result
 
 
 @frappe.whitelist()
@@ -120,14 +297,37 @@ def save_wizard_step(setup_name: str, step: int, data: str | dict | None = None)
 		"regional_cost_factor",
 		"site_region",
 	}
+	float_fields = {
+		"plot_area_m2",
+		"gross_floor_area_m2",
+		"road_length_m",
+		"road_width_m",
+		"pipe_network_km",
+		"liquidated_damages_per_day",
+	}
+	int_fields = {
+		"number_of_floors",
+		"basement_levels",
+		"unit_count",
+		"bed_count",
+		"key_count",
+	}
 	for key, value in payload.items():
-		if key in allowed:
+		if key not in allowed:
+			continue
+		if value in ("", None):
+			continue
+		if key in int_fields:
+			setup.set(key, cint(value))
+		elif key in float_fields:
+			setup.set(key, flt(value))
+		else:
 			setup.set(key, value)
 	setup.wizard_step = int(step)
 	if setup.building_type and not setup.boq_template:
 		meta = BUILDING_TYPE_META.get(setup.building_type, {})
 		code = meta.get("template_code")
-		if code and frappe.db.exists("Construction BOQ Template", code):
+		if code and _ensure_boq_template_in_db(code):
 			setup.boq_template = code
 		if meta.get("segment"):
 			setup.project_segment = setup.project_segment or meta.get("segment")
@@ -136,6 +336,7 @@ def save_wizard_step(setup_name: str, step: int, data: str | dict | None = None)
 			"Construction BOQ Template", setup.boq_template, "default_governing_standard"
 		)
 	setup.flags.ignore_permissions = True
+	setup.flags.wizard_save = True
 	setup.save()
 	return {"name": setup.name, "wizard_step": setup.wizard_step, "status": setup.status}
 
@@ -218,6 +419,12 @@ def cint(value):
 	return _cint(value)
 
 
+def flt(value):
+	from frappe.utils import flt as _flt
+
+	return _flt(value)
+
+
 def _upsert_boq_template(tpl: dict, *, replace_lines: bool = True) -> str:
 	"""Insert or update a Construction BOQ Template from seed data."""
 	code = tpl["template_code"]
@@ -278,8 +485,10 @@ def load_building_type_template(setup_name: str) -> dict:
 
 	setup = frappe.get_doc("Construction Project Setup", setup_name)
 	meta = BUILDING_TYPE_META.get(setup.building_type or "", {})
-	if meta.get("template_code"):
-		setup.boq_template = meta["template_code"]
+	template_code = meta.get("template_code")
+	if template_code:
+		_ensure_boq_template_in_db(template_code)
+		setup.boq_template = template_code
 	if meta.get("segment"):
 		setup.project_segment = meta["segment"]
 	pack = get_template_pack(setup.boq_template, setup.building_type)
@@ -294,8 +503,10 @@ def load_building_type_template(setup_name: str) -> dict:
 				getdate(setup.planned_start), pack.get("duration_months", 18)
 			)
 	setup.flags.ignore_permissions = True
+	setup.flags.wizard_save = True
 	setup.save()
 	return {
+		"building_type": setup.building_type,
 		"boq_template": setup.boq_template,
 		"project_segment": setup.project_segment,
 		"governing_standard": setup.governing_standard,
@@ -305,10 +516,7 @@ def load_building_type_template(setup_name: str) -> dict:
 
 @frappe.whitelist()
 def ensure_material_catalog(company: str | None = None) -> dict:
-	if not company:
-		company = frappe.defaults.get_user_default("Company")
-	if not company:
-		frappe.throw(_("Company is required."), title=_("Catalog"))
+	company, _branch = _resolve_company_branch(company, None, required=True)
 	from omnexa_construction.wizard.catalog_import import import_material_catalog
 
 	return import_material_catalog(company)

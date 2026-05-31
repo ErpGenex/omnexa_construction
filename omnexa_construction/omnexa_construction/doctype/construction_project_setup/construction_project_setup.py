@@ -12,6 +12,8 @@ class ConstructionProjectSetup(Document):
 	def validate(self):
 		if self.status not in ("Completed", "Failed"):
 			recalculate_setup_pricing(self)
+		if getattr(self.flags, "wizard_save", False):
+			return
 		self._validate_phases()
 		self._validate_ipc_plan()
 

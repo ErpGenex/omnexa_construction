@@ -1,0 +1,183 @@
+.construction-wizard {
+	padding-bottom: 88px;
+}
+
+.construction-wizard.wizard-rtl {
+	direction: rtl;
+	text-align: right;
+}
+
+.construction-wizard.wizard-rtl .wizard-steps {
+	text-align: right;
+}
+
+.construction-wizard.wizard-rtl .wizard-footer-bar {
+	flex-direction: row-reverse;
+}
+
+.construction-wizard.wizard-rtl table th,
+.construction-wizard.wizard-rtl table td {
+	text-align: right;
+}
+
+.construction-wizard.wizard-rtl .form-group .control-label {
+	text-align: right;
+	display: block;
+}
+
+.construction-wizard .wizard-steps {
+	margin-bottom: 1rem;
+}
+
+.construction-wizard .wizard-body {
+	min-height: 280px;
+	padding: 8px 4px 16px;
+}
+
+.construction-wizard .wizard-loading {
+	padding: 24px 12px;
+	font-size: 14px;
+}
+
+/* Sticky footer — Next always visible */
+.construction-wizard .wizard-footer-bar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1040;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px 24px;
+	background: #fff;
+	border-top: 2px solid #1e3a5f;
+	box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.construction-wizard .wizard-footer-bar .footer-left,
+.construction-wizard .wizard-footer-bar .footer-right {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.construction-wizard .wizard-btn-next {
+	min-width: 160px;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 28px;
+	background: #1e3a5f;
+	border-color: #1e3a5f;
+}
+
+.construction-wizard .wizard-btn-next:hover {
+	background: #152a45;
+	border-color: #152a45;
+}
+
+.construction-wizard .wizard-btn-generate {
+	min-width: 180px;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 28px;
+}
+
+.construction-wizard .wizard-btn-prev {
+	min-width: 120px;
+	font-size: 14px;
+	padding: 10px 20px;
+}
+
+/* Building type cards */
+.construction-wizard .building-type-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 12px;
+	margin-top: 8px;
+}
+
+.construction-wizard .building-type-card {
+	border: 2px solid #d1d8e0;
+	border-radius: 8px;
+	padding: 14px 16px;
+	cursor: pointer;
+	transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+	background: #fafbfc;
+	min-height: 72px;
+}
+
+.construction-wizard .building-type-card:hover {
+	border-color: #1e3a5f;
+	background: #f0f4f8;
+}
+
+.construction-wizard .building-type-card.selected {
+	border-color: #1e3a5f;
+	background: #e8eef5;
+	box-shadow: 0 0 0 1px #1e3a5f;
+}
+
+.construction-wizard .building-type-card .card-title-ar {
+	font-size: 15px;
+	font-weight: 600;
+	color: #1e3a5f;
+	margin-bottom: 4px;
+}
+
+.construction-wizard .building-type-card .card-title-en {
+	font-size: 12px;
+	color: #666;
+}
+
+.construction-wizard .building-type-card .badge-no-tpl {
+	margin-top: 6px;
+	font-size: 10px;
+}
+
+.construction-wizard .step2-hint {
+	font-size: 14px;
+	color: #1e3a5f;
+	font-weight: 600;
+	margin-bottom: 12px;
+	padding: 10px 14px;
+	background: #e8eef5;
+	border-radius: 6px;
+	border-right: 4px solid #1e3a5f;
+}
+
+.construction-wizard.wizard-rtl .step2-hint {
+	border-right: none;
+	border-left: 4px solid #1e3a5f;
+}
+
+.construction-wizard .selected-type-summary {
+	margin-top: 16px;
+	padding: 12px 16px;
+	background: #f8f9fa;
+	border: 1px solid #dee2e6;
+	border-radius: 6px;
+}
+
+.construction-wizard .selected-type-summary.empty {
+	border-color: #f5c6cb;
+	background: #fff5f5;
+	color: #721c24;
+}
+
+.construction-wizard .step3-type-banner {
+	margin-bottom: 16px;
+	padding: 12px 16px;
+	background: #e8eef5;
+	border: 1px solid #c5d4e8;
+	border-radius: 6px;
+	color: #1e3a5f;
+	font-size: 14px;
+}
+
+.construction-wizard .step3-type-banner.empty {
+	border-color: #f5c6cb;
+	background: #fff5f5;
+	color: #721c24;
+}

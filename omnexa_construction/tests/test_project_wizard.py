@@ -8,6 +8,7 @@ from omnexa_construction.wizard.regional_cost import resolve_regional_factor
 from omnexa_construction.wizard.residential_inventory import sync_residential_inventory_from_setup
 from omnexa_construction.wizard.scaling import resolve_quantity
 from omnexa_construction.wizard.template_loader import VILLA_LINES
+from omnexa_construction.wizard.wizard_api import create_setup
 
 
 class TestProjectWizard(FrappeTestCase):
@@ -15,6 +16,52 @@ class TestProjectWizard(FrappeTestCase):
 		super().setUp()
 		self.company = frappe.db.get_value("Company", {}, "name")
 		self.branch = frappe.db.get_value("Branch", {"company": self.company}, "name") if self.company else None
+
+	def test_create_setup_resolves_company_without_user_default(self):
+		if not self.company:
+			self.skipTest("No company on site")
+		frappe.defaults.clear_user_default("Company")
+		frappe.defaults.clear_user_default("company")
+		out = create_setup()
+		self.assertEqual(out["company"], self.company)
+		frappe.delete_doc("Construction Project Setup", out["name"], force=1)
+
+	def test_save_wizard_assignments(self):
+		if not self.company or not self.branch:
+			self.skipTest("No company/branch")
+		currency = frappe.db.get_value("Company", self.company, "default_currency") or "EGP"
+		setup = frappe.get_doc(
+			{
+				"doctype": "Construction Project Setup",
+				"company": self.company,
+				"branch": self.branch,
+				"contract_currency": currency,
+				"contract_title": "Assignment Save Test",
+				"building_type": "villa",
+			}
+		)
+		setup.insert(ignore_permissions=True)
+		setup.append(
+			"assignments",
+			{
+				"assignment_type": "Subcontractor",
+				"trade_package_code": "CIVIL",
+				"scope_notes": "Test scope",
+			},
+		)
+		setup.save(ignore_permissions=True)
+		supplier = frappe.db.get_value("Supplier", {}, "name")
+		if not supplier:
+			self.skipTest("No supplier on site")
+		from omnexa_construction.wizard.project_bundle import save_wizard_assignments
+
+		save_wizard_assignments(
+			setup.name,
+			[{"trade_package_code": "CIVIL", "party": supplier}],
+		)
+		setup.reload()
+		self.assertEqual(setup.assignments[0].party, supplier)
+		frappe.delete_doc("Construction Project Setup", setup.name, force=1)
 
 	def test_regional_factor_default(self):
 		self.assertEqual(resolve_regional_factor(), 1.0)

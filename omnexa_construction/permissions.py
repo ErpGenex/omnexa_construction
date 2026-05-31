@@ -6,6 +6,8 @@ from omnexa_core.omnexa_core.user_context import apply_company_branch_defaults
 
 
 def enforce_branch_access_for_doc(doc, method=None):
+	if getattr(getattr(doc, "flags", None), "wizard_save", False):
+		return
 	enforce_branch_access(doc)
 
 

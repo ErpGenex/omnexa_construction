@@ -37,3 +37,12 @@ class TestWizardScaling(FrappeTestCase):
 		d = build_drivers(Setup())
 		self.assertEqual(d["GFA"], 500)
 		self.assertEqual(d["ROAD_M"], 1000)
+
+	def test_lump_sum_ignores_area_driver(self):
+		line = {
+			"quantity_driver": "GFA",
+			"base_quantity": 1,
+			"unit_of_measure": "ls",
+		}
+		drivers = {"GFA": 5000}
+		self.assertEqual(resolve_quantity(line, drivers), 1)

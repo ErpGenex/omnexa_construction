@@ -64,8 +64,8 @@ SCHOOL_FULL_LINES = _merge_lines(
 		_line("00.20", "School safety & temporary facilities", "00 Preliminaries", parent="00", uom="ls", base_qty=1, driver="FIXED", unit_cost=320000),
 		_line("01.10", "Bulk excavation", "01 Earthworks", parent="01", uom="m³", base_qty=0.6, driver="PLOT", unit_cost=95, trade="TRD-EARTH"),
 		_line("09.10", "Plumbing for classrooms & labs", "09 MEP-P", parent="09", uom="ls", base_qty=1, driver="FORMULA", formula="UNITS / 20", unit_cost=380000, trade="TRD-MEP-P"),
-		_line("10.10", "Classroom & lab HVAC", "10 MEP-H", parent="10", uom="ls", base_qty=1, driver="GFA", unit_cost=380, trade="TRD-MEP-H"),
-		_line("11.10", "Power, data & PA system", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="GFA", unit_cost=420, trade="TRD-MEP-E"),
+		_line("10.10", "Classroom & lab HVAC", "10 MEP-H", parent="10", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 400", unit_cost=380000, trade="TRD-MEP-H"),
+		_line("11.10", "Power, data & PA system", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 380", unit_cost=420000, trade="TRD-MEP-E"),
 		_line("07.10", "Classroom & lab finishes", "07 Finishes", parent="07", uom="m²", base_qty=0.95, driver="GFA", unit_cost=780, trade="TRD-FIN"),
 		_line("13.10", "Playgrounds & sports courts", "13 External", parent="13", uom="m²", base_qty=0.3, driver="PLOT", unit_cost=520, trade="TRD-EXT"),
 		_line("13.20", "Boundary wall & gates", "13 External", parent="13", uom="m", base_qty=0.08, driver="PLOT", unit_cost=4200, trade="TRD-EXT"),
@@ -100,12 +100,12 @@ FACTORY_FULL_LINES = [
 	_line("07", "Industrial Flooring", "07 Finishes", is_group=1, trade="TRD-FIN"),
 	_line("07.10", "Epoxy / hardener floor finish", "07 Finishes", parent="07", uom="m²", base_qty=0.95, driver="GFA", unit_cost=420, trade="TRD-FIN"),
 	_line("09", "Process Plumbing", "09 MEP-P", is_group=1, trade="TRD-MEP-P"),
-	_line("09.10", "Process water & drainage", "09 MEP-P", parent="09", uom="ls", base_qty=1, driver="GFA", unit_cost=320, trade="TRD-MEP-P"),
+	_line("09.10", "Process water & drainage", "09 MEP-P", parent="09", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 350", unit_cost=450000, trade="TRD-MEP-P"),
 	_line("10", "Ventilation & HVAC", "10 MEP-H", is_group=1, trade="TRD-MEP-H"),
-	_line("10.10", "Industrial ventilation / HVAC", "10 MEP-H", parent="10", uom="ls", base_qty=1, driver="GFA", unit_cost=450, trade="TRD-MEP-H"),
+	_line("10.10", "Industrial ventilation / HVAC", "10 MEP-H", parent="10", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 400", unit_cost=380000, trade="TRD-MEP-H"),
 	_line("11", "Power & Controls", "11 MEP-E", is_group=1, trade="TRD-MEP-E"),
-	_line("11.10", "MV/LV distribution & lighting", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="GFA", unit_cost=520, trade="TRD-MEP-E"),
-	_line("11.20", "Fire alarm & suppression", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="GFA", unit_cost=280, trade="TRD-MEP-E"),
+	_line("11.10", "MV/LV distribution & lighting", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 380", unit_cost=420000, trade="TRD-MEP-E"),
+	_line("11.20", "Fire alarm & suppression", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 500", unit_cost=280000, trade="TRD-MEP-E"),
 	_line("13", "External Works", "13 External", is_group=1, trade="TRD-EXT"),
 	_line("13.10", "Fence, gate & external drainage", "13 External", parent="13", uom="ls", base_qty=1, driver="FIXED", unit_cost=380000, trade="TRD-EXT"),
 	_line("15", "Testing & Handover", "15 Handover", is_group=1),
@@ -270,7 +270,7 @@ HOTEL_FULL_LINES = _merge_lines(
 	[
 		_line("08.10", "Guest room FF&E package", "08 Joinery", parent="08", uom="No", base_qty=1.2, driver="FORMULA", formula="KEY_COUNT / 50", unit_cost=45000, trade="TRD-FIN"),
 		_line("10.20", "Kitchen & laundry equipment", "10 MEP-H", parent="10", uom="ls", base_qty=1, driver="FORMULA", formula="KEY_COUNT / 80", unit_cost=680000, trade="TRD-MEP-H"),
-		_line("11.20", "BMS / ELV hospitality", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="GFA", unit_cost=180, trade="TRD-MEP-E"),
+		_line("11.20", "BMS / ELV hospitality", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 380", unit_cost=420000, trade="TRD-MEP-E"),
 		_line("12.20", "Service lifts & dumbwaiters", "12 Lifts", parent="12", uom="No", base_qty=0.15, driver="FLOORS", unit_cost=520000),
 	],
 )
@@ -282,7 +282,7 @@ MALL_FULL_LINES = _merge_lines(
 		_line("05.30", "Atrium glazing & feature facade", "05 Facade", parent="05", uom="m²", base_qty=0.08, driver="GFA", unit_cost=5200, trade="TRD-FACADE"),
 		_line("12.20", "Escalators & travellators", "12 Lifts", parent="12", uom="No", base_qty=0.15, driver="FLOORS", unit_cost=420000),
 		_line("08.10", "Retail fit-out allowance", "08 Joinery", parent="08", uom="m²", base_qty=0.65, driver="GFA", unit_cost=1400, trade="TRD-FIN"),
-		_line("11.30", "Mall BMS & fire integration", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="GFA", unit_cost=240, trade="TRD-MEP-E"),
+		_line("11.30", "Mall BMS & fire integration", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 350", unit_cost=480000, trade="TRD-MEP-E"),
 	],
 )
 
@@ -290,8 +290,8 @@ OFFICE_FULL_LINES = _merge_lines(
 	RES_BLD_LINES,
 	_building_common_extras(),
 	[
-		_line("11.20", "Generator & UPS (office)", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="GFA", unit_cost=220, trade="TRD-MEP-E"),
-		_line("11.30", "Structured cabling & BMS", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="GFA", unit_cost=180, trade="TRD-MEP-E"),
+		_line("11.20", "Generator & UPS (office)", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 400", unit_cost=350000, trade="TRD-MEP-E"),
+		_line("11.30", "Structured cabling & BMS", "11 MEP-E", parent="11", uom="ls", base_qty=1, driver="FORMULA", formula="GFA / 380", unit_cost=380000, trade="TRD-MEP-E"),
 		_line("07.30", "Raised floor & ceiling (office)", "07 Finishes", parent="07", uom="m²", base_qty=0.85, driver="GFA", unit_cost=520, trade="TRD-FIN"),
 	],
 )

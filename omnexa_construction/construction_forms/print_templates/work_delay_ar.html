@@ -1,10 +1,27 @@
-<style>.ar-form{direction:rtl;font-family:Tahoma,Arial,sans-serif;font-size:11px}.ar-form .title{text-align:center;font-size:18px;font-weight:bold;color:#1e3a5f}.ar-form .section-head{background:#1e3a5f;color:#fff;padding:6px;margin-top:8px}</style>
 <div class="ar-form print-format">
-<div class="title">نموذج تأخير أعمال</div>
-<p>مشروع: {{ doc.project_name }} — التاريخ: {{ doc.form_date }}</p>
+<table class="meta"><tr>
+  <td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+  <td width="58%"><div class="title">نموذج تأخير أعمال</div></td>
+  <td width="30%"><b class="label">رقم:</b> {{ doc.name }}<br><b class="label">التاريخ:</b> {{ doc.form_date }}</td>
+</tr></table>
+<p><b class="label">المشروع:</b> {{ doc.project_name }}</p>
 <div class="section-head">بيانات التأخير</div>
-<p><b>البند:</b> {{ doc.delayed_item }}<br><b>الوصف:</b> {{ doc.description or "" }}<br><b>برنامج الانتهاء:</b> {{ doc.scheduled_finish_date or "" }}<br><b>الانتهاء الفعلي:</b> {{ doc.actual_finish_date or "" }}<br><b>أيام التأخير:</b> {{ doc.delay_days or 0 }}</p>
+<table class="grid">
+  <tbody>
+    <tr><td width="25%"><b class="label">البند</b></td><td class="desc">{{ doc.delayed_item }}</td></tr>
+    <tr><td><b class="label">الوصف</b></td><td class="desc">{{ doc.description or "" }}</td></tr>
+    <tr><td><b class="label">برنامج الانتهاء</b></td><td>{{ doc.scheduled_finish_date or "" }}</td></tr>
+    <tr><td><b class="label">الانتهاء الفعلي</b></td><td>{{ doc.actual_finish_date or "" }}</td></tr>
+    <tr><td><b class="label">أيام التأخير</b></td><td>{{ doc.delay_days or 0 }}</td></tr>
+  </tbody>
+</table>
 <div class="section-head">أسباب التأخير</div>
 <p>{% if doc.reason_contractor %}☑{% else %}☐{% endif %} المقاول &nbsp; {% if doc.reason_third_party %}☑{% else %}☐{% endif %} جهات أخرى &nbsp; {% if doc.reason_force_majeure %}☑{% else %}☐{% endif %} قوة قاهرة</p>
-<p>{{ doc.notes or "" }}</p>
+<p class="note">{{ doc.notes or "" }}</p>
+<table class="sig"><tr>
+  <td><div class="sig-title">إعداد</div><div class="sig-line"></div>الاسم: _______________</td>
+  <td><div class="sig-title">مراجعة</div><div class="sig-line"></div>الاسم: _______________</td>
+  <td><div class="sig-title">اعتماد</div><div class="sig-line"></div>الاسم: _______________</td>
+</tr></table>
+<div class="page-footer">Omnexa Construction — {{ doc.project_name }} — {{ doc.name }}</div>
 </div>

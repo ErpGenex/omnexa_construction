@@ -1,8 +1,18 @@
-<style>.ar-form{direction:rtl;font-family:Tahoma,Arial,sans-serif;font-size:11px}.ar-form .title{text-align:center;font-size:18px;font-weight:bold;color:#1e3a5f}.ar-form .section-head{background:#1e3a5f;color:#fff;padding:6px;margin-top:8px}.ar-form table.grid{width:100%;border-collapse:collapse}.ar-form table.grid th,.ar-form table.grid td{border:1px solid #999;padding:4px;text-align:center}.ar-form table.grid th{background:#e8eef5}.ar-form .sig td{border:1px solid #ccc;padding:8px;width:33%}</style>
 <div class="ar-form print-format">
-<div class="title">طلب اعتماد خامات</div>
-<p>رقم: {{ doc.name }} — التاريخ: {{ doc.request_date }} — مشروع: {{ doc.project_name }}</p>
+<table class="meta"><tr>
+  <td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+  <td width="58%"><div class="title">طلب اعتماد خامات</div></td>
+  <td width="30%"><b class="label">رقم:</b> {{ doc.name }}<br><b class="label">التاريخ:</b> {{ doc.request_date }}</td>
+</tr></table>
+<p><b class="label">المشروع:</b> {{ doc.project_name }}</p>
+<div class="section-head">بنود الخامات المطلوب اعتمادها</div>
 <table class="grid"><thead><tr><th>م</th><th>اسم الخامة</th><th>المواصفة</th><th>المصنعة</th><th>بلد المنشأ</th><th>الكمية</th><th>ملاحظات</th></tr></thead>
-<tbody>{% for row in doc.materials %}<tr><td>{{ loop.index }}</td><td>{{ row.material_name }}</td><td>{{ row.required_spec or "" }}</td><td>{{ row.manufacturer or "" }}</td><td>{{ row.country_of_origin or "" }}</td><td>{{ row.suggested_quantity or "" }} {{ row.uom or "" }}</td><td>{{ row.remarks or "" }}</td></tr>{% endfor %}</tbody></table>
+<tbody>{% for row in doc.materials %}<tr><td>{{ loop.index }}</td><td class="desc">{{ row.material_name }}</td><td>{{ row.required_spec or "" }}</td><td>{{ row.manufacturer or "" }}</td><td>{{ row.country_of_origin or "" }}</td><td>{{ row.suggested_quantity or "" }} {{ row.uom or "" }}</td><td>{{ row.remarks or "" }}</td></tr>{% endfor %}</tbody></table>
 <p class="note"><b>ملاحظة:</b> {{ doc.consultant_note or "لن يتم توريد أو استخدام أي خامات قبل الاعتماد الخطي من الاستشاري." }}</p>
+<table class="sig"><tr>
+  <td><div class="sig-title">إعداد</div><div class="sig-line"></div>الاسم: _______________</td>
+  <td><div class="sig-title">مراجعة</div><div class="sig-line"></div>الاسم: _______________</td>
+  <td><div class="sig-title">اعتماد الاستشاري</div><div class="sig-line"></div>الاسم: _______________</td>
+</tr></table>
+<div class="page-footer">Omnexa Construction — {{ doc.project_name }} — {{ doc.name }}</div>
 </div>

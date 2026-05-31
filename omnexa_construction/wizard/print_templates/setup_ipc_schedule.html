@@ -1,34 +1,84 @@
-<div class="print-format">
-  <h2>{{ _("IPC Payment Schedule") }} — {{ doc.contract_title or doc.name }}</h2>
-  <p><b>{{ _("Retention") }}:</b> {{ doc.retention_percent or 0 }}% | <b>{{ _("Advance") }}:</b> {{ doc.advance_payment_percent or 0 }}%</p>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>{{ _("IPC #") }}</th>
-        <th>{{ _("Phase") }}</th>
-        <th>{{ _("Date") }}</th>
-        <th>{{ _("Period") }}</th>
-        <th>{{ _("Cum. %") }}</th>
-        <th>{{ _("Gross") }}</th>
-        <th>{{ _("Retention") }}</th>
-        <th>{{ _("Discount") }}</th>
-        <th>{{ _("Net") }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in doc.ipc_plan %}
-      <tr>
-        <td>{{ row.ipc_number }}</td>
-        <td>{{ row.phase_code }}</td>
-        <td>{{ row.ipc_date }}</td>
-        <td>{{ row.period_from }} — {{ row.period_to }}</td>
-        <td class="text-right">{{ row.cumulative_completion_percent }}%</td>
-        <td class="text-right">{{ frappe.utils.fmt_money(row.period_gross, currency=doc.contract_currency) }}</td>
-        <td class="text-right">{{ frappe.utils.fmt_money(row.retention_amount, currency=doc.contract_currency) }}</td>
-        <td class="text-right">{{ frappe.utils.fmt_money(row.discount_amount, currency=doc.contract_currency) }}</td>
-        <td class="text-right">{{ frappe.utils.fmt_money(row.net_amount, currency=doc.contract_currency) }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+{% set ctx = frappe.call("omnexa_construction.construction_forms.setup_print.build_setup_print_context", setup_name=doc.name) %}
+{% set cur = doc.contract_currency or ctx.currency %}
+{% set ns = namespace(gross=0, retention=0, discount=0, net=0) %}
+<div class="omx-setup ar-form print-format">
+
+<table class="meta">
+<tr>
+	<td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+	<td width="48%">
+		<b class="label">الشركة:</b> {{ ctx.company_name }}<br>
+		<b class="label">المشروع:</b> {{ ctx.contract_title }}<br>
+		<b class="label">العميل:</b> {{ ctx.client_name or "—" }}
+	</td>
+	<td width="40%">
+		<div class="doc-title">جدول المستخلصات IPC</div>
+		<div class="doc-subtitle">Interim Payment Certificate Schedule</div>
+		<b class="label">رقم الإعداد:</b> {{ doc.name }}<br>
+		<b class="label">تاريخ الطباعة:</b> {{ frappe.format(ctx.print_date, {"fieldtype": "Date"}) }}
+	</td>
+</tr>
+</table>
+
+<div class="info-bar">
+	<div class="cell"><b class="label">نسبة التأمين:</b> {{ doc.retention_percent or 0 }}%</div>
+	<div class="cell"><b class="label">الدفعة المقدمة:</b> {{ doc.advance_payment_percent or 0 }}%</div>
+	<div class="cell"><b class="label">بداية المشروع:</b> {{ doc.planned_start or "—" }}</div>
+	<div class="cell"><b class="label">الانتهاء المخطط:</b> {{ doc.planned_completion or "—" }}</div>
+</div>
+
+<div class="section-head">جدول الدفعات الدورية</div>
+<table class="grid">
+	<thead>
+		<tr>
+			<th width="6%">م</th>
+			<th width="8%">IPC</th>
+			<th width="10%">المرحلة</th>
+			<th width="10%">التاريخ</th>
+			<th width="16%">الفترة</th>
+			<th width="8%">% تراكمي</th>
+			<th width="12%">إجمالي الفترة</th>
+			<th width="10%">تأمينات</th>
+			<th width="10%">خصومات</th>
+			<th width="10%">الصافي</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for row in doc.ipc_plan %}
+		{% set ns.gross = ns.gross + (row.period_gross or 0) %}
+		{% set ns.retention = ns.retention + (row.retention_amount or 0) %}
+		{% set ns.discount = ns.discount + (row.discount_amount or 0) %}
+		{% set ns.net = ns.net + (row.net_amount or 0) %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row.ipc_number }}</td>
+			<td>{{ row.phase_code or "—" }}</td>
+			<td>{{ row.ipc_date or "—" }}</td>
+			<td>{{ row.period_from or "—" }} — {{ row.period_to or "—" }}</td>
+			<td>{{ row.cumulative_completion_percent or 0 }}%</td>
+			<td>{{ frappe.utils.fmt_money(row.period_gross, currency=cur) if row.period_gross else "—" }}</td>
+			<td>{{ frappe.utils.fmt_money(row.retention_amount, currency=cur) if row.retention_amount else "—" }}</td>
+			<td>{{ frappe.utils.fmt_money(row.discount_amount, currency=cur) if row.discount_amount else "—" }}</td>
+			<td>{{ frappe.utils.fmt_money(row.net_amount, currency=cur) if row.net_amount else "—" }}</td>
+		</tr>
+		{% endfor %}
+		<tr class="total-row">
+			<td colspan="6">الإجمالي</td>
+			<td>{{ frappe.utils.fmt_money(ns.gross, currency=cur) }}</td>
+			<td>{{ frappe.utils.fmt_money(ns.retention, currency=cur) }}</td>
+			<td>{{ frappe.utils.fmt_money(ns.discount, currency=cur) }}</td>
+			<td>{{ frappe.utils.fmt_money(ns.net, currency=cur) }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="sig">
+	<tr>
+		<td><div class="sig-title">إعداد</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">مراجعة</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">اعتماد</div><div class="sig-line"></div>الاسم: _______________</td>
+	</tr>
+</table>
+
+<div class="page-footer">Omnexa Construction — {{ ctx.contract_title }} — IPC Schedule — {{ doc.name }}</div>
 </div>

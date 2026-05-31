@@ -1,10 +1,17 @@
-<style>.ar-form{direction:rtl;font-family:Tahoma,Arial,sans-serif;font-size:11px}.ar-form .title{text-align:center;font-size:18px;font-weight:bold;color:#1e3a5f}.ar-form table.grid{width:100%;border-collapse:collapse}.ar-form table.grid th,.ar-form table.grid td{border:1px solid #999;padding:4px;text-align:center}.ar-form table.grid th{background:#e8eef5}</style>
 <div class="ar-form print-format">
-<div class="title">كشف حساب مقاول</div>
-<p>مشروع: {{ doc.project_name }} — المقاول: {{ doc.contractor_name }} — حتى {{ doc.to_date }}</p>
+<table class="meta"><tr>
+  <td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+  <td width="58%"><div class="title">كشف حساب مقاول</div></td>
+  <td width="30%"><b class="label">رقم:</b> {{ doc.name }}<br><b class="label">حتى:</b> {{ doc.to_date }}</td>
+</tr></table>
+<p><b class="label">المشروع:</b> {{ doc.project_name }} — <b class="label">المقاول:</b> {{ doc.contractor_name }}</p>
 {% set currency = frappe.db.get_value("Project Contract", doc.project_contract, "contract_currency") or "EGP" %}
+<div class="section-head">حركة الحساب</div>
 <table class="grid"><thead><tr><th>م</th><th>البيان</th><th>تاريخ المستخلص</th><th>الأعمال المنفذة</th><th>المدفوعات</th><th>مدين</th><th>دائن</th></tr></thead>
-<tbody>{% for row in doc.lines %}<tr><td>{{ loop.index }}</td><td>{{ row.description }}</td><td>{{ row.ipc_date or "" }}</td><td>{{ frappe.utils.fmt_money(row.executed_works_value, currency=currency) if row.executed_works_value else "" }}</td><td>{{ frappe.utils.fmt_money(row.prior_payments, currency=currency) if row.prior_payments else "" }}</td><td>{{ frappe.utils.fmt_money(row.debit_balance, currency=currency) if row.debit_balance else "" }}</td><td>{{ frappe.utils.fmt_money(row.credit_balance, currency=currency) if row.credit_balance else "" }}</td></tr>{% endfor %}</tbody></table>
-<p><b>الصافي للمقاول:</b> {{ frappe.utils.fmt_money(doc.debit_balance_due_contractor, currency=currency) }}</p>
+<tbody>{% for row in doc.lines %}<tr><td>{{ loop.index }}</td><td class="desc">{{ row.description }}</td><td>{{ row.ipc_date or "" }}</td><td>{{ frappe.utils.fmt_money(row.executed_works_value, currency=currency) if row.executed_works_value else "" }}</td><td>{{ frappe.utils.fmt_money(row.prior_payments, currency=currency) if row.prior_payments else "" }}</td><td>{{ frappe.utils.fmt_money(row.debit_balance, currency=currency) if row.debit_balance else "" }}</td><td>{{ frappe.utils.fmt_money(row.credit_balance, currency=currency) if row.credit_balance else "" }}</td></tr>{% endfor %}</tbody></table>
+<table class="summary">
+  <tr><td class="label">الصافي للمقاول</td><td class="val">{{ frappe.utils.fmt_money(doc.debit_balance_due_contractor, currency=currency) }}</td></tr>
+</table>
 <p class="note">{{ doc.disclaimer or "ملاحظة: هذا الكشف ليس سند صرف." }}</p>
+<div class="page-footer">Omnexa Construction — {{ doc.project_name }} — {{ doc.name }}</div>
 </div>

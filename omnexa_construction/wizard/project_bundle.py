@@ -24,6 +24,43 @@ from omnexa_construction.wizard.procurement_rfq import create_rfqs_for_setup
 from omnexa_construction.wizard.template_packs import BUILDING_TYPE_META
 
 
+def _bundle_has_submitted_documents(contract_name: str) -> bool:
+	if frappe.db.exists("DocType", "IPC Certificate"):
+		if frappe.db.exists("IPC Certificate", {"project_contract": contract_name, "docstatus": 1}):
+			return True
+	if frappe.db.exists("DocType", "Subcontract Payment Certificate"):
+		if frappe.db.exists(
+			"Subcontract Payment Certificate", {"project_contract": contract_name, "docstatus": 1}
+		):
+			return True
+	return False
+
+
+def _cleanup_wizard_bundle(contract_name: str) -> None:
+	"""Remove draft wizard-generated documents before regenerate."""
+	if _bundle_has_submitted_documents(contract_name):
+		frappe.throw(
+			_("Cannot regenerate: submitted certificates exist on contract {0}.").format(contract_name),
+			title=_("Wizard"),
+		)
+	child_doctypes = [
+		("IPC Certificate", "project_contract"),
+		("Subcontract Work Order", "project_contract"),
+		("Purchase Request", "project_contract"),
+		("Construction RFQ", "project_contract"),
+		("Construction Document Transmittal", "project_contract"),
+	]
+	for doctype, field in child_doctypes:
+		if not frappe.db.exists("DocType", doctype):
+			continue
+		for name in frappe.get_all(doctype, filters={field: contract_name}, pluck="name"):
+			frappe.delete_doc(doctype, name, force=1, ignore_permissions=True)
+	boq_items = frappe.get_all("BOQ Item", filters={"project_contract": contract_name}, pluck="name")
+	for name in sorted(boq_items, reverse=True):
+		frappe.delete_doc("BOQ Item", name, force=1, ignore_permissions=True)
+	frappe.delete_doc("Project Contract", contract_name, force=1, ignore_permissions=True)
+
+
 def expand_template_to_lines(setup) -> list[dict]:
 	"""Build BOQ preview lines from linked Construction BOQ Template."""
 	if not setup.boq_template:
@@ -119,6 +156,37 @@ def suggest_assignments(setup_name: str, save: int | str = 1) -> dict:
 
 
 @frappe.whitelist()
+def save_wizard_assignments(setup_name: str, assignments: str | list | None = None) -> dict:
+	"""Persist subcontractor party links from wizard step 8."""
+	import json
+
+	setup = frappe.get_doc("Construction Project Setup", setup_name)
+	if setup.status == "Completed":
+		frappe.throw(_("Cannot edit a completed setup."), title=_("Wizard"))
+	rows = json.loads(assignments) if isinstance(assignments, str) else (assignments or [])
+	party_by_trade = {
+		row.get("trade_package_code"): (row.get("party") or "").strip()
+		for row in rows
+		if row.get("trade_package_code")
+	}
+	for assign in setup.assignments or []:
+		if assign.trade_package_code in party_by_trade:
+			assign.party = party_by_trade[assign.trade_package_code] or None
+	setup.flags.ignore_permissions = True
+	setup.save()
+	return {
+		"assignments": [
+			{
+				"trade_package_code": a.trade_package_code,
+				"party": a.party,
+				"assignment_type": a.assignment_type,
+			}
+			for a in setup.assignments or []
+		]
+	}
+
+
+@frappe.whitelist()
 def create_project_bundle(setup_name: str, force: int | str = 0) -> dict:
 	frappe.flags.in_wizard = True
 	try:
@@ -136,11 +204,20 @@ def create_project_bundle(setup_name: str, force: int | str = 0) -> dict:
 
 def _create_project_bundle(setup_name: str, force: int = 0) -> dict:
 	setup = frappe.get_doc("Construction Project Setup", setup_name)
-	if setup.project_contract and not force:
-		frappe.throw(
-			_("Project Contract {0} already exists. Use force=1 to regenerate.").format(setup.project_contract),
-			title=_("Wizard"),
-		)
+	if setup.status == "Completed" and not force:
+		frappe.throw(_("Setup already completed. Open the Project Contract or use force=1 to regenerate."), title=_("Wizard"))
+	if setup.project_contract:
+		if not force:
+			frappe.throw(
+				_("Project Contract {0} already exists. Use force=1 to regenerate.").format(setup.project_contract),
+				title=_("Wizard"),
+			)
+		_cleanup_wizard_bundle(setup.project_contract)
+		setup.project_contract = None
+		setup.status = "Draft"
+		setup.flags.ignore_permissions = True
+		setup.save()
+		setup.reload()
 	_validate_setup(setup)
 	if not setup.boq_lines:
 		preview_boq(setup_name, save=1)
@@ -153,6 +230,13 @@ def _create_project_bundle(setup_name: str, force: int = 0) -> dict:
 	setup.save()
 	setup.reload()
 
+	from frappe.database.database import savepoint
+
+	with savepoint():
+		return _execute_project_bundle(setup)
+
+
+def _execute_project_bundle(setup) -> dict:
 	import_material_catalog(setup.company)
 
 	boq_items: list[str] = []

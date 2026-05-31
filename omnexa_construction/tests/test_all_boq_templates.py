@@ -40,3 +40,11 @@ class TestAllBoqTemplates(FrappeTestCase):
 		for code, pack in TEMPLATE_PACKS.items():
 			codes = [r["cost_code"] for r in pack.get("lines") or []]
 			self.assertEqual(len(codes), len(set(codes)), f"{code}: duplicate cost codes")
+
+	def test_lump_sum_lines_do_not_use_area_drivers(self):
+		for code, pack in TEMPLATE_PACKS.items():
+			for row in pack.get("lines") or []:
+				uom = (row.get("unit_of_measure") or "").strip().lower()
+				driver = row.get("quantity_driver") or "FIXED"
+				if uom == "ls" and driver in ("GFA", "PLOT", "FLOORS", "UNITS"):
+					self.fail(f"{code} {row.get('cost_code')}: ls lines must use FIXED or FORMULA, not {driver}")

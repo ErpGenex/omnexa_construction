@@ -9,7 +9,20 @@ def get_ipc_print_context(doc) -> dict:
 	currency = frappe.db.get_value("Project Contract", doc.project_contract, "contract_currency") or "EGP"
 	company_name = frappe.db.get_value("Company", doc.company, "company_name") or doc.company
 	contract = frappe.get_doc("Project Contract", doc.project_contract)
-	contractor = frappe.db.get_value("Company", doc.company, "company_name") or ""
+	client_name = ""
+	if contract.client:
+		client_name = frappe.db.get_value("Customer", contract.client, "customer_name") or contract.client
+
+	contractor_name = company_name
+	if frappe.db.exists("DocType", "Subcontract Work Order"):
+		sub = frappe.db.get_value(
+			"Subcontract Work Order",
+			{"project_contract": doc.project_contract, "docstatus": ["<", 2]},
+			"subcontractor",
+			order_by="creation asc",
+		)
+		if sub:
+			contractor_name = frappe.db.get_value("Supplier", sub, "supplier_name") or sub
 
 	period_map = {row.boq_item: flt(row.period_value) for row in (doc.boq_lines or []) if row.boq_item}
 	boq_items = frappe.get_all(
@@ -52,24 +65,33 @@ def get_ipc_print_context(doc) -> dict:
 	discount = flt(doc.get("discount_amount"))
 	other_ded = flt(doc.get("other_deductions"))
 	net_due = flt(doc.net_amount)
+	cumulative_billed = flt(doc.cumulative_value_billed) or total_cumulative
+	completion_pct = flt(doc.boq_completion_percent)
+	if not completion_pct and total_contract:
+		completion_pct = total_cumulative / total_contract * 100.0
+
+	cert_number = doc.employer_certificate_ref or doc.certificate_reference or doc.name
 
 	return {
 		"currency": currency,
+		"currency_label": currency,
 		"company_name": company_name,
+		"client_name": client_name,
 		"contract_title": contract.contract_title,
 		"contract_number": contract.name,
-		"contractor_name": contractor,
+		"contractor_name": contractor_name,
+		"site_location": contract.site_location or "",
 		"boq_rows": rows,
 		"totals": {
-			"contract_value": total_contract,
-			"prior_cumulative": total_prior,
+			"contract_value": total_contract or flt(doc.billable_contract_value),
+			"prior_cumulative": total_prior or flt(doc.prior_cumulative_billed),
 			"current_ipc": total_current or flt(doc.gross_amount),
-			"cumulative_to_date": total_cumulative or flt(doc.cumulative_value_billed),
-			"completion_percent": flt(doc.boq_completion_percent),
+			"cumulative_to_date": total_cumulative or cumulative_billed,
+			"completion_percent": round(completion_pct, 2),
 		},
 		"summary": {
-			"cumulative_billed": flt(doc.cumulative_value_billed),
-			"completion_percent": flt(doc.boq_completion_percent),
+			"cumulative_billed": cumulative_billed,
+			"completion_percent": round(completion_pct, 2),
 			"current_ipc_gross": flt(doc.gross_amount),
 			"retention": flt(doc.retention_deduction),
 			"advance_recovery": flt(doc.advance_recovery),
@@ -78,6 +100,10 @@ def get_ipc_print_context(doc) -> dict:
 			"other": other_ded,
 			"net_due": net_due,
 		},
+		"certificate_number": cert_number,
+		"ipc_date": doc.ipc_date,
+		"period_from": doc.period_from,
+		"period_to": doc.period_to,
 	}
 
 
