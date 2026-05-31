@@ -1,0 +1,39 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:NCR-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"ncr_date",
+		"ncr_reference",
+		"boq_item",
+		"severity",
+		"description",
+		"corrective_action",
+		"status",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "ncr_date", "fieldtype": "Date", "label": "NCR Date", "reqd": 1, "default": "Today", "in_list_view": 1},
+		{"fieldname": "ncr_reference", "fieldtype": "Data", "label": "NCR Reference"},
+		{"fieldname": "boq_item", "fieldtype": "Link", "label": "BOQ Item", "options": "BOQ Item"},
+		{"fieldname": "severity", "fieldtype": "Select", "label": "Severity", "options": "Minor\nMajor\nCritical", "default": "Minor", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "description", "fieldtype": "Small Text", "label": "Non-conformance Description", "reqd": 1},
+		{"fieldname": "corrective_action", "fieldtype": "Small Text", "label": "Corrective Action (CAR)"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nUnder Review\nClosed", "default": "Open", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction NCR",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 0}
+	],
+	"track_changes": 1
+}

@@ -1,0 +1,29 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:CEU-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "boq_item", "usage_date", "equipment_name", "hours", "hourly_rate", "total_cost", "operator", "notes", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "boq_item", "fieldtype": "Link", "label": "BOQ Item", "options": "BOQ Item", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "usage_date", "fieldtype": "Date", "label": "Usage Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "equipment_name", "fieldtype": "Data", "label": "Equipment", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "hours", "fieldtype": "Float", "label": "Hours", "reqd": 1},
+		{"fieldname": "hourly_rate", "fieldtype": "Currency", "label": "Hourly Rate", "reqd": 1},
+		{"fieldname": "total_cost", "fieldtype": "Currency", "label": "Total Cost", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "operator", "fieldtype": "Data", "label": "Operator"},
+		{"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Equipment Usage",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

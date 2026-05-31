@@ -1,0 +1,33 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"phase_code",
+		"phase_name",
+		"phase_name_ar",
+		"planned_start",
+		"planned_finish",
+		"handover_date",
+		"weight_percent",
+		"boq_cost_prefixes",
+		"remarks"
+	],
+	"fields": [
+		{"fieldname": "phase_code", "fieldtype": "Data", "label": "Phase Code", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "phase_name", "fieldtype": "Data", "label": "Phase Name", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "phase_name_ar", "fieldtype": "Data", "label": "Phase Name (AR)"},
+		{"fieldname": "planned_start", "fieldtype": "Date", "label": "Planned Start", "in_list_view": 1},
+		{"fieldname": "planned_finish", "fieldtype": "Date", "label": "Planned Finish", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "handover_date", "fieldtype": "Date", "label": "Handover / Delivery Date", "in_list_view": 1},
+		{"fieldname": "weight_percent", "fieldtype": "Percent", "label": "Weight % of Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "boq_cost_prefixes", "fieldtype": "Small Text", "label": "BOQ Prefixes", "description": "Comma-separated cost code prefixes (e.g. 01,02,03)."},
+		{"fieldname": "remarks", "fieldtype": "Small Text", "label": "Remarks"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Project Setup Phase",
+	"permissions": [],
+	"track_changes": 0
+}

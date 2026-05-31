@@ -34,6 +34,22 @@
 		"tab_break_3",
 		"section_break_epc",
 		"project_segment",
+		"building_type",
+		"delivery_model",
+		"quality_tier",
+		"column_break_wizard_specs",
+		"plot_area_m2",
+		"gross_floor_area_m2",
+		"number_of_floors",
+		"basement_levels",
+		"column_break_wizard_specs_2",
+		"unit_count",
+		"bed_count",
+		"key_count",
+		"road_length_m",
+		"road_width_m",
+		"pipe_network_km",
+		"wizard_setup",
 		"planned_start",
 		"planned_completion",
 		"site_location",
@@ -211,6 +227,94 @@
 			"description": "High-level segment for reporting (roads, buildings, industrial EPC, etc.)."
 		},
 		{
+			"fieldname": "building_type",
+			"fieldtype": "Select",
+			"label": "Building / Project Type",
+			"options": "\nvilla\nresidential_building\nsocial_housing\noffice_tower\nhotel\nmall\nschool\nhospital\nuniversity\nwarehouse\nfactory\nhighway\nurban_road\nbridge\nwater_network\nsewer_network\nelectrical_network\ngas_network\ntelecom_fiber\nsubstation\nwastewater_plant",
+			"description": "Detailed asset type from Construction Project Wizard catalog."
+		},
+		{
+			"fieldname": "delivery_model",
+			"fieldtype": "Select",
+			"label": "Delivery Model",
+			"options": "\nDesign-Bid-Build\nDesign-Build\nEPC Turnkey"
+		},
+		{
+			"fieldname": "quality_tier",
+			"fieldtype": "Select",
+			"label": "Quality Tier",
+			"options": "Economy\nStandard\nPremium\nLuxury",
+			"default": "Standard"
+		},
+		{
+			"fieldname": "column_break_wizard_specs",
+			"fieldtype": "Column Break",
+			"label": "Wizard specifications"
+		},
+		{
+			"fieldname": "plot_area_m2",
+			"fieldtype": "Float",
+			"label": "Plot Area (m²)"
+		},
+		{
+			"fieldname": "gross_floor_area_m2",
+			"fieldtype": "Float",
+			"label": "Gross Floor Area (m²)"
+		},
+		{
+			"fieldname": "number_of_floors",
+			"fieldtype": "Int",
+			"label": "Number of Floors",
+			"default": "1"
+		},
+		{
+			"fieldname": "basement_levels",
+			"fieldtype": "Int",
+			"label": "Basement Levels",
+			"default": "0"
+		},
+		{
+			"fieldname": "column_break_wizard_specs_2",
+			"fieldtype": "Column Break"
+		},
+		{
+			"fieldname": "unit_count",
+			"fieldtype": "Int",
+			"label": "Unit Count"
+		},
+		{
+			"fieldname": "bed_count",
+			"fieldtype": "Int",
+			"label": "Bed Count"
+		},
+		{
+			"fieldname": "key_count",
+			"fieldtype": "Int",
+			"label": "Hotel Keys"
+		},
+		{
+			"fieldname": "road_length_m",
+			"fieldtype": "Float",
+			"label": "Road Length (m)"
+		},
+		{
+			"fieldname": "road_width_m",
+			"fieldtype": "Float",
+			"label": "Road Width (m)"
+		},
+		{
+			"fieldname": "pipe_network_km",
+			"fieldtype": "Float",
+			"label": "Pipe Network (km)"
+		},
+		{
+			"fieldname": "wizard_setup",
+			"fieldtype": "Link",
+			"label": "Wizard Setup",
+			"options": "Construction Project Setup",
+			"read_only": 1
+		},
+		{
 			"fieldname": "planned_start",
 			"fieldtype": "Date",
 			"label": "Planned Start"
@@ -344,9 +448,74 @@
 			"link_fieldname": "project_contract"
 		},
 		{
+			"group": "QA & Approvals",
+			"link_doctype": "Construction Work Approval Request",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "QA & Approvals",
+			"link_doctype": "Construction Material Approval Request",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "Claims & Time",
+			"link_doctype": "Construction Work Delay Notice",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "Claims & Time",
+			"link_doctype": "Construction Fines Statement",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "Finance",
+			"link_doctype": "Contractor Account Statement",
+			"link_fieldname": "project_contract"
+		},
+		{
 			"group": "Finance",
 			"link_doctype": "Project WIP Snapshot",
 			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "Residential",
+			"link_doctype": "Construction Plot Unit",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "Residential",
+			"link_doctype": "Construction Residential Unit",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "QS & Close-out",
+			"link_doctype": "Construction QS Measurement Sheet",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "QS & Close-out",
+			"link_doctype": "Construction Final Account Statement",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "QS & Close-out",
+			"link_doctype": "Construction DLP Record",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "FIDIC",
+			"link_doctype": "Construction FIDIC Notice",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "QA & Approvals",
+			"link_doctype": "Construction Inspection Test Plan",
+			"link_fieldname": "project_contract"
+		},
+		{
+			"group": "Projects",
+			"link_doctype": "PM WBS Task",
+			"link_fieldname": "project"
 		},
 		{
 			"group": "Projects",

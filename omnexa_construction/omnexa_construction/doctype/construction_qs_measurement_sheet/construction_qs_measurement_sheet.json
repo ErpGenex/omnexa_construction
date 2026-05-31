@@ -1,0 +1,26 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:QS-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "survey_date", "surveyor", "status", "apply_to_boq", "lines", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "survey_date", "fieldtype": "Date", "label": "Survey Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "surveyor", "fieldtype": "Data", "label": "Surveyor / QS"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nSubmitted\nApproved\nCancelled", "default": "Draft", "reqd": 1},
+		{"fieldname": "apply_to_boq", "fieldtype": "Check", "label": "Update BOQ Quantities on Approve", "default": "1"},
+		{"fieldname": "lines", "fieldtype": "Table", "label": "Measurement Lines", "options": "Construction QS Measurement Line", "reqd": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction QS Measurement Sheet",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 0, "delete": 0}
+	],
+	"track_changes": 1
+}

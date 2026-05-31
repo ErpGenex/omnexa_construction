@@ -12,6 +12,8 @@ REPORT_NAMES = (
 	"Construction Contract International Summary",
 	"Project Profitability (Construction)",
 	"IPC Certificate Summary",
+	"Construction Earned Value",
+	"Construction Executive Summary",
 )
 
 ROLES = (

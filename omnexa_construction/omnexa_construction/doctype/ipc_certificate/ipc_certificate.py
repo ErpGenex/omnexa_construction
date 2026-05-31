@@ -5,7 +5,21 @@ from frappe.utils import flt, now_datetime
 
 from omnexa_construction.contract_financials import billable_contract_value
 from omnexa_construction.ipc_billing import compute_ipc_amounts
-from omnexa_projects_pm.wbs_integration import validate_linked_pm_wbs_task
+from omnexa_construction.wizard.pricing import compute_ipc_amounts_with_discount
+from omnexa_projects_pm.wbs_integration import validate_linked_pm_wbs_task, weighted_boq_completion_percent
+
+
+@frappe.whitelist()
+def suggest_boq_completion_percent(project_contract: str) -> float:
+	"""Suggest cumulative BOQ completion % weighted by planned cost."""
+	if not project_contract:
+		return 0.0
+	lines = frappe.db.get_all(
+		"BOQ Item",
+		filters={"project_contract": project_contract, "docstatus": ["!=", 2]},
+		fields=["completion_percent", "planned_cost"],
+	)
+	return weighted_boq_completion_percent(lines)
 
 
 def _prior_certified_completion_percent(
@@ -65,13 +79,25 @@ class IPCCertificate(Document):
 		retention_pct = flt(
 			frappe.db.get_value("Project Contract", self.project_contract, "retention_percent")
 		)
-		out = compute_ipc_amounts(
-			billable_contract_value=billable,
-			cumulative_completion_percent=cur_pct,
-			prior_certified_completion_percent=prior_pct,
-			retention_percent=retention_pct,
-			advance_recovery=flt(self.advance_recovery),
-		)
+		disc_pct = flt(self.get("discount_percent")) if self.meta.has_field("discount_percent") else 0.0
+		if self.meta.has_field("discount_amount"):
+			out = compute_ipc_amounts_with_discount(
+				billable_contract_value=billable,
+				cumulative_completion_percent=cur_pct,
+				prior_certified_completion_percent=prior_pct,
+				retention_percent=retention_pct,
+				advance_recovery=flt(self.advance_recovery),
+				discount_percent=disc_pct,
+			)
+			self.discount_amount = out.get("discount_amount", 0)
+		else:
+			out = compute_ipc_amounts(
+				billable_contract_value=billable,
+				cumulative_completion_percent=cur_pct,
+				prior_certified_completion_percent=prior_pct,
+				retention_percent=retention_pct,
+				advance_recovery=flt(self.advance_recovery),
+			)
 		self.prior_cumulative_billed = out["prior_cumulative_billed"]
 		self.cumulative_value_billed = out["cumulative_value_billed"]
 		self.gross_amount = out["gross_amount"]

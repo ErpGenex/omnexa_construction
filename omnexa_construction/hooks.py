@@ -44,6 +44,18 @@ required_apps = ["omnexa_core"]
 
 # include js in doctype views
 # Company demo buttons: omnexa_core/public/js/company_demo_data_hub.js
+doctype_js = {
+	"Project Contract": "public/js/project_contract.js",
+	"Subcontract Payment Certificate": "public/js/subcontract_payment_certificate.js",
+	"IPC Certificate": "public/js/ipc_certificate.js",
+	"Construction Project Setup": "public/js/construction_project_setup.js",
+	"Construction RFQ": "public/js/construction_rfq.js",
+	"Contractor Account Statement": "public/js/contractor_account_statement.js",
+	"Construction QS Measurement Sheet": "public/js/construction_qs_measurement_sheet.js",
+	"Construction Final Account Statement": "public/js/construction_final_account_statement.js",
+	"Site Daily Report": "public/js/site_daily_report.js",
+	"Project WIP Snapshot": "public/js/project_wip_snapshot.js",
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -117,13 +129,33 @@ before_migrate = "omnexa_construction.install.enforce_supported_frappe_version"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+permission_query_conditions = {
+	"Project Contract": "omnexa_construction.permissions.project_contract_query_conditions",
+	"BOQ Item": "omnexa_construction.permissions.boq_item_query_conditions",
+	"IPC Certificate": "omnexa_construction.permissions.ipc_certificate_query_conditions",
+	"Site Daily Report": "omnexa_construction.permissions.site_daily_report_query_conditions",
+	"Subcontract Work Order": "omnexa_construction.permissions.subcontract_work_order_query_conditions",
+	"Project WIP Snapshot": "omnexa_construction.permissions.project_wip_snapshot_query_conditions",
+	"Subcontract Payment Certificate": "omnexa_construction.permissions.subcontract_payment_certificate_query_conditions",
+	"Construction Change Order": "omnexa_construction.permissions.construction_change_order_query_conditions",
+	"Construction Extension of Time": "omnexa_construction.permissions.construction_extension_of_time_query_conditions",
+	"Construction Claim": "omnexa_construction.permissions.construction_claim_query_conditions",
+	"Construction Inspection Request": "omnexa_construction.permissions.construction_inspection_request_query_conditions",
+	"Construction NCR": "omnexa_construction.permissions.construction_ncr_query_conditions",
+	"Construction HSE Incident": "omnexa_construction.permissions.construction_hse_incident_query_conditions",
+	"Construction Document Transmittal": "omnexa_construction.permissions.construction_document_transmittal_query_conditions",
+	"Construction Project Setup": "omnexa_construction.permissions.construction_project_setup_query_conditions",
+	"Regional Cost Factor": "omnexa_construction.permissions.regional_cost_factor_query_conditions",
+	"Construction Plot Unit": "omnexa_construction.permissions.construction_plot_unit_query_conditions",
+	"Construction Residential Unit": "omnexa_construction.permissions.construction_residential_unit_query_conditions",
+	"Construction QS Measurement Sheet": "omnexa_construction.permissions.construction_qs_measurement_sheet_query_conditions",
+	"Construction FIDIC Notice": "omnexa_construction.permissions.construction_fidic_notice_query_conditions",
+	"Construction Final Account Statement": "omnexa_construction.permissions.construction_final_account_statement_query_conditions",
+	"Construction DLP Record": "omnexa_construction.permissions.construction_dlp_record_query_conditions",
+	"Construction Inspection Test Plan": "omnexa_construction.permissions.construction_inspection_test_plan_query_conditions",
+	"Construction Equipment Usage": "omnexa_construction.permissions.construction_equipment_usage_query_conditions",
+	"Construction CDE Document": "omnexa_construction.permissions.construction_cde_document_query_conditions",
+}
 
 # DocType Class
 # ---------------
@@ -137,16 +169,91 @@ before_migrate = "omnexa_construction.install.enforce_supported_frappe_version"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+_BRANCH_DOC_EVENTS = {
+	"before_validate": "omnexa_construction.permissions.populate_company_branch_from_user_context",
+	"validate": "omnexa_construction.permissions.enforce_branch_access_for_doc",
+}
+
+_WORKFLOW_VALIDATE = [
+	"omnexa_construction.permissions.enforce_branch_access_for_doc",
+	"omnexa_construction.workflow_hooks.validate_construction_workflow_binding",
+]
+
+_COST_ROLLUP_EVENTS = {
+	"after_insert": "omnexa_construction.cost_rollup.refresh_linked_boq_actual_cost",
+	"on_update": "omnexa_construction.cost_rollup.refresh_linked_boq_actual_cost",
+	"on_trash": "omnexa_construction.cost_rollup.refresh_linked_boq_actual_cost",
+}
+
+_SITE_DAILY_EVENTS = {
+	**_BRANCH_DOC_EVENTS,
+	**_COST_ROLLUP_EVENTS,
+}
+
+_EQUIPMENT_USAGE_EVENTS = {
+	**_BRANCH_DOC_EVENTS,
+	**_COST_ROLLUP_EVENTS,
+}
+
+_TIMESHEET_EVENTS = {
+	"validate": "omnexa_construction.timesheet_cost_hooks.timesheet_entry_before_save",
+	**_COST_ROLLUP_EVENTS,
+}
+
+_IPC_EVENTS = {
+	"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
+	"validate": _WORKFLOW_VALIDATE,
+	"on_update": "omnexa_construction.ipc_revenue.maybe_create_draft_sales_invoice",
+}
+
+doc_events = {
+	"Project Contract": _BRANCH_DOC_EVENTS.copy(),
+	"BOQ Item": _BRANCH_DOC_EVENTS.copy(),
+	"IPC Certificate": _IPC_EVENTS,
+	"Site Daily Report": _SITE_DAILY_EVENTS,
+	"Subcontract Work Order": _BRANCH_DOC_EVENTS.copy(),
+	"Project WIP Snapshot": _BRANCH_DOC_EVENTS.copy(),
+	"Subcontract Payment Certificate": {
+		"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
+		"validate": _WORKFLOW_VALIDATE,
+	},
+	"Construction Change Order": {
+		"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
+		"validate": _WORKFLOW_VALIDATE,
+	},
+	"Construction Extension of Time": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Claim": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Inspection Request": _BRANCH_DOC_EVENTS.copy(),
+	"Construction NCR": _BRANCH_DOC_EVENTS.copy(),
+	"Construction HSE Incident": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Document Transmittal": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Project Setup": _BRANCH_DOC_EVENTS.copy(),
+	"Regional Cost Factor": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Plot Unit": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Residential Unit": _BRANCH_DOC_EVENTS.copy(),
+	"Construction QS Measurement Sheet": _BRANCH_DOC_EVENTS.copy(),
+	"Construction FIDIC Notice": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Final Account Statement": _BRANCH_DOC_EVENTS.copy(),
+	"Construction DLP Record": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Inspection Test Plan": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Equipment Usage": _EQUIPMENT_USAGE_EVENTS,
+	"Construction CDE Document": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Work Delay Notice": _BRANCH_DOC_EVENTS.copy(),
+	"Timesheet Entry": _TIMESHEET_EVENTS,
+	"Purchase Request": {
+		"validate": "omnexa_construction.procurement_hooks.validate_purchase_request_boq_links",
+	},
+	"Purchase Order": {
+		"validate": "omnexa_construction.procurement_hooks.validate_purchase_order_boq_links",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
+
+scheduler_events = {
+	"daily": ["omnexa_construction.fidic_alerts.mark_overdue_fidic_notices"],
+}
 
 # scheduler_events = {
 # 	"all": [

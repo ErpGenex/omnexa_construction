@@ -4,25 +4,47 @@
 import frappe
 from frappe import _
 
+from omnexa_construction.contract_financials import (
+	certified_ipc_net_total,
+	claims_active_count,
+	eot_approved_count,
+)
 from omnexa_core.omnexa_core.report_print.report_query_filters import (
 	get_all_filters,
-	policy_version_filters,
 	prepare_filters,
-	sql_conditions,
 )
-
 
 
 def execute(filters=None):
 	filters = prepare_filters(filters)
-	filters_dict = get_all_filters(filters, "Project Contract", date_field="creation", company=True, branch=True, extra_links={})
+	filters_dict = get_all_filters(
+		filters, "Project Contract", date_field="creation", company=True, branch=True, extra_links={}
+	)
 	data = frappe.get_all(
 		"Project Contract",
-		fields=['name', 'contract_title', 'governing_standard', 'project_segment', 'contract_currency', 'contract_value', 'revised_contract_value', 'retention_held_to_date', 'status'],
+		fields=[
+			"name",
+			"contract_title",
+			"governing_standard",
+			"project_segment",
+			"contract_currency",
+			"contract_value",
+			"revised_contract_value",
+			"retention_held_to_date",
+			"status",
+		],
 		filters=filters_dict,
 		limit_page_length=5000,
 	)
+	for row in data:
+		row.ipc_net_certified = certified_ipc_net_total(row.name)
+		row.eot_approved_count = eot_approved_count(row.name)
+		row.claims_active_count = claims_active_count(row.name)
 
+	return _columns(), data
+
+
+def _columns():
 	return [
 		{"label": _("Contract"), "fieldname": "name", "fieldtype": "Link", "options": "Project Contract", "width": 140},
 		{"label": _("Title"), "fieldname": "contract_title", "fieldtype": "Data", "width": 160},
@@ -36,4 +58,4 @@ def execute(filters=None):
 		{"label": _("EOT approved"), "fieldname": "eot_approved_count", "fieldtype": "Int", "width": 90},
 		{"label": _("Claims active"), "fieldname": "claims_active_count", "fieldtype": "Int", "width": 90},
 		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90},
-	], data
+	]

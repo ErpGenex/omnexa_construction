@@ -1,0 +1,21 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["boq_item", "cost_code", "description", "unit_of_measure", "previous_qty", "measured_qty", "revision_qty", "remarks"],
+	"fields": [
+		{"fieldname": "boq_item", "fieldtype": "Link", "label": "BOQ Item", "options": "BOQ Item", "in_list_view": 1},
+		{"fieldname": "cost_code", "fieldtype": "Data", "label": "Cost Code", "in_list_view": 1},
+		{"fieldname": "description", "fieldtype": "Data", "label": "Description", "in_list_view": 1},
+		{"fieldname": "unit_of_measure", "fieldtype": "Link", "label": "UOM", "options": "UOM"},
+		{"fieldname": "previous_qty", "fieldtype": "Float", "label": "Previous Qty", "read_only": 1},
+		{"fieldname": "measured_qty", "fieldtype": "Float", "label": "Measured Qty", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "revision_qty", "fieldtype": "Float", "label": "Revision Qty", "read_only": 1},
+		{"fieldname": "remarks", "fieldtype": "Small Text", "label": "Remarks"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction QS Measurement Line",
+	"permissions": []
+}

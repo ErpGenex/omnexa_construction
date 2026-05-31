@@ -6,7 +6,7 @@ function setup_company_construction_demo_buttons(frm) {
 	const demo_btn = (label, fn) => erpgenex.company_demo.demo_btn(frm, label, fn, grp);
 
 	demo_btn(
-		__("Seed 5 projects (owners, IPC, subcontractors, costs)"),
+		__("Seed 20 projects (full construction portfolio demo)"),
 		() => {
 			frappe.confirm(
 				__(

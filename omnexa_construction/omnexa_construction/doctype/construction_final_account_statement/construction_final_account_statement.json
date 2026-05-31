@@ -1,0 +1,31 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:FAS-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "statement_date", "status", "contract_sum", "approved_variations", "claims_allowed", "gross_final_sum", "retention_held", "previous_certified", "final_due", "lines", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "statement_date", "fieldtype": "Date", "label": "Statement Date", "default": "Today", "reqd": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nIssued\nAgreed\nClosed", "default": "Draft", "reqd": 1},
+		{"fieldname": "contract_sum", "fieldtype": "Currency", "label": "Contract Sum", "read_only": 1},
+		{"fieldname": "approved_variations", "fieldtype": "Currency", "label": "Approved Variations", "read_only": 1},
+		{"fieldname": "claims_allowed", "fieldtype": "Currency", "label": "Claims Allowed", "default": "0"},
+		{"fieldname": "gross_final_sum", "fieldtype": "Currency", "label": "Gross Final Sum", "read_only": 1},
+		{"fieldname": "retention_held", "fieldtype": "Currency", "label": "Retention Held", "read_only": 1},
+		{"fieldname": "previous_certified", "fieldtype": "Currency", "label": "Previous Certified (IPC)", "read_only": 1},
+		{"fieldname": "final_due", "fieldtype": "Currency", "label": "Final Amount Due", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "lines", "fieldtype": "Table", "label": "Breakdown", "options": "Construction Final Account Line"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Final Account Statement",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Finance Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

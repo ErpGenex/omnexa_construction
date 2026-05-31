@@ -51,3 +51,63 @@ def construction_extension_of_time_query_conditions(user=None):
 
 def construction_claim_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction Claim", user)
+
+
+def construction_inspection_request_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Inspection Request", user)
+
+
+def construction_ncr_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction NCR", user)
+
+
+def construction_hse_incident_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction HSE Incident", user)
+
+
+def construction_document_transmittal_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Document Transmittal", user)
+
+
+def construction_project_setup_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Project Setup", user)
+
+
+def regional_cost_factor_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Regional Cost Factor", user)
+
+
+def construction_plot_unit_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Plot Unit", user)
+
+
+def construction_residential_unit_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Residential Unit", user)
+
+
+def construction_qs_measurement_sheet_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction QS Measurement Sheet", user)
+
+
+def construction_fidic_notice_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction FIDIC Notice", user)
+
+
+def construction_final_account_statement_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Final Account Statement", user)
+
+
+def construction_dlp_record_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction DLP Record", user)
+
+
+def construction_inspection_test_plan_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Inspection Test Plan", user)
+
+
+def construction_equipment_usage_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Equipment Usage", user)
+
+
+def construction_cde_document_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction CDE Document", user)

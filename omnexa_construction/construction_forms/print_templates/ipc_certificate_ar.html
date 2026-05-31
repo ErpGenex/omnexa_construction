@@ -1,0 +1,17 @@
+<style>.ar-form{direction:rtl;font-family:Tahoma,Arial,sans-serif;font-size:10px}.ar-form .title{text-align:center;font-size:17px;font-weight:bold;color:#1e3a5f}.ar-form table.grid{width:100%;border-collapse:collapse}.ar-form table.grid th,.ar-form table.grid td{border:1px solid #666;padding:4px;text-align:center}.ar-form table.grid th{background:#1e3a5f;color:#fff}.ar-form .net{background:#d6e8f7;font-weight:bold}</style>
+{% set ctx = frappe.call("omnexa_construction.construction_forms.ipc_print.build_ipc_print_context", ipc_name=doc.name) %}
+<div class="ar-form print-format">
+<table width="100%"><tr>
+<td><b>{{ ctx.company_name }}</b><br>المشروع: {{ ctx.contract_title }}<br>العقد: {{ ctx.contract_number }}</td>
+<td class="title">مستخلص مقاولات</td>
+<td>رقم: {{ doc.name }}<br>التاريخ: {{ doc.ipc_date }}<br>الفترة: {{ doc.period_from or "" }} — {{ doc.period_to or "" }}</td>
+</tr></table>
+<table class="grid"><thead><tr><th>م</th><th>بيان الأعمال</th><th>قيمة العقد</th><th>حتى السابق</th><th>هذا المستخلص</th><th>الإجمالي</th><th>%</th></tr></thead>
+<tbody>{% for row in ctx.boq_rows %}<tr><td>{{ row.idx }}</td><td style="text-align:right">{{ row.description }}</td><td>{{ frappe.utils.fmt_money(row.contract_value, currency=ctx.currency) }}</td><td>{{ frappe.utils.fmt_money(row.prior_cumulative, currency=ctx.currency) }}</td><td>{{ frappe.utils.fmt_money(row.current_ipc, currency=ctx.currency) }}</td><td>{{ frappe.utils.fmt_money(row.cumulative_to_date, currency=ctx.currency) }}</td><td>{{ "%.1f"|format(row.completion_percent) }}%</td></tr>{% endfor %}
+<tr style="font-weight:bold;background:#e8eef5"><td colspan="2">الإجمالي</td><td>{{ frappe.utils.fmt_money(ctx.totals.contract_value, currency=ctx.currency) }}</td><td>{{ frappe.utils.fmt_money(ctx.totals.prior_cumulative, currency=ctx.currency) }}</td><td>{{ frappe.utils.fmt_money(ctx.totals.current_ipc, currency=ctx.currency) }}</td><td>{{ frappe.utils.fmt_money(ctx.totals.cumulative_to_date, currency=ctx.currency) }}</td><td>{{ ctx.totals.completion_percent }}%</td></tr></tbody></table>
+<table width="50%" style="margin-top:10px"><tr><td>قيمة هذا المستخلص</td><td>{{ frappe.utils.fmt_money(ctx.summary.current_ipc_gross, currency=ctx.currency) }}</td></tr>
+<tr><td>تأمينات مستردة</td><td>{{ frappe.utils.fmt_money(ctx.summary.retention, currency=ctx.currency) }}</td></tr>
+<tr><td>استرداد دفعة مقدمة</td><td>{{ frappe.utils.fmt_money(ctx.summary.advance_recovery, currency=ctx.currency) }}</td></tr>
+<tr><td>غرامات</td><td>{{ frappe.utils.fmt_money(ctx.summary.penalty, currency=ctx.currency) }}</td></tr>
+<tr class="net"><td>الصافي المستحق للمقاول</td><td>{{ frappe.utils.fmt_money(ctx.summary.net_due, currency=ctx.currency) }}</td></tr></table>
+</div>

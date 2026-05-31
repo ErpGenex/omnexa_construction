@@ -1,0 +1,39 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:CDT-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"transmittal_date",
+		"reference_no",
+		"issued_by",
+		"recipient_notes",
+		"items_section",
+		"items",
+		"status",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "transmittal_date", "fieldtype": "Date", "label": "Transmittal Date", "reqd": 1, "default": "Today", "in_list_view": 1},
+		{"fieldname": "reference_no", "fieldtype": "Data", "label": "External Reference", "description": "Client / contract transmittal reference (ISO 19650)."},
+		{"fieldname": "issued_by", "fieldtype": "Link", "label": "Issued By", "options": "User"},
+		{"fieldname": "recipient_notes", "fieldtype": "Small Text", "label": "Recipient / Distribution Notes"},
+		{"fieldname": "items_section", "fieldtype": "Section Break", "label": "Documents"},
+		{"fieldname": "items", "fieldtype": "Table", "label": "Lines", "options": "Construction Document Transmittal Item", "reqd": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nIssued\nAcknowledged", "default": "Draft", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Document Transmittal",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 0}
+	],
+	"track_changes": 1
+}

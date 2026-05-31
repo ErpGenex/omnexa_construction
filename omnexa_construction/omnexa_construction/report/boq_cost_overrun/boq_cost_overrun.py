@@ -3,26 +3,41 @@
 
 import frappe
 from frappe import _
+from frappe.utils import flt
 
 from omnexa_core.omnexa_core.report_print.report_query_filters import (
 	get_all_filters,
-	policy_version_filters,
 	prepare_filters,
-	sql_conditions,
 )
-
 
 
 def execute(filters=None):
 	filters = prepare_filters(filters)
-	filters_dict = get_all_filters(filters, "BOQ Item", date_field="creation", company=True, branch=True, extra_links={'project_contract': 'project_contract'})
+	filters_dict = get_all_filters(
+		filters,
+		"BOQ Item",
+		date_field="creation",
+		company=True,
+		branch=True,
+		extra_links={"project_contract": "project_contract"},
+	)
 	data = frappe.get_all(
 		"BOQ Item",
-		fields=['name', 'project_contract', 'section_name', 'item_description', 'planned_cost', 'actual_cost'],
+		fields=["name", "project_contract", "section_name", "item_description", "planned_cost", "actual_cost"],
 		filters=filters_dict,
 		limit_page_length=5000,
 	)
+	for row in data:
+		planned = flt(row.planned_cost)
+		actual = flt(row.actual_cost)
+		overrun = actual - planned
+		row.overrun = overrun
+		row.overrun_percent = (overrun / planned * 100.0) if planned else 0.0
 
+	return _columns(), data
+
+
+def _columns():
 	return [
 		{"label": _("Project Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 160},
 		{"label": _("BOQ Item"), "fieldname": "name", "fieldtype": "Link", "options": "BOQ Item", "width": 130},
@@ -32,4 +47,4 @@ def execute(filters=None):
 		{"label": _("Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 120},
 		{"label": _("Overrun"), "fieldname": "overrun", "fieldtype": "Currency", "width": 110},
 		{"label": _("% Over planned"), "fieldname": "overrun_percent", "fieldtype": "Percent", "width": 110},
-	], data
+	]

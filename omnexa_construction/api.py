@@ -17,7 +17,7 @@ def seed_construction_demo_from_company(
 	branch: str | None = None,
 	force: int | str | None = 0,
 ) -> dict:
-	"""Seed five-project construction portfolio demo for training and UAT."""
+	"""Seed twenty-project construction portfolio demo for training and UAT."""
 	from omnexa_construction.utils.demo_seed import seed_construction_portfolio_demo
 
 	return seed_construction_portfolio_demo(company, branch=branch, force=force)

@@ -1,0 +1,40 @@
+# Copyright (c) 2026, Omnexa and contributors
+# License: MIT. See license.txt
+
+import frappe
+from frappe import _
+
+from omnexa_construction.evm_metrics import evm_snapshot
+from omnexa_core.omnexa_core.report_print.report_query_filters import get_all_filters, prepare_filters
+
+
+def execute(filters=None):
+	filters = prepare_filters(filters)
+	as_of = filters.get("as_of_date")
+	contracts = frappe.get_all(
+		"Project Contract",
+		filters=get_all_filters(filters, "Project Contract", company=True, branch=True),
+		fields=["name"],
+		limit_page_length=5000,
+	)
+	data = [evm_snapshot(row.name, as_of) for row in contracts]
+	return _columns(), data
+
+
+def _columns():
+	return [
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 140},
+		{"label": _("Title"), "fieldname": "contract_title", "fieldtype": "Data", "width": 160},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90},
+		{"label": _("BAC"), "fieldname": "bac", "fieldtype": "Currency", "width": 120},
+		{"label": _("PV"), "fieldname": "pv", "fieldtype": "Currency", "width": 110},
+		{"label": _("EV"), "fieldname": "ev", "fieldtype": "Currency", "width": 110},
+		{"label": _("AC"), "fieldname": "ac", "fieldtype": "Currency", "width": 110},
+		{"label": _("CPI"), "fieldname": "cpi", "fieldtype": "Float", "precision": 2, "width": 80},
+		{"label": _("SPI"), "fieldname": "spi", "fieldtype": "Float", "precision": 2, "width": 80},
+		{"label": _("CV"), "fieldname": "cv", "fieldtype": "Currency", "width": 110},
+		{"label": _("SV"), "fieldname": "sv", "fieldtype": "Currency", "width": 110},
+		{"label": _("EAC"), "fieldname": "eac", "fieldtype": "Currency", "width": 110},
+		{"label": _("ETC"), "fieldname": "etc", "fieldtype": "Currency", "width": 110},
+		{"label": _("% Planned"), "fieldname": "schedule_percent", "fieldtype": "Percent", "width": 90},
+	]

@@ -1,0 +1,24 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:ITP-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "itp_reference", "revision", "status", "lines", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "itp_reference", "fieldtype": "Data", "label": "ITP Reference", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "revision", "fieldtype": "Data", "label": "Revision", "default": "A"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nActive\nSuperseded", "default": "Draft", "reqd": 1},
+		{"fieldname": "lines", "fieldtype": "Table", "label": "Test Activities", "options": "Construction Inspection Test Plan Line", "reqd": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Inspection Test Plan",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

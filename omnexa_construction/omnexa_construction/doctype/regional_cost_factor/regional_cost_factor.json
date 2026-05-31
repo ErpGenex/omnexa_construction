@@ -1,0 +1,28 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:RCF-{region_code}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["region_code", "region_name", "company", "branch", "cost_factor", "building_type", "is_default", "disabled", "notes"],
+	"fields": [
+		{"fieldname": "region_code", "fieldtype": "Data", "label": "Region Code", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "region_name", "fieldtype": "Data", "label": "Region Name", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch"},
+		{"fieldname": "cost_factor", "fieldtype": "Float", "label": "Cost Factor", "default": "1", "reqd": 1, "description": "Multiplier on parametric BOQ quantities (1.0 = baseline)."},
+		{"fieldname": "building_type", "fieldtype": "Select", "label": "Building Type (optional)", "options": "\nvilla\nresidential_building\nsocial_housing\noffice_tower\nhotel\nmall\nschool\nhospital\nhighway\nurban_road"},
+		{"fieldname": "is_default", "fieldtype": "Check", "label": "Default for Company", "default": "0"},
+		{"fieldname": "disabled", "fieldtype": "Check", "label": "Disabled", "default": "0"},
+		{"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"}
+	],
+	"module": "Omnexa Construction",
+	"name": "Regional Cost Factor",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"sort_field": "modified",
+	"sort_order": "DESC",
+	"track_changes": 1
+}

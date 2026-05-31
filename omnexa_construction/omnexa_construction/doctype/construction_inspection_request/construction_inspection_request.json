@@ -1,0 +1,39 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:IR-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"inspection_date",
+		"location",
+		"work_activity",
+		"boq_item",
+		"inspector",
+		"findings",
+		"status",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "inspection_date", "fieldtype": "Date", "label": "Inspection Date", "reqd": 1, "default": "Today", "in_list_view": 1},
+		{"fieldname": "location", "fieldtype": "Data", "label": "Location / Zone", "reqd": 1},
+		{"fieldname": "work_activity", "fieldtype": "Data", "label": "Work Activity", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "boq_item", "fieldtype": "Link", "label": "BOQ Item", "options": "BOQ Item"},
+		{"fieldname": "inspector", "fieldtype": "Link", "label": "Inspector", "options": "User"},
+		{"fieldname": "findings", "fieldtype": "Small Text", "label": "Findings"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nScheduled\nIn Progress\nPassed\nFailed\nClosed", "default": "Draft", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Inspection Request",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 0}
+	],
+	"track_changes": 1
+}

@@ -1,0 +1,22 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["item_code", "item_name", "quantity", "uom", "boq_item", "cost_code", "estimated_rate", "amount"],
+	"fields": [
+		{"fieldname": "item_code", "fieldtype": "Link", "label": "Item", "options": "Item", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "item_name", "fieldtype": "Data", "label": "Description", "fetch_from": "item_code.item_name", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "quantity", "fieldtype": "Float", "label": "Qty", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "uom", "fieldtype": "Link", "label": "UOM", "options": "UOM"},
+		{"fieldname": "boq_item", "fieldtype": "Link", "label": "BOQ Item", "options": "BOQ Item"},
+		{"fieldname": "cost_code", "fieldtype": "Data", "label": "Cost Code", "in_list_view": 1},
+		{"fieldname": "estimated_rate", "fieldtype": "Currency", "label": "Est. Rate"},
+		{"fieldname": "amount", "fieldtype": "Currency", "label": "Amount", "read_only": 1, "in_list_view": 1}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction RFQ Item",
+	"permissions": [],
+	"track_changes": 0
+}

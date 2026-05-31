@@ -1,0 +1,56 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:CRFQ-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"company",
+		"branch",
+		"project_contract",
+		"purchase_request",
+		"column_break_1",
+		"rfq_date",
+		"required_by",
+		"status",
+		"awarded_supplier",
+		"section_items",
+		"items",
+		"section_quotes",
+		"supplier_quotes",
+		"section_totals",
+		"estimated_total",
+		"lowest_quote",
+		"recommended_supplier"
+	],
+	"fields": [
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1},
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "purchase_request", "fieldtype": "Link", "label": "Purchase Request", "options": "Purchase Request"},
+		{"fieldname": "column_break_1", "fieldtype": "Column Break"},
+		{"fieldname": "rfq_date", "fieldtype": "Date", "label": "RFQ Date", "default": "Today", "reqd": 1},
+		{"fieldname": "required_by", "fieldtype": "Date", "label": "Required By"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nSent\nEvaluated\nAwarded\nCancelled", "default": "Draft", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "awarded_supplier", "fieldtype": "Link", "label": "Awarded Supplier", "options": "Supplier"},
+		{"fieldname": "section_items", "fieldtype": "Section Break", "label": "Items"},
+		{"fieldname": "items", "fieldtype": "Table", "label": "RFQ Lines", "options": "Construction RFQ Item", "reqd": 1},
+		{"fieldname": "section_quotes", "fieldtype": "Section Break", "label": "Supplier Quotes"},
+		{"fieldname": "supplier_quotes", "fieldtype": "Table", "label": "Quotes", "options": "Construction RFQ Supplier Quote"},
+		{"fieldname": "section_totals", "fieldtype": "Section Break", "label": "Evaluation"},
+		{"fieldname": "estimated_total", "fieldtype": "Currency", "label": "Estimated Total", "read_only": 1},
+		{"fieldname": "lowest_quote", "fieldtype": "Currency", "label": "Lowest Quote", "read_only": 1},
+		{"fieldname": "recommended_supplier", "fieldtype": "Link", "label": "Recommended Supplier", "options": "Supplier", "read_only": 1}
+	],
+	"links": [
+		{"group": "Procurement", "link_doctype": "Purchase Request", "link_fieldname": "purchase_request"}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction RFQ",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+		{"role": "Cost Controller", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1}
+	],
+	"track_changes": 1
+}

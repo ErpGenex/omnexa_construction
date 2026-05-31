@@ -1,0 +1,31 @@
+<div class="print-format">
+  <h2>{{ _("BOQ Schedule") }} — {{ doc.contract_title or doc.name }}</h2>
+  <p><b>{{ _("Type") }}:</b> {{ doc.building_type }} | <b>{{ _("Template") }}:</b> {{ doc.boq_template }}</p>
+  <p><b>{{ _("Contract Value") }}:</b> {{ frappe.utils.fmt_money(doc.estimated_contract_value, currency=doc.contract_currency) }}</p>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>{{ _("Code") }}</th>
+        <th>{{ _("Description") }}</th>
+        <th>{{ _("Qty") }}</th>
+        <th>{{ _("UOM") }}</th>
+        <th>{{ _("Planned Cost") }}</th>
+        <th>{{ _("Finish") }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in doc.boq_lines %}
+      {% if row.include and not row.is_group %}
+      <tr>
+        <td>{{ row.cost_code }}</td>
+        <td>{{ row.item_description }}</td>
+        <td class="text-right">{{ row.quantity }}</td>
+        <td>{{ row.unit_of_measure }}</td>
+        <td class="text-right">{{ frappe.utils.fmt_money(row.planned_cost, currency=doc.contract_currency) }}</td>
+        <td>{{ row.planned_finish or "" }}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

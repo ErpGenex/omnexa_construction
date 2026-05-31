@@ -1,0 +1,21 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["idx", "work_description", "location_section", "executed_quantity", "uom", "execution_date", "remarks"],
+	"fields": [
+		{"fieldname": "idx", "fieldtype": "Int", "label": "م", "in_list_view": 1},
+		{"fieldname": "work_description", "fieldtype": "Data", "label": "بيان الأعمال", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "location_section", "fieldtype": "Data", "label": "الموقع / الجزء", "in_list_view": 1},
+		{"fieldname": "executed_quantity", "fieldtype": "Float", "label": "الكمية المنفذة", "in_list_view": 1},
+		{"fieldname": "uom", "fieldtype": "Data", "label": "وحدة القياس"},
+		{"fieldname": "execution_date", "fieldtype": "Date", "label": "تاريخ التنفيذ"},
+		{"fieldname": "remarks", "fieldtype": "Small Text", "label": "ملاحظات"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Work Approval Line",
+	"permissions": [],
+	"track_changes": 0
+}

@@ -1,28 +1,42 @@
 import frappe
 from frappe.model.document import Document
 from frappe.utils import flt, today
+from omnexa_construction.subcontract_financials import (
+	refresh_subcontract_work_order_amounts,
+	subcontract_paid_total,
+)
 from omnexa_construction.utils.gl import post_gl_journal
 
 
 class SubcontractPaymentCertificate(Document):
 	def validate(self):
 		self._hydrate_from_subcontract()
+		if self.is_new() and self.subcontract_work_order and not flt(self.previously_paid):
+			self.previously_paid = subcontract_paid_total(self.subcontract_work_order)
 		self.retention_amount = flt(self.certified_amount) * (flt(self.retention_percent) / 100.0)
 		self.net_payable = flt(self.certified_amount) - flt(self.previously_paid) - flt(self.retention_amount)
 
 	def on_submit(self):
 		self._post_accrual_journal()
 		self.db_set("status", "Approved", update_modified=False)
+		self._sync_subcontract_work_order()
 
 	def on_cancel(self):
 		self._reverse_journal()
 		self.db_set("status", "Draft", update_modified=False)
+		self._sync_subcontract_work_order()
 
 	def on_update_after_submit(self):
 		if self.status == "Paid" and not self.payment_entry:
 			self._create_payment_entry()
 		if self.status == "Retention Released" and not self.retention_payment_entry:
 			self._create_retention_payment_entry()
+		if self.has_value_changed("status"):
+			self._sync_subcontract_work_order()
+
+	def _sync_subcontract_work_order(self):
+		if self.subcontract_work_order:
+			refresh_subcontract_work_order_amounts(self.subcontract_work_order)
 
 	def _hydrate_from_subcontract(self):
 		if not self.subcontract_work_order:

@@ -1,0 +1,45 @@
+<style>
+.ar-form { direction: rtl; font-family: Tahoma, Arial, sans-serif; font-size: 11px; color: #222; }
+.ar-form .title { text-align: center; font-size: 18px; font-weight: bold; margin: 8px 0; color: #1e3a5f; }
+.ar-form .meta { width: 100%; margin-bottom: 10px; }
+.ar-form .meta td { padding: 3px 6px; vertical-align: top; }
+.ar-form .section-head { background: #1e3a5f; color: #fff; padding: 6px 8px; font-weight: bold; margin-top: 10px; }
+.ar-form table.grid { width: 100%; border-collapse: collapse; margin-top: 6px; }
+.ar-form table.grid th { background: #e8eef5; border: 1px solid #999; padding: 5px; text-align: center; font-size: 10px; }
+.ar-form table.grid td { border: 1px solid #999; padding: 4px 5px; text-align: center; }
+.ar-form .sig { width: 100%; margin-top: 18px; }
+.ar-form .sig td { width: 33%; text-align: center; vertical-align: top; border: 1px solid #ccc; padding: 8px; height: 70px; }
+.ar-form .note { margin-top: 10px; font-size: 10px; color: #555; }
+</style>
+<div class="ar-form print-format">
+  <table class="meta"><tr>
+    <td width="20%">{{ doc.company }}</td>
+    <td width="60%" class="title">طلب اعتماد أعمال</td>
+    <td width="20%">رقم: {{ doc.name }}<br>التاريخ: {{ doc.request_date }}</td>
+  </tr></table>
+  <p>إلى: {{ doc.recipient_title or "الاستشاري / المهندس" }}</p>
+  <p>تحية طيبة وبعد،،،</p>
+  <p><b>الموضوع:</b> طلب اعتماد أعمال — مشروع {{ doc.project_name }}</p>
+  <div class="section-head">بيانات المشروع</div>
+  <table class="meta">
+    <tr><td><b>اسم المشروع:</b> {{ doc.project_name }}</td><td><b>رقم المشروع:</b> {{ doc.project_number }}</td></tr>
+    <tr><td><b>الموقع:</b> {{ doc.site_location }}</td><td><b>رقم العقد:</b> {{ doc.contract_number }}</td></tr>
+    <tr><td colspan="2"><b>المقاول:</b> {{ doc.contractor_name }}</td></tr>
+  </table>
+  <div class="section-head">تفاصيل الأعمال</div>
+  <table class="grid">
+    <thead><tr><th>م</th><th>بيان الأعمال</th><th>الموقع / الجزء</th><th>الكمية المنفذة</th><th>وحدة القياس</th><th>تاريخ التنفيذ</th><th>ملاحظات</th></tr></thead>
+    <tbody>{% for row in doc.works %}<tr>
+      <td>{{ row.idx or loop.index }}</td><td>{{ row.work_description }}</td><td>{{ row.location_section or "" }}</td>
+      <td>{{ row.executed_quantity or "" }}</td><td>{{ row.uom or "" }}</td><td>{{ row.execution_date or "" }}</td><td>{{ row.remarks or "" }}</td>
+    </tr>{% endfor %}</tbody>
+  </table>
+  <div class="section-head">المرفقات والاعتماد</div>
+  <p>{% if doc.attach_test_reports %}☑{% else %}☐{% endif %} تقارير &nbsp; {% if doc.attach_photos %}☑{% else %}☐{% endif %} صور &nbsp; {% if doc.attach_drawings %}☑{% else %}☐{% endif %} رسومات</p>
+  <p>{% if doc.approve_quantities %}☑{% else %}☐{% endif %} كميات &nbsp; {% if doc.approve_quality %}☑{% else %}☐{% endif %} جودة &nbsp; {% if doc.approve_financial %}☑{% else %}☐{% endif %} مالي</p>
+  <table class="sig"><tr>
+    <td><b>إعداد</b><br>{{ doc.prepared_by_name or "" }}<br>{{ doc.prepared_by_date or "" }}</td>
+    <td><b>مراجعة</b><br>{{ doc.reviewed_by_name or "" }}<br>{{ doc.reviewed_by_date or "" }}</td>
+    <td><b>يعتمد من المقاول</b><br>{{ doc.contractor_approved_by or "" }}<br>{{ doc.contractor_approved_date or "" }}</td>
+  </tr></table>
+</div>

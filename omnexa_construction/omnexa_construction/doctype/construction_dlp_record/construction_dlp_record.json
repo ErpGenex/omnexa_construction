@@ -1,0 +1,26 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:DLP-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "handover_date", "dlp_months", "dlp_end_date", "status", "open_defects_count", "notes", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "handover_date", "fieldtype": "Date", "label": "Handover Date", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "dlp_months", "fieldtype": "Int", "label": "DLP (Months)", "default": "12"},
+		{"fieldname": "dlp_end_date", "fieldtype": "Date", "label": "DLP End Date", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Active\nExpired\nClosed", "default": "Active", "reqd": 1},
+		{"fieldname": "open_defects_count", "fieldtype": "Int", "label": "Open Defects", "default": "0"},
+		{"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction DLP Record",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

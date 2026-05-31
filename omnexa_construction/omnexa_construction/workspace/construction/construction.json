@@ -13,7 +13,7 @@
    "label": "Subcontract Work Order Mix"
   }
  ],
- "content": "[{\"id\": \"erpgenex-onboarding\", \"type\": \"onboarding\", \"data\": {\"onboarding_name\": \"ERPGENEX — Construction\", \"col\": 12}}, {\"id\": \"construction-h\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Construction</b></span>\", \"col\": 12}}, {\"id\": \"construction-nc0\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Project Contract\", \"col\": 4}}, {\"id\": \"construction-nc1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"BOQ Item\", \"col\": 4}}, {\"id\": \"construction-nc2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Site Daily Report\", \"col\": 4}}, {\"id\": \"construction-nc3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Subcontract Work Order\", \"col\": 4}}, {\"id\": \"construction-nc4\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Construction Change Order\", \"col\": 4}}, {\"id\": \"construction-nc5\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Extension of Time (EOT)\", \"col\": 4}}, {\"id\": \"construction-nc6\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Construction Claim\", \"col\": 4}}, {\"id\": \"construction-nc7\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"IPC Certificate\", \"col\": 4}}, {\"id\": \"construction-ch0\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Status Bar\", \"col\": 4}}, {\"id\": \"construction-ch1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Project Contract Mix\", \"col\": 4}}, {\"id\": \"construction-ch2\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Subcontract Work Order Mix\", \"col\": 4}}, {\"id\": \"construction-ops\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Actions</b>\", \"col\": 12}}, {\"id\": \"construction-sc0\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Project Contract\", \"col\": 3}}, {\"id\": \"construction-sc1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"BOQ Item\", \"col\": 3}}, {\"id\": \"construction-sc2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"PM WBS Task\", \"col\": 3}}, {\"id\": \"construction-sc3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Site Daily Report\", \"col\": 3}}, {\"id\": \"construction-sc4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Subcontract Work Order\", \"col\": 3}}, {\"id\": \"construction-sc5\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Construction Change Order\", \"col\": 3}}, {\"id\": \"construction-sc6\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Extension of Time (EOT)\", \"col\": 3}}, {\"id\": \"construction-sc7\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Construction Claim\", \"col\": 3}}, {\"id\": \"construction-sc8\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"IPC Certificate\", \"col\": 3}}, {\"id\": \"construction-sc9\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Subcontract Payment Certificate\", \"col\": 3}}, {\"id\": \"construction-sc10\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Project WIP Snapshot\", \"col\": 3}}, {\"id\": \"construction-sc11\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Purchase Order\", \"col\": 3}}, {\"id\": \"construction-sc12\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Supplier\", \"col\": 3}}, {\"id\": \"construction-sc13\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"BOQ Progress\", \"col\": 3}}]",
+ "content": "[{\"id\": \"erpgenex-onboarding\", \"type\": \"onboarding\", \"data\": {\"onboarding_name\": \"ERPGENEX — Construction\", \"col\": 12}}, {\"id\": \"construction-h\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Construction</b></span>\", \"col\": 12}}, {\"id\": \"construction-nc0\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Project Contract\", \"col\": 4}}, {\"id\": \"construction-nc1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"BOQ Item\", \"col\": 4}}, {\"id\": \"construction-nc2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Site Daily Report\", \"col\": 4}}, {\"id\": \"construction-nc3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Subcontract Work Order\", \"col\": 4}}, {\"id\": \"construction-nc4\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Construction Change Order\", \"col\": 4}}, {\"id\": \"construction-nc5\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Extension of Time (EOT)\", \"col\": 4}}, {\"id\": \"construction-nc6\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Construction Claim\", \"col\": 4}}, {\"id\": \"construction-nc7\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"IPC Certificate\", \"col\": 4}}, {\"id\": \"construction-nc-open-ncr\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open NCRs\", \"col\": 4}}, {\"id\": \"construction-nc-open-hse\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open HSE incidents\", \"col\": 4}}, {\"id\": \"construction-ch0\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Status Bar\", \"col\": 4}}, {\"id\": \"construction-ch1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Project Contract Mix\", \"col\": 4}}, {\"id\": \"construction-ch2\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Subcontract Work Order Mix\", \"col\": 4}}, {\"id\": \"construction-ops\", \"type\": \"header\", \"data\": {\"text\": \"<b>Quick Actions</b>\", \"col\": 12}}, {\"id\": \"construction-sc0\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Project Contract\", \"col\": 3}}, {\"id\": \"construction-sc1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"BOQ Item\", \"col\": 3}}, {\"id\": \"construction-sc2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"PM WBS Task\", \"col\": 3}}, {\"id\": \"construction-sc3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Site Daily Report\", \"col\": 3}}, {\"id\": \"construction-sc4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Subcontract Work Order\", \"col\": 3}}, {\"id\": \"construction-sc5\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Construction Change Order\", \"col\": 3}}, {\"id\": \"construction-sc6\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Extension of Time (EOT)\", \"col\": 3}}, {\"id\": \"construction-sc7\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Construction Claim\", \"col\": 3}}, {\"id\": \"construction-sc8\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"IPC Certificate\", \"col\": 3}}, {\"id\": \"construction-sc9\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Subcontract Payment Certificate\", \"col\": 3}}, {\"id\": \"construction-sc10\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Project WIP Snapshot\", \"col\": 3}}, {\"id\": \"construction-sc11\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Purchase Order\", \"col\": 3}}, {\"id\": \"construction-sc12\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Supplier\", \"col\": 3}}, {\"id\": \"construction-sc13\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"BOQ Progress\", \"col\": 3}}, {\"id\": \"construction-sc-evm\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Earned value (EVM)\", \"col\": 3}}, {\"id\": \"construction-sc-exec\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Executive summary\", \"col\": 3}}, {\"id\": \"construction-sc-ctrl\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Contract control\", \"col\": 3}}]",
  "creation": "2026-04-17 23:42:59.727027",
  "custom_blocks": [],
  "docstatus": 0,
@@ -25,6 +25,14 @@
  "is_hidden": 0,
  "label": "Construction",
  "links": [
+  {
+   "type": "Link",
+   "label": "New Project (Wizard)",
+   "link_to": "construction-project-wizard",
+   "link_type": "Page",
+   "icon": "add",
+   "hidden": 0
+  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -252,7 +260,7 @@
   {
    "hidden": 0,
    "icon": "alert-circle",
-   "is_query_report": 0,
+   "is_query_report": 1,
    "label": "BOQ Cost Overrun",
    "link_count": 0,
    "link_to": "BOQ Cost Overrun",
@@ -263,14 +271,121 @@
   },
   {
    "hidden": 0,
+   "icon": "file-text",
+   "is_query_report": 1,
+   "label": "IPC Certificate Summary",
+   "link_count": 0,
+   "link_to": "IPC Certificate Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "IPC Certificate",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
    "icon": "globe",
-   "is_query_report": 0,
+   "is_query_report": 1,
    "label": "Contract International Summary",
    "link_count": 0,
    "link_to": "Construction Contract International Summary",
    "link_type": "Report",
    "onboard": 0,
    "report_ref_doctype": "Project Contract",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "activity",
+   "is_query_report": 1,
+   "label": "Construction Earned Value",
+   "link_count": 0,
+   "link_to": "Construction Earned Value",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Project Contract",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "bar-chart-2",
+   "is_query_report": 1,
+   "label": "Construction Executive Summary",
+   "link_count": 0,
+   "link_to": "Construction Executive Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Project Contract",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "QA / QC & HSE",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "search",
+   "is_query_report": 0,
+   "label": "Construction Inspection Request",
+   "link_count": 0,
+   "link_to": "Construction Inspection Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "alert-triangle",
+   "is_query_report": 0,
+   "label": "Construction NCR",
+   "link_count": 0,
+   "link_to": "Construction NCR",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "shield",
+   "is_query_report": 0,
+   "label": "Construction HSE Incident",
+   "link_count": 0,
+   "link_to": "Construction HSE Incident",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Documents (ISO 19650 lite)",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "icon": "folder",
+   "is_query_report": 0,
+   "label": "Construction Document Transmittal",
+   "link_count": 0,
+   "link_to": "Construction Document Transmittal",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "icon": "shopping-cart",
+   "is_query_report": 0,
+   "label": "Purchase Request",
+   "link_count": 0,
+   "link_to": "Purchase Request",
+   "link_type": "DocType",
+   "onboard": 0,
    "type": "Link"
   },
   {
@@ -314,6 +429,18 @@
    "number_card_name": "Project Contract"
   },
   {
+   "label": "Active contracts",
+   "number_card_name": "Active contracts"
+  },
+  {
+   "label": "Suspended contracts",
+   "number_card_name": "Suspended contracts"
+  },
+  {
+   "label": "Closed contracts",
+   "number_card_name": "Closed contracts"
+  },
+  {
    "label": "BOQ Item",
    "number_card_name": "BOQ Item"
   },
@@ -340,6 +467,14 @@
   {
    "label": "IPC Certificate",
    "number_card_name": "IPC Certificate"
+  },
+  {
+   "label": "Open NCRs",
+   "number_card_name": "Open NCRs"
+  },
+  {
+   "label": "Open HSE incidents",
+   "number_card_name": "Open HSE incidents"
   }
  ],
  "owner": "Administrator",
@@ -348,6 +483,12 @@
  "roles": [],
  "sequence_id": 8.3,
  "shortcuts": [
+  {
+   "color": "Green",
+   "label": "New Project (Wizard)",
+   "link_to": "construction-project-wizard",
+   "type": "Page"
+  },
   {
    "color": "Cyan",
    "doc_view": "List",

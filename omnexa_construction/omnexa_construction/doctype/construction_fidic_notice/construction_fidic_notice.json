@@ -1,0 +1,27 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:FID-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "notice_type", "clause_reference", "notice_date", "response_due_date", "status", "party", "description", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "notice_type", "fieldtype": "Select", "label": "Notice Type", "options": "Claim\nExtension of Time\nVariation\nDefects\nPayment\nTermination\nOther", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "clause_reference", "fieldtype": "Data", "label": "Contract Clause", "description": "e.g. FIDIC Sub-Clause 20.1"},
+		{"fieldname": "notice_date", "fieldtype": "Date", "label": "Notice Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "response_due_date", "fieldtype": "Date", "label": "Response Due Date", "in_list_view": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nAcknowledged\nClosed\nOverdue", "default": "Open", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "party", "fieldtype": "Select", "label": "From / To", "options": "Contractor\nEmployer\nEngineer"},
+		{"fieldname": "description", "fieldtype": "Text Editor", "label": "Description"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction FIDIC Notice",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}
