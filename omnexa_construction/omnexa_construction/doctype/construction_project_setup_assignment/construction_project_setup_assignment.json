@@ -16,7 +16,7 @@
 			"fieldname": "assignment_type",
 			"fieldtype": "Select",
 			"label": "Type",
-			"options": "Subcontractor\nSupplier",
+			"options": "Company\nSubcontractor\nSupplier",
 			"reqd": 1,
 			"in_list_view": 1
 		},

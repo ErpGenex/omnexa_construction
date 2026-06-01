@@ -1,0 +1,172 @@
+{% set ctx = frappe.call("omnexa_construction.construction_forms.setup_print.build_setup_print_context", setup_name=doc.name) %}
+{% set cur = doc.contract_currency or ctx.currency %}
+<div class="omx-setup ar-form omx-a4-root">
+
+<table class="meta">
+<tr>
+	<td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+	<td width="48%">
+		<b class="label">الشركة:</b> {{ ctx.company_name }}<br>
+		{% if ctx.branch_name %}<b class="label">الفرع:</b> {{ ctx.branch_name }}<br>{% endif %}
+		<b class="label">العميل:</b> {{ ctx.client_name or "—" }}<br>
+		<b class="label">المشروع:</b> {{ ctx.contract_title }}
+	</td>
+	<td width="40%">
+		<div class="doc-title">ملخص إعداد المشروع</div>
+		<div class="doc-subtitle">Construction Project Setup Summary</div>
+		<b class="label">رقم الإعداد:</b> {{ doc.name }}<br>
+		<b class="label">الحالة:</b> {{ doc.status or "—" }}<br>
+		<b class="label">تاريخ الطباعة:</b> {{ frappe.format(ctx.print_date, {"fieldtype": "Date"}) }}
+	</td>
+</tr>
+</table>
+
+<div class="section-head">بيانات العقد والموقع</div>
+<table class="grid">
+	<tbody>
+		<tr>
+			<td class="desc" width="25%"><b class="label">نوع العقد</b></td>
+			<td width="25%">{{ doc.contract_type or "—" }}</td>
+			<td class="desc" width="25%"><b class="label">نموذج التسليم</b></td>
+			<td width="25%">{{ doc.delivery_model or "—" }}</td>
+		</tr>
+		<tr>
+			<td class="desc"><b class="label">بداية المشروع</b></td>
+			<td>{{ doc.planned_start or "—" }}</td>
+			<td class="desc"><b class="label">الانتهاء المخطط</b></td>
+			<td>{{ doc.planned_completion or "—" }}</td>
+		</tr>
+		<tr>
+			<td class="desc"><b class="label">نوع المبنى</b></td>
+			<td>{{ ctx.building_type or "—" }}</td>
+			<td class="desc"><b class="label">قالب BOQ</b></td>
+			<td>{{ ctx.boq_template or "—" }}</td>
+		</tr>
+		<tr>
+			<td class="desc"><b class="label">المعيار الحاكم</b></td>
+			<td colspan="3">{{ ctx.governing_standard or "—" }}</td>
+		</tr>
+		<tr>
+			<td class="desc"><b class="label">منطقة الموقع</b></td>
+			<td>{{ doc.site_region or "—" }}</td>
+			<td class="desc"><b class="label">معامل التكلفة الإقليمي</b></td>
+			<td>{{ ctx.regional_cost_factor_label or doc.regional_cost_factor or "—" }}</td>
+		</tr>
+		<tr>
+			<td class="desc"><b class="label">مساحة الأرض (م²)</b></td>
+			<td>{{ doc.plot_area_m2 or "—" }}</td>
+			<td class="desc"><b class="label">المساحة الإجمالية (م²)</b></td>
+			<td>{{ doc.gross_floor_area_m2 or "—" }}</td>
+		</tr>
+		<tr>
+			<td class="desc"><b class="label">الأدوار / الأقبية</b></td>
+			<td>{{ doc.number_of_floors or 0 }} / {{ doc.basement_levels or 0 }}</td>
+			<td class="desc"><b class="label">فئة الجودة</b></td>
+			<td>{{ doc.quality_tier or "—" }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="section-head">الشروط المالية</div>
+<table class="grid">
+	<tbody>
+		<tr>
+			<td class="desc" width="25%"><b class="label">قيمة العقد التقديرية</b></td>
+			<td width="25%">{{ frappe.utils.fmt_money(doc.estimated_contract_value, currency=cur) if doc.estimated_contract_value else "—" }}</td>
+			<td class="desc" width="25%"><b class="label">نسبة التأمين</b></td>
+			<td width="25%">{{ doc.retention_percent or 0 }}%</td>
+		</tr>
+		<tr>
+			<td class="desc"><b class="label">الدفعة المقدمة</b></td>
+			<td>{{ doc.advance_payment_percent or 0 }}% — {{ frappe.utils.fmt_money(doc.advance_payment_amount, currency=cur) if doc.advance_payment_amount else "—" }}</td>
+			<td class="desc"><b class="label">غرامة التأخير / يوم</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.liquidated_damages_per_day, currency=cur) if doc.liquidated_damages_per_day else "—" }}</td>
+		</tr>
+	</tbody>
+</table>
+
+{% if doc.phases %}
+<div class="section-head">مراحل المشروع</div>
+<table class="grid">
+	<thead>
+		<tr>
+			<th width="10%">المرحلة</th>
+			<th width="28%">الاسم</th>
+			<th width="14%">البداية</th>
+			<th width="14%">الانتهاء</th>
+			<th width="12%">الوزن %</th>
+			<th width="22%">بادئات BOQ</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for row in doc.phases %}
+		<tr>
+			<td>{{ row.phase_code }}</td>
+			<td class="desc">{{ row.phase_name }}</td>
+			<td>{{ row.planned_start or "—" }}</td>
+			<td>{{ row.planned_finish or "—" }}</td>
+			<td>{{ row.weight_percent or 0 }}%</td>
+			<td class="desc">{{ row.boq_cost_prefixes or "—" }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+
+{% if doc.boq_lines %}
+<div class="section-head">جدول الكميات (ملخص)</div>
+<table class="grid">
+	<thead>
+		<tr>
+			<th width="10%">الكود</th>
+			<th width="36%">البيان</th>
+			<th width="10%">تضمين</th>
+			<th width="12%">الكمية</th>
+			<th width="16%">التكلفة</th>
+			<th width="16%">المرحلة</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% set ns = namespace(total=0, shown=0) %}
+		{% for row in doc.boq_lines %}
+		{% if row.include and not row.is_group %}
+		{% set ns.total = ns.total + (row.planned_cost or 0) %}
+		{% set ns.shown = ns.shown + 1 %}
+		{% if ns.shown <= 80 %}
+		<tr>
+			<td>{{ row.cost_code }}</td>
+			<td class="desc">{{ row.item_description }}</td>
+			<td>✓</td>
+			<td>{{ row.quantity }} {{ row.unit_of_measure or "" }}</td>
+			<td>{{ frappe.utils.fmt_money(row.planned_cost, currency=cur) if row.planned_cost else "—" }}</td>
+			<td>{{ row.phase_code or "—" }}</td>
+		</tr>
+		{% endif %}
+		{% endif %}
+		{% endfor %}
+		<tr class="total-row">
+			<td colspan="4">إجمالي البنود المضمّنة{% if ns.shown > 80 %} (أول 80 بنداً){% endif %}</td>
+			<td colspan="2">{{ frappe.utils.fmt_money(ns.total, currency=cur) }}</td>
+		</tr>
+	</tbody>
+</table>
+{% endif %}
+
+{% if doc.project_contract %}
+<div class="info-bar">
+	<div class="cell"><b class="label">عقد المشروع:</b> {{ doc.project_contract }}</div>
+	<div class="cell"><b class="label">BOQ منشأة:</b> {{ doc.generated_boq_count or 0 }}</div>
+	<div class="cell"><b class="label">مستخلصات:</b> {{ doc.generated_ipc_count or 0 }}</div>
+</div>
+{% endif %}
+
+<table class="sig">
+	<tr>
+		<td><div class="sig-title">إعداد</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">مراجعة</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">اعتماد</div><div class="sig-line"></div>الاسم: _______________</td>
+	</tr>
+</table>
+
+<div class="page-footer">Omnexa Construction — {{ ctx.contract_title }} — Setup Summary — {{ doc.name }}</div>
+</div>

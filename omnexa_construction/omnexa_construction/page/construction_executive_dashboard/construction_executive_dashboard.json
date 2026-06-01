@@ -1,0 +1,14 @@
+{
+ "doctype": "Page",
+ "name": "construction-executive-dashboard",
+ "module": "Omnexa Construction",
+ "title": "Construction Executive Dashboard",
+ "icon": "dashboard",
+ "standard": "Yes",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Construction Commercial Manager"},
+  {"role": "Cost Controller"}
+ ]
+}

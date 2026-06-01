@@ -1,0 +1,35 @@
+<div class="ar-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">شعار<br>الشركة</div>{% endif %}</td>
+  <td width="58%"><div class="title">شهادة دفعة مقاول باطن</div><div class="title-underline"></div></td>
+  <td width="30%" class="header-box">
+    <b class="label">الرقم:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.certificate_date, {"fieldtype": "Date"}) or "" }}
+  </td>
+</tr></table>
+
+{% set currency = frappe.db.get_value('Project Contract', doc.project_contract, 'contract_currency') or 'EGP' %}
+<table class="project-grid meta">
+  <tr>
+    <td width="50%"><b class="label">أمر العمل:</b> {{ doc.subcontract_work_order }}</td>
+    <td width="50%"><b class="label">المقاول:</b> {{ doc.subcontractor }}</td>
+  </tr>
+  <tr>
+    <td><b class="label">العقد:</b> {{ doc.project_contract }}</td>
+    <td><b class="label">الحالة:</b> {{ doc.status }}</td>
+  </tr>
+</table>
+
+<table class="grid">
+  <thead><tr>
+    <th>البيان</th>
+    <th>المبلغ ({{ currency }})</th>
+  </tr></thead>
+  <tbody>
+    <tr><td>المبلغ المعتمد</td><td>{{ frappe.format(doc.certified_amount, {"fieldtype": "Currency"}) }}</td></tr>
+    <tr><td>مدفوع سابقاً</td><td>{{ frappe.format(doc.previously_paid, {"fieldtype": "Currency"}) }}</td></tr>
+    <tr><td>خصم ضمان ({{ doc.retention_percent or 0 }}%)</td><td>{{ frappe.format(doc.retention_amount, {"fieldtype": "Currency"}) }}</td></tr>
+    <tr><td><b>صافي المستحق</b></td><td><b>{{ frappe.format(doc.net_payable, {"fieldtype": "Currency"}) }}</b></td></tr>
+  </tbody>
+</table>
+</div>

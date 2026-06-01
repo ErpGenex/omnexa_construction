@@ -191,7 +191,7 @@ _register(
 )
 _register(
 	"RES-BLD-TURNKEY-STD",
-	{"template_code": "RES-BLD-TURNKEY-STD", "template_name": "Residential Building", "template_name_ar": "عمارة سكنية", "building_type": "residential_building", "project_segment": "Buildings", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "RES-BLD-TURNKEY-STD", "template_name": "Residential Building", "template_name_ar": "عمارة سكنية", "building_type": "residential_building", "project_segment": "Buildings", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	RESIDENTIAL_FULL_LINES,
 	PHASE_BUILDING_STD,
 	duration_months=20,
@@ -206,7 +206,7 @@ _register(
 )
 _register(
 	"MALL-TURNKEY-STD",
-	{"template_code": "MALL-TURNKEY-STD", "template_name": "Shopping Mall", "template_name_ar": "مول تجاري", "building_type": "mall", "project_segment": "Buildings", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Premium"},
+	{"template_code": "MALL-TURNKEY-STD", "template_name": "Shopping Mall", "template_name_ar": "مول تجاري", "building_type": "mall", "project_segment": "Buildings", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
 	_mall_lines(),
 	PHASE_COMMERCIAL,
 	duration_months=28,
@@ -221,105 +221,105 @@ _register(
 )
 _register(
 	"SCHOOL-TURNKEY-STD",
-	{"template_code": "SCHOOL-TURNKEY-STD", "template_name": "School", "template_name_ar": "مدرسة", "building_type": "school", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "SCHOOL-TURNKEY-STD", "template_name": "School", "template_name_ar": "مدرسة", "building_type": "school", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_school_lines(),
 	PHASE_EDUCATION,
 	duration_months=16,
 )
 _register(
 	"UNIVERSITY-PHASE-STD",
-	{"template_code": "UNIVERSITY-PHASE-STD", "template_name": "University Campus", "template_name_ar": "حرم جامعي", "building_type": "university", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "UNIVERSITY-PHASE-STD", "template_name": "University Campus", "template_name_ar": "حرم جامعي", "building_type": "university", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_university_lines(),
 	PHASE_EDUCATION,
 	duration_months=24,
 )
 _register(
 	"OFFICE-TOWER-STD",
-	{"template_code": "OFFICE-TOWER-STD", "template_name": "Office Tower", "template_name_ar": "برج إداري", "building_type": "office_tower", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Premium"},
+	{"template_code": "OFFICE-TOWER-STD", "template_name": "Office Tower", "template_name_ar": "برج إداري", "building_type": "office_tower", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
 	_office_lines(),
 	PHASE_COMMERCIAL,
 	duration_months=22,
 )
 _register(
 	"SOCIAL-HOUSING-UP",
-	{"template_code": "SOCIAL-HOUSING-UP", "template_name": "Social Housing", "template_name_ar": "إسكان اجتماعي", "building_type": "social_housing", "project_segment": "Buildings", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Economy"},
+	{"template_code": "SOCIAL-HOUSING-UP", "template_name": "Social Housing", "template_name_ar": "إسكان اجتماعي", "building_type": "social_housing", "project_segment": "Buildings", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Economy"},
 	_social_housing_lines(),
 	PHASE_BUILDING_STD,
 	duration_months=22,
 )
 _register(
 	"WAREHOUSE-STD",
-	{"template_code": "WAREHOUSE-STD", "template_name": "Warehouse", "template_name_ar": "مخزن", "building_type": "warehouse", "project_segment": "Industrial EPC", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Yellow Book", "quality_tier": "Standard"},
+	{"template_code": "WAREHOUSE-STD", "template_name": "Warehouse", "template_name_ar": "مخزن", "building_type": "warehouse", "project_segment": "Industrial EPC", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Standard"},
 	_warehouse_lines(),
 	PHASE_INDUSTRIAL,
 	duration_months=10,
 )
 _register(
 	"FACTORY-EPC-STD",
-	{"template_code": "FACTORY-EPC-STD", "template_name": "Factory EPC", "template_name_ar": "مصنع", "building_type": "factory", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book", "quality_tier": "Standard"},
+	{"template_code": "FACTORY-EPC-STD", "template_name": "Factory EPC", "template_name_ar": "مصنع", "building_type": "factory", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Standard"},
 	_factory_lines(),
 	PHASE_INDUSTRIAL,
 	duration_months=14,
 )
 _register(
 	"URBAN-ROAD-STD",
-	{"template_code": "URBAN-ROAD-STD", "template_name": "Urban Road", "template_name_ar": "طريق حضري", "building_type": "urban_road", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "URBAN-ROAD-STD", "template_name": "Urban Road", "template_name_ar": "طريق حضري", "building_type": "urban_road", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	URBAN_ROAD_FULL_LINES,
 	PHASE_ROAD,
 	duration_months=8,
 )
 _register(
 	"HIGHWAY-UP-STD",
-	{"template_code": "HIGHWAY-UP-STD", "template_name": "Highway", "template_name_ar": "طريق سريع", "building_type": "highway", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "HIGHWAY-UP-STD", "template_name": "Highway", "template_name_ar": "طريق سريع", "building_type": "highway", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_highway_lines(),
 	PHASE_ROAD,
 	duration_months=18,
 )
 _register(
 	"WATER-NET-STD",
-	{"template_code": "WATER-NET-STD", "template_name": "Water Network", "template_name_ar": "شبكة مياه", "building_type": "water_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "WATER-NET-STD", "template_name": "Water Network", "template_name_ar": "شبكة مياه", "building_type": "water_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_pipeline_lines("شبكة مياه"),
 	PHASE_PIPELINE,
 	duration_months=12,
 )
 _register(
 	"SEWER-NET-STD",
-	{"template_code": "SEWER-NET-STD", "template_name": "Sewer Network", "template_name_ar": "شبكة صرف", "building_type": "sewer_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "SEWER-NET-STD", "template_name": "Sewer Network", "template_name_ar": "شبكة صرف", "building_type": "sewer_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_pipeline_lines("شبكة صرف"),
 	PHASE_PIPELINE,
 	duration_months=12,
 )
 _register(
 	"ELEC-NET-STD",
-	{"template_code": "ELEC-NET-STD", "template_name": "Electrical Network", "template_name_ar": "شبكة كهرباء", "building_type": "electrical_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "ELEC-NET-STD", "template_name": "Electrical Network", "template_name_ar": "شبكة كهرباء", "building_type": "electrical_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_pipeline_lines("شبكة كهرباء", "ROAD_KM"),
 	PHASE_PIPELINE,
 	duration_months=14,
 )
 _register(
 	"GAS-NET-STD",
-	{"template_code": "GAS-NET-STD", "template_name": "Gas Network", "template_name_ar": "شبكة غاز", "building_type": "gas_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "GAS-NET-STD", "template_name": "Gas Network", "template_name_ar": "شبكة غاز", "building_type": "gas_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_pipeline_lines("شبكة غاز"),
 	PHASE_PIPELINE,
 	duration_months=10,
 )
 _register(
 	"TELECOM-FIBER-STD",
-	{"template_code": "TELECOM-FIBER-STD", "template_name": "Telecom Fiber", "template_name_ar": "فايبر", "building_type": "telecom_fiber", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "TELECOM-FIBER-STD", "template_name": "Telecom Fiber", "template_name_ar": "فايبر", "building_type": "telecom_fiber", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	_pipeline_lines("اتصالات", "PIPE_KM"),
 	PHASE_PIPELINE,
 	duration_months=8,
 )
 _register(
 	"BRIDGE-STD",
-	{"template_code": "BRIDGE-STD", "template_name": "Bridge / Viaduct", "template_name_ar": "كوبري", "building_type": "bridge", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book", "quality_tier": "Standard"},
+	{"template_code": "BRIDGE-STD", "template_name": "Bridge / Viaduct", "template_name_ar": "كوبري", "building_type": "bridge", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
 	BRIDGE_FULL_LINES,
 	PHASE_ROAD,
 	duration_months=16,
 )
 _register(
 	"SUBSTATION-EPC",
-	{"template_code": "SUBSTATION-EPC", "template_name": "Substation EPC", "template_name_ar": "محطة كهرباء", "building_type": "substation", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book", "quality_tier": "Standard"},
+	{"template_code": "SUBSTATION-EPC", "template_name": "Substation EPC", "template_name_ar": "محطة كهرباء", "building_type": "substation", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Standard"},
 	SUBSTATION_FULL_LINES,
 	PHASE_INDUSTRIAL,
 	DETAIL_RULES_MEP_LS,

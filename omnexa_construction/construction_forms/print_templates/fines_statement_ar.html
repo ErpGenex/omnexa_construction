@@ -1,16 +1,89 @@
+{% set currency = frappe.db.get_value("Project Contract", doc.project_contract, "contract_currency") or "EGP" %}
 <div class="ar-form print-format">
+
 <table class="meta"><tr>
-  <td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
-  <td width="58%"><div class="title">كشف غرامات</div></td>
-  <td width="30%"><b class="label">رقم:</b> {{ doc.name }}<br><b class="label">حتى:</b> {{ doc.to_date }}</td>
+  <td width="38%" class="header-box">
+    <b class="label">اسم المشروع:</b> {{ doc.project_name }}<br>
+    <b class="label">رقم المشروع:</b> {{ doc.project_number or "" }}<br>
+    <b class="label">المقاول:</b> {{ doc.contractor_name or "" }}
+  </td>
+  <td width="34%"><div class="title">كشف غرامات</div></td>
+  <td width="28%" class="header-box">
+    <b class="label">رقم الكشف:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.statement_date, {"fieldtype": "Date"}) or "" }}<br>
+    <b class="label">حتى تاريخ:</b> {{ frappe.format(doc.to_date, {"fieldtype": "Date"}) or "" }}
+  </td>
 </tr></table>
-<p><b class="label">المشروع:</b> {{ doc.project_name }}</p>
+
+{% if doc.contract_reference %}
+<p class="intro-text">{{ doc.contract_reference }}</p>
+{% else %}
+<p class="intro-text">بخصوص العقد رقم <b>{{ frappe.db.get_value("Project Contract", doc.project_contract, "name") or "____________" }}</b> — نرفق لسيادتكم كشف الغرامات المستحقة عن الفترة حتى التاريخ الموضح أعلاه.</p>
+{% endif %}
+
 <div class="section-head">تفاصيل الغرامات</div>
-<table class="grid"><thead><tr><th>م</th><th>البيان</th><th>السبب</th><th>بند العقد</th><th>من</th><th>إلى</th><th>أيام</th><th>يومياً</th><th>الإجمالي</th></tr></thead>
-<tbody>{% for row in doc.fines %}<tr><td>{{ loop.index }}</td><td class="desc">{{ row.description }}</td><td>{{ row.fine_reason or "" }}</td><td>{{ row.contract_clause or "" }}</td><td>{{ row.violation_start or "" }}</td><td>{{ row.violation_end or "" }}</td><td>{{ row.number_of_days or "" }}</td><td>{{ frappe.utils.fmt_money(row.daily_fine_amount) if row.daily_fine_amount else "" }}</td><td>{{ frappe.utils.fmt_money(row.total_fine) if row.total_fine else "" }}</td></tr>{% endfor %}</tbody></table>
-<table class="summary">
-  <tr class="total-row"><td class="label">إجمالي الغرامات</td><td class="val">{{ frappe.utils.fmt_money(doc.total_fines) }}</td></tr>
+<table class="grid">
+  <thead><tr>
+    <th width="3%">م</th>
+    <th width="14%">البيان</th>
+    <th width="12%">سبب الغرامة</th>
+    <th width="8%">بند العقد</th>
+    <th width="9%">تاريخ بداية المخالفة</th>
+    <th width="9%">تاريخ نهاية المخالفة</th>
+    <th width="6%">عدد الأيام</th>
+    <th width="11%">قيمة الغرامة اليومية ({{ currency }})</th>
+    <th width="11%">إجمالي الغرامة ({{ currency }})</th>
+    <th width="17%">ملاحظات</th>
+  </tr></thead>
+  <tbody>{% for row in doc.fines %}<tr>
+    <td>{{ loop.index }}</td>
+    <td class="desc">{{ row.description }}</td>
+    <td>{{ row.fine_reason or "" }}</td>
+    <td>{{ row.contract_clause or "" }}</td>
+    <td>{{ frappe.format(row.violation_start, {"fieldtype": "Date"}) or "" }}</td>
+    <td>{{ frappe.format(row.violation_end, {"fieldtype": "Date"}) or "" }}</td>
+    <td>{{ row.number_of_days or "" }}</td>
+    <td>{{ frappe.utils.fmt_money(row.daily_fine_amount, currency=currency) if row.daily_fine_amount else "" }}</td>
+    <td>{{ frappe.utils.fmt_money(row.total_fine, currency=currency) if row.total_fine else "" }}</td>
+    <td>{{ row.remarks or "" }}</td>
+  </tr>{% endfor %}
+  <tr class="total-row">
+    <td colspan="8">إجمالي الغرامات</td>
+    <td>{{ frappe.utils.fmt_money(doc.total_fines, currency=currency) }}</td>
+    <td></td>
+  </tr></tbody>
 </table>
-{% if doc.total_fines_in_words %}<p class="note">{{ doc.total_fines_in_words }}</p>{% endif %}
+
+{% if doc.total_fines_in_words %}<div class="amount-words">فقط لا غير: {{ doc.total_fines_in_words }}</div>{% endif %}
+{% if doc.notes %}<p class="note">{{ doc.notes }}</p>{% endif %}
+
+<table class="sig"><tr>
+  <td width="25%">
+    <div class="sig-title">إعداد</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.prepared_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.prepared_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%">
+    <div class="sig-title">مراجعة</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.reviewed_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.reviewed_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%">
+    <div class="sig-title">اعتماد</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.approved_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.approved_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%"><div class="stamp-square">ختم<br>الشركة</div></td>
+</tr></table>
+
 <div class="page-footer">Omnexa Construction — {{ doc.project_name }} — {{ doc.name }}</div>
 </div>

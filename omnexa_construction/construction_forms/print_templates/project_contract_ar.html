@@ -1,6 +1,6 @@
 {% set ctx = frappe.call("omnexa_construction.construction_forms.setup_print.build_contract_print_context", contract_name=doc.name) %}
 {% set cur = doc.contract_currency or ctx.currency %}
-<div class="omx-setup ar-form print-format">
+<div class="omx-setup ar-form omx-a4-root">
 
 <table class="meta">
 <tr>

@@ -34,7 +34,7 @@ def _prior_certified_completion_percent(
 		FROM `tabIPC Certificate`
 		WHERE project_contract = %s
 			AND COALESCE(name, '') != COALESCE(%s, '')
-			AND status IN ('Certified', 'Posted')
+			AND (status IN ('Certified', 'Posted') OR docstatus = 1)
 			AND docstatus < 2
 			AND (
 				ipc_date < %s
@@ -102,10 +102,47 @@ class IPCCertificate(Document):
 		self.cumulative_value_billed = out["cumulative_value_billed"]
 		self.gross_amount = out["gross_amount"]
 		self.retention_deduction = out["retention_deduction"]
-		self.net_amount = out["net_amount"]
+		base_net = out["net_amount"]
+		penalty = flt(self.get("penalty_deduction"))
+		other = flt(self.get("other_deductions"))
+		self.net_amount = base_net - penalty - other
+		self._apply_tax_fields()
+		if self.meta.has_field("vat_percent") and not flt(self.get("vat_percent")):
+			vat_pct = frappe.db.get_value("Project Contract", self.project_contract, "default_vat_percent")
+			if vat_pct:
+				self.vat_percent = flt(vat_pct)
+		if self.meta.has_field("wht_percent") and not flt(self.get("wht_percent")):
+			wht_pct = frappe.db.get_value("Project Contract", self.project_contract, "default_wht_percent")
+			if wht_pct:
+				self.wht_percent = flt(wht_pct)
 
 		validate_linked_pm_wbs_task(self.project_contract, self.pm_wbs_task)
 		self._validate_boq_lines()
+
+	def _apply_tax_fields(self):
+		from omnexa_construction.ipc_taxes import compute_ipc_tax_amounts
+
+		taxes = compute_ipc_tax_amounts(
+			flt(self.net_amount),
+			flt(self.gross_amount),
+			vat_percent=flt(self.get("vat_percent")),
+			wht_percent=flt(self.get("wht_percent")),
+		)
+		if self.meta.has_field("vat_amount") and flt(self.vat_percent) and not flt(self.vat_amount):
+			self.vat_amount = taxes["vat_amount"]
+		if self.meta.has_field("wht_amount") and flt(self.wht_percent) and not flt(self.wht_amount):
+			self.wht_amount = taxes["wht_amount"]
+		if self.meta.has_field("net_after_tax"):
+			vat = flt(self.get("vat_amount"))
+			wht = flt(self.get("wht_amount"))
+			self.net_after_tax = flt(self.net_amount) + vat - wht
+
+	def on_submit(self):
+		if self.status in (None, "", "Draft"):
+			self.db_set("status", "Certified", update_modified=False)
+
+	def on_cancel(self):
+		self.db_set("status", "Cancelled", update_modified=False)
 
 	def _validate_boq_lines(self):
 		rows = [r for r in self.get("boq_lines") or [] if getattr(r, "boq_item", None)]

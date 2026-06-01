@@ -2,6 +2,11 @@
 
 Construction management vertical
 
+### Roadmap
+
+Full gap-completion plan (FIDIC, PMBOK, ISO, NEC4, ERP):  
+[docs/CONSTRUCTION_COMPLETION_ROADMAP.md](docs/CONSTRUCTION_COMPLETION_ROADMAP.md)
+
 License model: Paid app. Access is gated through `license_gate.before_request` when `omnexa_license_enforce` is enabled.
 
 ### Installation

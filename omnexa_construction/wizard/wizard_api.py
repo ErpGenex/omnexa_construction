@@ -148,17 +148,19 @@ def create_setup(company: str | None = None, branch: str | None = None) -> dict:
 
 
 def _setup_dict_for_wizard(setup) -> dict:
-	"""Lean, JSON-safe setup payload for the desk wizard."""
-	child_tables = (
-		"boq_lines",
-		"phases",
-		"ipc_plan",
-		"boq_details",
-		"assignments",
-	)
+	"""JSON-safe setup payload; child tables included from BOQ step onward."""
 	row = setup.as_dict(convert_dates_to_str=True)
-	for table in child_tables:
-		row.pop(table, None)
+	rcf = row.get("regional_cost_factor")
+	if rcf and not frappe.db.exists("Regional Cost Factor", rcf):
+		row["regional_cost_factor"] = None
+	step = cint(setup.wizard_step) or 1
+	if step < 5:
+		for table in ("boq_lines", "phases", "ipc_plan"):
+			row.pop(table, None)
+	if step < 7:
+		row.pop("boq_details", None)
+	if step < 8 and not (setup.assignments or []):
+		row.pop("assignments", None)
 	return row
 
 
@@ -191,9 +193,9 @@ def _ensure_setup_company_branch(setup) -> None:
 	if branch and setup.get("branch") != branch:
 		setup.branch = branch
 	if setup.has_value_changed("company") or setup.has_value_changed("branch"):
-		setup.flags.wizard_save = True
-		setup.flags.ignore_permissions = True
-		setup.save()
+		from omnexa_construction.wizard.persist import save_wizard_setup
+
+		save_wizard_setup(setup)
 
 
 def _load_setup_doc(setup_name: str | None, company: str | None, branch: str | None):
@@ -226,8 +228,10 @@ def get_wizard_context(
 	branch: str | None = None,
 ) -> dict:
 	"""Load or create a wizard draft; company/branch are resolved server-side when omitted."""
+	company, branch = _sanitize_company_branch(company, branch)
 	try:
 		setup = _load_setup_doc(setup_name, company, branch)
+		_ensure_setup_company_branch(setup)
 		return {
 			"setup": _setup_dict_for_wizard(setup),
 			"building_types": get_building_types(),
@@ -312,8 +316,15 @@ def save_wizard_step(setup_name: str, step: int, data: str | dict | None = None)
 		"bed_count",
 		"key_count",
 	}
+	regional_payload = {
+		k: payload.get(k)
+		for k in ("regional_cost_factor", "site_region")
+		if k in payload
+	}
 	for key, value in payload.items():
 		if key not in allowed:
+			continue
+		if key in ("regional_cost_factor", "site_region"):
 			continue
 		if value in ("", None):
 			continue
@@ -323,6 +334,10 @@ def save_wizard_step(setup_name: str, step: int, data: str | dict | None = None)
 			setup.set(key, flt(value))
 		else:
 			setup.set(key, value)
+	if regional_payload:
+		from omnexa_construction.wizard.regional_fields import apply_regional_fields
+
+		apply_regional_fields(setup, regional_payload)
 	setup.wizard_step = int(step)
 	if setup.building_type and not setup.boq_template:
 		meta = BUILDING_TYPE_META.get(setup.building_type, {})
@@ -335,10 +350,26 @@ def save_wizard_step(setup_name: str, step: int, data: str | dict | None = None)
 		setup.governing_standard = frappe.db.get_value(
 			"Construction BOQ Template", setup.boq_template, "default_governing_standard"
 		)
-	setup.flags.ignore_permissions = True
-	setup.flags.wizard_save = True
-	setup.save()
-	return {"name": setup.name, "wizard_step": setup.wizard_step, "status": setup.status}
+	from omnexa_construction.wizard.governing_standards import normalize_governing_standard
+
+	if setup.governing_standard:
+		setup.governing_standard = normalize_governing_standard(
+			setup.governing_standard,
+			contract_type=setup.contract_type,
+		)
+	if int(step) >= 3:
+		from omnexa_construction.wizard.spec_defaults import apply_wizard_spec_defaults
+
+		apply_wizard_spec_defaults(setup)
+	from omnexa_construction.wizard.persist import save_wizard_setup
+
+	save_wizard_setup(setup)
+	return {
+		"name": setup.name,
+		"wizard_step": setup.wizard_step,
+		"status": setup.status,
+		"modified": setup.modified,
+	}
 
 
 @frappe.whitelist()
@@ -347,8 +378,9 @@ def recalculate_pricing(setup_name: str) -> dict:
 	if setup.status == "Completed":
 		frappe.throw(_("Cannot recalculate a completed setup. Reopen as copy."), title=_("Wizard"))
 	result = recalculate_setup_pricing(setup)
-	setup.flags.ignore_permissions = True
-	setup.save()
+	from omnexa_construction.wizard.persist import save_wizard_setup
+
+	save_wizard_setup(setup)
 	return result
 
 
@@ -364,8 +396,9 @@ def expand_boq_details(setup_name: str, replace: int | str = 0) -> dict:
 	else:
 		added = expand_default_boq_details(setup)
 		result = {**recalculate_setup_pricing(setup), "added": added}
-	setup.flags.ignore_permissions = True
-	setup.save()
+	from omnexa_construction.wizard.persist import save_wizard_setup
+
+	save_wizard_setup(setup)
 	return result
 
 
@@ -374,8 +407,9 @@ def suggest_phases_ipc(setup_name: str, save: int | str = 1) -> dict:
 	setup = frappe.get_doc("Construction Project Setup", setup_name)
 	result = apply_template_defaults(setup, force_phases=True, force_details=not setup.boq_details)
 	if cint(save):
-		setup.flags.ignore_permissions = True
-		setup.save()
+		from omnexa_construction.wizard.persist import save_wizard_setup
+
+		save_wizard_setup(setup)
 	return result
 
 
@@ -384,8 +418,9 @@ def apply_full_template(setup_name: str) -> dict:
 	"""Re-apply BOQ phases, details, and IPC from template (keeps manual BOQ line edits)."""
 	setup = frappe.get_doc("Construction Project Setup", setup_name)
 	result = apply_template_defaults(setup, force_phases=True, force_details=True)
-	setup.flags.ignore_permissions = True
-	setup.save()
+	from omnexa_construction.wizard.persist import save_wizard_setup
+
+	save_wizard_setup(setup)
 	return result
 
 
@@ -493,7 +528,13 @@ def load_building_type_template(setup_name: str) -> dict:
 		setup.project_segment = meta["segment"]
 	pack = get_template_pack(setup.boq_template, setup.building_type)
 	if pack:
-		setup.governing_standard = pack.get("default_governing_standard") or setup.governing_standard
+		from omnexa_construction.wizard.governing_standards import normalize_governing_standard
+
+		raw_gov = pack.get("default_governing_standard") or setup.governing_standard
+		setup.governing_standard = normalize_governing_standard(
+			raw_gov,
+			contract_type=setup.contract_type or pack.get("default_contract_type"),
+		)
 		if pack.get("quality_tier") and not setup.quality_tier:
 			setup.quality_tier = pack["quality_tier"]
 		if not setup.planned_start:
@@ -502,15 +543,106 @@ def load_building_type_template(setup_name: str) -> dict:
 			setup.planned_completion = add_months(
 				getdate(setup.planned_start), pack.get("duration_months", 18)
 			)
-	setup.flags.ignore_permissions = True
-	setup.flags.wizard_save = True
-	setup.save()
-	return {
+	from omnexa_construction.wizard.spec_defaults import apply_wizard_spec_defaults
+
+	apply_wizard_spec_defaults(setup)
+	from omnexa_construction.wizard.persist import save_wizard_setup
+
+	save_wizard_setup(setup)
+	result = {
 		"building_type": setup.building_type,
 		"boq_template": setup.boq_template,
 		"project_segment": setup.project_segment,
 		"governing_standard": setup.governing_standard,
+		"quality_tier": setup.quality_tier,
 		"duration_months": (pack or {}).get("duration_months"),
+		"plot_area_m2": setup.plot_area_m2,
+		"gross_floor_area_m2": setup.gross_floor_area_m2,
+		"number_of_floors": setup.number_of_floors,
+		"basement_levels": setup.basement_levels,
+		"unit_count": setup.unit_count,
+		"bed_count": setup.bed_count,
+		"key_count": setup.key_count,
+		"road_length_m": setup.road_length_m,
+		"road_width_m": setup.road_width_m,
+		"pipe_network_km": setup.pipe_network_km,
+	}
+	return result
+
+
+@frappe.whitelist()
+def list_regional_cost_options(company: str | None = None) -> list[dict]:
+	"""Region codes and cost factors for the wizard financials step."""
+	company, _branch = _resolve_company_branch(company, None)
+	if not company:
+		return []
+	rows = frappe.get_all(
+		"Regional Cost Factor",
+		filters={"company": company, "disabled": 0},
+		fields=["name", "region_code", "region_name", "cost_factor", "is_default"],
+		order_by="is_default desc, region_code asc",
+	)
+	return rows
+
+
+@frappe.whitelist()
+def save_wizard_phases(setup_name: str, phases: str | list | None = None) -> dict:
+	from omnexa_construction.wizard.setup_tables import save_wizard_phases as _save
+
+	return _save(setup_name, phases)
+
+
+@frappe.whitelist()
+def save_wizard_boq_lines(setup_name: str, lines: str | list | None = None) -> dict:
+	from omnexa_construction.wizard.setup_tables import save_wizard_boq_lines as _save
+
+	return _save(setup_name, lines)
+
+
+@frappe.whitelist()
+def save_wizard_boq_details(setup_name: str, details: str | list | None = None) -> dict:
+	from omnexa_construction.wizard.setup_tables import save_wizard_boq_details as _save
+
+	return _save(setup_name, details)
+
+
+@frappe.whitelist()
+def list_site_region_code_options(
+	company: str | None = None,
+	search: str | None = None,
+	limit: int = 500,
+) -> list[dict]:
+	"""ISO country codes (all countries) plus company Regional Cost Factor region codes."""
+	from omnexa_construction.wizard.site_region_codes import get_site_region_options
+
+	company, _branch = _resolve_company_branch(company, None)
+	return get_site_region_options(company=company, search=search, limit=cint(limit) or 500)
+
+
+@frappe.whitelist()
+def prepare_specifications_step(setup_name: str) -> dict:
+	"""Ensure specification drivers exist before BOQ scaling (wizard step 3)."""
+	if not setup_name or not frappe.db.exists("Construction Project Setup", setup_name):
+		frappe.throw(_("Wizard draft not found. Reload the page."), title=_("Wizard"))
+	setup = frappe.get_doc("Construction Project Setup", setup_name)
+	if not setup.building_type:
+		frappe.throw(_("Building type is required."), title=_("Wizard"))
+	from omnexa_construction.wizard.spec_defaults import apply_wizard_spec_defaults
+
+	apply_wizard_spec_defaults(setup)
+	return {
+		"building_type": setup.building_type,
+		"quality_tier": setup.quality_tier,
+		"plot_area_m2": setup.plot_area_m2,
+		"gross_floor_area_m2": setup.gross_floor_area_m2,
+		"number_of_floors": setup.number_of_floors,
+		"basement_levels": setup.basement_levels,
+		"unit_count": setup.unit_count,
+		"bed_count": setup.bed_count,
+		"key_count": setup.key_count,
+		"road_length_m": setup.road_length_m,
+		"road_width_m": setup.road_width_m,
+		"pipe_network_km": setup.pipe_network_km,
 	}
 
 

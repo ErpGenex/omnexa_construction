@@ -1,0 +1,46 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:CAPA-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"ncr",
+		"capa_date",
+		"capa_type",
+		"description",
+		"root_cause",
+		"corrective_action",
+		"preventive_action",
+		"status",
+		"target_close_date",
+		"closed_date",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "ncr", "fieldtype": "Link", "label": "Related NCR", "options": "Construction NCR", "in_list_view": 1},
+		{"fieldname": "capa_date", "fieldtype": "Date", "label": "CAPA Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "capa_type", "fieldtype": "Select", "label": "Type", "options": "Corrective\nPreventive", "default": "Corrective", "reqd": 1},
+		{"fieldname": "description", "fieldtype": "Small Text", "label": "Issue Description", "reqd": 1},
+		{"fieldname": "root_cause", "fieldtype": "Small Text", "label": "Root Cause Analysis"},
+		{"fieldname": "corrective_action", "fieldtype": "Small Text", "label": "Corrective Action"},
+		{"fieldname": "preventive_action", "fieldtype": "Small Text", "label": "Preventive Action"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nIn Progress\nVerified\nClosed", "default": "Open", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "target_close_date", "fieldtype": "Date", "label": "Target Close Date"},
+		{"fieldname": "closed_date", "fieldtype": "Date", "label": "Closed Date"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction CAPA",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1},
+		{"role": "Construction QA Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

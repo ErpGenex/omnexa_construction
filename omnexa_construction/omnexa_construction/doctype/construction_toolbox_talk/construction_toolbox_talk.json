@@ -1,0 +1,35 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:TBT-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"talk_date",
+		"topic",
+		"presenter",
+		"attendees_count",
+		"summary",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "talk_date", "fieldtype": "Date", "label": "Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "topic", "fieldtype": "Data", "label": "Topic", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "presenter", "fieldtype": "Link", "label": "Presenter", "options": "User"},
+		{"fieldname": "attendees_count", "fieldtype": "Int", "label": "Attendees"},
+		{"fieldname": "summary", "fieldtype": "Text", "label": "Summary"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Toolbox Talk",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Construction HSE Officer", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

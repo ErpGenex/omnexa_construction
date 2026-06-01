@@ -6,7 +6,7 @@ from unittest.mock import patch
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
-from omnexa_construction.construction_forms.ipc_print import get_ipc_print_context
+from omnexa_construction.construction_forms.ipc_print import currency_display_label, get_ipc_print_context
 
 
 class TestIpcPrint(FrappeTestCase):
@@ -39,3 +39,7 @@ class TestIpcPrint(FrappeTestCase):
 		self.assertEqual(ctx["certificate_number"], ipc.name)
 		self.assertEqual(ctx["summary"]["retention"], 50000)
 		self.assertEqual(ctx["summary"]["net_due"], 680000)
+
+	def test_currency_display_label(self):
+		self.assertEqual(currency_display_label("EGP"), "ج.م")
+		self.assertEqual(currency_display_label("USD"), "USD")

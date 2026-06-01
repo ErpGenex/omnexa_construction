@@ -1,0 +1,20 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["finding", "clause_reference", "severity", "corrective_action", "target_date", "status"],
+	"fields": [
+		{"fieldname": "finding", "fieldtype": "Small Text", "label": "Finding", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "clause_reference", "fieldtype": "Data", "label": "Clause / Ref"},
+		{"fieldname": "severity", "fieldtype": "Select", "label": "Severity", "options": "Observation\nMinor\nMajor", "default": "Observation", "in_list_view": 1},
+		{"fieldname": "corrective_action", "fieldtype": "Small Text", "label": "Corrective Action"},
+		{"fieldname": "target_date", "fieldtype": "Date", "label": "Target Date"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nClosed", "default": "Open", "in_list_view": 1}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Quality Audit Finding",
+	"permissions": [],
+	"track_changes": 0
+}

@@ -4,6 +4,28 @@ import frappe
 from frappe.utils import flt
 
 
+def currency_display_label(currency: str | None) -> str:
+	"""Short Arabic-friendly currency label for print headers."""
+	if not currency:
+		return "EGP"
+	labels = {
+		"EGP": "ج.م",
+		"SAR": "ر.س",
+		"AED": "د.إ",
+		"USD": "USD",
+		"EUR": "EUR",
+		"GBP": "GBP",
+	}
+	if currency in labels:
+		return labels[currency]
+	return frappe.db.get_value("Currency", currency, "symbol", cache=True) or currency
+
+
+def format_ipc_amount(amount) -> str:
+	"""Numeric amount only — currency is shown in column headers."""
+	return frappe.utils.fmt_money(amount, currency=None)
+
+
 def get_ipc_print_context(doc) -> dict:
 	"""Build BOQ rows and totals for Arabic IPC print format."""
 	currency = frappe.db.get_value("Project Contract", doc.project_contract, "contract_currency") or "EGP"
@@ -74,7 +96,7 @@ def get_ipc_print_context(doc) -> dict:
 
 	return {
 		"currency": currency,
-		"currency_label": currency,
+		"currency_label": currency_display_label(currency),
 		"company_name": company_name,
 		"client_name": client_name,
 		"contract_title": contract.contract_title,

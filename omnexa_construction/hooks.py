@@ -9,6 +9,7 @@ app_license = "mit"
 # ------------------
 
 required_apps = ["omnexa_core"]
+# Recommended for WBS-linked EVM (install separately): omnexa_projects_pm
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -45,11 +46,14 @@ required_apps = ["omnexa_core"]
 # include js in doctype views
 # Company demo buttons: omnexa_core/public/js/company_demo_data_hub.js
 doctype_js = {
+	"BOQ Item": "public/js/boq_item.js",
 	"Project Contract": "public/js/project_contract.js",
 	"Subcontract Payment Certificate": "public/js/subcontract_payment_certificate.js",
 	"IPC Certificate": "public/js/ipc_certificate.js",
 	"Construction Project Setup": "public/js/construction_project_setup.js",
 	"Construction RFQ": "public/js/construction_rfq.js",
+	"Construction CDE Document": "public/js/construction_cde_document.js",
+	"Construction Document Transmittal": "public/js/construction_cde_document.js",
 	"Contractor Account Statement": "public/js/contractor_account_statement.js",
 	"Construction QS Measurement Sheet": "public/js/construction_qs_measurement_sheet.js",
 	"Construction Final Account Statement": "public/js/construction_final_account_statement.js",
@@ -155,6 +159,29 @@ permission_query_conditions = {
 	"Construction Inspection Test Plan": "omnexa_construction.permissions.construction_inspection_test_plan_query_conditions",
 	"Construction Equipment Usage": "omnexa_construction.permissions.construction_equipment_usage_query_conditions",
 	"Construction CDE Document": "omnexa_construction.permissions.construction_cde_document_query_conditions",
+	"Construction RFI": "omnexa_construction.permissions.construction_rfi_query_conditions",
+	"Construction Snagging Item": "omnexa_construction.permissions.construction_snagging_item_query_conditions",
+	"Construction Retention Release": "omnexa_construction.permissions.construction_retention_release_query_conditions",
+	"Construction CAPA": "omnexa_construction.permissions.construction_capa_query_conditions",
+	"Construction Permit to Work": "omnexa_construction.permissions.construction_permit_to_work_query_conditions",
+	"Construction Schedule Baseline": "omnexa_construction.permissions.construction_schedule_baseline_query_conditions",
+	"Construction Hazard Register": "omnexa_construction.permissions.construction_hazard_register_query_conditions",
+	"Construction Environmental Aspect": "omnexa_construction.permissions.construction_environmental_aspect_query_conditions",
+	"Construction Waste Log": "omnexa_construction.permissions.construction_waste_log_query_conditions",
+	"Construction Internal Audit": "omnexa_construction.permissions.construction_internal_audit_query_conditions",
+	"Construction Early Warning": "omnexa_construction.permissions.construction_early_warning_query_conditions",
+	"Construction Compensation Event": "omnexa_construction.permissions.construction_compensation_event_query_conditions",
+	"Construction Dispute Case": "omnexa_construction.permissions.construction_dispute_case_query_conditions",
+	"Construction MIDP": "omnexa_construction.permissions.construction_midp_query_conditions",
+	"Construction BIM Model Register": "omnexa_construction.permissions.construction_bim_model_register_query_conditions",
+	"Construction BIM Issue": "omnexa_construction.permissions.construction_bim_issue_query_conditions",
+	"Construction DAB Referral": "omnexa_construction.permissions.construction_dab_referral_query_conditions",
+	"Construction Settlement": "omnexa_construction.permissions.construction_settlement_query_conditions",
+	"Subcontract Retention Release": "omnexa_construction.permissions.subcontract_retention_release_query_conditions",
+	"Construction Supplier Prequalification": "omnexa_construction.permissions.construction_supplier_prequalification_query_conditions",
+	"Construction Management Review": "omnexa_construction.permissions.construction_management_review_query_conditions",
+	"Construction Safety KPI": "omnexa_construction.permissions.construction_safety_kpi_query_conditions",
+	"Construction Environmental Monitoring": "omnexa_construction.permissions.construction_environmental_monitoring_query_conditions",
 }
 
 # DocType Class
@@ -188,6 +215,7 @@ _COST_ROLLUP_EVENTS = {
 _SITE_DAILY_EVENTS = {
 	**_BRANCH_DOC_EVENTS,
 	**_COST_ROLLUP_EVENTS,
+	"on_submit": "omnexa_construction.site_daily_inventory_hooks.maybe_create_material_issue_on_submit",
 }
 
 _EQUIPMENT_USAGE_EVENTS = {
@@ -204,6 +232,7 @@ _IPC_EVENTS = {
 	"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
 	"validate": _WORKFLOW_VALIDATE,
 	"on_update": "omnexa_construction.ipc_revenue.maybe_create_draft_sales_invoice",
+	"on_submit": "omnexa_construction.construction_integrations.dispatch_ipc_certified",
 }
 
 doc_events = {
@@ -211,7 +240,13 @@ doc_events = {
 	"BOQ Item": _BRANCH_DOC_EVENTS.copy(),
 	"IPC Certificate": _IPC_EVENTS,
 	"Site Daily Report": _SITE_DAILY_EVENTS,
-	"Subcontract Work Order": _BRANCH_DOC_EVENTS.copy(),
+	"Subcontract Work Order": {
+		**_BRANCH_DOC_EVENTS,
+		"validate": [
+			_BRANCH_DOC_EVENTS["validate"],
+			"omnexa_construction.subcontract_compliance.refresh_compliance_status",
+		],
+	},
 	"Project WIP Snapshot": _BRANCH_DOC_EVENTS.copy(),
 	"Subcontract Payment Certificate": {
 		"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
@@ -226,33 +261,84 @@ doc_events = {
 	"Construction Inspection Request": _BRANCH_DOC_EVENTS.copy(),
 	"Construction NCR": _BRANCH_DOC_EVENTS.copy(),
 	"Construction HSE Incident": _BRANCH_DOC_EVENTS.copy(),
-	"Construction Document Transmittal": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Document Transmittal": {
+		**_BRANCH_DOC_EVENTS,
+		"on_update": "omnexa_construction.construction_integrations.dispatch_transmittal_issued",
+	},
 	"Construction Project Setup": _BRANCH_DOC_EVENTS.copy(),
 	"Regional Cost Factor": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Plot Unit": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Residential Unit": _BRANCH_DOC_EVENTS.copy(),
 	"Construction QS Measurement Sheet": _BRANCH_DOC_EVENTS.copy(),
-	"Construction FIDIC Notice": _BRANCH_DOC_EVENTS.copy(),
+	"Construction FIDIC Notice": {
+		"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
+		"validate": [
+			_BRANCH_DOC_EVENTS["validate"],
+			"omnexa_construction.fidic_compliance.validate_fidic_notice_doc",
+		],
+	},
 	"Construction Final Account Statement": _BRANCH_DOC_EVENTS.copy(),
 	"Construction DLP Record": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Inspection Test Plan": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Equipment Usage": _EQUIPMENT_USAGE_EVENTS,
-	"Construction CDE Document": _BRANCH_DOC_EVENTS.copy(),
+	"Construction CDE Document": {
+		**_BRANCH_DOC_EVENTS,
+		"validate": [
+			_BRANCH_DOC_EVENTS["validate"],
+			"omnexa_construction.cde_validation.validate_cde_document_doc",
+		],
+	},
 	"Construction Work Delay Notice": _BRANCH_DOC_EVENTS.copy(),
+	"Construction RFI": {
+		**_BRANCH_DOC_EVENTS,
+		"on_submit": "omnexa_construction.construction_integrations.dispatch_rfi_submitted",
+	},
+	"Construction Snagging Item": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Retention Release": _BRANCH_DOC_EVENTS.copy(),
+	"Construction CAPA": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Permit to Work": _BRANCH_DOC_EVENTS.copy(),
 	"Timesheet Entry": _TIMESHEET_EVENTS,
 	"Purchase Request": {
 		"validate": "omnexa_construction.procurement_hooks.validate_purchase_request_boq_links",
 	},
 	"Purchase Order": {
 		"validate": "omnexa_construction.procurement_hooks.validate_purchase_order_boq_links",
+		"on_submit": "omnexa_construction.boq_commitment.on_purchase_order_update",
+		"on_cancel": "omnexa_construction.boq_commitment.on_purchase_order_update",
 	},
+	"Construction Schedule Baseline": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Hazard Register": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Environmental Aspect": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Waste Log": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Internal Audit": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Toolbox Talk": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Material Approval Request": {
+		**_BRANCH_DOC_EVENTS,
+		"on_update": "omnexa_construction.material_approval_hooks.maybe_create_material_request",
+	},
+	"Construction Early Warning": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Compensation Event": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Dispute Case": _BRANCH_DOC_EVENTS.copy(),
+	"Construction MIDP": _BRANCH_DOC_EVENTS.copy(),
+	"Construction BIM Model Register": _BRANCH_DOC_EVENTS.copy(),
+	"Construction BIM Issue": _BRANCH_DOC_EVENTS.copy(),
+	"Construction DAB Referral": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Settlement": _BRANCH_DOC_EVENTS.copy(),
+	"Subcontract Retention Release": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Supplier Prequalification": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Management Review": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Safety KPI": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Environmental Monitoring": _BRANCH_DOC_EVENTS.copy(),
 }
 
 # Scheduled Tasks
 # ---------------
 
 scheduler_events = {
-	"daily": ["omnexa_construction.fidic_alerts.mark_overdue_fidic_notices"],
+	"daily": [
+		"omnexa_construction.fidic_alerts.mark_overdue_fidic_notices",
+		"omnexa_construction.subcontract_compliance.mark_expired_compliance_daily",
+	],
 }
 
 # scheduler_events = {

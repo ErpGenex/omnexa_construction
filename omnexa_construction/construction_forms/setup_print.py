@@ -3,14 +3,33 @@ from __future__ import annotations
 import frappe
 
 
+def _branch_display_name(branch_link: str | None) -> str:
+	"""Resolve Branch link to human-readable name (Branch uses branch_name, not branch)."""
+	if not branch_link:
+		return ""
+	if not frappe.db.exists("Branch", branch_link):
+		return branch_link
+	return frappe.db.get_value("Branch", branch_link, "branch_name") or branch_link
+
+
 def get_setup_print_context(doc) -> dict:
 	"""Shared header/meta for Construction Project Setup A4 prints."""
 	company_name = frappe.db.get_value("Company", doc.company, "company_name") if doc.company else ""
-	branch_name = frappe.db.get_value("Branch", doc.branch, "branch") if doc.branch else ""
+	branch_name = _branch_display_name(doc.branch)
 	client_name = ""
 	if doc.client:
 		client_name = frappe.db.get_value("Customer", doc.client, "customer_name") or doc.client
 	currency = doc.contract_currency or frappe.db.get_value("Company", doc.company, "default_currency") or "EGP"
+	regional_cost_factor_label = ""
+	rcf = getattr(doc, "regional_cost_factor", None)
+	if rcf and frappe.db.exists("Regional Cost Factor", rcf):
+		regional_cost_factor_label = (
+			frappe.db.get_value("Regional Cost Factor", rcf, "region_name")
+			or frappe.db.get_value("Regional Cost Factor", rcf, "region_code")
+			or rcf
+		)
+	elif rcf:
+		regional_cost_factor_label = rcf
 	return {
 		"company_name": company_name or doc.company or "",
 		"branch_name": branch_name or doc.branch or "",
@@ -26,6 +45,7 @@ def get_setup_print_context(doc) -> dict:
 		"retention_percent": doc.retention_percent,
 		"advance_payment_percent": doc.advance_payment_percent,
 		"print_date": frappe.utils.today(),
+		"regional_cost_factor_label": regional_cost_factor_label,
 	}
 
 

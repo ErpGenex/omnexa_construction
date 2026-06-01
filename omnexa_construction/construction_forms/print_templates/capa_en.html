@@ -1,0 +1,17 @@
+<div class="en-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+  <td width="58%"><div class="title">Corrective and Preventive Action (CAPA)</div></td>
+  <td width="30%"><b>No.:</b> {{ doc.name }}<br><b>Date:</b> {{ frappe.format(doc.capa_date, {"fieldtype": "Date"}) or "" }}</td>
+</tr></table>
+<p><b>Contract:</b> {{ doc.project_contract }} &nbsp; <b>NCR:</b> {{ doc.ncr or "" }} &nbsp; <b>Type:</b> {{ doc.capa_type }}</p>
+<p><b>Status:</b> {{ doc.status }} &nbsp; <b>Target Close:</b> {{ frappe.format(doc.target_close_date, {"fieldtype": "Date"}) or "" }}</p>
+<div class="section-head">Problem Description</div>
+<p>{{ doc.description or "" }}</p>
+<div class="section-head">Root Cause Analysis</div>
+<p>{{ doc.root_cause or "—" }}</p>
+<div class="section-head">Corrective Action</div>
+<p>{{ doc.corrective_action or "—" }}</p>
+<div class="section-head">Preventive Action</div>
+<p>{{ doc.preventive_action or "—" }}</p>
+</div>

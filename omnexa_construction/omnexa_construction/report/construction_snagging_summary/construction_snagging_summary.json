@@ -1,0 +1,22 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "doctype": "Report",
+ "filters": [
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch"},
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract"},
+  {"fieldname": "as_of_date", "fieldtype": "Date", "label": "As Of Date", "default": "Today"}
+ ],
+ "is_standard": "Yes",
+ "module": "Omnexa Construction",
+ "name": "Construction Snagging Summary",
+ "ref_doctype": "Construction Snagging Item",
+ "report_name": "Construction Snagging Summary",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Site Engineer"}
+ ]
+}

@@ -25,6 +25,12 @@
 	}
 }
 
+/* Outer Frappe .print-format already has padding — inner content must fill width */
+.print-format > .omx-setup,
+.print-format > .omx-a4,
+.print-format > .ar-form,
+.print-format > .ipc-ar,
+.print-format .omx-setup.omx-a4-root,
 .omx-a4,
 .ar-form,
 .omx-setup,
@@ -34,8 +40,31 @@
 	font-size: 10px;
 	color: #1a1a1a;
 	line-height: 1.45;
-	max-width: 186mm;
-	margin: 0 auto;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Legacy templates nested a second .print-format — strip duplicate chrome */
+.print-format .print-format.omx-setup,
+.print-format .print-format.omx-a4,
+.print-format .omx-setup.print-format,
+.print-format .omx-a4.print-format {
+	padding: 0 !important;
+	margin: 0 !important;
+	max-width: 100% !important;
+	min-height: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+}
+
+.print-format table.grid,
+.print-format table.meta {
+	table-layout: fixed;
+	word-wrap: break-word;
 }
 
 .omx-a4 .doc-title,
@@ -293,6 +322,38 @@
 }
 
 /* IPC Certificate — specific */
+.ipc-ar .ipc-currency-note {
+	margin: 6px 0 8px;
+	font-size: 9px;
+	color: #444;
+	text-align: left;
+}
+.ipc-ar table.grid td.num,
+.ipc-ar table.grid th.num-col,
+.ipc-ar table.summary td.num,
+.ipc-ar table.summary td.val.num {
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+	direction: ltr;
+	unicode-bidi: embed;
+	text-align: left;
+}
+.ipc-ar table.grid td.pct,
+.ipc-ar table.summary td.pct {
+	direction: ltr;
+	unicode-bidi: embed;
+	text-align: center;
+}
+.ipc-ar .ipc-summary-block {
+	margin-top: 10px;
+	width: 100%;
+}
+.ipc-ar .ipc-summary-block table.summary {
+	width: 55%;
+	max-width: 420px;
+	margin-right: auto;
+	margin-left: 0;
+}
 .ipc-ar .title {
 	text-decoration: underline;
 }
@@ -320,6 +381,130 @@
 	color: #1e3a5f;
 	padding-top: 28px;
 	line-height: 1.3;
+}
+
+/* Shared Arabic construction form layout */
+.ar-form .title-underline,
+.ipc-ar .title-underline {
+	border-bottom: 3px solid #1e3a5f;
+	margin: 4px auto 8px;
+	width: 70%;
+}
+
+.ar-form .header-box,
+.ipc-ar .header-box {
+	border: 1px solid #b8c4d4;
+	border-radius: 4px;
+	padding: 8px 10px;
+	background: #fafbfc;
+	font-size: 9px;
+	line-height: 1.6;
+}
+
+.ar-form .intro-text,
+.ipc-ar .intro-text {
+	margin: 8px 0 10px;
+	font-size: 10px;
+	line-height: 1.7;
+}
+
+.ar-form .intro-text .subject,
+.ipc-ar .intro-text .subject {
+	text-decoration: underline;
+	font-weight: 700;
+}
+
+.ar-form table.project-grid,
+.ar-form table.project-grid td {
+	border: 1px solid #b8c4d4;
+}
+
+.ar-form table.project-grid td {
+	padding: 6px 8px;
+	background: #fff;
+}
+
+.ar-form .checkbox-row,
+.ipc-ar .checkbox-row {
+	margin: 6px 0;
+	font-size: 10px;
+}
+
+.ar-form .checkbox-row span,
+.ipc-ar .checkbox-row span {
+	margin-left: 14px;
+}
+
+.ar-form .footer-split,
+.ipc-ar .footer-split {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+.ar-form .footer-split td,
+.ipc-ar .footer-split td {
+	vertical-align: top;
+	padding: 0 4px;
+}
+
+.ar-form .notes-box,
+.ipc-ar .notes-box {
+	border: 1px solid #b8c4d4;
+	border-radius: 4px;
+	min-height: 72px;
+	padding: 8px 10px;
+	background: #fff;
+	font-size: 9px;
+}
+
+.ar-form .notes-box .notes-title,
+.ipc-ar .notes-box .notes-title {
+	font-weight: 700;
+	color: #1e3a5f;
+	margin-bottom: 6px;
+}
+
+.ar-form .footer-bottom,
+.ipc-ar .footer-bottom {
+	width: 100%;
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+
+.ar-form .footer-bottom td,
+.ipc-ar .footer-bottom td {
+	vertical-align: bottom;
+}
+
+.ar-form .stamp-square,
+.ipc-ar .stamp-square {
+	width: 72px;
+	height: 72px;
+	border: 1px dashed #1e3a5f;
+	text-align: center;
+	font-size: 8px;
+	color: #1e3a5f;
+	padding-top: 26px;
+	background: #fafbfc;
+}
+
+.ar-form table.sig td .sig-field,
+.ipc-ar table.sig td .sig-field {
+	font-size: 9px;
+	margin-top: 4px;
+	text-align: right;
+	padding: 0 6px;
+}
+
+.ar-form .amount-words,
+.ipc-ar .amount-words {
+	margin: 8px 0;
+	padding: 6px 10px;
+	border: 1px solid #d1d8e0;
+	background: #f4f7fb;
+	font-size: 10px;
+	font-weight: 600;
 }
 
 </style>

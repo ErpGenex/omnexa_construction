@@ -1,0 +1,24 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "width": "180px"},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "width": "180px"},
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "width": "200px"},
+  {"fieldname": "as_of_date", "fieldtype": "Date", "label": "As of Date", "default": "Today", "width": "140px"}
+ ],
+ "is_standard": "Yes",
+ "module": "Omnexa Construction",
+ "name": "Construction EVM Dashboard",
+ "ref_doctype": "Project Contract",
+ "report_name": "Construction EVM Dashboard",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Finance Manager"},
+  {"role": "Cost Controller"}
+ ]
+}

@@ -1,0 +1,47 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:PTW-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"permit_date",
+		"work_location",
+		"work_description",
+		"valid_from",
+		"valid_to",
+		"hazards_identified",
+		"control_measures",
+		"status",
+		"issued_by",
+		"approved_by",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "permit_date", "fieldtype": "Date", "label": "Permit Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "work_location", "fieldtype": "Data", "label": "Work Location", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "work_description", "fieldtype": "Small Text", "label": "Work Description", "reqd": 1},
+		{"fieldname": "valid_from", "fieldtype": "Datetime", "label": "Valid From", "reqd": 1},
+		{"fieldname": "valid_to", "fieldtype": "Datetime", "label": "Valid To", "reqd": 1},
+		{"fieldname": "hazards_identified", "fieldtype": "Small Text", "label": "Hazards Identified"},
+		{"fieldname": "control_measures", "fieldtype": "Small Text", "label": "Control Measures"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nActive\nExpired\nCancelled", "default": "Draft", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "issued_by", "fieldtype": "Link", "label": "Issued By", "options": "User"},
+		{"fieldname": "approved_by", "fieldtype": "Link", "label": "Approved By", "options": "User"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Permit to Work",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1},
+		{"role": "Construction HSE Officer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

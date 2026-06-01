@@ -6,6 +6,30 @@ frappe.ui.form.on("Construction RFQ", {
 				frappe.set_route("Form", "Purchase Request", frm.doc.purchase_request);
 			});
 		}
+		if (!frm.is_new()) {
+			const supplier =
+				frm.doc.awarded_supplier || frm.doc.recommended_supplier;
+			if (supplier && !frm.doc.purchase_order) {
+				frm.add_custom_button(__("Create Purchase Order"), () => {
+					frappe.call({
+						method: "omnexa_construction.procurement_rfq.create_purchase_order_from_rfq",
+						args: { rfq_name: frm.doc.name, supplier },
+						freeze: true,
+						callback(r) {
+							if (r.message) {
+								frappe.set_route("Form", "Purchase Order", r.message);
+							}
+							frm.reload_doc();
+						},
+					});
+				});
+			}
+			if (frm.doc.purchase_order) {
+				frm.add_custom_button(__("Open Purchase Order"), () => {
+					frappe.set_route("Form", "Purchase Order", frm.doc.purchase_order);
+				});
+			}
+		}
 		if (!frm.is_new() && frm.doc.supplier_quotes && frm.doc.supplier_quotes.length) {
 			frm.add_custom_button(__("Evaluate Quotes"), () => {
 				frappe.call({

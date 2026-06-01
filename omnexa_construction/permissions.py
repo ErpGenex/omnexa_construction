@@ -113,3 +113,95 @@ def construction_equipment_usage_query_conditions(user=None):
 
 def construction_cde_document_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction CDE Document", user)
+
+
+def construction_rfi_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction RFI", user)
+
+
+def construction_snagging_item_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Snagging Item", user)
+
+
+def construction_retention_release_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Retention Release", user)
+
+
+def construction_capa_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction CAPA", user)
+
+
+def construction_permit_to_work_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Permit to Work", user)
+
+
+def construction_schedule_baseline_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Schedule Baseline", user)
+
+
+def construction_hazard_register_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Hazard Register", user)
+
+
+def construction_environmental_aspect_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Environmental Aspect", user)
+
+
+def construction_waste_log_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Waste Log", user)
+
+
+def construction_internal_audit_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Internal Audit", user)
+
+
+def construction_early_warning_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Early Warning", user)
+
+
+def construction_compensation_event_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Compensation Event", user)
+
+
+def construction_dispute_case_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Dispute Case", user)
+
+
+def construction_midp_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction MIDP", user)
+
+
+def construction_bim_model_register_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction BIM Model Register", user)
+
+
+def construction_bim_issue_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction BIM Issue", user)
+
+
+def construction_dab_referral_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction DAB Referral", user)
+
+
+def construction_settlement_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Settlement", user)
+
+
+def subcontract_retention_release_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Subcontract Retention Release", user)
+
+
+def construction_supplier_prequalification_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Supplier Prequalification", user)
+
+
+def construction_management_review_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Management Review", user)
+
+
+def construction_safety_kpi_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Safety KPI", user)
+
+
+def construction_environmental_monitoring_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Environmental Monitoring", user)

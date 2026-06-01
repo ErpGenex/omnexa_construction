@@ -1,0 +1,12 @@
+<div class="en-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+  <td width="58%"><div class="title">Permit to Work</div></td>
+  <td width="30%"><b>No.:</b> {{ doc.name }}<br><b>Date:</b> {{ frappe.format(doc.permit_date, {"fieldtype": "Date"}) or "" }}</td>
+</tr></table>
+<p><b>Contract:</b> {{ doc.project_contract }} &nbsp; <b>Location:</b> {{ doc.work_location }}</p>
+<p><b>Work:</b> {{ doc.work_description }}</p>
+<p><b>Valid:</b> {{ frappe.format(doc.valid_from, {"fieldtype": "Datetime"}) or "" }} – {{ frappe.format(doc.valid_to, {"fieldtype": "Datetime"}) or "" }}</p>
+<p><b>Hazards:</b> {{ doc.hazards_identified or "—" }}</p>
+<p><b>Controls:</b> {{ doc.control_measures or "—" }}</p>
+</div>

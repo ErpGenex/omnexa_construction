@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 from frappe.model.document import Document
 from frappe.utils import date_diff, flt, getdate
 
@@ -13,7 +14,7 @@ class ConstructionWorkDelayNotice(Document):
 		if self.boq_item and self.project_contract:
 			pc = frappe.db.get_value("BOQ Item", self.boq_item, "project_contract")
 			if pc != self.project_contract:
-				frappe.throw(frappe._("BOQ item is not on this contract."))
+				frappe.throw(_("BOQ item is not on this contract."))
 		ld_day = flt(
 			frappe.db.get_value("Project Contract", self.project_contract, "liquidated_damages_per_day")
 		)

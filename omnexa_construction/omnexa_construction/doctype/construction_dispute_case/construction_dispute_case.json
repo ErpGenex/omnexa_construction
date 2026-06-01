@@ -1,0 +1,40 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:DSP-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"case_date",
+		"case_title",
+		"dispute_type",
+		"status",
+		"claimed_amount",
+		"settled_amount",
+		"events",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "case_date", "fieldtype": "Date", "label": "Case Date", "default": "Today", "reqd": 1},
+		{"fieldname": "case_title", "fieldtype": "Data", "label": "Case Title", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "dispute_type", "fieldtype": "Select", "label": "Type", "options": "Claim\nDelay\nPayment\nTermination\nOther", "default": "Claim", "reqd": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nDAB Referral\nArbitration\nSettled\nClosed", "default": "Open", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "claimed_amount", "fieldtype": "Currency", "label": "Claimed Amount"},
+		{"fieldname": "settled_amount", "fieldtype": "Currency", "label": "Settled Amount"},
+		{"fieldname": "events", "fieldtype": "Table", "label": "Events", "options": "Construction Dispute Event"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Dispute Case",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1},
+		{"role": "Construction Commercial Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

@@ -115,6 +115,7 @@
 			"fieldtype": "Column Break"
 		}
 	],
+	"is_submittable": 1,
 	"module": "Omnexa Construction",
 	"name": "Construction Change Order",
 	"permissions": [

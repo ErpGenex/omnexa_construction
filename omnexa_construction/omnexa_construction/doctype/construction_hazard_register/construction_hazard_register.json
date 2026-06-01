@@ -1,0 +1,25 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:HZR-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "register_date", "status", "hazards", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "register_date", "fieldtype": "Date", "label": "Register Date", "default": "Today", "reqd": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nActive\nClosed", "default": "Draft", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "hazards", "fieldtype": "Table", "label": "Hazards", "options": "Construction Hazard Register Line", "reqd": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Hazard Register",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1},
+		{"role": "Construction HSE Officer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

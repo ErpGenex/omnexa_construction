@@ -1,0 +1,29 @@
+{% set ctx = frappe.call("omnexa_construction.construction_forms.ipc_print.build_ipc_print_context", ipc_name=doc.name) %}
+{% set cur = ctx.currency %}
+<div class="ipc-en print-format">
+<table class="meta">
+<tr>
+	<td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+	<td width="38%">
+		<b>Company:</b> {{ ctx.company_name }}<br>
+		<b>Project:</b> {{ ctx.contract_title }}<br>
+		<b>Contract No.:</b> {{ ctx.contract_number }}<br>
+		<b>Contractor:</b> {{ ctx.contractor_name }}
+		{% if ctx.client_name %}<br><b>Client:</b> {{ ctx.client_name }}{% endif %}
+	</td>
+	<td width="28%"><div class="title">Interim Payment Certificate</div></td>
+	<td width="22%">
+		<b>IPC No.:</b> {{ ctx.certificate_number }}<br>
+		<b>Date:</b> {{ frappe.format(ctx.ipc_date, {"fieldtype": "Date"}) }}<br>
+		<b>Period:</b> {{ frappe.format(ctx.period_from, {"fieldtype": "Date"}) or "—" }} – {{ frappe.format(ctx.period_to, {"fieldtype": "Date"}) or "—" }}
+	</td>
+</tr>
+</table>
+<table class="grid">
+	<tr><th>Description</th><th>Amount ({{ cur }})</th></tr>
+	<tr><td>Gross this period</td><td>{{ frappe.format(ctx.gross_amount, {"fieldtype": "Currency"}) }}</td></tr>
+	<tr><td>Retention</td><td>{{ frappe.format(ctx.retention_deduction, {"fieldtype": "Currency"}) }}</td></tr>
+	<tr><td>Advance recovery</td><td>{{ frappe.format(ctx.advance_recovery, {"fieldtype": "Currency"}) }}</td></tr>
+	<tr><td><b>Net payable</b></td><td><b>{{ frappe.format(ctx.net_amount, {"fieldtype": "Currency"}) }}</b></td></tr>
+</table>
+</div>

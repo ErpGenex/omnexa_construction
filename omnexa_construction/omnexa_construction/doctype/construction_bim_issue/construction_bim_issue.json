@@ -1,0 +1,39 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:BCF-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"bim_model",
+		"issue_date",
+		"title",
+		"description",
+		"location",
+		"status",
+		"assigned_to",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "bim_model", "fieldtype": "Link", "label": "BIM Model", "options": "Construction BIM Model Register"},
+		{"fieldname": "issue_date", "fieldtype": "Date", "label": "Date", "default": "Today", "reqd": 1},
+		{"fieldname": "title", "fieldtype": "Data", "label": "Title", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "description", "fieldtype": "Small Text", "label": "Description"},
+		{"fieldname": "location", "fieldtype": "Data", "label": "Location / Viewpoint"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nIn Progress\nResolved\nClosed", "default": "Open", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "assigned_to", "fieldtype": "Link", "label": "Assigned To", "options": "User"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction BIM Issue",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Construction Document Controller", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

@@ -3,6 +3,22 @@ frappe.ui.form.on("IPC Certificate", {
 		if (!frm.doc.project_contract || frm.doc.status === "Cancelled") {
 			return;
 		}
+		if (frm.doc.docstatus === 0) {
+			frm.add_custom_button(
+				__("Calculate Deductions"),
+				() => {
+					frappe.call({
+						method: "omnexa_construction.liquidated_damages.apply_deductions_to_ipc",
+						args: { ipc_name: frm.doc.name, use_suggested: 1 },
+						callback() {
+							frm.reload_doc();
+							frappe.show_alert({ message: __("Deductions updated"), indicator: "green" });
+						},
+					});
+				},
+				__("Commercial")
+			);
+		}
 		if (!frm.doc.sales_invoice && frm.doc.status !== "Posted") {
 			frm.add_custom_button(
 				__("Suggest from BOQ"),

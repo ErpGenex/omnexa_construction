@@ -1,0 +1,33 @@
+<div class="ar-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">شعار<br>الشركة</div>{% endif %}</td>
+  <td width="58%"><div class="title">تصريح عمل (Permit to Work)</div><div class="title-underline"></div></td>
+  <td width="30%" class="header-box">
+    <b class="label">الرقم:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.permit_date, {"fieldtype": "Date"}) or "" }}
+  </td>
+</tr></table>
+
+<table class="project-grid meta">
+  <tr>
+    <td width="50%"><b class="label">العقد:</b> {{ doc.project_contract }}</td>
+    <td width="50%"><b class="label">الموقع:</b> {{ doc.work_location }}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b class="label">وصف العمل:</b> {{ doc.work_description }}</td>
+  </tr>
+  <tr>
+    <td><b class="label">صالح من:</b> {{ frappe.format(doc.valid_from, {"fieldtype": "Datetime"}) or "" }}</td>
+    <td><b class="label">صالح إلى:</b> {{ frappe.format(doc.valid_to, {"fieldtype": "Datetime"}) or "" }}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b class="label">الحالة:</b> {{ doc.status }}</td>
+  </tr>
+</table>
+
+<div class="section-head">المخاطر المحددة</div>
+<p>{{ doc.hazards_identified or "—" }}</p>
+<div class="section-head">إجراءات التحكم</div>
+<p>{{ doc.control_measures or "—" }}</p>
+<p><b class="label">أصدر:</b> {{ doc.issued_by or "" }} &nbsp; <b class="label">اعتمد:</b> {{ doc.approved_by or "" }}</p>
+</div>

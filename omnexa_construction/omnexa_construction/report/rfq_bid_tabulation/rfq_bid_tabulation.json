@@ -1,0 +1,23 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "doctype": "Report",
+ "filters": [
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch"},
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract"},
+  {"fieldname": "rfq", "fieldtype": "Link", "label": "RFQ", "options": "Construction RFQ"}
+ ],
+ "is_standard": "Yes",
+ "module": "Omnexa Construction",
+ "name": "RFQ Bid Tabulation",
+ "ref_doctype": "Construction RFQ",
+ "report_name": "RFQ Bid Tabulation",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Construction Commercial Manager"},
+  {"role": "Cost Controller"}
+ ]
+}

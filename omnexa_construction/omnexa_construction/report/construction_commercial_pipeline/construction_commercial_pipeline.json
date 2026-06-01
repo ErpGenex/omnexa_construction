@@ -1,0 +1,22 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "doctype": "Report",
+ "filters": [
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch"},
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract"}
+ ],
+ "is_standard": "Yes",
+ "module": "Omnexa Construction",
+ "name": "Construction Commercial Pipeline",
+ "ref_doctype": "IPC Certificate",
+ "report_name": "Construction Commercial Pipeline",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Construction Commercial Manager"},
+  {"role": "Construction QS"}
+ ]
+}

@@ -1,0 +1,18 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["event_date", "event_type", "description", "document_reference"],
+	"fields": [
+		{"fieldname": "event_date", "fieldtype": "Date", "label": "Date", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "event_type", "fieldtype": "Select", "label": "Type", "options": "Notice\nMeeting\nSubmission\nDecision\nSettlement", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "description", "fieldtype": "Small Text", "label": "Description", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "document_reference", "fieldtype": "Data", "label": "Reference"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Dispute Event",
+	"permissions": [],
+	"track_changes": 0
+}

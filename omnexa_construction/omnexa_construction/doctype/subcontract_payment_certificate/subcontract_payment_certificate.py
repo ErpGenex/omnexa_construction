@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt, today
 from omnexa_construction.subcontract_financials import (
@@ -15,6 +16,21 @@ class SubcontractPaymentCertificate(Document):
 			self.previously_paid = subcontract_paid_total(self.subcontract_work_order)
 		self.retention_amount = flt(self.certified_amount) * (flt(self.retention_percent) / 100.0)
 		self.net_payable = flt(self.certified_amount) - flt(self.previously_paid) - flt(self.retention_amount)
+		self._validate_lien_waiver()
+
+	def _validate_lien_waiver(self):
+		if self.status != "Paid" or not self.meta.has_field("lien_waiver_attachment"):
+			return
+		if self.lien_waiver_attachment:
+			return
+		require = False
+		if self.project_contract and frappe.get_meta("Project Contract").has_field("require_lien_waiver"):
+			require = frappe.db.get_value("Project Contract", self.project_contract, "require_lien_waiver")
+		if require:
+			frappe.throw(
+				_("Lien waiver attachment is required before marking certificate as Paid."),
+				title=_("Subcontract Payment"),
+			)
 
 	def on_submit(self):
 		self._post_accrual_journal()

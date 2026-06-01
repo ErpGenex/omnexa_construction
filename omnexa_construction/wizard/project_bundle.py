@@ -118,8 +118,9 @@ def preview_boq(setup_name: str, save: int | str = 1) -> dict:
 		apply_template_defaults(setup, force_phases=not setup.phases, force_details=not setup.boq_details)
 		result = {"estimated_contract_value": setup.estimated_contract_value}
 		total = result["estimated_contract_value"]
-		setup.flags.ignore_permissions = True
-		setup.save()
+		from omnexa_construction.wizard.persist import save_wizard_setup
+
+		save_wizard_setup(setup)
 	return {"lines": lines, "estimated_contract_value": total, "line_count": len(lines)}
 
 
@@ -150,40 +151,18 @@ def suggest_assignments(setup_name: str, save: int | str = 1) -> dict:
 		setup.set("assignments", [])
 		for row in suggestions:
 			setup.append("assignments", row)
-		setup.flags.ignore_permissions = True
-		setup.save()
+		from omnexa_construction.wizard.persist import save_wizard_setup
+
+		save_wizard_setup(setup)
 	return {"assignments": suggestions}
 
 
 @frappe.whitelist()
 def save_wizard_assignments(setup_name: str, assignments: str | list | None = None) -> dict:
-	"""Persist subcontractor party links from wizard step 8."""
-	import json
+	"""Persist trade assignments (company / subcontractor) from wizard step 8."""
+	from omnexa_construction.wizard.setup_tables import save_wizard_assignments_full
 
-	setup = frappe.get_doc("Construction Project Setup", setup_name)
-	if setup.status == "Completed":
-		frappe.throw(_("Cannot edit a completed setup."), title=_("Wizard"))
-	rows = json.loads(assignments) if isinstance(assignments, str) else (assignments or [])
-	party_by_trade = {
-		row.get("trade_package_code"): (row.get("party") or "").strip()
-		for row in rows
-		if row.get("trade_package_code")
-	}
-	for assign in setup.assignments or []:
-		if assign.trade_package_code in party_by_trade:
-			assign.party = party_by_trade[assign.trade_package_code] or None
-	setup.flags.ignore_permissions = True
-	setup.save()
-	return {
-		"assignments": [
-			{
-				"trade_package_code": a.trade_package_code,
-				"party": a.party,
-				"assignment_type": a.assignment_type,
-			}
-			for a in setup.assignments or []
-		]
-	}
+	return save_wizard_assignments_full(setup_name, assignments, sync_boq_lines=1)
 
 
 @frappe.whitelist()
@@ -195,8 +174,9 @@ def create_project_bundle(setup_name: str, force: int | str = 0) -> dict:
 		setup = frappe.get_doc("Construction Project Setup", setup_name)
 		setup.status = "Failed"
 		setup.error_log = frappe.get_traceback(with_context=True)
-		setup.flags.ignore_permissions = True
-		setup.save()
+		from omnexa_construction.wizard.persist import save_wizard_setup
+
+		save_wizard_setup(setup)
 		raise
 	finally:
 		frappe.flags.in_wizard = False
@@ -215,9 +195,11 @@ def _create_project_bundle(setup_name: str, force: int = 0) -> dict:
 		_cleanup_wizard_bundle(setup.project_contract)
 		setup.project_contract = None
 		setup.status = "Draft"
-		setup.flags.ignore_permissions = True
-		setup.save()
+		from omnexa_construction.wizard.persist import save_wizard_setup
+
+		save_wizard_setup(setup)
 		setup.reload()
+	setup.governing_standard = _normalized_governing_standard(setup)
 	_validate_setup(setup)
 	if not setup.boq_lines:
 		preview_boq(setup_name, save=1)
@@ -226,14 +208,20 @@ def _create_project_bundle(setup_name: str, force: int = 0) -> dict:
 		suggest_assignments(setup_name, save=1)
 		setup.reload()
 	apply_template_defaults(setup)
-	setup.flags.ignore_permissions = True
-	setup.save()
+	from omnexa_construction.wizard.persist import save_wizard_setup
+
+	save_wizard_setup(setup)
 	setup.reload()
 
-	from frappe.database.database import savepoint
-
-	with savepoint():
-		return _execute_project_bundle(setup)
+	save_point = f"wizard_bundle_{frappe.generate_hash(length=10)}"
+	frappe.db.savepoint(save_point)
+	try:
+		result = _execute_project_bundle(setup)
+	except Exception:
+		frappe.db.rollback(save_point=save_point)
+		raise
+	frappe.db.release_savepoint(save_point)
+	return result
 
 
 def _execute_project_bundle(setup) -> dict:
@@ -301,21 +289,49 @@ def _execute_project_bundle(setup) -> dict:
 	)
 
 	trade_boq: dict[str, list[str]] = {}
+	party_boq: dict[str, list[str]] = {}
 	for row in setup.boq_lines:
-		if not row.include or row.is_group or not row.trade_package_code:
+		if not row.include or row.is_group:
 			continue
 		name = code_to_boq.get(row.cost_code)
-		if name:
+		if not name:
+			continue
+		exec_mode = (getattr(row, "execution_mode", None) or "Company").strip()
+		party = (getattr(row, "assigned_party", None) or "").strip()
+		if exec_mode == "Subcontractor" and party:
+			party_boq.setdefault(party, []).append(name)
+		elif row.trade_package_code:
 			trade_boq.setdefault(row.trade_package_code, []).append(name)
 
+	created_parties: set[str] = set()
+	for party, linked in party_boq.items():
+		scope_value = sum(flt(frappe.db.get_value("BOQ Item", b, "planned_cost")) for b in linked)
+		scw = frappe.get_doc(
+			{
+				"doctype": "Subcontract Work Order",
+				"project_contract": contract.name,
+				"subcontractor": party,
+				"scope_of_work": _("BOQ lines assigned to {0} — {1}").format(party, setup.contract_title),
+				"contract_value": scope_value,
+				"status": "Active",
+				"company": setup.company,
+				"branch": setup.branch,
+			}
+		)
+		scw.insert(ignore_permissions=True)
+		scw_names.append(scw.name)
+		created_parties.add(party)
+
 	for assign in setup.assignments or []:
-		if assign.assignment_type != "Subcontractor" or not assign.party:
+		if assign.assignment_type == "Company" or not assign.party:
+			continue
+		if assign.party in created_parties:
 			continue
 		trade = assign.trade_package_code
 		linked = trade_boq.get(trade, [])
-		scope_value = sum(
-			flt(frappe.db.get_value("BOQ Item", b, "planned_cost")) for b in linked
-		)
+		if not linked:
+			continue
+		scope_value = sum(flt(frappe.db.get_value("BOQ Item", b, "planned_cost")) for b in linked)
 		trade_label = frappe.db.get_value("Construction Trade Package", trade, "trade_name") or trade
 		scw = frappe.get_doc(
 			{
@@ -332,6 +348,7 @@ def _execute_project_bundle(setup) -> dict:
 		)
 		scw.insert(ignore_permissions=True)
 		scw_names.append(scw.name)
+		created_parties.add(assign.party)
 
 	if frappe.db.exists("DocType", "Purchase Request"):
 		pr_names.extend(_create_purchase_requests(setup, contract.name, code_to_boq))
@@ -344,19 +361,22 @@ def _execute_project_bundle(setup) -> dict:
 	pack = export_project_document_pack(setup.name)
 	inventory = sync_residential_inventory_from_setup(setup, contract.name)
 
-	setup.project_contract = contract.name
-	setup.document_transmittal = transmittal
-	setup.generated_boq_count = len(boq_items)
-	setup.generated_scw_count = len(scw_names)
-	setup.generated_pr_count = len(pr_names)
-	setup.generated_rfq_count = len(rfq_names)
-	setup.generated_ipc_count = len(ipc_names)
+	final = frappe.get_doc("Construction Project Setup", setup.name)
+	final.project_contract = contract.name
+	final.document_transmittal = transmittal
+	final.generated_boq_count = len(boq_items)
+	final.generated_scw_count = len(scw_names)
+	final.generated_pr_count = len(pr_names)
+	final.generated_rfq_count = len(rfq_names)
+	final.generated_ipc_count = len(ipc_names)
 	if pack.get("file_url"):
-		setup.document_pack_file = pack["file_url"]
-	setup.status = "Completed"
-	setup.wizard_step = 7
-	setup.flags.ignore_permissions = True
-	setup.save()
+		final.document_pack_file = pack["file_url"]
+	final.status = "Completed"
+	final.wizard_step = 8
+	final.flags.ignore_permissions = True
+	final.flags.wizard_save = True
+	final.flags.ignore_version_check = True
+	final.save()
 
 	return {
 		"project_contract": contract.name,
@@ -429,6 +449,15 @@ def _create_ipc_schedule_drafts(setup, contract_name: str) -> list[str]:
 	return names
 
 
+def _normalized_governing_standard(setup) -> str:
+	from omnexa_construction.wizard.governing_standards import normalize_governing_standard
+
+	return normalize_governing_standard(
+		setup.governing_standard,
+		contract_type=setup.contract_type,
+	)
+
+
 def _validate_setup(setup) -> None:
 	required = ["company", "branch", "client", "contract_title", "contract_type", "contract_currency"]
 	for field in required:
@@ -449,8 +478,7 @@ def _create_project_contract(setup):
 			"client": setup.client,
 			"contract_currency": setup.contract_currency,
 			"delivery_model": setup.delivery_model,
-			"governing_standard": setup.governing_standard
-			or "FIDIC 2017 Red Book (Building & Engineering)",
+			"governing_standard": _normalized_governing_standard(setup),
 			"project_segment": setup.project_segment,
 			"building_type": setup.building_type,
 			"quality_tier": setup.quality_tier,

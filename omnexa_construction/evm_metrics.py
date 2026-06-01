@@ -50,6 +50,72 @@ def earned_value_from_boq(project_contract: str | None) -> float:
 	return sum(flt(row.get("planned_cost")) * flt(row.get("completion_percent")) / 100.0 for row in rows)
 
 
+def earned_value_from_qs(project_contract: str | None) -> float:
+	"""EV from latest submitted QS measurements (measured qty × unit cost)."""
+	if not project_contract or not frappe.db.exists("DocType", "Construction QS Measurement Sheet"):
+		return 0.0
+	total = 0.0
+	sheets = frappe.get_all(
+		"Construction QS Measurement Sheet",
+		filters={"project_contract": project_contract, "docstatus": 1},
+		pluck="name",
+	)
+	for sheet in sheets:
+		for row in frappe.get_all(
+			"Construction QS Measurement Line",
+			filters={"parent": sheet},
+			fields=["boq_item", "measured_qty"],
+		):
+			if not row.boq_item:
+				continue
+			uc = flt(frappe.db.get_value("BOQ Item", row.boq_item, "unit_cost"))
+			total += flt(row.measured_qty) * uc
+	return total
+
+
+def schedule_percent_from_wbs(project_contract: str | None, as_of_date=None) -> float | None:
+	"""Weighted WBS progress for BOQ lines linked to PM WBS Task."""
+	if not project_contract or not frappe.db.exists("DocType", "PM WBS Task"):
+		return None
+	rows = frappe.db.get_all(
+		"BOQ Item",
+		filters={
+			"project_contract": project_contract,
+			"is_group": 0,
+			"pm_wbs_task": ["is", "set"],
+			"docstatus": ["<", 2],
+		},
+		fields=["planned_cost", "pm_wbs_task"],
+	)
+	if not rows:
+		return None
+	acc = 0.0
+	total_w = 0.0
+	for row in rows:
+		w = flt(row.planned_cost) or 1.0
+		pct = flt(frappe.db.get_value("PM WBS Task", row.pm_wbs_task, "progress_percent"))
+		if pct <= 0:
+			pct = _wbs_time_percent(row.pm_wbs_task, as_of_date)
+		acc += w * pct
+		total_w += w
+	if not total_w:
+		return None
+	return max(0.0, min(100.0, acc / total_w))
+
+
+def _wbs_time_percent(pm_wbs_task: str, as_of_date=None) -> float:
+	task = frappe.db.get_value(
+		"PM WBS Task",
+		pm_wbs_task,
+		["planned_start", "planned_end", "progress_percent"],
+		as_dict=True,
+	)
+	if not task:
+		return 0.0
+	end = task.get("planned_end")
+	return schedule_percent_planned(task.get("planned_start"), end, as_of_date) or flt(task.progress_percent)
+
+
 def actual_cost_from_boq(project_contract: str | None) -> float:
 	if not project_contract:
 		return 0.0
@@ -70,17 +136,23 @@ def evm_snapshot(project_contract: str, as_of_date=None) -> dict:
 	contract = frappe.db.get_value(
 		"Project Contract",
 		project_contract,
-		["contract_title", "planned_start", "planned_completion", "status"],
+		["contract_title", "planned_start", "planned_completion", "status", "primary_wbs_task"],
 		as_dict=True,
 	) or {}
 	bac = billable_contract_value(project_contract)
-	schedule_pct = schedule_percent_planned(
-		contract.get("planned_start"),
-		contract.get("planned_completion"),
-		as_of_date,
-	)
+	schedule_pct = schedule_percent_from_wbs(project_contract, as_of_date)
+	schedule_source = "WBS"
+	if schedule_pct is None:
+		schedule_pct = schedule_percent_planned(
+			contract.get("planned_start"),
+			contract.get("planned_completion"),
+			as_of_date,
+		)
+		schedule_source = "Contract Dates"
 	pv = planned_value(bac, schedule_pct)
-	ev = earned_value_from_boq(project_contract)
+	ev_boq = earned_value_from_boq(project_contract)
+	ev_qs = earned_value_from_qs(project_contract)
+	ev = ev_qs if ev_qs > 0 else ev_boq
 	ac = actual_cost_from_boq(project_contract)
 	cpi = (ev / ac) if ac else 0.0
 	spi = (ev / pv) if pv else 0.0
@@ -88,6 +160,9 @@ def evm_snapshot(project_contract: str, as_of_date=None) -> dict:
 	sv = ev - pv
 	eac = (bac / cpi) if cpi else bac
 	etc = eac - ac
+	vac = bac - eac
+	tcpi = (bac - ev) / (bac - ac) if (bac - ac) else 0.0
+	committed = _total_boq_committed(project_contract)
 	return {
 		"project_contract": project_contract,
 		"contract_title": contract.get("contract_title") or project_contract,
@@ -95,12 +170,32 @@ def evm_snapshot(project_contract: str, as_of_date=None) -> dict:
 		"bac": bac,
 		"pv": pv,
 		"ev": ev,
+		"ev_boq": ev_boq,
+		"ev_qs": ev_qs,
 		"ac": ac,
+		"committed_cost": committed,
 		"cpi": cpi,
 		"spi": spi,
 		"cv": cv,
 		"sv": sv,
 		"eac": eac,
 		"etc": etc,
+		"vac": vac,
+		"tcpi": tcpi,
 		"schedule_percent": schedule_pct,
+		"schedule_source": schedule_source,
 	}
+
+
+def _total_boq_committed(project_contract: str) -> float:
+	if not frappe.get_meta("BOQ Item").has_field("committed_cost"):
+		return 0.0
+	row = frappe.db.sql(
+		"""
+		SELECT COALESCE(SUM(committed_cost), 0)
+		FROM `tabBOQ Item`
+		WHERE project_contract = %s AND is_group = 0 AND docstatus < 2
+		""",
+		(project_contract,),
+	)
+	return flt(row[0][0] if row else 0)

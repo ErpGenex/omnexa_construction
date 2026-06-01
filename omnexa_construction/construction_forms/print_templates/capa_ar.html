@@ -1,0 +1,29 @@
+<div class="ar-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">شعار<br>الشركة</div>{% endif %}</td>
+  <td width="58%"><div class="title">إجراء تصحيحي ووقائي (CAPA)</div><div class="title-underline"></div></td>
+  <td width="30%" class="header-box">
+    <b class="label">الرقم:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.capa_date, {"fieldtype": "Date"}) or "" }}
+  </td>
+</tr></table>
+
+<table class="project-grid meta">
+  <tr>
+    <td width="50%"><b class="label">العقد:</b> {{ doc.project_contract }}</td>
+    <td width="50%"><b class="label">NCR:</b> {{ doc.ncr or "" }} &nbsp; <b class="label">النوع:</b> {{ doc.capa_type }}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b class="label">الحالة:</b> {{ doc.status }} &nbsp; <b class="label">إغلاق مستهدف:</b> {{ frappe.format(doc.target_close_date, {"fieldtype": "Date"}) or "" }}</td>
+  </tr>
+</table>
+
+<div class="section-head">وصف المشكلة</div>
+<p>{{ doc.description or "" }}</p>
+<div class="section-head">تحليل السبب الجذري</div>
+<p>{{ doc.root_cause or "—" }}</p>
+<div class="section-head">الإجراء التصحيحي</div>
+<p>{{ doc.corrective_action or "—" }}</p>
+<div class="section-head">الإجراء الوقائي</div>
+<p>{{ doc.preventive_action or "—" }}</p>
+</div>

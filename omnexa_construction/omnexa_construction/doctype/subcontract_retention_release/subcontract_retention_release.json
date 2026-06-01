@@ -1,0 +1,42 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:SRR-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"subcontract_work_order",
+		"project_contract",
+		"subcontractor",
+		"release_date",
+		"retention_amount",
+		"release_percent",
+		"net_release",
+		"status",
+		"payment_reference",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "subcontract_work_order", "fieldtype": "Link", "label": "Subcontract Work Order", "options": "Subcontract Work Order", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "fetch_from": "subcontract_work_order.project_contract", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "subcontractor", "fieldtype": "Link", "label": "Subcontractor", "options": "Supplier", "fetch_from": "subcontract_work_order.subcontractor", "read_only": 1},
+		{"fieldname": "release_date", "fieldtype": "Date", "label": "Release Date", "default": "Today", "reqd": 1},
+		{"fieldname": "retention_amount", "fieldtype": "Currency", "label": "Retention Held", "reqd": 1},
+		{"fieldname": "release_percent", "fieldtype": "Percent", "label": "Release %", "default": "100"},
+		{"fieldname": "net_release", "fieldtype": "Currency", "label": "Net Release", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nApproved\nPaid", "default": "Draft", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "payment_reference", "fieldtype": "Data", "label": "Payment Reference"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Subcontract Retention Release",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1},
+		{"role": "Construction Commercial Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

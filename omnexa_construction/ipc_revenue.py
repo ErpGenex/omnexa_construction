@@ -60,7 +60,7 @@ def create_draft_sales_invoice(ipc_name: str) -> str | None:
 	si.posting_date = ipc.ipc_date or getdate()
 	si.due_date = add_days(si.posting_date, 30)
 	si.currency = currency
-	si.conversion_rate = 1
+	si.conversion_rate = _ipc_conversion_rate(ipc, currency)
 	si.remarks = f"IPC:{ipc.name} · {contract.contract_title or ipc.project_contract}"
 	si.append(
 		"items",
@@ -81,6 +81,35 @@ def create_draft_sales_invoice(ipc_name: str) -> str | None:
 		title=_("IPC billing"),
 	)
 	return si.name
+
+
+def _ipc_conversion_rate(ipc, currency: str) -> float:
+	company_currency = frappe.db.get_value("Company", ipc.company, "default_currency")
+	if currency == company_currency:
+		return 1.0
+	if ipc.meta.has_field("exchange_rate") and flt(ipc.exchange_rate) > 0:
+		return flt(ipc.exchange_rate)
+	rate = _lookup_exchange_rate(ipc.company, currency, company_currency, ipc.ipc_date or getdate())
+	return flt(rate) or 1.0
+
+
+def _lookup_exchange_rate(company: str, from_currency: str, to_currency: str, exchange_date) -> float | None:
+	try:
+		from omnexa_accounting.omnexa_accounting.utils.currency import get_exchange_rate
+
+		return get_exchange_rate(company, from_currency, to_currency, exchange_date)
+	except ImportError:
+		pass
+	row = frappe.db.sql(
+		"""
+		select exchange_rate from `tabCurrency Exchange Rate`
+		where company = %s and from_currency = %s and to_currency = %s
+		and exchange_date <= %s
+		order by exchange_date desc limit 1
+		""",
+		(company, from_currency, to_currency, exchange_date),
+	)
+	return flt(row[0][0]) if row else None
 
 
 def _resolve_ipc_billing_item(company: str) -> str:

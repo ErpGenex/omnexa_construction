@@ -83,6 +83,7 @@ def sync_all_a4_print_formats() -> dict:
 		stats["formats"].append("Project Contract — Summary")
 
 	setup_prints = (
+		("Construction Setup — Summary", "setup_summary.html"),
 		("Construction Setup — BOQ Schedule", "setup_boq_schedule.html"),
 		("Construction Setup — IPC Schedule", "setup_ipc_schedule.html"),
 		("Construction Setup — Phase Delivery", "setup_phase_delivery.html"),

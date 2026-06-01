@@ -1,0 +1,19 @@
+<div class="en-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+  <td width="58%"><div class="title">Work Approval Request</div></td>
+  <td width="30%"><b>No.:</b> {{ doc.name }}<br><b>Date:</b> {{ frappe.format(doc.request_date, {"fieldtype": "Date"}) or "" }}</td>
+</tr></table>
+<p><b>To:</b> {{ doc.recipient_title or "Consultant / Engineer" }}</p>
+<p>Subject: Work approval for project <b>{{ doc.project_name }}</b></p>
+<div class="section-head">Project Details</div>
+<p><b>Project:</b> {{ doc.project_name }} &nbsp; <b>Contractor:</b> {{ doc.contractor_name or "" }}</p>
+<div class="section-head">Executed Works</div>
+<table class="grid"><thead><tr>
+  <th>#</th><th>Description</th><th>Location</th><th>Qty</th><th>UOM</th><th>Date</th><th>Remarks</th>
+</tr></thead><tbody>{% for row in doc.works %}<tr>
+  <td>{{ row.idx or loop.index }}</td><td>{{ row.work_description }}</td><td>{{ row.location_section or "" }}</td>
+  <td>{{ row.executed_quantity or "" }}</td><td>{{ row.uom or "" }}</td>
+  <td>{{ frappe.format(row.execution_date, {"fieldtype": "Date"}) or "" }}</td><td>{{ row.remarks or "" }}</td>
+</tr>{% endfor %}</tbody></table>
+</div>

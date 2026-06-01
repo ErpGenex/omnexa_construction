@@ -36,5 +36,9 @@ def _columns():
 		{"label": _("SV"), "fieldname": "sv", "fieldtype": "Currency", "width": 110},
 		{"label": _("EAC"), "fieldname": "eac", "fieldtype": "Currency", "width": 110},
 		{"label": _("ETC"), "fieldname": "etc", "fieldtype": "Currency", "width": 110},
+		{"label": _("VAC"), "fieldname": "vac", "fieldtype": "Currency", "width": 100},
+		{"label": _("TCPI"), "fieldname": "tcpi", "fieldtype": "Float", "precision": 2, "width": 70},
+		{"label": _("Committed"), "fieldname": "committed_cost", "fieldtype": "Currency", "width": 100},
 		{"label": _("% Planned"), "fieldname": "schedule_percent", "fieldtype": "Percent", "width": 90},
+		{"label": _("Schedule Source"), "fieldname": "schedule_source", "fieldtype": "Data", "width": 100},
 	]

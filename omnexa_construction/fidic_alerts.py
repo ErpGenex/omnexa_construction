@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import frappe
-from frappe.utils import getdate, today
+from frappe.utils import today
+
+from omnexa_construction.fidic_compliance import mark_time_barred_notices, refresh_fidic_notice_compliance
 
 
 def mark_overdue_fidic_notices():
@@ -14,3 +16,4 @@ def mark_overdue_fidic_notices():
 		pluck="name",
 	):
 		frappe.db.set_value("Construction FIDIC Notice", name, "status", "Overdue", update_modified=True)
+	mark_time_barred_notices()

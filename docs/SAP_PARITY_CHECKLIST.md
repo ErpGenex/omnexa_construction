@@ -16,6 +16,8 @@
 | 10 | SAP HANA scale-out | N/A | MariaDB / bench stack |
 | 11 | SAP STMS transport | N/A | Git + bench deploy |
 
-**Metrics:** 11 DocTypes · 8 tests · 6 reports
+**Metrics:** 72+ DocTypes · 50+ test files · 21+ reports · 14+ workflows · QHSE Workspace · Mobile Hub · i18n 500+
 
 **Checklist product score:** **100%** (signed omnexa_construction)
+
+**v2.0 roadmap:** Phases 0–8 implemented — see `docs/CONSTRUCTION_COMPLETION_ROADMAP.md` §15

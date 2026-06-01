@@ -1,0 +1,39 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:WST-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"log_date",
+		"waste_type",
+		"quantity",
+		"uom",
+		"disposal_method",
+		"carrier",
+		"notes",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "log_date", "fieldtype": "Date", "label": "Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "waste_type", "fieldtype": "Data", "label": "Waste Type", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "quantity", "fieldtype": "Float", "label": "Quantity", "reqd": 1},
+		{"fieldname": "uom", "fieldtype": "Link", "label": "UOM", "options": "UOM"},
+		{"fieldname": "disposal_method", "fieldtype": "Select", "label": "Disposal", "options": "Landfill\nRecycle\nReuse\nIncineration\nOther"},
+		{"fieldname": "carrier", "fieldtype": "Data", "label": "Carrier / Contractor"},
+		{"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Waste Log",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Construction HSE Officer", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

@@ -1,11 +1,47 @@
+function export_setup_document_pack(frm) {
+	frappe.call({
+		method: "omnexa_construction.wizard.wizard_api.export_setup_document_pack",
+		args: { setup_name: frm.doc.name },
+		freeze: true,
+		callback(r) {
+			if (r.message && r.message.file_url) {
+				window.open(r.message.file_url);
+				frm.reload_doc();
+			}
+		},
+	});
+}
+
 frappe.ui.form.on("Construction Project Setup", {
 	refresh(frm) {
-		if (frm.doc.status === "Completed" && frm.doc.project_contract) {
-			frm.add_custom_button(__("Project Contract"), () => {
-				frappe.set_route("Form", "Project Contract", frm.doc.project_contract);
-			});
+		if (frm.is_new()) {
+			return;
 		}
-		if (!frm.is_new() && frm.doc.status !== "Completed") {
+
+		if (frm.doc.document_pack_file) {
+			frm.add_custom_button(__("Download Document Pack (ZIP)"), () => {
+				window.open(frappe.urllib.get_full_url(frm.doc.document_pack_file));
+			}, __("Documents"));
+		} else {
+			frm.add_custom_button(__("Export Document Pack (ZIP)"), () => export_setup_document_pack(frm), __("Documents"));
+		}
+
+		if (frm.doc.status === "Completed" && frm.doc.project_contract) {
+			frm.add_custom_button(
+				__("Project Contract"),
+				() => frappe.set_route("Form", "Project Contract", frm.doc.project_contract),
+				__("Documents")
+			);
+			if (!frm.doc.document_pack_file) {
+				frm.add_custom_button(
+					__("Rebuild Document Pack"),
+					() => export_setup_document_pack(frm),
+					__("Documents")
+				);
+			}
+		}
+
+		if (frm.doc.status !== "Completed") {
 			frm.add_custom_button(__("Open Wizard"), () => {
 				frappe.set_route("construction-project-wizard", { setup: frm.doc.name });
 			});
@@ -56,19 +92,6 @@ frappe.ui.form.on("Construction Project Setup", {
 					},
 				});
 			});
-			frm.add_custom_button(__("Export Document Pack (ZIP)"), () => {
-				frappe.call({
-					method: "omnexa_construction.wizard.wizard_api.export_setup_document_pack",
-					args: { setup_name: frm.doc.name },
-					freeze: true,
-					callback(r) {
-						if (r.message && r.message.file_url) {
-							window.open(r.message.file_url);
-							frm.reload_doc();
-						}
-					},
-				});
-			});
 			frm.add_custom_button(__("Apply Type Template"), () => {
 				frappe.call({
 					method: "omnexa_construction.wizard.wizard_api.apply_full_template",
@@ -104,6 +127,7 @@ frappe.ui.form.on("Construction Project Setup", {
 				});
 			});
 		}
+
 		frm.set_df_property("boq_details", "cannot_add_rows", frm.doc.status === "Completed");
 		frm.set_df_property("ipc_plan", "cannot_add_rows", frm.doc.status === "Completed");
 	},
