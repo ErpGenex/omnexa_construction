@@ -8,6 +8,8 @@ from pathlib import Path
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
+from omnexa_construction.construction_forms.print_style import ensure_print_format
+
 MODULE = "Omnexa Construction"
 
 NEW_DOCTYPES = (
@@ -130,29 +132,7 @@ def execute():
 		path = base / filename
 		if not path.exists():
 			continue
-		html = path.read_text(encoding="utf-8")
-		if frappe.db.exists("Print Format", name):
-			frappe.db.set_value(
-				"Print Format",
-				name,
-				{"html": html, "custom_format": 1, "print_format_type": "Jinja", "disabled": 0, "default_print_language": lang},
-				update_modified=True,
-			)
-		else:
-			frappe.get_doc(
-				{
-					"doctype": "Print Format",
-					"name": name,
-					"doc_type": doctype,
-					"module": MODULE,
-					"custom_format": 1,
-					"print_format_type": "Jinja",
-					"standard": "Yes",
-					"disabled": 0,
-					"default_print_language": lang,
-					"html": html,
-				}
-			).insert(ignore_permissions=True)
+		ensure_print_format(name, doctype, path.read_text(encoding="utf-8"), lang=lang)
 
 	try:
 		from omnexa_construction.construction_workflows import sync_qhse_and_document_workflows
@@ -162,55 +142,8 @@ def execute():
 		frappe.log_error(title="Final workflow sync failed")
 		raise
 
-	_ensure_qhse_workspace()
 	from omnexa_construction.patches.v2_0.sync_construction_ar_translations import execute as sync_i18n
 
 	sync_i18n()
 	frappe.clear_cache()
 
-
-def _ensure_qhse_workspace():
-	name = "Construction QHSE"
-	if not frappe.db.exists("Workspace", name):
-		ws = frappe.get_doc(
-			{
-				"doctype": "Workspace",
-				"name": name,
-				"label": name,
-				"title": name,
-				"module": MODULE,
-				"public": 1,
-				"content": "[]",
-			}
-		)
-		ws.insert(ignore_permissions=True)
-	else:
-		ws = frappe.get_doc("Workspace", name)
-
-	existing = {s.link_to for s in (ws.shortcuts or []) if s.link_to}
-	shortcuts = [
-		("DocType", "Construction NCR", "NCR"),
-		("DocType", "Construction CAPA", "CAPA"),
-		("DocType", "Construction HSE Incident", "HSE Incidents"),
-		("DocType", "Construction Permit to Work", "PTW"),
-		("DocType", "Construction Hazard Register", "Hazards"),
-		("DocType", "Construction Toolbox Talk", "Toolbox Talks"),
-		("DocType", "Construction Environmental Aspect", "Environmental"),
-		("DocType", "Construction Waste Log", "Waste Log"),
-		("DocType", "Construction Environmental Monitoring", "Monitoring"),
-		("DocType", "Construction Safety KPI", "Safety KPIs"),
-		("DocType", "Construction Internal Audit", "Audits"),
-		("DocType", "Construction Management Review", "Mgmt Review"),
-		("Report", "HSE Incident Summary", "HSE Summary"),
-		("Report", "NCR Aging", "NCR Aging"),
-		("Report", "PTW Register", "PTW Register"),
-		("Report", "Environmental Compliance", "ENV Compliance"),
-	]
-	for typ, link_to, label in shortcuts:
-		if link_to in existing:
-			continue
-		if typ == "DocType" and not frappe.db.exists("DocType", link_to):
-			continue
-		ws.append("shortcuts", {"type": typ, "link_to": link_to, "label": label, "color": "Green"})
-		existing.add(link_to)
-	ws.save(ignore_permissions=True)

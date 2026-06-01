@@ -307,6 +307,9 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 			("DocType", "Construction Internal Audit", "Internal Audit", "search", False),
 			("DocType", "Construction Management Review", "Management Review", "users", False),
 			("DocType", "Construction Safety KPI", "Safety KPI", "trending-up", False),
+			("Report", "NCR Aging", "NCR Aging", "alert-triangle", True),
+			("Report", "PTW Register", "PTW Register", "lock", True),
+			("Report", "HSE Incident Summary", "HSE Summary", "heart", True),
 		],
 	),
 	(
@@ -315,6 +318,7 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 			("DocType", "Construction Environmental Aspect", "Environmental Aspect", "sun", False),
 			("DocType", "Construction Waste Log", "Waste Log", "trash-2", False),
 			("DocType", "Construction Environmental Monitoring", "Environmental Monitoring", "thermometer", False),
+			("Report", "Environmental Compliance", "Environmental Compliance", "sun", True),
 		],
 	),
 	(
@@ -354,10 +358,6 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 			("Report", "Construction Contract International Summary", "International Summary", "globe", True),
 			("Report", "Currency Revaluation Exposure", "Currency Exposure", "dollar-sign", True),
 			("Report", "RFQ Bid Tabulation", "RFQ Bid Tabulation", "columns", True),
-			("Report", "NCR Aging", "NCR Aging", "alert-triangle", True),
-			("Report", "PTW Register", "PTW Register", "lock", True),
-			("Report", "HSE Incident Summary", "HSE Summary", "heart", True),
-			("Report", "Environmental Compliance", "Environmental Compliance", "sun", True),
 			("Report", "Construction Snagging Summary", "Snagging Summary", "check-circle", True),
 		],
 	),
@@ -439,6 +439,18 @@ def _link_key(row) -> tuple[str, str] | None:
 	if not link_to or not link_type:
 		return None
 	return (link_type, link_to)
+
+
+QHSE_WORKSPACE_NAME = "Construction QHSE"
+
+
+def remove_construction_qhse_workspace() -> bool:
+	"""Remove standalone QHSE workspace; its links live under Construction."""
+	if not frappe.db.exists("Workspace", QHSE_WORKSPACE_NAME):
+		return False
+	frappe.delete_doc("Workspace", QHSE_WORKSPACE_NAME, force=True, ignore_permissions=True)
+	frappe.clear_cache(doctype="Workspace")
+	return True
 
 
 def sync_construction_workspace_menu(*, save: bool = True) -> dict:
@@ -530,6 +542,8 @@ def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 		content_changed = True
 	if content_changed:
 		ws.content = json.dumps(content, separators=(",", ":"))
+
+	remove_construction_qhse_workspace()
 
 	if save:
 		ws.save(ignore_permissions=True, ignore_version=True)

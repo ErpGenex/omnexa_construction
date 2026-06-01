@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from contextlib import contextmanager
 from pathlib import Path
 
 import frappe
@@ -28,32 +29,56 @@ def compose_print_html(body_html: str, *, inject_base: bool = True) -> str:
 	return f"{base}\n{body}".strip()
 
 
-def _ensure_print(name: str, doctype: str, html: str, *, lang: str | None = None) -> None:
+@contextmanager
+def _allow_standard_print_format_writes():
+	"""Print Format.validate blocks standard=Yes unless in_migrate/install/test."""
+	prev = bool(getattr(frappe.flags, "in_migrate", False))
+	frappe.flags.in_migrate = True
+	try:
+		yield
+	finally:
+		frappe.flags.in_migrate = prev
+
+
+def ensure_print_format(
+	name: str,
+	doctype: str,
+	html: str,
+	*,
+	lang: str | None = None,
+	standard: str = "Yes",
+) -> None:
 	values = {
 		"html": html,
 		"custom_format": 1,
 		"print_format_type": "Jinja",
 		"disabled": 0,
-		"standard": "Yes",
+		"standard": standard,
 	}
 	if lang:
 		values["default_print_language"] = lang
-	if frappe.db.exists("Print Format", name):
-		frappe.db.set_value("Print Format", name, values, update_modified=True)
-		return
-	row = {
-		"doctype": "Print Format",
-		"name": name,
-		"doc_type": doctype,
-		"module": MODULE,
-		**values,
-	}
-	frappe.get_doc(row).insert(ignore_permissions=True)
+
+	with _allow_standard_print_format_writes():
+		if frappe.db.exists("Print Format", name):
+			frappe.db.set_value("Print Format", name, values, update_modified=True)
+			return
+		frappe.get_doc(
+			{
+				"doctype": "Print Format",
+				"name": name,
+				"doc_type": doctype,
+				"module": MODULE,
+				**values,
+			}
+		).insert(ignore_permissions=True)
+
+
+def _ensure_print(name: str, doctype: str, html: str, *, lang: str | None = None) -> None:
+	ensure_print_format(name, doctype, html, lang=lang)
 
 
 def sync_all_a4_print_formats() -> dict:
 	"""Idempotent sync of all construction A4 print formats."""
-	frappe.flags.in_migrate = True
 	stats = {"updated": 0, "formats": []}
 
 	arabic_forms = (
@@ -97,5 +122,4 @@ def sync_all_a4_print_formats() -> dict:
 			stats["formats"].append(name)
 
 	frappe.clear_cache(doctype="Print Format")
-	frappe.flags.in_migrate = False
 	return stats

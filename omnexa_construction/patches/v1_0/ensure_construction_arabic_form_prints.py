@@ -8,6 +8,8 @@ from pathlib import Path
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
+from omnexa_construction.construction_forms.print_style import ensure_print_format
+
 MODULE = "Omnexa Construction"
 
 PRINTS = (
@@ -22,31 +24,6 @@ PRINTS = (
 
 def _template_dir() -> Path:
 	return Path(__file__).resolve().parents[2] / "construction_forms" / "print_templates"
-
-
-def _ensure_print(name: str, doctype: str, html: str, lang: str = "ar") -> None:
-	if frappe.db.exists("Print Format", name):
-		frappe.db.set_value(
-			"Print Format",
-			name,
-			{"html": html, "custom_format": 1, "print_format_type": "Jinja", "disabled": 0, "standard": "Yes", "default_print_language": lang},
-			update_modified=True,
-		)
-		return
-	frappe.get_doc(
-		{
-			"doctype": "Print Format",
-			"name": name,
-			"doc_type": doctype,
-			"module": MODULE,
-			"custom_format": 1,
-			"print_format_type": "Jinja",
-			"standard": "Yes",
-			"disabled": 0,
-			"default_print_language": lang,
-			"html": html,
-		}
-	).insert(ignore_permissions=True)
 
 
 def execute():
@@ -69,5 +46,5 @@ def execute():
 				"{% for row in doc.lines %}",
 				"{% set currency = frappe.db.get_value('Project Contract', doc.project_contract, 'contract_currency') or 'EGP' %}\n    {% for row in doc.lines %}",
 			)
-		_ensure_print(name, doctype, html, lang)
+		ensure_print_format(name, doctype, html, lang=lang)
 	frappe.clear_cache(doctype="IPC Certificate")
