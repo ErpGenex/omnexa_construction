@@ -212,6 +212,7 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 	(
 		"2. العقود والكميات",
 		[
+			("DocType", "Customer", "Customer (project owners)", "users", False),
 			("DocType", "Project Contract", "Project Contract", "file-text", False),
 			("DocType", "BOQ Item", "BOQ Item", "list", False),
 			("DocType", "Construction BOQ Template", "BOQ Template", "copy", False),
