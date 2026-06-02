@@ -57,6 +57,10 @@ def get_portfolio_dashboard(company: str, branch: str | None = None) -> dict:
 	total_ev = 0.0
 	weighted_spi = 0.0
 	weight = 0.0
+	delayed_contracts = 0
+	at_risk_contracts = 0
+	on_track_contracts = 0
+	total_sv_days = 0.0
 	contract_rows = []
 	for name in contracts[:50]:
 		snap = evm_snapshot(name)
@@ -66,6 +70,15 @@ def get_portfolio_dashboard(company: str, branch: str | None = None) -> dict:
 		if bac:
 			weighted_spi += flt(snap.get("spi")) * bac
 			weight += bac
+		sv_days = flt(snap.get("schedule_variance_days"))
+		total_sv_days += sv_days
+		health = snap.get("schedule_health_status") or "On Track"
+		if health == "Delayed":
+			delayed_contracts += 1
+		elif health == "At Risk":
+			at_risk_contracts += 1
+		else:
+			on_track_contracts += 1
 		contract_rows.append(
 			{
 				"project_contract": name,
@@ -74,15 +87,30 @@ def get_portfolio_dashboard(company: str, branch: str | None = None) -> dict:
 				"ev": flt(snap.get("ev")),
 				"cpi": flt(snap.get("cpi")),
 				"spi": flt(snap.get("spi")),
+				"schedule_variance_days": sv_days,
+				"schedule_health_status": health,
 				"status": snap.get("status"),
 			}
 		)
+
+	# Prioritize delayed contracts in executive dashboard table.
+	health_rank = {"Delayed": 0, "At Risk": 1, "On Track": 2}
+	contract_rows.sort(
+		key=lambda row: (
+			health_rank.get(row.get("schedule_health_status") or "On Track", 2),
+			-(flt(row.get("schedule_variance_days"))),
+		)
+	)
 
 	return {
 		"contract_count": len(contracts),
 		"total_bac": total_bac,
 		"total_ev": total_ev,
 		"portfolio_spi": (weighted_spi / weight) if weight else 0,
+		"avg_schedule_variance_days": (total_sv_days / len(contract_rows)) if contract_rows else 0.0,
+		"delayed_contracts": delayed_contracts,
+		"at_risk_contracts": at_risk_contracts,
+		"on_track_contracts": on_track_contracts,
 		"open_ipc": open_ipc,
 		"open_ncr": open_ncr,
 		"open_rfi": open_rfi,

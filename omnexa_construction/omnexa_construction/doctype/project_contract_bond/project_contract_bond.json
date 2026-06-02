@@ -1,0 +1,72 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"bond_type",
+		"percent_of_contract",
+		"bond_amount",
+		"issuer",
+		"reference_no",
+		"issue_date",
+		"expiry_date",
+		"status"
+	],
+	"fields": [
+		{
+			"fieldname": "bond_type",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "Bond / Guarantee Type",
+			"options": "Bid Bond\nPerformance Bond\nAdvance Payment Guarantee\nMaintenance Bond\nRetention Bond\nInsurance Policy\nOther",
+			"reqd": 1
+		},
+		{
+			"fieldname": "percent_of_contract",
+			"fieldtype": "Percent",
+			"in_list_view": 1,
+			"label": "% of Contract"
+		},
+		{
+			"fieldname": "bond_amount",
+			"fieldtype": "Currency",
+			"in_list_view": 1,
+			"label": "Amount"
+		},
+		{
+			"fieldname": "issuer",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Issuer / Bank"
+		},
+		{
+			"fieldname": "reference_no",
+			"fieldtype": "Data",
+			"label": "Reference No."
+		},
+		{
+			"fieldname": "issue_date",
+			"fieldtype": "Date",
+			"label": "Issue Date"
+		},
+		{
+			"fieldname": "expiry_date",
+			"fieldtype": "Date",
+			"label": "Expiry Date"
+		},
+		{
+			"default": "Active",
+			"fieldname": "status",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "Status",
+			"options": "Draft\nActive\nReleased\nExpired"
+		}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Project Contract Bond",
+	"permissions": [],
+	"track_changes": 0
+}

@@ -1,0 +1,33 @@
+{
+	"actions": [],
+	"autoname": "format:OSHA-{YYYY}-{#####}",
+	"creation": "2026-06-02 00:00:00",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"inspection_date",
+		"inspector",
+		"checklist_json",
+		"status",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "inspection_date", "fieldtype": "Date", "label": "Inspection Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "inspector", "fieldtype": "Link", "label": "Inspector", "options": "User"},
+		{"fieldname": "checklist_json", "fieldtype": "Code", "label": "Checklist (JSON)", "options": "JSON"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Draft\nCompleted", "default": "Draft", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction OSHA Site Checklist",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

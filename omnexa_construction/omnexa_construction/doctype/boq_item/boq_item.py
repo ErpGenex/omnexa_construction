@@ -3,6 +3,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
 
+from omnexa_construction.utils.cbs_boq import apply_cbs_to_boq_line
 from omnexa_projects_pm.wbs_integration import (
 	recompute_pm_wbs_progress_from_boq,
 	validate_linked_pm_wbs_task,
@@ -11,6 +12,7 @@ from omnexa_projects_pm.wbs_integration import (
 
 class BOQItem(Document):
 	def validate(self):
+		apply_cbs_to_boq_line(self)
 		self._validate_boq_hierarchy()
 		if self.is_group:
 			children = frappe.get_all(

@@ -16,6 +16,12 @@ class TestPortfolioApi(FrappeTestCase):
 		for key in (
 			"contract_count",
 			"total_bac",
+			"total_ev",
+			"portfolio_spi",
+			"avg_schedule_variance_days",
+			"delayed_contracts",
+			"at_risk_contracts",
+			"on_track_contracts",
 			"open_ipc",
 			"open_ncr",
 			"open_rfi",
@@ -24,3 +30,5 @@ class TestPortfolioApi(FrappeTestCase):
 			"contracts",
 		):
 			self.assertIn(key, out)
+		if out.get("contracts"):
+			self.assertIn("schedule_health_status", out["contracts"][0])

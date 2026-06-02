@@ -95,6 +95,10 @@ def construction_fidic_notice_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction FIDIC Notice", user)
 
 
+def construction_fidic_clause_reference_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction FIDIC Clause Reference", user)
+
+
 def construction_final_account_statement_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction Final Account Statement", user)
 
@@ -179,6 +183,14 @@ def construction_bim_issue_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction BIM Issue", user)
 
 
+def construction_cde_access_log_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction CDE Access Log", user)
+
+
+def construction_osha_site_checklist_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction OSHA Site Checklist", user)
+
+
 def construction_dab_referral_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction DAB Referral", user)
 
@@ -205,3 +217,16 @@ def construction_safety_kpi_query_conditions(user=None):
 
 def construction_environmental_monitoring_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction Environmental Monitoring", user)
+
+
+def construction_bid_estimate_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Bid Estimate", user)
+
+
+def construction_cbs_element_query_conditions(user=None):
+	# CBS master is shared across branches within company context.
+	return ""
+
+
+def construction_project_risk_query_conditions(user=None):
+	return permission_query_conditions_for_branch_field("Construction Project Risk", user)

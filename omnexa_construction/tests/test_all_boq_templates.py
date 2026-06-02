@@ -21,9 +21,9 @@ class TestAllBoqTemplates(FrappeTestCase):
 			self.assertIn(meta["template_code"], TEMPLATE_PACKS, f"Pack missing for {code}")
 
 	def test_template_catalog_size(self):
-		self.assertEqual(len(TEMPLATE_PACKS), 34)
-		self.assertEqual(len(BOQ_TEMPLATES), 34)
-		self.assertEqual(len(BUILDING_TYPE_META), 34)
+		self.assertEqual(len(TEMPLATE_PACKS), 50)
+		self.assertEqual(len(BOQ_TEMPLATES), 50)
+		self.assertEqual(len(BUILDING_TYPE_META), 50)
 
 	def test_each_template_has_full_boq_structure(self):
 		for code, pack in TEMPLATE_PACKS.items():

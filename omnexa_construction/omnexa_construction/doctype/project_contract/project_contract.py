@@ -19,3 +19,12 @@ class ProjectContract(Document):
 		self.approved_change_orders_value = co
 		self.revised_contract_value = flt(self.contract_value) + co
 		self.retention_held_to_date = retention_held_from_certified_ipc(self.name)
+		self._normalize_contract_bonds()
+
+	def _normalize_contract_bonds(self):
+		base = flt(self.revised_contract_value) or flt(self.contract_value)
+		for row in self.get("contract_bonds") or []:
+			if flt(row.percent_of_contract) and not flt(row.bond_amount) and base:
+				row.bond_amount = round(base * flt(row.percent_of_contract) / 100, 2)
+			elif flt(row.bond_amount) and not flt(row.percent_of_contract) and base:
+				row.percent_of_contract = round((flt(row.bond_amount) / base) * 100, 2)

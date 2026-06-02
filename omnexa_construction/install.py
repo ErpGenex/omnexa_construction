@@ -30,5 +30,13 @@ def enforce_supported_frappe_version():
 def after_migrate():
 	"""Keep wizard building-type Select options aligned with BUILDING_TYPE_META."""
 	from omnexa_construction.wizard.building_type_registry import sync_building_type_select_options
+	from omnexa_construction.workspace.construction_workspace import sync_construction_workspace_menu
 
 	sync_building_type_select_options()
+	sync_construction_workspace_menu(save=True)
+	try:
+		from omnexa_construction.world_class_certification import apply_site_certification_defaults
+
+		apply_site_certification_defaults()
+	except Exception:
+		frappe.log_error(frappe.get_traceback(), "Omnexa: World Class 100 certification defaults")

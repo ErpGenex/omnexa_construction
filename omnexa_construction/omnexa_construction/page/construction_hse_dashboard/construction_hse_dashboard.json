@@ -1,0 +1,10 @@
+{
+ "content": null,
+ "doctype": "Page",
+ "module": "Omnexa Construction",
+ "name": "construction-hse-dashboard",
+ "page_name": "construction-hse-dashboard",
+ "roles": [{"role": "System Manager"}, {"role": "Project Manager"}, {"role": "Site Engineer"}],
+ "standard": "Yes",
+ "title": "HSE KPI Dashboard"
+}

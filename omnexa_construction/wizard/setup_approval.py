@@ -206,7 +206,10 @@ def _copy_terms_to_contract(setup, contract_name: str) -> None:
 			},
 		)
 	contract.flags.ignore_permissions = True
-	contract.save()
+	if contract.docstatus == 1:
+		contract.save(ignore_version=True)
+	else:
+		contract.save()
 
 
 def _attach_setup_pack_to_contract(setup, contract_name: str, file_url: str | None) -> None:

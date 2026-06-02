@@ -1,0 +1,16 @@
+{
+	"content": null,
+	"docstatus": 0,
+	"doctype": "Page",
+	"idx": 0,
+	"module": "Omnexa Construction",
+	"name": "construction-schedule-gantt",
+	"page_name": "construction-schedule-gantt",
+	"roles": [
+		{"role": "System Manager"},
+		{"role": "Project Manager"},
+		{"role": "Site Engineer"}
+	],
+	"standard": "Yes",
+	"title": "Construction Schedule Gantt"
+}

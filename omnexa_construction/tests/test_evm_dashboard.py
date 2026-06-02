@@ -36,3 +36,6 @@ class TestEvmDashboard(FrappeTestCase):
 		self.assertEqual(len(data), 1)
 		self.assertEqual(chart["type"], "bar")
 		self.assertTrue(summary)
+		labels = {row.get("label") for row in summary}
+		self.assertIn("Delayed Contracts", labels)
+		self.assertIn("Avg SV Days", labels)

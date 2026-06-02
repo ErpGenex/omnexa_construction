@@ -11,6 +11,7 @@
 		"is_group",
 		"section_name",
 		"cost_code",
+		"cbs_element",
 		"column_break_omnexa_1",
 		"item_description",
 		"quantity",
@@ -77,6 +78,13 @@
 			"fieldtype": "Data",
 			"label": "Cost / BOQ code",
 			"description": "Employer bill code, CSI, UniClass, or internal WBS cost code for international reporting."
+		},
+		{
+			"fieldname": "cbs_element",
+			"fieldtype": "Link",
+			"label": "CBS Element",
+			"options": "Construction CBS Element",
+			"description": "Cost breakdown structure node for GL alignment and reporting."
 		},
 		{
 			"fieldname": "item_description",

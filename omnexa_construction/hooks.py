@@ -26,7 +26,7 @@ required_apps = ["omnexa_core"]
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/omnexa_construction/css/omnexa_construction.css"
+app_include_css = "/assets/omnexa_construction/css/construction_gantt_critical.css"
 # app_include_js = "/assets/omnexa_construction/js/omnexa_construction.js"
 
 # include js, css files in header of web template
@@ -52,6 +52,8 @@ doctype_js = {
 	"IPC Certificate": "public/js/ipc_certificate.js",
 	"Construction Project Setup": "public/js/construction_project_setup.js",
 	"Construction RFQ": "public/js/construction_rfq.js",
+	"Construction Bid Estimate": "public/js/construction_bid_estimate.js",
+	"Construction Schedule Baseline": "public/js/construction_schedule_baseline.js",
 	"Construction CDE Document": "public/js/construction_cde_document.js",
 	"Construction Document Transmittal": "public/js/construction_cde_document.js",
 	"Contractor Account Statement": "public/js/contractor_account_statement.js",
@@ -59,6 +61,9 @@ doctype_js = {
 	"Construction Final Account Statement": "public/js/construction_final_account_statement.js",
 	"Site Daily Report": "public/js/site_daily_report.js",
 	"Project WIP Snapshot": "public/js/project_wip_snapshot.js",
+}
+doctype_list_js = {
+	"Project Contract": "public/js/project_contract_list.js",
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -155,6 +160,7 @@ permission_query_conditions = {
 	"Construction Residential Unit": "omnexa_construction.permissions.construction_residential_unit_query_conditions",
 	"Construction QS Measurement Sheet": "omnexa_construction.permissions.construction_qs_measurement_sheet_query_conditions",
 	"Construction FIDIC Notice": "omnexa_construction.permissions.construction_fidic_notice_query_conditions",
+	"Construction FIDIC Clause Reference": "omnexa_construction.permissions.construction_fidic_clause_reference_query_conditions",
 	"Construction Final Account Statement": "omnexa_construction.permissions.construction_final_account_statement_query_conditions",
 	"Construction DLP Record": "omnexa_construction.permissions.construction_dlp_record_query_conditions",
 	"Construction Inspection Test Plan": "omnexa_construction.permissions.construction_inspection_test_plan_query_conditions",
@@ -176,6 +182,8 @@ permission_query_conditions = {
 	"Construction MIDP": "omnexa_construction.permissions.construction_midp_query_conditions",
 	"Construction BIM Model Register": "omnexa_construction.permissions.construction_bim_model_register_query_conditions",
 	"Construction BIM Issue": "omnexa_construction.permissions.construction_bim_issue_query_conditions",
+	"Construction CDE Access Log": "omnexa_construction.permissions.construction_cde_access_log_query_conditions",
+	"Construction OSHA Site Checklist": "omnexa_construction.permissions.construction_osha_site_checklist_query_conditions",
 	"Construction DAB Referral": "omnexa_construction.permissions.construction_dab_referral_query_conditions",
 	"Construction Settlement": "omnexa_construction.permissions.construction_settlement_query_conditions",
 	"Subcontract Retention Release": "omnexa_construction.permissions.subcontract_retention_release_query_conditions",
@@ -183,6 +191,9 @@ permission_query_conditions = {
 	"Construction Management Review": "omnexa_construction.permissions.construction_management_review_query_conditions",
 	"Construction Safety KPI": "omnexa_construction.permissions.construction_safety_kpi_query_conditions",
 	"Construction Environmental Monitoring": "omnexa_construction.permissions.construction_environmental_monitoring_query_conditions",
+	"Construction Bid Estimate": "omnexa_construction.permissions.construction_bid_estimate_query_conditions",
+	"Construction CBS Element": "omnexa_construction.permissions.construction_cbs_element_query_conditions",
+	"Construction Project Risk": "omnexa_construction.permissions.construction_project_risk_query_conditions",
 }
 
 # DocType Class
@@ -239,7 +250,11 @@ _IPC_EVENTS = {
 doc_events = {
 	"Project Contract": _BRANCH_DOC_EVENTS.copy(),
 	"BOQ Item": _BRANCH_DOC_EVENTS.copy(),
-	"IPC Certificate": _IPC_EVENTS,
+	"IPC Certificate": {
+		**_IPC_EVENTS,
+		"validate": _WORKFLOW_VALIDATE
+		+ ["omnexa_construction.regional_compliance.zatca_ipc_hook.validate_ipc_zatca_readiness"],
+	},
 	"Site Daily Report": _SITE_DAILY_EVENTS,
 	"Subcontract Work Order": {
 		**_BRANCH_DOC_EVENTS,
@@ -260,7 +275,13 @@ doc_events = {
 	"Construction Extension of Time": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Claim": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Inspection Request": _BRANCH_DOC_EVENTS.copy(),
-	"Construction NCR": _BRANCH_DOC_EVENTS.copy(),
+	"Construction NCR": {
+		**_BRANCH_DOC_EVENTS,
+		"validate": [
+			_BRANCH_DOC_EVENTS["validate"],
+			"omnexa_construction.ncr_sla.apply_ncr_sla",
+		],
+	},
 	"Construction HSE Incident": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Document Transmittal": {
 		**_BRANCH_DOC_EVENTS,
@@ -278,6 +299,7 @@ doc_events = {
 			"omnexa_construction.fidic_compliance.validate_fidic_notice_doc",
 		],
 	},
+	"Construction FIDIC Clause Reference": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Final Account Statement": _BRANCH_DOC_EVENTS.copy(),
 	"Construction DLP Record": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Inspection Test Plan": _BRANCH_DOC_EVENTS.copy(),
@@ -288,6 +310,10 @@ doc_events = {
 			_BRANCH_DOC_EVENTS["validate"],
 			"omnexa_construction.cde_validation.validate_cde_document_doc",
 		],
+		"onload": "omnexa_construction.regional_compliance.eu_package.log_cde_access_on_load",
+	},
+	"Engineering Submittal": {
+		"validate": "omnexa_construction.riba_submittal_gates.validate_engineering_submittal_riba_gate",
 	},
 	"Construction Work Delay Notice": _BRANCH_DOC_EVENTS.copy(),
 	"Construction RFI": {
@@ -330,6 +356,10 @@ doc_events = {
 	"Construction Management Review": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Safety KPI": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Environmental Monitoring": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Bid Estimate": _BRANCH_DOC_EVENTS.copy(),
+	"Construction Project Risk": _BRANCH_DOC_EVENTS.copy(),
+	"Construction CDE Access Log": _BRANCH_DOC_EVENTS.copy(),
+	"Construction OSHA Site Checklist": _BRANCH_DOC_EVENTS.copy(),
 }
 
 # Scheduled Tasks
@@ -339,6 +369,7 @@ scheduler_events = {
 	"daily": [
 		"omnexa_construction.fidic_alerts.mark_overdue_fidic_notices",
 		"omnexa_construction.subcontract_compliance.mark_expired_compliance_daily",
+		"omnexa_construction.ncr_sla.mark_ncr_sla_breaches_daily",
 	],
 }
 

@@ -35,14 +35,37 @@ def compute_notice_due_date(notice_date, project_contract: str):
 	return add_days(getdate(notice_date), days)
 
 
+def time_bar_days_for_notice(doc) -> int:
+	"""Prefer clause reference (if provided), otherwise contract governing standard."""
+	try:
+		ref = doc.get("fidic_clause_reference")
+	except Exception:
+		ref = None
+	if ref and frappe.db.exists("Construction FIDIC Clause Reference", ref):
+		days = frappe.db.get_value("Construction FIDIC Clause Reference", ref, "time_bar_days")
+		try:
+			days = int(days) if days is not None else None
+		except Exception:
+			days = None
+		if days and days > 0:
+			return days
+	return time_bar_days_for_contract(doc.get("project_contract"))
+
+
+def compute_notice_due_date_for_notice(doc):
+	if not doc.get("notice_date"):
+		return None
+	return add_days(getdate(doc.get("notice_date")), time_bar_days_for_notice(doc))
+
+
 def refresh_fidic_notice_compliance(doc) -> None:
 	"""Set notice_due_date and is_time_barred on Construction FIDIC Notice."""
 	if not doc.get("notice_date") or not doc.get("project_contract"):
 		return
 	if doc.meta.has_field("notice_due_date") and not doc.notice_due_date:
-		doc.notice_due_date = compute_notice_due_date(doc.notice_date, doc.project_contract)
+		doc.notice_due_date = compute_notice_due_date_for_notice(doc)
 	if doc.meta.has_field("is_time_barred"):
-		due = doc.get("notice_due_date") or compute_notice_due_date(doc.notice_date, doc.project_contract)
+		due = doc.get("notice_due_date") or compute_notice_due_date_for_notice(doc)
 		if due and getdate() > getdate(due) and doc.status in ("Open", "Overdue"):
 			doc.is_time_barred = 1
 		elif doc.status in ("Acknowledged", "Closed"):

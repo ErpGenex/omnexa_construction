@@ -20,6 +20,11 @@
 		"material_consumed_cost",
 		"column_break_omnexa_2",
 		"safety_notes",
+		"section_break_mobile",
+		"latitude",
+		"longitude",
+		"photos",
+		"daily_quantities",
 		"company",
 		"branch",
 		"report_reference"
@@ -102,6 +107,35 @@
 			"fieldname": "safety_notes",
 			"fieldtype": "Small Text",
 			"label": "Safety Notes"
+		},
+		{
+			"fieldname": "section_break_mobile",
+			"fieldtype": "Section Break",
+			"label": "Mobile / Field"
+		},
+		{
+			"fieldname": "latitude",
+			"fieldtype": "Float",
+			"label": "GPS Latitude",
+			"precision": "8"
+		},
+		{
+			"fieldname": "longitude",
+			"fieldtype": "Float",
+			"label": "GPS Longitude",
+			"precision": "8"
+		},
+		{
+			"fieldname": "photos",
+			"fieldtype": "Table",
+			"label": "Site Photos",
+			"options": "Site Daily Report Photo"
+		},
+		{
+			"fieldname": "daily_quantities",
+			"fieldtype": "Table",
+			"label": "Daily Quantities",
+			"options": "Site Daily Report Quantity"
 		},
 		{
 			"fieldname": "company",

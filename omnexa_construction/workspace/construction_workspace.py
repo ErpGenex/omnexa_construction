@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import frappe
 
@@ -200,7 +201,7 @@ WorkspaceItem = tuple[str, str, str, str, bool]
 
 WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 	(
-		"1. البداية والإعداد",
+		"1. Start & Setup",
 		[
 			("Page", "construction-project-wizard", "New Project (Wizard)", "add", False),
 			("DocType", "Construction Project Setup", "Construction Project Setup", "edit", False),
@@ -210,9 +211,11 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"2. العقود والكميات",
+		"2. Contracts & BOQ",
 		[
 			("DocType", "Customer", "Customer (project owners)", "users", False),
+			("DocType", "Construction Bid Estimate", "Bid Estimate", "target", False),
+			("DocType", "Construction CBS Element", "CBS Element", "git-branch", False),
 			("DocType", "Project Contract", "Project Contract", "file-text", False),
 			("DocType", "BOQ Item", "BOQ Item", "list", False),
 			("DocType", "Construction BOQ Template", "BOQ Template", "copy", False),
@@ -221,17 +224,20 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"3. الجدول الزمني",
+		"3. Schedule",
 		[
 			("DocType", "Construction Schedule Baseline", "Schedule Baseline", "calendar", False),
+			("Page", "construction-schedule-gantt", "Schedule Gantt", "bar-chart", False),
 			("DocType", "PM WBS Task", "PM WBS Task", "tree", False),
 			("DocType", "Construction MIDP", "MIDP", "book", False),
 		],
 	),
 	(
-		"4. الموقع والتنفيذ",
+		"4. Site & Execution",
 		[
 			("DocType", "Site Daily Report", "Site Daily Report", "clipboard", False),
+			("DocType", "Timesheet Entry", "Timesheet Entry", "clock", False),
+			("DocType", "Construction Project Risk", "Project Risk Register", "alert-triangle", False),
 			("DocType", "Construction Equipment Usage", "Equipment Usage", "tool", False),
 			("DocType", "Construction Snagging Item", "Snagging", "check-circle", False),
 			("DocType", "Construction Inspection Request", "Inspection Request", "search", False),
@@ -239,7 +245,7 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"5. مقاولي الباطن",
+		"5. Subcontractors",
 		[
 			("DocType", "Subcontract Work Order", "Subcontract Work Order", "users", False),
 			("DocType", "Subcontract Payment Certificate", "Subcontract Payment", "credit-card", False),
@@ -248,8 +254,9 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"6. التغييرات والمطالبات (FIDIC)",
+		"6. Changes & Claims (FIDIC)",
 		[
+			("DocType", "Construction FIDIC Clause Reference", "FIDIC Clause Reference", "book-open", False),
 			("DocType", "Construction Change Order", "Change Order", "shuffle", False),
 			("DocType", "Construction Extension of Time", "Extension of Time (EOT)", "clock", False),
 			("DocType", "Construction Claim", "Construction Claim", "file-warning", False),
@@ -260,7 +267,7 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"7. NEC4 والنزاعات",
+		"7. NEC4 & Disputes",
 		[
 			("DocType", "Construction Early Warning", "Early Warning (NEC4)", "alert-triangle", False),
 			("DocType", "Construction Compensation Event", "Compensation Event", "zap", False),
@@ -270,14 +277,20 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"8. الفوترة والدفع",
+		"8. Billing & Payment",
 		[
 			("DocType", "IPC Certificate", "IPC Certificate", "credit-card", False),
+			("DocType", "Subcontract Payment Certificate", "Subcontract Payment", "credit-card", False),
+			("DocType", "Subcontract Retention Release", "Subcontract Retention Release", "unlock", False),
+			("DocType", "Construction Retention Release", "Retention Release", "unlock", False),
+			("DocType", "Construction Final Account Statement", "Final Account", "file-text", False),
+			("DocType", "Contractor Account Statement", "Contractor Statement", "file-minus", False),
+			("DocType", "Construction Fines Statement", "Fines Statement", "slash", False),
 			("DocType", "Project WIP Snapshot", "Project WIP Snapshot", "activity", False),
 		],
 	),
 	(
-		"9. المشتريات",
+		"9. Procurement",
 		[
 			("DocType", "Construction RFQ", "Construction RFQ", "file-search", False),
 			("DocType", "Purchase Request", "Purchase Request", "shopping-bag", False),
@@ -286,18 +299,16 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"10. الاعتمادات والنماذج",
+		"10. Approvals & Forms",
 		[
 			("DocType", "Construction RFI", "RFI", "help-circle", False),
 			("DocType", "Construction Material Approval Request", "Material Approval", "package", False),
 			("DocType", "Construction Work Approval Request", "Work Approval", "check-square", False),
-			("DocType", "Construction Fines Statement", "Fines Statement", "slash", False),
-			("DocType", "Contractor Account Statement", "Contractor Statement", "file-minus", False),
 			("DocType", "Construction Document Transmittal", "Document Transmittal", "folder", False),
 		],
 	),
 	(
-		"11. الجودة والسلامة (QHSE)",
+		"11. Quality & Safety (QHSE)",
 		[
 			("DocType", "Construction NCR", "NCR", "alert-triangle", False),
 			("DocType", "Construction CAPA", "CAPA", "shield", False),
@@ -310,11 +321,14 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 			("DocType", "Construction Safety KPI", "Safety KPI", "trending-up", False),
 			("Report", "NCR Aging", "NCR Aging", "alert-triangle", True),
 			("Report", "PTW Register", "PTW Register", "lock", True),
+			("Page", "construction-hse-dashboard", "HSE KPI Dashboard", "activity", False),
 			("Report", "HSE Incident Summary", "HSE Summary", "heart", True),
+			("DocType", "Construction OSHA Site Checklist", "OSHA Site Checklist", "clipboard", False),
+			("DocType", "Construction User NPS", "User NPS Survey", "smile", False),
 		],
 	),
 	(
-		"12. البيئة",
+		"12. Environment",
 		[
 			("DocType", "Construction Environmental Aspect", "Environmental Aspect", "sun", False),
 			("DocType", "Construction Waste Log", "Waste Log", "trash-2", False),
@@ -323,18 +337,20 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"13. الوثائق والـ CDE / BIM",
+		"13. Documents & CDE / BIM",
 		[
+			("Page", "construction-ifc-viewer", "IFC Viewer (Lite)", "box", False),
 			("DocType", "Construction CDE Document", "CDE Document", "file", False),
 			("DocType", "Construction BIM Model Register", "BIM Model Register", "box", False),
 			("DocType", "Construction BIM Issue", "BIM Issue", "git-branch", False),
+			("DocType", "Construction CDE Access Log", "CDE Access Log", "shield", False),
 			("DocType", "Construction Inspection Test Plan", "ITP", "list", False),
 			("DocType", "Engineering Stage", "Engineering Stage", "map", False),
 			("DocType", "Engineering Submittal", "Engineering Submittal", "file-text", False),
 		],
 	),
 	(
-		"14. التسليم والضمان",
+		"14. Handover & Warranty",
 		[
 			("DocType", "Construction DLP Record", "DLP Record", "clock", False),
 			("DocType", "Construction Residential Unit", "Residential Unit", "home", False),
@@ -342,13 +358,16 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		],
 	),
 	(
-		"15. التقارير والتحليلات",
+		"15. Reports & Analytics",
 		[
+			("Page", "construction-bi-executive", "Executive BI", "trending-up", False),
+			("Report", "Construction World Class Mock Audit", "World Class Mock Audit", "award", True),
 			("Report", "Construction Executive Summary", "Executive Summary", "bar-chart-2", True),
 			("Report", "Construction EVM Dashboard", "EVM Dashboard", "activity", True),
 			("Report", "Construction Earned Value", "Earned Value (EVM)", "layers", True),
 			("Report", "Construction Contract Control", "Contract Control", "sliders", True),
 			("Report", "Construction FIDIC Compliance", "FIDIC Compliance", "check-circle", True),
+			("Report", "Construction FIDIC Compliance Checklist", "FIDIC Checklist 100%", "check-square", True),
 			("Report", "Construction Commercial Pipeline", "Commercial Pipeline", "git-merge", True),
 			("Report", "BOQ Progress", "BOQ Progress", "bar-chart", True),
 			("Report", "BOQ Commitment vs Actual", "BOQ Commitment vs Actual", "pie-chart", True),
@@ -359,6 +378,8 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 			("Report", "Construction Contract International Summary", "International Summary", "globe", True),
 			("Report", "Currency Revaluation Exposure", "Currency Exposure", "dollar-sign", True),
 			("Report", "RFQ Bid Tabulation", "RFQ Bid Tabulation", "columns", True),
+			("Report", "Construction Bid Comparison", "Bid Comparison", "target", True),
+			("Report", "Construction CBS BOQ Summary", "CBS BOQ Summary", "git-branch", True),
 			("Report", "Construction Snagging Summary", "Snagging Summary", "check-circle", True),
 		],
 	),
@@ -370,10 +391,21 @@ DASHBOARD_SHORTCUTS: list[tuple[str, str, str, str, str | None]] = [
 	("DocType", SETUP_DOCTYPE, SETUP_LABEL, "Green", "List"),
 	("DocType", "Project Contract", "Project Contract", "Cyan", "List"),
 	("DocType", "BOQ Item", "BOQ Item", "Blue", "List"),
+	("DocType", "PM WBS Task", "PM WBS Task", "Purple", "List"),
+	("Page", "construction-schedule-gantt", "Schedule Gantt", "Blue", None),
 	("DocType", "Site Daily Report", "Site Daily Report", "Orange", "List"),
+	("Page", "construction-site-mobile", "Site Mobile Hub", "Orange", None),
+	("DocType", "Subcontract Work Order", "Subcontract Work Order", "Green", "List"),
 	("DocType", "IPC Certificate", "IPC Certificate", "Cyan", "List"),
+	("DocType", "Subcontract Payment Certificate", "Subcontract Payment", "Cyan", "List"),
+	("DocType", "Construction Extension of Time", "Extension of Time (EOT)", "Teal", "List"),
 	("DocType", "Construction Change Order", "Change Order", "Red", "List"),
+	("DocType", "Construction Claim", "Construction Claim", "Pink", "List"),
+	("DocType", "Project WIP Snapshot", "Project WIP Snapshot", "Purple", "List"),
 	("Page", "construction-executive-dashboard", "Executive Dashboard", "Purple", None),
+	("Page", "construction-bi-executive", "Executive BI", "Purple", None),
+	("Page", "construction-hse-dashboard", "HSE KPI Dashboard", "Red", None),
+	("Page", "construction-ifc-viewer", "IFC Viewer", "Grey", None),
 	("Report", "Construction EVM Dashboard", "EVM Dashboard", "Grey", None),
 	("Report", "Construction Executive Summary", "Executive Summary", "Grey", None),
 	("Report", "BOQ Progress", "BOQ Progress", "Red", None),
@@ -382,7 +414,135 @@ DASHBOARD_SHORTCUTS: list[tuple[str, str, str, str, str | None]] = [
 	("DocType", "Construction Work Approval Request", "Work Approval", "Blue", "List"),
 	("DocType", "Construction Fines Statement", "Fines Statement", "Red", "List"),
 	("DocType", "Contractor Account Statement", "Contractor Statement", "Blue", "List"),
+	("DocType", "Purchase Order", "Purchase Order", "Orange", "List"),
+	("DocType", "Supplier", "Supplier", "Green", "List"),
 ]
+
+WORKSPACE_FIXTURE_PATH = Path(__file__).resolve().parent.parent / "omnexa_construction" / "workspace" / "construction" / "construction.json"
+CONTENT_SLUG = "construction"
+QUICK_ACTIONS_HEADER = "Quick Actions"
+ALL_MODULES_HEADER = "All modules & links"
+
+
+def sync_construction_workspace_content(ws) -> int:
+	"""Rebuild EditorJS body so every sidebar section renders as a card on the desk page.
+
+	Frappe only paints ``Workspace Link`` groups when ``content`` contains matching ``card`` blocks.
+	Without this, users see only a few Operations/Reports shortcuts from omnexa_core.
+	"""
+	blocks: list[dict] = []
+	block_i = 0
+
+	def _nid(suffix: str) -> str:
+		nonlocal block_i
+		block_i += 1
+		return f"{CONTENT_SLUG}-{suffix}-{block_i}"
+
+	existing = json.loads(ws.content or "[]")
+	for row in existing:
+		if isinstance(row, dict) and row.get("type") == "onboarding":
+			blocks.append(row)
+			break
+
+	blocks.append(
+		{
+			"id": f"{CONTENT_SLUG}-h",
+			"type": "header",
+			"data": {"text": '<span class="h4"><b>Construction</b></span>', "col": 12},
+		}
+	)
+
+	blocks.append(
+		{
+			"id": _nid("qa-h"),
+			"type": "header",
+			"data": {"text": f'<span class="h5"><b>{QUICK_ACTIONS_HEADER}</b></span>', "col": 12},
+		}
+	)
+	quick = 0
+	for row in ws.shortcuts or []:
+		st = _row_val(row, "type")
+		if st == "Report":
+			continue
+		label = _row_val(row, "label")
+		if not label:
+			continue
+		blocks.append(
+			{
+				"id": _nid("qa"),
+				"type": "shortcut",
+				"data": {"shortcut_name": label, "col": 4},
+			}
+		)
+		quick += 1
+		if quick >= 15:
+			break
+
+	blocks.append(
+		{
+			"id": _nid("all-h"),
+			"type": "header",
+			"data": {"text": f'<span class="h5"><b>{ALL_MODULES_HEADER}</b></span>', "col": 12},
+		}
+	)
+	cards = 0
+	for row in ws.links or []:
+		if _row_val(row, "type") != "Card Break":
+			continue
+		label = (_row_val(row, "label") or "").strip()
+		if not label:
+			continue
+		blocks.append(
+			{
+				"id": _nid("card"),
+				"type": "card",
+				"data": {"card_name": label, "col": 4},
+			}
+		)
+		cards += 1
+
+	if ws.number_cards:
+		blocks.append(
+			{
+				"id": _nid("kpi-h"),
+				"type": "header",
+				"data": {"text": '<span class="h5"><b>KPIs</b></span>', "col": 12},
+			}
+		)
+		for i, nc in enumerate(ws.number_cards[:12]):
+			nc_label = _row_val(nc, "label") or _row_val(nc, "number_card_name")
+			if not nc_label:
+				continue
+			blocks.append(
+				{
+					"id": _nid("nc"),
+					"type": "number_card",
+					"data": {"number_card_name": nc_label, "col": 4},
+				}
+			)
+
+	if ws.charts:
+		blocks.append(
+			{
+				"id": _nid("ch-h"),
+				"type": "header",
+				"data": {"text": '<span class="h5"><b>Charts</b></span>', "col": 12},
+			}
+		)
+		for ch in ws.charts[:9]:
+			ch_label = _row_val(ch, "label") or _row_val(ch, "chart_name")
+			if not ch_label:
+				continue
+			blocks.append(
+				{
+					"id": _nid("ch"),
+					"type": "chart",
+					"data": {"chart_name": ch_label, "col": 4},
+				}
+			)
+
+	ws.content = json.dumps(blocks, separators=(",", ":"))
+	return cards
 
 
 def _link_target_exists(link_type: str, link_to: str) -> bool:
@@ -445,6 +605,50 @@ def _link_key(row) -> tuple[str, str] | None:
 QHSE_WORKSPACE_NAME = "Construction QHSE"
 
 
+def _serialize_workspace_child_row(row) -> dict:
+	"""Strip DB-only fields for module workspace fixture export."""
+	skip = {
+		"name",
+		"owner",
+		"creation",
+		"modified",
+		"modified_by",
+		"docstatus",
+		"parent",
+		"parentfield",
+		"parenttype",
+		"idx",
+		"doctype",
+	}
+	out: dict = {}
+	for key, value in (row.as_dict() if hasattr(row, "as_dict") else dict(row)).items():
+		if key in skip or value in (None, ""):
+			continue
+		out[key] = value
+	return out
+
+
+def export_construction_workspace_fixture(ws=None) -> bool:
+	"""Write synced sidebar links + shortcuts into module construction.json (fresh installs)."""
+	path = WORKSPACE_FIXTURE_PATH
+	if not path.is_file():
+		return False
+
+	if ws is None:
+		if not frappe.db.exists("Workspace", "Construction"):
+			return False
+		ws = frappe.get_doc("Workspace", "Construction")
+
+	data = json.loads(path.read_text(encoding="utf-8"))
+	data["links"] = [_serialize_workspace_child_row(row) for row in (ws.links or [])]
+	data["shortcuts"] = [_serialize_workspace_child_row(row) for row in (ws.shortcuts or [])]
+	if ws.content:
+		data["content"] = ws.content
+	data["modified"] = frappe.utils.now_datetime().strftime("%Y-%m-%d %H:%M:%S.%f")
+	path.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+	return True
+
+
 def remove_construction_qhse_workspace() -> bool:
 	"""Remove standalone QHSE workspace; its links live under Construction."""
 	if not frappe.db.exists("Workspace", QHSE_WORKSPACE_NAME):
@@ -457,9 +661,9 @@ def remove_construction_qhse_workspace() -> bool:
 def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 	"""Rebuild Construction workspace sidebar links in logical order (idempotent).
 
-	Preserves custom links not in the catalog under «Other / أخرى».
+	Preserves custom links not in the catalog under «Other».
 	"""
-	stats = {"sections": 0, "links": 0, "preserved": 0, "shortcuts": 0}
+	stats = {"sections": 0, "links": 0, "preserved": 0, "shortcuts": 0, "content_cards": 0}
 	if not frappe.db.exists("Workspace", "Construction"):
 		return stats
 
@@ -502,7 +706,7 @@ def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 		stats["preserved"] += 1
 
 	if extras:
-		new_links.append(_card_break("Other / أخرى"))
+		new_links.append(_card_break("Other"))
 		new_links.extend(extras)
 
 	ws.links = []
@@ -510,44 +714,38 @@ def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 		ws.append("links", row)
 	_reindex_child_rows(ws.links)
 
-	# Dashboard shortcuts — merge without duplicating
-	existing_sc = {(s.type, s.link_to) for s in (ws.shortcuts or []) if s.link_to}
-	pos = 0
+	# Dashboard shortcuts — rebuild from catalog (idempotent)
+	ws.shortcuts = []
 	for link_type, link_to, label, color, doc_view in DASHBOARD_SHORTCUTS:
 		if not _link_target_exists(link_type, link_to):
 			continue
-		key = (link_type, link_to)
-		if key not in existing_sc:
-			_ensure_shortcut(
-				ws,
-				label=label,
-				link_to=link_to,
-				link_type=link_type,
-				color=color,
-				position=pos,
-				doc_view=doc_view,
-			)
-			existing_sc.add(key)
-			stats["shortcuts"] += 1
-		else:
-			_reposition_shortcut(ws, link_to, link_type, pos)
-		pos += 1
+		values = {
+			"label": label,
+			"type": link_type,
+			"link_to": link_to,
+			"color": color,
+		}
+		if doc_view:
+			values["doc_view"] = doc_view
+		if link_type == "Report":
+			ref = frappe.db.get_value("Report", link_to, "ref_doctype")
+			if ref:
+				values["report_ref_doctype"] = ref
+		ws.append("shortcuts", values)
+		stats["shortcuts"] += 1
 	_reindex_child_rows(ws.shortcuts)
 
-	# Wizard blocks on workspace home content
-	content = json.loads(ws.content or "[]")
-	content_changed = False
-	if _ensure_content_shortcut(content, WIZARD_CONTENT_ID, WIZARD_LABEL, after_header=True):
-		content_changed = True
-	if _ensure_content_shortcut(content, SETUP_CONTENT_ID, SETUP_LABEL, after_id=WIZARD_CONTENT_ID):
-		content_changed = True
-	if content_changed:
-		ws.content = json.dumps(content, separators=(",", ":"))
+	stats["content_cards"] = sync_construction_workspace_content(ws)
 
 	remove_construction_qhse_workspace()
 
 	if save:
 		ws.save(ignore_permissions=True, ignore_version=True)
 		frappe.clear_cache(doctype="Workspace")
+		try:
+			export_construction_workspace_fixture(ws)
+			stats["fixture_exported"] = True
+		except OSError:
+			stats["fixture_exported"] = False
 	return stats
 

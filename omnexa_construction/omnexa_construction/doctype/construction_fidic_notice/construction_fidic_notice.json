@@ -4,10 +4,11 @@
 	"autoname": "format:FID-{YYYY}-{#####}",
 	"doctype": "DocType",
 	"engine": "InnoDB",
-	"field_order": ["project_contract", "notice_type", "clause_reference", "notice_date", "response_due_date", "status", "party", "description", "company", "branch"],
+	"field_order": ["project_contract", "notice_type", "fidic_clause_reference", "clause_reference", "notice_date", "response_due_date", "status", "party", "description", "company", "branch"],
 	"fields": [
 		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
 		{"fieldname": "notice_type", "fieldtype": "Select", "label": "Notice Type", "options": "Claim\nExtension of Time\nVariation\nDefects\nPayment\nTermination\nOther", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "fidic_clause_reference", "fieldtype": "Link", "label": "FIDIC Clause Reference", "options": "Construction FIDIC Clause Reference"},
 		{"fieldname": "clause_reference", "fieldtype": "Data", "label": "Contract Clause", "description": "e.g. FIDIC Sub-Clause 20.1"},
 		{"fieldname": "notice_date", "fieldtype": "Date", "label": "Notice Date", "default": "Today", "reqd": 1, "in_list_view": 1},
 		{"fieldname": "response_due_date", "fieldtype": "Date", "label": "Response Due Date", "in_list_view": 1},

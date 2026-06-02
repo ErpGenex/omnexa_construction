@@ -31,6 +31,8 @@
 		"liquidated_damages_cap_percent",
 		"defects_liability_months",
 		"insurance_summary",
+		"section_break_bonds",
+		"contract_bonds",
 		"tab_break_3",
 		"section_break_epc",
 		"project_segment",
@@ -218,6 +220,17 @@
 			"fieldtype": "Small Text",
 			"label": "Insurance programme summary",
 			"description": "CAR/EAR, third party, professional indemnity — narrative or policy cross-refs."
+		},
+		{
+			"fieldname": "section_break_bonds",
+			"fieldtype": "Section Break",
+			"label": "Bonds & Guarantees Register"
+		},
+		{
+			"fieldname": "contract_bonds",
+			"fieldtype": "Table",
+			"label": "Bonds / Guarantees",
+			"options": "Project Contract Bond"
 		},
 		{
 			"fieldname": "section_break_epc",
@@ -421,7 +434,8 @@
 			"fieldname": "contract_terms",
 			"fieldtype": "Table",
 			"label": "Contract Clauses",
-			"options": "Project Contract Term"
+			"options": "Project Contract Term",
+			"allow_on_submit": 1
 		},
 		{
 			"fieldname": "column_break_omnexa_1",

@@ -1,0 +1,30 @@
+{
+	"actions": [],
+	"autoname": "format:CDE-LOG-{YYYY}-{#####}",
+	"creation": "2026-06-02 00:00:00",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"cde_document",
+		"project_contract",
+		"user",
+		"action",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "cde_document", "fieldtype": "Link", "label": "CDE Document", "options": "Construction CDE Document", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "user", "fieldtype": "Link", "label": "User", "options": "User", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "action", "fieldtype": "Select", "label": "Action", "options": "view\ndownload\nprint\nshare", "default": "view", "reqd": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction CDE Access Log",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Construction Document Controller", "read": 1, "write": 0, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

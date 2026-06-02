@@ -43,10 +43,22 @@ def execute(filters=None):
 
 	avg_cpi = sum(flt(s.get("cpi")) for s in snapshots) / len(snapshots) if snapshots else 0
 	avg_spi = sum(flt(s.get("spi")) for s in snapshots) / len(snapshots) if snapshots else 0
+	avg_sv_days = sum(flt(s.get("schedule_variance_days")) for s in snapshots) / len(snapshots) if snapshots else 0
+	delayed_contracts = sum(1 for s in snapshots if flt(s.get("schedule_variance_days")) > 0)
 	report_summary = [
 		{"label": _("Contracts"), "value": len(snapshots), "indicator": "Blue"},
 		{"label": _("Avg CPI"), "value": round(avg_cpi, 2), "indicator": "Green" if avg_cpi >= 1 else "Red"},
 		{"label": _("Avg SPI"), "value": round(avg_spi, 2), "indicator": "Green" if avg_spi >= 1 else "Orange"},
+		{
+			"label": _("Delayed Contracts"),
+			"value": delayed_contracts,
+			"indicator": "Red" if delayed_contracts else "Green",
+		},
+		{
+			"label": _("Avg SV Days"),
+			"value": round(avg_sv_days, 1),
+			"indicator": "Red" if avg_sv_days > 0 else "Green",
+		},
 	]
 	return columns, data, None, chart, report_summary
 
@@ -65,4 +77,7 @@ def _columns():
 		{"label": _("SV"), "fieldname": "sv", "fieldtype": "Currency", "width": 100},
 		{"label": _("EAC"), "fieldname": "eac", "fieldtype": "Currency", "width": 100},
 		{"label": _("% Planned"), "fieldname": "schedule_percent", "fieldtype": "Percent", "width": 90},
+		{"label": _("Forecast Finish"), "fieldname": "forecast_finish_date", "fieldtype": "Date", "width": 110},
+		{"label": _("SV Days"), "fieldname": "schedule_variance_days", "fieldtype": "Int", "width": 80},
+		{"label": _("Schedule Health"), "fieldname": "schedule_health_status", "fieldtype": "Data", "width": 100},
 	]

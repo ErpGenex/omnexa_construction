@@ -5,6 +5,8 @@ import json
 
 import frappe
 
+from omnexa_construction.utils.number_card_filters import normalize_number_card_filters
+
 
 PORTFOLIO_CARDS = [
 	("Active contracts", "Project Contract", [["status", "=", "Active"]]),
@@ -23,7 +25,10 @@ def execute():
 
 
 def _upsert_number_card(label: str, document_type: str, filters: list) -> str | None:
-	filters_json = json.dumps(filters, separators=(",", ":"))
+	filters_json = json.dumps(
+		normalize_number_card_filters(document_type, filters),
+		separators=(",", ":"),
+	)
 	existing = frappe.db.get_value(
 		"Number Card",
 		{"label": label, "document_type": document_type, "function": "Count"},

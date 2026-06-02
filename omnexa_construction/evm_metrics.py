@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 import frappe
-from frappe.utils import flt, getdate, today
+from frappe.utils import add_days, date_diff, flt, getdate, today
 
 from omnexa_construction.contract_financials import billable_contract_value
 
@@ -116,6 +116,81 @@ def _wbs_time_percent(pm_wbs_task: str, as_of_date=None) -> float:
 	return schedule_percent_planned(task.get("planned_start"), end, as_of_date) or flt(task.progress_percent)
 
 
+def expected_finish_date_from_progress(planned_start, planned_completion, progress_percent: float, as_of_date=None):
+	"""Forecast completion date from current progress against baseline duration."""
+	start = getdate(planned_start) if planned_start else None
+	end = getdate(planned_completion) if planned_completion else None
+	if not start or not end or end <= start:
+		return None
+	progress = flt(progress_percent)
+	if progress <= 0:
+		return end
+	if progress >= 100:
+		return getdate(as_of_date or today())
+	as_of = getdate(as_of_date or today())
+	elapsed = max(1, date_diff(as_of, start))
+	forecast_total = round(elapsed / max(progress / 100.0, 0.001))
+	forecast_total = max(1, forecast_total)
+	return add_days(start, forecast_total)
+
+
+def schedule_health_status(spi: float, schedule_variance_days: float) -> str:
+	"""Classify schedule health for early warning dashboards."""
+	spi_v = flt(spi)
+	sv_days = flt(schedule_variance_days)
+	thresholds = _schedule_health_thresholds()
+	if sv_days > thresholds["delayed_sv_days"] or spi_v < thresholds["delayed_spi"]:
+		return "Delayed"
+	if sv_days > thresholds["at_risk_sv_days"] or spi_v < thresholds["at_risk_spi"]:
+		return "At Risk"
+	return "On Track"
+
+
+def _schedule_health_thresholds() -> dict:
+	"""Read classification thresholds from Integration Settings with defaults."""
+	defaults = {
+		"delayed_spi": 0.90,
+		"delayed_sv_days": 14,
+		"at_risk_spi": 1.00,
+		"at_risk_sv_days": 0,
+	}
+	if not frappe.db.exists("DocType", "Construction Integration Settings"):
+		return defaults
+	try:
+		delayed_spi = flt(
+			frappe.db.get_single_value(
+				"Construction Integration Settings",
+				"schedule_delayed_spi_threshold",
+			)
+		)
+		delayed_sv_days = flt(
+			frappe.db.get_single_value(
+				"Construction Integration Settings",
+				"schedule_delayed_sv_days_threshold",
+			)
+		)
+		at_risk_spi = flt(
+			frappe.db.get_single_value(
+				"Construction Integration Settings",
+				"schedule_at_risk_spi_threshold",
+			)
+		)
+		at_risk_sv_days = flt(
+			frappe.db.get_single_value(
+				"Construction Integration Settings",
+				"schedule_at_risk_sv_days_threshold",
+			)
+		)
+	except Exception:
+		return defaults
+	return {
+		"delayed_spi": delayed_spi or defaults["delayed_spi"],
+		"delayed_sv_days": delayed_sv_days or defaults["delayed_sv_days"],
+		"at_risk_spi": at_risk_spi or defaults["at_risk_spi"],
+		"at_risk_sv_days": at_risk_sv_days or defaults["at_risk_sv_days"],
+	}
+
+
 def actual_cost_from_boq(project_contract: str | None) -> float:
 	if not project_contract:
 		return 0.0
@@ -163,6 +238,20 @@ def evm_snapshot(project_contract: str, as_of_date=None) -> dict:
 	vac = bac - eac
 	tcpi = (bac - ev) / (bac - ac) if (bac - ac) else 0.0
 	committed = _total_boq_committed(project_contract)
+	planned_start = contract.get("planned_start")
+	planned_completion = contract.get("planned_completion")
+	as_of = getdate(as_of_date or today())
+	forecast_finish = expected_finish_date_from_progress(
+		planned_start,
+		planned_completion,
+		schedule_pct,
+		as_of,
+	)
+	schedule_variance_days = 0
+	if forecast_finish and planned_completion:
+		schedule_variance_days = date_diff(forecast_finish, getdate(planned_completion))
+	schedule_health = schedule_health_status(spi, schedule_variance_days)
+
 	return {
 		"project_contract": project_contract,
 		"contract_title": contract.get("contract_title") or project_contract,
@@ -184,6 +273,12 @@ def evm_snapshot(project_contract: str, as_of_date=None) -> dict:
 		"tcpi": tcpi,
 		"schedule_percent": schedule_pct,
 		"schedule_source": schedule_source,
+		"as_of_date": as_of,
+		"planned_start": planned_start,
+		"planned_completion": planned_completion,
+		"forecast_finish_date": forecast_finish,
+		"schedule_variance_days": schedule_variance_days,
+		"schedule_health_status": schedule_health,
 	}
 
 

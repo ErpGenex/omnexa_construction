@@ -208,6 +208,22 @@ BUILDING_TYPE_META: dict[str, dict] = {
 	"power_plant": {"segment": "Industrial EPC", "template_code": "POWER-PLANT-STD", "label_en": "Power Plant", "label_ar": "محطة توليد"},
 	"railway": {"segment": "Infrastructure", "template_code": "RAILWAY-LINE-STD", "label_en": "Railway Line", "label_ar": "خط سكة حديد"},
 	"district_cooling": {"segment": "Roads & Utilities", "template_code": "DISTRICT-COOLING-STD", "label_en": "District Cooling", "label_ar": "تبريد مركزي"},
+	"government_office": {"segment": "Buildings", "template_code": "GOV-OFFICE-STD", "label_en": "Government Office Complex", "label_ar": "مجمع مكاتب حكومية"},
+	"court_complex": {"segment": "Buildings", "template_code": "COURT-COMPLEX-STD", "label_en": "Court Complex", "label_ar": "مجمع محاكم"},
+	"police_station": {"segment": "Buildings", "template_code": "POLICE-STATION-STD", "label_en": "Police Station", "label_ar": "مركز شرطة"},
+	"fire_station": {"segment": "Buildings", "template_code": "FIRE-STATION-STD", "label_en": "Fire Station", "label_ar": "مركز إطفاء"},
+	"sports_club": {"segment": "Buildings", "template_code": "SPORTS-CLUB-STD", "label_en": "Sports Club", "label_ar": "نادي رياضي"},
+	"bus_terminal": {"segment": "Infrastructure", "template_code": "BUS-TERMINAL-STD", "label_en": "Bus Terminal", "label_ar": "محطة حافلات"},
+	"logistics_hub": {"segment": "Industrial EPC", "template_code": "LOGISTICS-HUB-STD", "label_en": "Logistics Hub", "label_ar": "مركز لوجستي"},
+	"cold_storage": {"segment": "Industrial EPC", "template_code": "COLD-STORAGE-STD", "label_en": "Cold Storage", "label_ar": "مخزن تبريد"},
+	"container_yard": {"segment": "Infrastructure", "template_code": "CONTAINER-YARD-STD", "label_en": "Container Yard", "label_ar": "ساحة حاويات"},
+	"desalination_plant": {"segment": "Infrastructure", "template_code": "DESALINATION-PLANT-STD", "label_en": "Desalination Plant", "label_ar": "محطة تحلية"},
+	"stormwater_network": {"segment": "Roads & Utilities", "template_code": "STORMWATER-NET-STD", "label_en": "Stormwater Network", "label_ar": "شبكة أمطار"},
+	"landscape_park": {"segment": "Buildings", "template_code": "LANDSCAPE-PARK-STD", "label_en": "Landscape Park", "label_ar": "حديقة عامة"},
+	"waste_transfer_station": {"segment": "Infrastructure", "template_code": "WASTE-TRANSFER-STD", "label_en": "Waste Transfer Station", "label_ar": "محطة تحويل نفايات"},
+	"port_berth": {"segment": "Infrastructure", "template_code": "PORT-BERTH-STD", "label_en": "Port Berth", "label_ar": "رصيف ميناء"},
+	"ev_charging_network": {"segment": "Roads & Utilities", "template_code": "EV-CHARGING-NET-STD", "label_en": "EV Charging Network", "label_ar": "شبكة شحن مركبات كهربائية"},
+	"it_campus": {"segment": "Buildings", "template_code": "IT-CAMPUS-STD", "label_en": "IT Campus", "label_ar": "مجمع تقني"},
 }
 
 
@@ -475,6 +491,120 @@ _register(
 	PHASE_PIPELINE,
 	DETAIL_RULES_MEP_LS,
 	18,
+)
+_register(
+	"GOV-OFFICE-STD",
+	{"template_code": "GOV-OFFICE-STD", "template_name": "Government Office Complex", "template_name_ar": "مجمع مكاتب حكومية", "building_type": "government_office", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	OFFICE_FULL_LINES,
+	PHASE_COMMERCIAL,
+	duration_months=20,
+)
+_register(
+	"COURT-COMPLEX-STD",
+	{"template_code": "COURT-COMPLEX-STD", "template_name": "Court Complex", "template_name_ar": "مجمع محاكم", "building_type": "court_complex", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	OFFICE_FULL_LINES,
+	PHASE_COMMERCIAL,
+	duration_months=22,
+)
+_register(
+	"POLICE-STATION-STD",
+	{"template_code": "POLICE-STATION-STD", "template_name": "Police Station", "template_name_ar": "مركز شرطة", "building_type": "police_station", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	SCHOOL_FULL_LINES,
+	PHASE_EDUCATION,
+	duration_months=14,
+)
+_register(
+	"FIRE-STATION-STD",
+	{"template_code": "FIRE-STATION-STD", "template_name": "Fire Station", "template_name_ar": "مركز إطفاء", "building_type": "fire_station", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	SCHOOL_FULL_LINES,
+	PHASE_EDUCATION,
+	duration_months=12,
+)
+_register(
+	"SPORTS-CLUB-STD",
+	{"template_code": "SPORTS-CLUB-STD", "template_name": "Sports Club", "template_name_ar": "نادي رياضي", "building_type": "sports_club", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	STADIUM_FULL_LINES,
+	PHASE_COMMERCIAL,
+	duration_months=20,
+)
+_register(
+	"BUS-TERMINAL-STD",
+	{"template_code": "BUS-TERMINAL-STD", "template_name": "Bus Terminal", "template_name_ar": "محطة حافلات", "building_type": "bus_terminal", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	METRO_STATION_FULL_LINES,
+	PHASE_TRANSIT,
+	duration_months=16,
+)
+_register(
+	"LOGISTICS-HUB-STD",
+	{"template_code": "LOGISTICS-HUB-STD", "template_name": "Logistics Hub", "template_name_ar": "مركز لوجستي", "building_type": "logistics_hub", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Standard"},
+	WAREHOUSE_FULL_LINES,
+	PHASE_INDUSTRIAL,
+	duration_months=16,
+)
+_register(
+	"COLD-STORAGE-STD",
+	{"template_code": "COLD-STORAGE-STD", "template_name": "Cold Storage", "template_name_ar": "مخزن تبريد", "building_type": "cold_storage", "project_segment": "Industrial EPC", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Premium"},
+	WAREHOUSE_FULL_LINES,
+	PHASE_INDUSTRIAL,
+	duration_months=14,
+)
+_register(
+	"CONTAINER-YARD-STD",
+	{"template_code": "CONTAINER-YARD-STD", "template_name": "Container Yard", "template_name_ar": "ساحة حاويات", "building_type": "container_yard", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	URBAN_ROAD_FULL_LINES,
+	PHASE_ROAD,
+	duration_months=12,
+)
+_register(
+	"DESALINATION-PLANT-STD",
+	{"template_code": "DESALINATION-PLANT-STD", "template_name": "Desalination Plant", "template_name_ar": "محطة تحلية", "building_type": "desalination_plant", "project_segment": "Infrastructure", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Silver Book (EPC/Turnkey)", "quality_tier": "Premium"},
+	WWTP_FULL_LINES,
+	PHASE_PIPELINE,
+	DETAIL_RULES_MEP_LS,
+	24,
+)
+_register(
+	"STORMWATER-NET-STD",
+	{"template_code": "STORMWATER-NET-STD", "template_name": "Stormwater Network", "template_name_ar": "شبكة أمطار", "building_type": "stormwater_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	_pipeline_lines("شبكة أمطار"),
+	PHASE_PIPELINE,
+	duration_months=10,
+)
+_register(
+	"LANDSCAPE-PARK-STD",
+	{"template_code": "LANDSCAPE-PARK-STD", "template_name": "Landscape Park", "template_name_ar": "حديقة عامة", "building_type": "landscape_park", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	URBAN_ROAD_FULL_LINES,
+	PHASE_ROAD,
+	duration_months=10,
+)
+_register(
+	"WASTE-TRANSFER-STD",
+	{"template_code": "WASTE-TRANSFER-STD", "template_name": "Waste Transfer Station", "template_name_ar": "محطة تحويل نفايات", "building_type": "waste_transfer_station", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	WWTP_FULL_LINES,
+	PHASE_PIPELINE,
+	duration_months=14,
+)
+_register(
+	"PORT-BERTH-STD",
+	{"template_code": "PORT-BERTH-STD", "template_name": "Port Berth", "template_name_ar": "رصيف ميناء", "building_type": "port_berth", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	BRIDGE_FULL_LINES,
+	PHASE_ROAD,
+	duration_months=18,
+)
+_register(
+	"EV-CHARGING-NET-STD",
+	{"template_code": "EV-CHARGING-NET-STD", "template_name": "EV Charging Network", "template_name_ar": "شبكة شحن مركبات كهربائية", "building_type": "ev_charging_network", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	_pipeline_lines("شبكة شحن"),
+	PHASE_PIPELINE,
+	duration_months=8,
+)
+_register(
+	"IT-CAMPUS-STD",
+	{"template_code": "IT-CAMPUS-STD", "template_name": "IT Campus", "template_name_ar": "مجمع تقني", "building_type": "it_campus", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	DATA_CENTER_FULL_LINES,
+	PHASE_COMMERCIAL,
+	DETAIL_RULES_MEP_LS,
+	26,
 )
 
 # Backward-compatible export for template_loader import

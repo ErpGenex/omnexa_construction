@@ -20,6 +20,13 @@ def get_portfolio_dashboard(company: str, branch: str | None = None) -> dict:
 
 
 @frappe.whitelist()
+def get_executive_bi_dashboard(company: str, branch: str | None = None) -> dict:
+	from omnexa_construction.executive_bi import get_executive_bi_dashboard as _bi
+
+	return _bi(company, branch=branch)
+
+
+@frappe.whitelist()
 def seed_construction_demo_from_company(
 	company: str,
 	branch: str | None = None,

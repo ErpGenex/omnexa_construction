@@ -36,6 +36,43 @@ frappe.ui.form.on("IPC Certificate", {
 				},
 				__("Progress")
 			);
+			frm.add_custom_button(
+				__("Suggest from Schedule"),
+				() => {
+					frappe.call({
+						method:
+							"omnexa_construction.omnexa_construction.doctype.ipc_certificate.ipc_certificate.suggest_completion_percent_from_schedule",
+						args: {
+							project_contract: frm.doc.project_contract,
+							pm_wbs_task: frm.doc.pm_wbs_task || null,
+						},
+						callback(r) {
+							if (r.message && r.message.suggested_percent != null) {
+								const sourceMap = {
+									schedule_wbs: __("Schedule (WBS)"),
+									schedule_baseline: __("Schedule Baseline"),
+									boq: __("BOQ"),
+									none: __("None"),
+								};
+								frm.set_value("boq_completion_percent", r.message.suggested_percent);
+								frappe.show_alert({
+									message: __(
+										"Suggested {0}% from {1} (Schedule: {2}%, BOQ: {3}%)",
+										[
+											r.message.suggested_percent,
+											sourceMap[r.message.source] || r.message.source,
+											r.message.schedule_percent,
+											r.message.boq_percent,
+										]
+									),
+									indicator: "blue",
+								});
+							}
+						},
+					});
+				},
+				__("Progress")
+			);
 		}
 		if (!frm.doc.sales_invoice && flt(frm.doc.net_amount) > 0) {
 			frm.add_custom_button(

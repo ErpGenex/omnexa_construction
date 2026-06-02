@@ -1,0 +1,163 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:BID-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"estimate_title",
+		"customer",
+		"project_segment",
+		"building_type",
+		"estimated_contract_value",
+		"estimated_cost",
+		"target_margin_percent",
+		"status",
+		"proposal_date",
+		"expected_award_date",
+		"bid_package",
+		"linked_project_setup",
+		"section_break_scenarios",
+		"scenarios",
+		"notes",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{
+			"fieldname": "estimate_title",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Estimate Title",
+			"reqd": 1
+		},
+		{
+			"fieldname": "customer",
+			"fieldtype": "Link",
+			"in_list_view": 1,
+			"label": "Customer",
+			"options": "Customer",
+			"reqd": 1
+		},
+		{
+			"default": "Buildings",
+			"fieldname": "project_segment",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "Project Segment",
+			"options": "Infrastructure\nBuildings\nRoads & Utilities\nIndustrial EPC\nOther"
+		},
+		{
+			"fieldname": "building_type",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Building / Project Type"
+		},
+		{
+			"fieldname": "estimated_contract_value",
+			"fieldtype": "Currency",
+			"in_list_view": 1,
+			"label": "Estimated Contract Value",
+			"reqd": 1
+		},
+		{
+			"fieldname": "estimated_cost",
+			"fieldtype": "Currency",
+			"in_list_view": 1,
+			"label": "Estimated Cost",
+			"reqd": 1
+		},
+		{
+			"default": "12",
+			"fieldname": "target_margin_percent",
+			"fieldtype": "Percent",
+			"label": "Target Margin %"
+		},
+		{
+			"default": "Draft",
+			"fieldname": "status",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "Status",
+			"options": "Draft\nSubmitted\nNegotiated\nAwarded\nLost",
+			"reqd": 1
+		},
+		{
+			"fieldname": "proposal_date",
+			"fieldtype": "Date",
+			"in_list_view": 1,
+			"label": "Proposal Date"
+		},
+		{
+			"fieldname": "expected_award_date",
+			"fieldtype": "Date",
+			"label": "Expected Award Date"
+		},
+		{
+			"fieldname": "bid_package",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Bid Package",
+			"description": "Group multiple estimates for comparison (same tender package)."
+		},
+		{
+			"fieldname": "linked_project_setup",
+			"fieldtype": "Link",
+			"label": "Linked Project Setup",
+			"options": "Construction Project Setup"
+		},
+		{
+			"fieldname": "section_break_scenarios",
+			"fieldtype": "Section Break",
+			"label": "Sensitivity Scenarios"
+		},
+		{
+			"fieldname": "scenarios",
+			"fieldtype": "Table",
+			"label": "Scenarios",
+			"options": "Construction Bid Estimate Scenario"
+		},
+		{
+			"fieldname": "notes",
+			"fieldtype": "Text Editor",
+			"label": "Notes"
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"label": "Company",
+			"options": "Company",
+			"reqd": 1
+		},
+		{
+			"fieldname": "branch",
+			"fieldtype": "Link",
+			"label": "Branch",
+			"options": "Branch",
+			"reqd": 1
+		}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Bid Estimate",
+	"permissions": [
+		{
+			"create": 1,
+			"delete": 1,
+			"read": 1,
+			"role": "System Manager",
+			"submit": 1,
+			"write": 1
+		},
+		{
+			"create": 1,
+			"read": 1,
+			"role": "Project Manager",
+			"submit": 1,
+			"write": 1
+		}
+	],
+	"sort_field": "modified",
+	"sort_order": "DESC",
+	"track_changes": 1
+}

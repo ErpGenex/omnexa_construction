@@ -4,6 +4,7 @@ from frappe.model.document import Document
 from frappe.utils import flt, now_datetime
 
 from omnexa_construction.contract_financials import billable_contract_value
+from omnexa_construction.evm_metrics import schedule_percent_planned
 from omnexa_construction.ipc_billing import compute_ipc_amounts
 from omnexa_construction.wizard.pricing import compute_ipc_amounts_with_discount
 from omnexa_projects_pm.wbs_integration import validate_linked_pm_wbs_task, weighted_boq_completion_percent
@@ -20,6 +21,57 @@ def suggest_boq_completion_percent(project_contract: str) -> float:
 		fields=["completion_percent", "planned_cost"],
 	)
 	return weighted_boq_completion_percent(lines)
+
+
+@frappe.whitelist()
+def suggest_completion_percent_from_schedule(project_contract: str, pm_wbs_task: str | None = None) -> dict:
+	"""Suggest IPC completion % using schedule progress (PM WBS) with BOQ fallback context."""
+	if not project_contract:
+		return {"suggested_percent": 0.0, "source": "none", "boq_percent": 0.0, "schedule_percent": 0.0}
+
+	boq_percent = suggest_boq_completion_percent(project_contract)
+	schedule_percent = 0.0
+	source = "boq"
+
+	if frappe.db.exists("DocType", "PM WBS Task"):
+		if pm_wbs_task:
+			schedule_percent = flt(frappe.db.get_value("PM WBS Task", pm_wbs_task, "progress_percent"))
+		else:
+			rows = frappe.db.get_all(
+				"PM WBS Task",
+				filters={"project": project_contract, "docstatus": ["!=", 2]},
+				fields=["progress_percent"],
+				limit_page_length=200,
+			)
+			if rows:
+				schedule_percent = flt(sum(flt(r.get("progress_percent")) for r in rows) / len(rows))
+		if schedule_percent > 0:
+			source = "schedule_wbs"
+
+	if schedule_percent <= 0 and frappe.db.exists("DocType", "Construction Schedule Baseline"):
+		base = frappe.db.get_value(
+			"Construction Schedule Baseline",
+			{"project_contract": project_contract, "is_active": 1, "docstatus": ["!=", 2]},
+			["planned_start", "planned_completion"],
+			as_dict=1,
+		)
+		if base and base.get("planned_start") and base.get("planned_completion"):
+			schedule_percent = schedule_percent_planned(base.get("planned_start"), base.get("planned_completion"))
+			if schedule_percent > 0:
+				source = "schedule_baseline"
+
+	schedule_percent = max(0.0, min(100.0, schedule_percent))
+	boq_percent = max(0.0, min(100.0, boq_percent))
+	suggested = schedule_percent if schedule_percent > 0 else boq_percent
+	if schedule_percent <= 0:
+		source = "boq"
+
+	return {
+		"suggested_percent": round(suggested, 2),
+		"source": source,
+		"boq_percent": round(boq_percent, 2),
+		"schedule_percent": round(schedule_percent, 2),
+	}
 
 
 def _prior_certified_completion_percent(

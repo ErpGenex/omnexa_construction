@@ -1,0 +1,19 @@
+{
+  "name": "ErpGenEx Construction Site Mobile",
+  "short_name": "Site Mobile",
+  "description": "Construction field hub — daily reports, GPS, photos, offline queue",
+  "start_url": "/app/construction-site-mobile",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/assets/omnexa_construction/images/construction-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

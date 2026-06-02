@@ -54,6 +54,10 @@ function render_dashboard($body, data) {
 		{ label: __("Portfolio BAC"), value: format_currency(data.total_bac) },
 		{ label: __("Earned Value"), value: format_currency(data.total_ev) },
 		{ label: __("Portfolio SPI"), value: (data.portfolio_spi || 0).toFixed(2) },
+		{ label: __("Delayed Contracts"), value: data.delayed_contracts || 0 },
+		{ label: __("At Risk Contracts"), value: data.at_risk_contracts || 0 },
+		{ label: __("On Track Contracts"), value: data.on_track_contracts || 0 },
+		{ label: __("Avg SV Days"), value: (data.avg_schedule_variance_days || 0).toFixed(1) },
 		{ label: __("Open IPC"), value: data.open_ipc || 0 },
 		{ label: __("Open NCR"), value: data.open_ncr || 0 },
 		{ label: __("Open RFI"), value: data.open_rfi || 0 },
@@ -78,9 +82,12 @@ function render_dashboard($body, data) {
 
 	if (data.contracts && data.contracts.length) {
 		html += '<table class="table table-bordered table-sm mt-3"><thead><tr>' +
-			"<th>" + __("Contract") + "</th><th>" + __("BAC") + "</th><th>EV</th><th>CPI</th><th>SPI</th><th>" + __("Status") + "</th>" +
+			"<th>" + __("Contract") + "</th><th>" + __("BAC") + "</th><th>EV</th><th>CPI</th><th>SPI</th><th>" + __("SV Days") + "</th><th>" + __("Schedule Health") + "</th><th>" + __("Status") + "</th>" +
 			"</tr></thead><tbody>";
 		data.contracts.forEach((row) => {
+			const health = row.schedule_health_status || "On Track";
+			const healthClass =
+				health === "Delayed" ? "text-danger" : health === "At Risk" ? "text-warning" : "text-success";
 			html +=
 				"<tr><td>" +
 				(row.contract_title || row.project_contract) +
@@ -93,6 +100,12 @@ function render_dashboard($body, data) {
 				"</td><td>" +
 				(row.spi || 0).toFixed(2) +
 				"</td><td>" +
+				(row.schedule_variance_days || 0) +
+				"</td><td class='" +
+				healthClass +
+				"'><b>" +
+				__(health) +
+				"</b></td><td>" +
 				(row.status || "") +
 				"</td></tr>";
 		});

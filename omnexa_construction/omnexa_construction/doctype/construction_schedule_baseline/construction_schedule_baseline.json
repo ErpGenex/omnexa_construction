@@ -11,6 +11,8 @@
 		"planned_start",
 		"planned_completion",
 		"is_active",
+		"section_break_tasks",
+		"tasks",
 		"notes",
 		"company",
 		"branch"
@@ -22,6 +24,8 @@
 		{"fieldname": "planned_start", "fieldtype": "Date", "label": "Planned Start", "reqd": 1},
 		{"fieldname": "planned_completion", "fieldtype": "Date", "label": "Planned Completion", "reqd": 1},
 		{"fieldname": "is_active", "fieldtype": "Check", "label": "Active Baseline", "default": "1"},
+		{"fieldname": "section_break_tasks", "fieldtype": "Section Break", "label": "Gantt Tasks"},
+		{"fieldname": "tasks", "fieldtype": "Table", "label": "Baseline Tasks", "options": "Construction Schedule Baseline Task"},
 		{"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"},
 		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
 		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
