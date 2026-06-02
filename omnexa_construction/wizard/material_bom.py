@@ -3,15 +3,49 @@ from __future__ import annotations
 import frappe
 from frappe.utils import flt
 
-from omnexa_construction.wizard.catalog_import import import_material_catalog, resolve_item_code
+from omnexa_construction.wizard.catalog_import import (
+	ensure_catalog_item,
+	ensure_construction_uoms,
+	import_material_catalog,
+	resolve_item_code,
+)
 from omnexa_construction.wizard.material_catalog import TRADE_DEFAULT_ITEMS, item_code
 from omnexa_construction.wizard.pricing import money
+from omnexa_construction.wizard.scaling import LUMP_SUM_UOMS
+
+
+def _normalize_lump_uom(uom: str | None) -> str:
+	return (uom or "").strip().lower().replace(".", "")
+
+
+def material_row_uom(item: str, boq_uom: str | None) -> str:
+	"""BOQ lump-sum UOM (ls) is not valid on material lines — use Item stock UOM."""
+	ensure_construction_uoms()
+	stock_uom = frappe.db.get_value("Item", item, "stock_uom") or "Nos"
+	boq_key = _normalize_lump_uom(boq_uom)
+	if boq_key in LUMP_SUM_UOMS or boq_key == "ls":
+		uom = stock_uom
+	else:
+		uom = (boq_uom or "").strip() or stock_uom
+	if not frappe.db.exists("UOM", uom):
+		uom = stock_uom if frappe.db.exists("UOM", stock_uom) else "Nos"
+	return uom
+
+
+def _resolve_bom_item(trade_code: str | None, *, spec_hint: str, company: str, suffix: str | None = None) -> str | None:
+	if suffix:
+		code = ensure_catalog_item(suffix, company) or item_code(suffix)
+		if frappe.db.exists("Item", code):
+			return code
+	return resolve_item_code(trade_code, spec_hint=spec_hint, company=company)
 
 
 def build_material_bom_rows(setup, cost_code: str, trade_code: str | None = None) -> list[dict]:
 	"""Material BOM lines for one BOQ cost code from setup details + trade defaults."""
 	rows: list[dict] = []
 	company = setup.company
+	import_material_catalog(company, limit=80)
+	ensure_construction_uoms()
 	for d in setup.boq_details or []:
 		if (d.boq_cost_code or "").strip() != cost_code:
 			continue
@@ -19,7 +53,7 @@ def build_material_bom_rows(setup, cost_code: str, trade_code: str | None = None
 		if mat_amt <= 0 and "material" not in (d.spec_description or "").lower():
 			continue
 		item = resolve_item_code(trade_code, spec_hint=d.spec_description or "", uom=d.unit_of_measure, company=company)
-		if not item:
+		if not item or not frappe.db.exists("Item", item):
 			continue
 		qty = max(flt(d.quantity), 0.01)
 		rate = money(mat_amt / qty) if mat_amt else 0
@@ -27,7 +61,7 @@ def build_material_bom_rows(setup, cost_code: str, trade_code: str | None = None
 			{
 				"item_code": item,
 				"quantity": qty,
-				"uom": d.unit_of_measure or frappe.db.get_value("Item", item, "stock_uom"),
+				"uom": material_row_uom(item, d.unit_of_measure),
 				"rate": rate,
 				"amount": money(qty * rate) if rate else mat_amt,
 				"spec_description": d.spec_description,
@@ -47,17 +81,15 @@ def build_material_bom_rows(setup, cost_code: str, trade_code: str | None = None
 	split = mat_cost / max(len(suffixes), 1)
 	qty = max(flt(boq_row.quantity), 1)
 	for suffix in suffixes:
-		code = item_code(suffix)
-		if not frappe.db.exists("Item", code):
-			code = resolve_item_code(trade, company=company)
-		if not code:
+		code = _resolve_bom_item(trade, spec_hint=boq_row.item_description or "", company=company, suffix=suffix)
+		if not code or not frappe.db.exists("Item", code):
 			continue
 		rate = money(split / qty)
 		rows.append(
 			{
 				"item_code": code,
 				"quantity": qty,
-				"uom": boq_row.unit_of_measure or frappe.db.get_value("Item", code, "stock_uom"),
+				"uom": material_row_uom(code, boq_row.unit_of_measure),
 				"rate": rate,
 				"amount": money(qty * rate),
 				"spec_description": boq_row.item_description,

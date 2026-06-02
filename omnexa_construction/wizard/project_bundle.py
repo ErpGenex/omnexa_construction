@@ -16,7 +16,7 @@ from omnexa_construction.wizard.scaling import (
 )
 from omnexa_construction.wizard.apply_template_defaults import apply_template_defaults
 from omnexa_construction.wizard.boq_helpers import expand_default_boq_details
-from omnexa_construction.wizard.catalog_import import import_material_catalog, resolve_item_code
+from omnexa_construction.wizard.catalog_import import import_material_catalog, resolve_item_code, ensure_catalog_item
 from omnexa_construction.wizard.document_pack import export_project_document_pack
 from omnexa_construction.wizard.material_bom import apply_material_bom_to_boq_items
 from omnexa_construction.wizard.pricing import detail_amount, line_ld_cap_amount, money, recalculate_setup_pricing
@@ -649,19 +649,15 @@ def _default_item_for_trade(trade_code: str | None, company: str) -> str | None:
 		"TRD-ROAD": "MAT-ASPHALT",
 		"TRD-PIPE": "MAT-PVC-110",
 		"TRD-MEP-P": "MAT-PVC-110",
-		"TRD-MEP-E": "MAT-CABLE-LV",
-		"TRD-FIN": "MAT-TILE-FLR",
+		"TRD-MEP-E": "MAT-CABLE-16",
+		"TRD-FIN": "MAT-TILE-60",
 	}
 	suffix = candidates.get(trade_code or "", "MAT-RMX-C30")
-	for prefix in ("CONST-", "DEMO-CONST-", ""):
-		code = f"{prefix}{suffix}" if prefix else suffix
-		found = frappe.db.get_value("Item", {"item_code": code, "company": company}, "name")
-		if found:
-			return code
-		found = frappe.db.get_value("Item", {"item_code": code}, "name")
-		if found:
-			return code
-	return None
+	import_material_catalog(company, limit=50)
+	code = ensure_catalog_item(suffix, company)
+	if code:
+		return code
+	return resolve_item_code(trade_code, company=company)
 
 
 def _create_kickoff_transmittal(setup, contract_name: str) -> str | None:
