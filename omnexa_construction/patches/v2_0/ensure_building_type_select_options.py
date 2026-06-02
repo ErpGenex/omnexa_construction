@@ -1,7 +1,7 @@
 # Copyright (c) 2026, Omnexa and contributors
 # License: MIT
 
-"""Sync global BOQ catalog (34 project types) and wizard Select options."""
+"""Ensure all 34 building types are on Select fields (fixes stale Property Setters)."""
 
 
 def execute():

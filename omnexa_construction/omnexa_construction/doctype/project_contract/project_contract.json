@@ -235,7 +235,7 @@
 			"fieldname": "building_type",
 			"fieldtype": "Select",
 			"label": "Building / Project Type",
-			"options": "\nvilla\nresidential_building\nsocial_housing\noffice_tower\nhotel\nmall\nschool\nhospital\nuniversity\nwarehouse\nfactory\nhighway\nurban_road\nbridge\nwater_network\nsewer_network\nelectrical_network\ngas_network\ntelecom_fiber\nsubstation\nwastewater_plant",
+			"options": "\nairport_terminal\nbridge\ndata_center\ndistrict_cooling\nelectrical_network\nfactory\ngas_network\nhighway\nhospital\nhotel\nlaboratory\nmall\nmetro_station\nmixed_use\noffice_tower\nparking_structure\npower_plant\nrailway\nresidential_building\nresidential_compound\nschool\nsewer_network\nsocial_housing\nsolar_farm\nstadium\nsubstation\ntelecom_fiber\ntunnel\nuniversity\nurban_road\nvilla\nwarehouse\nwastewater_plant\nwater_network",
 			"description": "Detailed asset type from Construction Project Wizard catalog."
 		},
 		{

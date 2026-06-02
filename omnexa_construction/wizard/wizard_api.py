@@ -105,20 +105,12 @@ def _ensure_boq_template_in_db(template_code: str | None) -> bool:
 
 @frappe.whitelist()
 def get_building_types() -> list[dict]:
-	"""Building types available in Phase 4 MVP wizard."""
-	out = []
-	for code, meta in BUILDING_TYPE_META.items():
-		template_code = meta.get("template_code")
-		out.append(
-			{
-				"code": code,
-				"label_en": meta.get("label_en", code),
-				"label_ar": meta.get("label_ar", code),
-				"segment": meta.get("segment"),
-				"template_code": template_code,
-				"has_template": _boq_template_available(template_code),
-			}
-		)
+	"""All building / project types with BOQ template availability."""
+	from omnexa_construction.wizard.building_type_registry import list_building_types_for_api
+
+	out = list_building_types_for_api()
+	for row in out:
+		row["has_template"] = _boq_template_available(row.get("template_code"))
 	return out
 
 

@@ -25,3 +25,10 @@ def enforce_supported_frappe_version():
 			"Supported range is >=15.0,<16.0.",
 			frappe.ValidationError,
 		)
+
+
+def after_migrate():
+	"""Keep wizard building-type Select options aligned with BUILDING_TYPE_META."""
+	from omnexa_construction.wizard.building_type_registry import sync_building_type_select_options
+
+	sync_building_type_select_options()

@@ -99,6 +99,7 @@ doctype_js = {
 # ------------
 
 before_install = "omnexa_construction.install.enforce_supported_frappe_version"
+after_migrate = "omnexa_construction.install.after_migrate"
 before_migrate = "omnexa_construction.install.enforce_supported_frappe_version"
 
 # Uninstallation

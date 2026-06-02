@@ -11,7 +11,7 @@
 		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
 		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch"},
 		{"fieldname": "cost_factor", "fieldtype": "Float", "label": "Cost Factor", "default": "1", "reqd": 1, "description": "Multiplier on parametric BOQ quantities (1.0 = baseline)."},
-		{"fieldname": "building_type", "fieldtype": "Select", "label": "Building Type (optional)", "options": "\nvilla\nresidential_building\nsocial_housing\noffice_tower\nhotel\nmall\nschool\nhospital\nhighway\nurban_road"},
+		{"fieldname": "building_type", "fieldtype": "Select", "label": "Building Type (optional)", "options": "\nairport_terminal\nbridge\ndata_center\ndistrict_cooling\nelectrical_network\nfactory\ngas_network\nhighway\nhospital\nhotel\nlaboratory\nmall\nmetro_station\nmixed_use\noffice_tower\nparking_structure\npower_plant\nrailway\nresidential_building\nresidential_compound\nschool\nsewer_network\nsocial_housing\nsolar_farm\nstadium\nsubstation\ntelecom_fiber\ntunnel\nuniversity\nurban_road\nvilla\nwarehouse\nwastewater_plant\nwater_network"},
 		{"fieldname": "is_default", "fieldtype": "Check", "label": "Default for Company", "default": "0"},
 		{"fieldname": "disabled", "fieldtype": "Check", "label": "Disabled", "default": "0"},
 		{"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"}
