@@ -14,8 +14,10 @@ def _load_setup(setup_name: str):
 	if not setup_name or not frappe.db.exists("Construction Project Setup", setup_name):
 		frappe.throw(_("Wizard draft not found."), title=_("Wizard"))
 	setup = frappe.get_doc("Construction Project Setup", setup_name)
-	if setup.status == "Completed":
-		frappe.throw(_("Cannot edit a completed setup."), title=_("Wizard"))
+	from omnexa_construction.wizard.setup_approval import is_setup_locked
+
+	if is_setup_locked(setup):
+		frappe.throw(_("Cannot edit an approved setup. Reopen for revision first."), title=_("Wizard"))
 	return setup
 
 

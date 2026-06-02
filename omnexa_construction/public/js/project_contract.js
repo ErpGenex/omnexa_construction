@@ -94,5 +94,25 @@ frappe.ui.form.on("Project Contract", {
 				__("Residential")
 			);
 		}
+
+		if (frm.doc.wizard_setup) {
+			frm.add_custom_button(
+				__("Wizard Setup"),
+				() => frappe.set_route("Form", "Construction Project Setup", frm.doc.wizard_setup),
+				__("Contract")
+			);
+		}
+		if (frm.doc.approved_setup_attachment) {
+			frm.add_custom_button(
+				__("Approved Setup Pack"),
+				() => window.open(frappe.urllib.get_full_url(frm.doc.approved_setup_attachment)),
+				__("Contract")
+			);
+		}
+		frm.add_custom_button(
+			__("Print Full Contract"),
+			() => frappe.ui.get_print("Project Contract", frm.doc.name, "Project Contract — Full (عقد متكامل)"),
+			__("Contract")
+		);
 	},
 });

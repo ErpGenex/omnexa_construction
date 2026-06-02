@@ -62,7 +62,12 @@
 		"status",
 		"company",
 		"branch",
-		"contract_owner"
+		"contract_owner",
+		"section_contract_documents",
+		"approved_setup_revision",
+		"approved_setup_attachment",
+		"contract_terms_section",
+		"contract_terms"
 	],
 	"fields": [
 		{
@@ -388,6 +393,35 @@
 			"fieldtype": "Link",
 			"label": "Contract Owner",
 			"options": "User"
+		},
+		{
+			"fieldname": "section_contract_documents",
+			"fieldtype": "Section Break",
+			"label": "Contract Documents & Annexes"
+		},
+		{
+			"fieldname": "approved_setup_revision",
+			"fieldtype": "Int",
+			"label": "Approved Setup Revision",
+			"read_only": 1,
+			"description": "Revision of Construction Project Setup approved as contract annex."
+		},
+		{
+			"fieldname": "approved_setup_attachment",
+			"fieldtype": "Attach",
+			"label": "Approved Setup Pack (Contract Annex)",
+			"description": "ZIP/PDF pack exported on manager approval — BOQ, IPC, phases, assignments."
+		},
+		{
+			"fieldname": "contract_terms_section",
+			"fieldtype": "Section Break",
+			"label": "Contract Terms & Conditions"
+		},
+		{
+			"fieldname": "contract_terms",
+			"fieldtype": "Table",
+			"label": "Contract Clauses",
+			"options": "Project Contract Term"
 		},
 		{
 			"fieldname": "column_break_omnexa_1",

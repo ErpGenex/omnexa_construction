@@ -374,9 +374,9 @@ def save_wizard_step(setup_name: str, step: int, data: str | dict | None = None)
 
 @frappe.whitelist()
 def recalculate_pricing(setup_name: str) -> dict:
-	setup = frappe.get_doc("Construction Project Setup", setup_name)
-	if setup.status == "Completed":
-		frappe.throw(_("Cannot recalculate a completed setup. Reopen as copy."), title=_("Wizard"))
+	from omnexa_construction.wizard.setup_approval import ensure_setup_editable
+
+	setup = ensure_setup_editable(setup_name)
 	result = recalculate_setup_pricing(setup)
 	from omnexa_construction.wizard.persist import save_wizard_setup
 

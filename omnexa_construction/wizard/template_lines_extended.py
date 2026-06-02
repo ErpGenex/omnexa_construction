@@ -40,6 +40,14 @@ def _building_common_extras() -> list[dict]:
 	]
 
 
+def _qa_ipc_extras() -> list[dict]:
+	return [
+		_line("15.20", "Material testing & mock-ups", "15 Handover", parent="15", uom="ls", base_qty=1, driver="FIXED", unit_cost=85000),
+		_line("15.30", "Third-party QA / ITP witness", "15 Handover", parent="15", uom="ls", base_qty=1, driver="FIXED", unit_cost=120000),
+		_line("15.40", "As-built survey & BIM LOD300", "15 Handover", parent="15", uom="ls", base_qty=1, driver="FIXED", unit_cost=95000),
+	]
+
+
 HOSPITAL_FULL_LINES = _merge_lines(
 	RES_BLD_LINES,
 	_building_common_extras(),
@@ -296,6 +304,6 @@ OFFICE_FULL_LINES = _merge_lines(
 	],
 )
 
-VILLA_FULL_LINES = _merge_lines(VILLA_LINES, _building_common_extras())
+VILLA_FULL_LINES = _merge_lines(VILLA_LINES, _building_common_extras(), _qa_ipc_extras())
 
-RESIDENTIAL_FULL_LINES = _merge_lines(RES_BLD_LINES, _building_common_extras())
+RESIDENTIAL_FULL_LINES = _merge_lines(RES_BLD_LINES, _building_common_extras(), _qa_ipc_extras())

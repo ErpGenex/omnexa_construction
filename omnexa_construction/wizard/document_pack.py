@@ -22,6 +22,7 @@ def export_project_document_pack(setup_name: str, *, include_pdf: int = 1) -> di
 		zf.writestr("phases.csv", _phases_csv(setup))
 		zf.writestr("ipc_plan.csv", _ipc_csv(setup))
 		zf.writestr("assignments.csv", _assignments_csv(setup))
+		zf.writestr("contract_terms.csv", _contract_terms_csv(setup))
 		if setup.project_contract:
 			zf.writestr("contract.txt", f"Project Contract: {setup.project_contract}\n")
 		if cint(include_pdf):
@@ -145,4 +146,13 @@ def _assignments_csv(setup) -> str:
 	w.writerow(["type", "party", "trade", "scope"])
 	for a in setup.assignments or []:
 		w.writerow([a.assignment_type, a.party, a.trade_package_code, a.scope_notes])
+	return out.getvalue()
+
+
+def _contract_terms_csv(setup) -> str:
+	out = io.StringIO()
+	w = csv.writer(out)
+	w.writerow(["group", "title", "text", "sort_order"])
+	for row in sorted(setup.contract_terms or [], key=lambda r: int(r.sort_order or 0)):
+		w.writerow([row.clause_group, row.clause_title, row.clause_text, row.sort_order])
 	return out.getvalue()

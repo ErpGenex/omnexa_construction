@@ -6,12 +6,20 @@ from frappe.model.document import Document
 from frappe.utils import flt
 
 from omnexa_construction.wizard.pricing import recalculate_setup_pricing
+from omnexa_construction.wizard.setup_approval import is_setup_locked
 
 
 class ConstructionProjectSetup(Document):
 	def validate(self):
-		if self.status not in ("Completed", "Failed"):
+		if not is_setup_locked(self) and self.status != "Failed":
 			recalculate_setup_pricing(self)
+		if is_setup_locked(self) and not getattr(self.flags, "approval_unlock", False):
+			frappe.throw(
+				_("This setup is approved (revision {0}). Reopen for revision to edit.").format(
+					self.setup_revision or 1
+				),
+				title=_("Setup Locked"),
+			)
 		if getattr(self.flags, "wizard_save", False):
 			return
 		self._validate_phases()

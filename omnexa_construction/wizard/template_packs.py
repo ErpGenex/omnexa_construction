@@ -8,6 +8,21 @@ from omnexa_construction.wizard.template_loader import (
 	URBAN_ROAD_LINES,
 	VILLA_LINES,
 )
+from omnexa_construction.wizard.template_lines_global import (
+	AIRPORT_TERMINAL_FULL_LINES,
+	DATA_CENTER_FULL_LINES,
+	DISTRICT_COOLING_FULL_LINES,
+	LABORATORY_FULL_LINES,
+	METRO_STATION_FULL_LINES,
+	MIXED_USE_FULL_LINES,
+	PARKING_STRUCTURE_FULL_LINES,
+	POWER_PLANT_FULL_LINES,
+	RAILWAY_FULL_LINES,
+	RESIDENTIAL_COMPOUND_FULL_LINES,
+	SOLAR_FARM_FULL_LINES,
+	STADIUM_FULL_LINES,
+	TUNNEL_FULL_LINES,
+)
 from omnexa_construction.wizard.template_lines_extended import (
 	BRIDGE_FULL_LINES,
 	FACTORY_FULL_LINES,
@@ -76,6 +91,20 @@ PHASE_PIPELINE = [
 	("P2", "Pipe Laying", "تركيب المواسير", "08", 45, 4, 6),
 	("P3", "Testing & Chambers", "الاختبار والغرف", "09,10", 20, 10, 3),
 	("P4", "Commissioning", "التشغيل والتسليم", "11", 10, 13, 2),
+]
+
+PHASE_TRANSIT = [
+	("P1", "Mobilization & Earthworks", "التجهيز والحفريات", "00,01,02", 28, 0, 6),
+	("P2", "Structure & Tunnel", "الهيكل والأنفاق", "02,03,07", 38, 6, 10),
+	("P3", "MEP & Systems", "الأنظمة والتشغيل", "08,09,10,11", 24, 16, 6),
+	("P4", "Finishes & Commissioning", "التشطيبات والتسليم", "13,15", 10, 22, 4),
+]
+
+PHASE_ENERGY = [
+	("P1", "Site & Civil Works", "الموقع والأعمال المدنية", "00,01", 22, 0, 4),
+	("P2", "Generation Equipment", "معدات التوليد", "11", 48, 4, 8),
+	("P3", "Grid & Commissioning", "الشبكة والتشغيل", "15", 20, 12, 3),
+	("P4", "Handover & Performance Test", "التسليم واختبار الأداء", "15", 10, 15, 2),
 ]
 
 # Default detail breakdown per cost-code suffix (applied to matching leaf lines)
@@ -166,6 +195,19 @@ BUILDING_TYPE_META: dict[str, dict] = {
 	"telecom_fiber": {"segment": "Roads & Utilities", "template_code": "TELECOM-FIBER-STD", "label_en": "Telecom / Fiber", "label_ar": "شبكة فايبر"},
 	"substation": {"segment": "Industrial EPC", "template_code": "SUBSTATION-EPC", "label_en": "Substation", "label_ar": "محطة كهرباء"},
 	"wastewater_plant": {"segment": "Infrastructure", "template_code": "WWTP-TURNKEY", "label_en": "WWTP", "label_ar": "محطة معالجة"},
+	"mixed_use": {"segment": "Buildings", "template_code": "MIXED-USE-TOWER-STD", "label_en": "Mixed-Use Tower", "label_ar": "برج متعدد الاستخدام"},
+	"data_center": {"segment": "Industrial EPC", "template_code": "DATA-CENTER-TIER3", "label_en": "Data Center", "label_ar": "مركز بيانات"},
+	"airport_terminal": {"segment": "Infrastructure", "template_code": "AIRPORT-TERMINAL-STD", "label_en": "Airport Terminal", "label_ar": "مبنى مطار"},
+	"stadium": {"segment": "Infrastructure", "template_code": "STADIUM-STD", "label_en": "Stadium / Arena", "label_ar": "استاد / صالة"},
+	"metro_station": {"segment": "Infrastructure", "template_code": "METRO-STATION-STD", "label_en": "Metro / Rail Station", "label_ar": "محطة مترو"},
+	"residential_compound": {"segment": "Buildings", "template_code": "RES-COMPOUND-STD", "label_en": "Residential Compound", "label_ar": "كمبوند سكني"},
+	"parking_structure": {"segment": "Buildings", "template_code": "PARKING-STRUCT-STD", "label_en": "Parking Structure", "label_ar": "موقف سيارات"},
+	"laboratory": {"segment": "Buildings", "template_code": "LAB-FACILITY-STD", "label_en": "Laboratory / R&D", "label_ar": "مختبر / أبحاث"},
+	"tunnel": {"segment": "Infrastructure", "template_code": "TUNNEL-STD", "label_en": "Tunnel", "label_ar": "نفق"},
+	"solar_farm": {"segment": "Industrial EPC", "template_code": "SOLAR-FARM-STD", "label_en": "Solar Farm", "label_ar": "محطة طاقة شمسية"},
+	"power_plant": {"segment": "Industrial EPC", "template_code": "POWER-PLANT-STD", "label_en": "Power Plant", "label_ar": "محطة توليد"},
+	"railway": {"segment": "Infrastructure", "template_code": "RAILWAY-LINE-STD", "label_en": "Railway Line", "label_ar": "خط سكة حديد"},
+	"district_cooling": {"segment": "Roads & Utilities", "template_code": "DISTRICT-COOLING-STD", "label_en": "District Cooling", "label_ar": "تبريد مركزي"},
 }
 
 
@@ -332,6 +374,107 @@ _register(
 	PHASE_INDUSTRIAL,
 	DETAIL_RULES_MEP_LS,
 	20,
+)
+
+_register(
+	"MIXED-USE-TOWER-STD",
+	{"template_code": "MIXED-USE-TOWER-STD", "template_name": "Mixed-Use Tower", "template_name_ar": "برج متعدد الاستخدام", "building_type": "mixed_use", "project_segment": "Buildings", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	MIXED_USE_FULL_LINES,
+	PHASE_COMMERCIAL,
+	DETAIL_RULES_MEP_LS,
+	26,
+)
+_register(
+	"DATA-CENTER-TIER3",
+	{"template_code": "DATA-CENTER-TIER3", "template_name": "Data Center Tier III", "template_name_ar": "مركز بيانات", "building_type": "data_center", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Premium"},
+	DATA_CENTER_FULL_LINES,
+	PHASE_INDUSTRIAL,
+	DETAIL_RULES_MEP_LS,
+	16,
+)
+_register(
+	"AIRPORT-TERMINAL-STD",
+	{"template_code": "AIRPORT-TERMINAL-STD", "template_name": "Airport Terminal", "template_name_ar": "مبنى مطار", "building_type": "airport_terminal", "project_segment": "Infrastructure", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Silver Book (EPC/Turnkey)", "quality_tier": "Premium"},
+	AIRPORT_TERMINAL_FULL_LINES,
+	PHASE_COMMERCIAL,
+	DETAIL_RULES_MEP_LS,
+	32,
+)
+_register(
+	"STADIUM-STD",
+	{"template_code": "STADIUM-STD", "template_name": "Stadium / Arena", "template_name_ar": "استاد", "building_type": "stadium", "project_segment": "Infrastructure", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	STADIUM_FULL_LINES,
+	PHASE_BUILDING_STD,
+	duration_months=28,
+)
+_register(
+	"METRO-STATION-STD",
+	{"template_code": "METRO-STATION-STD", "template_name": "Metro Station", "template_name_ar": "محطة مترو", "building_type": "metro_station", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	METRO_STATION_FULL_LINES,
+	PHASE_TRANSIT,
+	DETAIL_RULES_MEP_LS,
+	24,
+)
+_register(
+	"RES-COMPOUND-STD",
+	{"template_code": "RES-COMPOUND-STD", "template_name": "Residential Compound", "template_name_ar": "كمبوند سكني", "building_type": "residential_compound", "project_segment": "Buildings", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	RESIDENTIAL_COMPOUND_FULL_LINES,
+	PHASE_BUILDING_STD,
+	duration_months=24,
+)
+_register(
+	"PARKING-STRUCT-STD",
+	{"template_code": "PARKING-STRUCT-STD", "template_name": "Parking Structure", "template_name_ar": "موقف سيارات", "building_type": "parking_structure", "project_segment": "Buildings", "default_contract_type": "Lump Sum", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	PARKING_STRUCTURE_FULL_LINES,
+	PHASE_BUILDING_STD,
+	duration_months=14,
+)
+_register(
+	"LAB-FACILITY-STD",
+	{"template_code": "LAB-FACILITY-STD", "template_name": "Laboratory Facility", "template_name_ar": "مختبر", "building_type": "laboratory", "project_segment": "Buildings", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Premium"},
+	LABORATORY_FULL_LINES,
+	PHASE_HEALTHCARE,
+	DETAIL_RULES_MEP_LS,
+	20,
+)
+_register(
+	"TUNNEL-STD",
+	{"template_code": "TUNNEL-STD", "template_name": "Tunnel", "template_name_ar": "نفق", "building_type": "tunnel", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Premium"},
+	TUNNEL_FULL_LINES,
+	PHASE_TRANSIT,
+	duration_months=30,
+)
+_register(
+	"SOLAR-FARM-STD",
+	{"template_code": "SOLAR-FARM-STD", "template_name": "Solar Farm", "template_name_ar": "محطة طاقة شمسية", "building_type": "solar_farm", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Yellow Book (M&E Design-Build)", "quality_tier": "Standard"},
+	SOLAR_FARM_FULL_LINES,
+	PHASE_ENERGY,
+	DETAIL_RULES_MEP_LS,
+	12,
+)
+_register(
+	"POWER-PLANT-STD",
+	{"template_code": "POWER-PLANT-STD", "template_name": "Power Plant", "template_name_ar": "محطة توليد", "building_type": "power_plant", "project_segment": "Industrial EPC", "default_contract_type": "Turnkey (EPC)", "default_governing_standard": "FIDIC 2017 Silver Book (EPC/Turnkey)", "quality_tier": "Premium"},
+	POWER_PLANT_FULL_LINES,
+	PHASE_INDUSTRIAL,
+	DETAIL_RULES_MEP_LS,
+	36,
+)
+_register(
+	"RAILWAY-LINE-STD",
+	{"template_code": "RAILWAY-LINE-STD", "template_name": "Railway Line", "template_name_ar": "خط سكة حديد", "building_type": "railway", "project_segment": "Infrastructure", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	RAILWAY_FULL_LINES,
+	PHASE_TRANSIT,
+	DETAIL_RULES_MEP_LS,
+	24,
+)
+_register(
+	"DISTRICT-COOLING-STD",
+	{"template_code": "DISTRICT-COOLING-STD", "template_name": "District Cooling", "template_name_ar": "تبريد مركزي", "building_type": "district_cooling", "project_segment": "Roads & Utilities", "default_contract_type": "Unit Price", "default_governing_standard": "FIDIC 2017 Red Book (Building & Engineering)", "quality_tier": "Standard"},
+	DISTRICT_COOLING_FULL_LINES,
+	PHASE_PIPELINE,
+	DETAIL_RULES_MEP_LS,
+	18,
 )
 
 # Backward-compatible export for template_loader import

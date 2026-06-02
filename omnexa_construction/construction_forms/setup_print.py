@@ -60,6 +60,30 @@ def get_contract_print_context(doc) -> dict:
 	client_name = ""
 	if doc.client:
 		client_name = frappe.db.get_value("Customer", doc.client, "customer_name") or doc.client
+	setup_name = getattr(doc, "wizard_setup", None)
+	setup_revision = getattr(doc, "approved_setup_revision", None)
+	boq_rows = frappe.get_all(
+		"BOQ Item",
+		filters={"project_contract": doc.name},
+		fields=[
+			"cost_code",
+			"item_description",
+			"quantity",
+			"unit_of_measure",
+			"unit_cost",
+			"planned_cost",
+			"is_group",
+		],
+		order_by="cost_code asc",
+		limit=500,
+	)
+	terms = []
+	if doc.get("contract_terms"):
+		terms = sorted(doc.contract_terms, key=lambda r: int(r.sort_order or 0))
+	elif setup_name and frappe.db.exists("Construction Project Setup", setup_name):
+		setup = frappe.get_doc("Construction Project Setup", setup_name)
+		terms = sorted(setup.get("contract_terms") or [], key=lambda r: int(r.sort_order or 0))
+		setup_revision = setup_revision or setup.setup_revision
 	return {
 		"company_name": company_name or doc.company or "",
 		"client_name": client_name,
@@ -72,6 +96,12 @@ def get_contract_print_context(doc) -> dict:
 		"planned_completion": doc.planned_completion,
 		"governing_standard": doc.governing_standard or "",
 		"site_location": doc.site_location or "",
+		"wizard_setup": setup_name or "",
+		"setup_revision": setup_revision or 1,
+		"approved_setup_attachment": getattr(doc, "approved_setup_attachment", None) or "",
+		"payment_terms": doc.payment_terms or "",
+		"boq_rows": boq_rows,
+		"contract_terms": terms,
 		"print_date": frappe.utils.today(),
 	}
 

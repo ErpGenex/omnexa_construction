@@ -106,6 +106,11 @@ def sync_all_a4_print_formats() -> dict:
 		_ensure_print("Project Contract — Summary", "Project Contract", html)
 		stats["updated"] += 1
 		stats["formats"].append("Project Contract — Summary")
+		raw_full = (FORMS_DIR / "project_contract_full_ar.html").read_text(encoding="utf-8")
+		html_full = compose_print_html(raw_full)
+		_ensure_print("Project Contract — Full (عقد متكامل)", "Project Contract", html_full, lang="ar")
+		stats["updated"] += 1
+		stats["formats"].append("Project Contract — Full (عقد متكامل)")
 
 	setup_prints = (
 		("Construction Setup — Summary", "setup_summary.html"),

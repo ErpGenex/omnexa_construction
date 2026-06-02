@@ -23,6 +23,36 @@ from omnexa_construction.wizard.pricing import detail_amount, line_ld_cap_amount
 from omnexa_construction.wizard.procurement_rfq import create_rfqs_for_setup
 from omnexa_construction.wizard.template_packs import BUILDING_TYPE_META
 
+# Trades where a separate Supplier row improves material PR / IPC traceability
+MATERIAL_SUPPLY_TRADES = frozenset(
+	{"TRD-CONC", "TRD-FACADE", "TRD-MEP-P", "TRD-MEP-H", "TRD-MEP-E", "TRD-FIN"}
+)
+
+
+def _trade_assignment_meta(trade_code: str) -> dict:
+	row = frappe.db.get_value(
+		"Construction Trade Package",
+		trade_code,
+		["trade_name", "boq_section_prefixes", "default_retention_percent"],
+		as_dict=True,
+	)
+	return row or {}
+
+
+def _boq_section_prefixes_for_trade(setup, trade_code: str, default_prefixes: str | None) -> str:
+	prefixes: set[str] = set()
+	for part in (default_prefixes or "").split(","):
+		part = part.strip()
+		if part:
+			prefixes.add(part)
+	for row in setup.boq_lines or []:
+		if not row.include or row.is_group or row.trade_package_code != trade_code:
+			continue
+		code = str(row.cost_code or "").strip()
+		if code:
+			prefixes.add(code.split(".")[0])
+	return ",".join(sorted(prefixes)) if prefixes else trade_code
+
 
 def _bundle_has_submitted_documents(contract_name: str) -> bool:
 	if frappe.db.exists("DocType", "IPC Certificate"):
@@ -133,20 +163,30 @@ def suggest_assignments(setup_name: str, save: int | str = 1) -> dict:
 			continue
 		trades[row.trade_package_code] = trades.get(row.trade_package_code, 0) + flt(row.planned_cost)
 	suggestions = []
-	for code, value in sorted(trades.items()):
-		trade_name = frappe.db.get_value("Construction Trade Package", code, "trade_name") or code
+	for code, value in sorted(trades.items(), key=lambda x: -x[1]):
+		meta = _trade_assignment_meta(code)
+		trade_name = meta.get("trade_name") or code
+		prefixes = _boq_section_prefixes_for_trade(setup, code, meta.get("boq_section_prefixes"))
+		retention = meta.get("default_retention_percent") or 5
 		suggestions.append(
 			{
 				"assignment_type": "Subcontractor",
 				"trade_package_code": code,
-				"boq_section_codes": code,
-				"retention_percent": frappe.db.get_value(
-					"Construction Trade Package", code, "default_retention_percent"
-				)
-				or 5,
+				"boq_section_codes": prefixes,
+				"retention_percent": retention,
 				"scope_notes": _("Subcontract package — {0} (est. {1})").format(trade_name, value),
 			}
 		)
+		if code in MATERIAL_SUPPLY_TRADES:
+			suggestions.append(
+				{
+					"assignment_type": "Supplier",
+					"trade_package_code": code,
+					"boq_section_codes": prefixes,
+					"retention_percent": 0,
+					"scope_notes": _("Materials supply — {0} (sections {1})").format(trade_name, prefixes),
+				}
+			)
 	if cint(save):
 		setup.set("assignments", [])
 		for row in suggestions:
@@ -224,18 +264,12 @@ def _create_project_bundle(setup_name: str, force: int = 0) -> dict:
 	return result
 
 
-def _execute_project_bundle(setup) -> dict:
-	import_material_catalog(setup.company)
-
+def _insert_boq_items_from_setup(setup, contract_name: str) -> tuple[list[str], dict[str, str], float]:
+	"""Create BOQ Item rows on an existing Project Contract from setup lines."""
 	boq_items: list[str] = []
-	scw_names: list[str] = []
-	pr_names: list[str] = []
-	rfq_names: list[str] = []
-	ipc_names: list[str] = []
-
-	contract = _create_project_contract(setup)
 	code_to_boq: dict[str, str] = {}
 	ordered = _sort_boq_lines(list(setup.boq_lines))
+	boq_meta = frappe.get_meta("BOQ Item")
 	for row in ordered:
 		if not row.include:
 			continue
@@ -243,7 +277,7 @@ def _execute_project_bundle(setup) -> dict:
 		planned = flt(row.planned_cost)
 		payload = {
 			"doctype": "BOQ Item",
-			"project_contract": contract.name,
+			"project_contract": contract_name,
 			"parent_boq_item": parent,
 			"is_group": row.is_group,
 			"section_name": row.section_name or row.cost_code,
@@ -258,7 +292,6 @@ def _execute_project_bundle(setup) -> dict:
 			"company": setup.company,
 			"branch": setup.branch,
 		}
-		boq_meta = frappe.get_meta("BOQ Item")
 		if boq_meta.has_field("planned_start_date") and row.planned_start:
 			payload["planned_start_date"] = row.planned_start
 		if boq_meta.has_field("planned_completion_date") and row.planned_finish:
@@ -275,12 +308,46 @@ def _execute_project_bundle(setup) -> dict:
 		boq.insert(ignore_permissions=True)
 		code_to_boq[row.cost_code] = boq.name
 		boq_items.append(boq.name)
+	contract_value = sum(flt(r.planned_cost) for r in setup.boq_lines if r.include and not r.is_group)
+	return boq_items, code_to_boq, contract_value
 
+
+def sync_boq_items_from_setup(setup, contract_name: str) -> dict:
+	"""Replace contract BOQ from setup (caller must ensure no submitted IPCs)."""
+	if _bundle_has_submitted_documents(contract_name):
+		frappe.throw(
+			_("Cannot resync BOQ: submitted certificates exist on {0}.").format(contract_name),
+			title=_("Sync"),
+		)
+	for name in sorted(
+		frappe.get_all("BOQ Item", filters={"project_contract": contract_name}, pluck="name"),
+		reverse=True,
+	):
+		frappe.delete_doc("BOQ Item", name, force=1, ignore_permissions=True)
+	boq_items, code_to_boq, contract_value = _insert_boq_items_from_setup(setup, contract_name)
+	bom_count = apply_material_bom_to_boq_items(setup, code_to_boq)
+	frappe.db.set_value(
+		"Project Contract",
+		contract_name,
+		{"contract_value": contract_value, "revised_contract_value": contract_value},
+		update_modified=True,
+	)
+	return {"boq_items": len(boq_items), "material_bom_lines": bom_count, "contract_value": contract_value}
+
+
+def _execute_project_bundle(setup) -> dict:
+	import_material_catalog(setup.company)
+
+	boq_items: list[str] = []
+	scw_names: list[str] = []
+	pr_names: list[str] = []
+	rfq_names: list[str] = []
+	ipc_names: list[str] = []
+
+	contract = _create_project_contract(setup)
+	boq_items, code_to_boq, contract_value = _insert_boq_items_from_setup(setup, contract.name)
 	bom_count = apply_material_bom_to_boq_items(setup, code_to_boq)
 
-	contract_value = sum(
-		flt(r.planned_cost) for r in setup.boq_lines if r.include and not r.is_group
-	)
 	frappe.db.set_value(
 		"Project Contract",
 		contract.name,
@@ -371,6 +438,7 @@ def _execute_project_bundle(setup) -> dict:
 	final.generated_ipc_count = len(ipc_names)
 	if pack.get("file_url"):
 		final.document_pack_file = pack["file_url"]
+	final.approval_status = final.approval_status or "Open"
 	final.status = "Completed"
 	final.wizard_step = 8
 	final.flags.ignore_permissions = True
