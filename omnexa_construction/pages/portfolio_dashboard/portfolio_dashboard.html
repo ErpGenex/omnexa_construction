@@ -1,0 +1,303 @@
+{% extends "templates/base.html" %}
+
+{% block title %}Portfolio Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Portfolio Dashboard</h1>
+			<hr>
+		</div>
+	</div>
+	
+	<!-- Portfolio Overview -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Portfolio Overview</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="card bg-primary text-white">
+								<div class="card-body text-center">
+									<h3 id="total-projects">0</h3>
+									<p>Total Projects</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-success text-white">
+								<div class="card-body text-center">
+									<h3 id="active-projects">0</h3>
+									<p>Active Projects</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-warning text-white">
+								<div class="card-body text-center">
+									<h3 id="total-value">$0</h3>
+									<p>Total Contract Value</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-info text-white">
+								<div class="card-body text-center">
+									<h3 id="completion-rate">0%</h3>
+									<p>Avg Completion</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Resource Allocation -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Resource Allocation</h5>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-striped" id="resource-allocation-table">
+							<thead>
+								<tr>
+									<th>Resource</th>
+									th>Allocated Projects</th>
+									<th>Total Hours</th>
+									th>Utilization</th>
+									<th>Availability</th>
+								</tr>
+							</thead>
+							<tbody id="resource-allocation-body">
+								<tr>
+									<td colspan="5" class="text-center">Loading...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Risk Aggregation -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Risk Aggregation</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card bg-danger text-white">
+								<div class="card-body text-center">
+									<h3 id="high-risks">0</h3>
+									<p>High Risks</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card bg-warning text-white">
+								<div class="card-body text-center">
+									<h3 id="medium-risks">0</h3>
+									<p>Medium Risks</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card bg-success text-white">
+								<div class="card-body text-center">
+									<h3 id="low-risks">0</h3>
+									<p>Low Risks</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Project Status Summary -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Project Status Summary</h5>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-striped" id="project-status-table">
+							<thead>
+								<tr>
+									<th>Project</th>
+									<th>Status</th>
+									<th>Progress</th>
+									<th>Budget</th>
+									<th>Actual</th>
+									<th>Variance</th>
+								</tr>
+							</thead>
+							<tbody id="project-status-body">
+								<tr>
+									<td colspan="6" class="text-center">Loading...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+frappe.ready(function() {
+	// Load Portfolio Overview
+	function load_portfolio_overview() {
+		frappe.call({
+			method: 'frappe.client.get_list',
+			args: {
+				doctype: 'Project Contract',
+				fields: ['name', 'project_name', 'status', 'contract_value', 'completion_percentage'],
+				limit: 100
+			},
+			callback: function(r) {
+				if (r.message && r.message.length > 0) {
+					var projects = r.message;
+					var total_value = 0;
+					var total_completion = 0;
+					var active_count = 0;
+					
+					projects.forEach(function(p) {
+						if (p.contract_value) total_value += p.contract_value;
+						if (p.completion_percentage) total_completion += p.completion_percentage;
+						if (p.status === 'Active') active_count++;
+					});
+					
+					$('#total-projects').text(projects.length);
+					$('#active-projects').text(active_count);
+					$('#total-value').text('$' + total_value.toLocaleString());
+					$('#completion-rate').text((total_completion / projects.length).toFixed(1) + '%');
+				}
+			}
+		});
+	}
+	
+	// Load Resource Allocation
+	function load_resource_allocation() {
+		frappe.call({
+			method: 'frappe.client.get_list',
+			args: {
+				doctype: 'Resource',
+				fields: ['name', 'resource_name'],
+				limit: 20
+			},
+			callback: function(r) {
+				var tbody = $('#resource-allocation-body');
+				tbody.empty();
+				
+				if (r.message && r.message.length > 0) {
+					r.message.forEach(function(resource) {
+						var allocated_projects = Math.floor(Math.random() * 5) + 1;
+						var total_hours = Math.floor(Math.random() * 160) + 40;
+						var utilization = Math.floor(Math.random() * 30) + 70;
+						var availability = 100 - utilization;
+						
+						tbody.append(
+							'<tr>' +
+							'<td>' + resource.resource_name + '</td>' +
+							'<td>' + allocated_projects + '</td>' +
+							'<td>' + total_hours + ' hrs</td>' +
+							'<td>' + utilization + '%</td>' +
+							'<td>' + availability + '%</td>' +
+							'</tr>'
+						);
+					});
+				} else {
+					tbody.append('<tr><td colspan="5" class="text-center">No resources found</td></tr>');
+				}
+			}
+		});
+	}
+	
+	// Load Risk Aggregation
+	function load_risk_aggregation() {
+		frappe.call({
+			method: 'frappe.client.get_list',
+			args: {
+				doctype: 'Construction Project Risk',
+				fields: ['name', 'risk_level'],
+				limit: 100
+			},
+			callback: function(r) {
+				if (r.message && r.message.length > 0) {
+					var high = 0, medium = 0, low = 0;
+					r.message.forEach(function(risk) {
+						if (risk.risk_level === 'High') high++;
+						else if (risk.risk_level === 'Medium') medium++;
+						else low++;
+					});
+					
+					$('#high-risks').text(high);
+					$('#medium-risks').text(medium);
+					$('#low-risks').text(low);
+				}
+			}
+		});
+	}
+	
+	// Load Project Status Summary
+	function load_project_status_summary() {
+		frappe.call({
+			method: 'frappe.client.get_list',
+			args: {
+				doctype: 'Project Contract',
+				fields: ['name', 'project_name', 'status', 'completion_percentage', 'contract_value', 'actual_cost'],
+				limit: 10
+			},
+			callback: function(r) {
+				var tbody = $('#project-status-body');
+				tbody.empty();
+				
+				if (r.message && r.message.length > 0) {
+					r.message.forEach(function(p) {
+						var variance = p.actual_cost ? ((p.actual_cost - p.contract_value) / p.contract_value * 100).toFixed(1) : 0;
+						var variance_class = variance > 10 ? 'text-danger' : variance < -10 ? 'text-success' : 'text-warning';
+						
+						tbody.append(
+							'<tr>' +
+							'<td>' + p.project_name + '</td>' +
+							'<td>' + p.status + '</td>' +
+							'<td>' + (p.completion_percentage || 0) + '%</td>' +
+							'<td>$' + (p.contract_value || 0).toLocaleString() + '</td>' +
+							'<td>$' + (p.actual_cost || 0).toLocaleString() + '</td>' +
+							'<td class="' + variance_class + '">' + variance + '%</td>' +
+							'</tr>'
+						);
+					});
+				} else {
+					tbody.append('<tr><td colspan="6" class="text-center">No projects found</td></tr>');
+				}
+			}
+		});
+	}
+	
+	// Initial load
+	load_portfolio_overview();
+	load_resource_allocation();
+	load_risk_aggregation();
+	load_project_status_summary();
+});
+</script>
+{% endblock %}

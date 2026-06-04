@@ -230,3 +230,13 @@ def construction_cbs_element_query_conditions(user=None):
 
 def construction_project_risk_query_conditions(user=None):
 	return permission_query_conditions_for_branch_field("Construction Project Risk", user)
+
+
+def primavera_integration_log_query_conditions(user=None):
+	# Integration logs are system-wide, no branch filtering
+	return ""
+
+
+def primavera_sync_queue_query_conditions(user=None):
+	# Sync queue is system-wide, no branch filtering
+	return ""

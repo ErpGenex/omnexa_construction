@@ -1,0 +1,8 @@
+{
+ "item_code": "portfolio_dashboard",
+ "item_name": "Portfolio Dashboard",
+ "page_name": "portfolio_dashboard",
+ "module": "Omnexa Construction",
+ "standard": "Yes",
+ "content": "{% include 'omnexa_construction/pages/portfolio_dashboard/portfolio_dashboard.html' %}"
+}

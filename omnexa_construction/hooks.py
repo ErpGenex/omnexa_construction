@@ -47,7 +47,7 @@ app_include_css = "/assets/omnexa_construction/css/construction_gantt_critical.c
 # Company demo buttons: omnexa_core/public/js/company_demo_data_hub.js
 doctype_js = {
 	"BOQ Item": "public/js/boq_item.js",
-	"Project Contract": "public/js/project_contract.js",
+	"Project Contract": "public/js/project_contract.js, public/js/primavera_sync_buttons.js",
 	"Subcontract Payment Certificate": "public/js/subcontract_payment_certificate.js",
 	"IPC Certificate": "public/js/ipc_certificate.js",
 	"Construction Project Setup": "public/js/construction_project_setup.js",
@@ -61,6 +61,8 @@ doctype_js = {
 	"Construction Final Account Statement": "public/js/construction_final_account_statement.js",
 	"Site Daily Report": "public/js/site_daily_report.js",
 	"Project WIP Snapshot": "public/js/project_wip_snapshot.js",
+	"PM WBS Task": "public/js/primavera_sync_buttons.js",
+	"Resource": "public/js/primavera_sync_buttons.js",
 }
 doctype_list_js = {
 	"Project Contract": "public/js/project_contract_list.js",
@@ -194,6 +196,8 @@ permission_query_conditions = {
 	"Construction Bid Estimate": "omnexa_construction.permissions.construction_bid_estimate_query_conditions",
 	"Construction CBS Element": "omnexa_construction.permissions.construction_cbs_element_query_conditions",
 	"Construction Project Risk": "omnexa_construction.permissions.construction_project_risk_query_conditions",
+	"Primavera Integration Log": "omnexa_construction.permissions.primavera_integration_log_query_conditions",
+	"Primavera Sync Queue": "omnexa_construction.permissions.primavera_sync_queue_query_conditions",
 }
 
 # DocType Class
@@ -248,7 +252,10 @@ _IPC_EVENTS = {
 }
 
 doc_events = {
-	"Project Contract": _BRANCH_DOC_EVENTS.copy(),
+	"Project Contract": {
+		**_BRANCH_DOC_EVENTS,
+		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_project_sync",
+	},
 	"BOQ Item": _BRANCH_DOC_EVENTS.copy(),
 	"IPC Certificate": {
 		**_IPC_EVENTS,
@@ -311,6 +318,8 @@ doc_events = {
 			"omnexa_construction.cde_validation.validate_cde_document_doc",
 		],
 		"onload": "omnexa_construction.regional_compliance.eu_package.log_cde_access_on_load",
+		"before_submit": "omnexa_construction.cde_versioning.before_submit_cde_document",
+		"on_update": "omnexa_construction.cde_versioning.on_update_cde_document",
 	},
 	"Engineering Submittal": {
 		"validate": "omnexa_construction.riba_submittal_gates.validate_engineering_submittal_riba_gate",
@@ -360,6 +369,18 @@ doc_events = {
 	"Construction Project Risk": _BRANCH_DOC_EVENTS.copy(),
 	"Construction CDE Access Log": _BRANCH_DOC_EVENTS.copy(),
 	"Construction OSHA Site Checklist": _BRANCH_DOC_EVENTS.copy(),
+	"PM WBS Task": {
+		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_task_sync",
+	},
+	"Resource": {
+		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_resource_sync",
+	},
+	"Primavera Integration Log": {
+		"before_insert": "omnexa_construction.integrations.primavera_hooks.set_sync_timestamp",
+	},
+	"Primavera Sync Queue": {
+		"before_insert": "omnexa_construction.integrations.primavera_hooks.set_queue_timestamp",
+	},
 }
 
 # Scheduled Tasks
@@ -370,6 +391,11 @@ scheduler_events = {
 		"omnexa_construction.fidic_alerts.mark_overdue_fidic_notices",
 		"omnexa_construction.subcontract_compliance.mark_expired_compliance_daily",
 		"omnexa_construction.ncr_sla.mark_ncr_sla_breaches_daily",
+		"omnexa_construction.integrations.primavera_scheduler.cleanup_old_logs",
+		"omnexa_construction.integrations.primavera_scheduler.cleanup_completed_queue",
+	],
+	"hourly": [
+		"omnexa_construction.integrations.primavera_scheduler.process_sync_queue",
 	],
 }
 

@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-06-04 04:30:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "code",
+  "classification_name",
+  "level",
+  "section_break_1",
+  "table",
+  "work_section",
+  "entity",
+  "description",
+  "section_break_2",
+  "parent_classification",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "UNI-.####"
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "classification_name",
+   "fieldtype": "Data",
+   "label": "Classification Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "level",
+   "fieldtype": "Select",
+   "label": "Level",
+   "options": "Table\nWork Section\nEntity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table",
+   "fieldtype": "Data",
+   "label": "Table"
+  },
+  {
+   "fieldname": "work_section",
+   "fieldtype": "Data",
+   "label": "Work Section"
+  },
+  {
+   "fieldname": "entity",
+   "fieldtype": "Data",
+   "label": "Entity"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "parent_classification",
+   "fieldtype": "Link",
+   "label": "Parent Classification",
+   "options": "Uniclass 2015 Classification"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "links": [],
+ "modified": "2026-06-04 04:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Omnexa Construction",
+ "name": "Uniclass 2015 Classification",
+ "naming_rule": "By Naming Series",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects User"
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager"
+  }
+ ],
+ "sort_field": "code",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "classification_name"
+}

@@ -206,8 +206,10 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 			("Page", "construction-project-wizard", "New Project (Wizard)", "add", False),
 			("DocType", "Construction Project Setup", "Construction Project Setup", "edit", False),
 			("Page", "construction-executive-dashboard", "Executive Dashboard", "layout", False),
+			("Page", "portfolio_dashboard", "Portfolio Dashboard", "grid", False),
 			("Page", "construction-site-mobile", "Site Mobile Hub", "smartphone", False),
 			("DocType", "Construction Integration Settings", "Integration Settings", "link", False),
+			("Page", "primavera_sync_dashboard", "Primavera P6 Sync Dashboard", "refresh-cw", False),
 		],
 	),
 	(
@@ -230,6 +232,17 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 			("Page", "construction-schedule-gantt", "Schedule Gantt", "bar-chart", False),
 			("DocType", "PM WBS Task", "PM WBS Task", "tree", False),
 			("DocType", "Construction MIDP", "MIDP", "book", False),
+		],
+	),
+	(
+		"10. BIM & CDE",
+		[
+			("Page", "bim_ifc_viewer", "BIM IFC Viewer", "box", False),
+			("DocType", "Construction BIM Model Register", "BIM Model Register", "database", False),
+			("DocType", "Construction BIM Issue", "BIM Issue", "alert-circle", False),
+			("DocType", "Construction CDE Document", "CDE Document", "file", False),
+			("DocType", "Construction Document Transmittal", "Document Transmittal", "share", False),
+			("DocType", "Uniclass 2015 Classification", "Uniclass 2015", "list", False),
 		],
 	),
 	(

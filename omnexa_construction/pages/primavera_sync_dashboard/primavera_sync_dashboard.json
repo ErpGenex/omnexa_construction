@@ -1,0 +1,8 @@
+{
+ "item_code": "primavera_sync_dashboard",
+ "item_name": "Primavera P6 Sync Dashboard",
+ "page_name": "primavera_sync_dashboard",
+ "module": "Omnexa Construction",
+ "standard": "Yes",
+ "content": "{% include 'omnexa_construction/pages/primavera_sync_dashboard/primavera_sync_dashboard.html' %}"
+}
