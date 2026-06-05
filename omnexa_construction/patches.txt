@@ -63,3 +63,5 @@ omnexa_construction.patches.primavera_p6_integration
 omnexa_construction.patches.cde_iso19650_enhancement
 omnexa_construction.patches.performance_optimization
 omnexa_construction.patches.qs_field_measurement_enhancement
+omnexa_construction.patches.update_workspace_menu
+omnexa_construction.patches.update_workspace_content

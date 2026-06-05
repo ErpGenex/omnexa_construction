@@ -158,6 +158,8 @@ def execute():
 			}).insert()
 	
 	for field in resource_fields:
+		if not frappe.db.exists("DocType", field["dt"]):
+			continue
 		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
 			frappe.get_doc({
 				"doctype": "Custom Field",

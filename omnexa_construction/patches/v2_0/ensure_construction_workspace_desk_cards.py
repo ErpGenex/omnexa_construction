@@ -9,5 +9,9 @@ from omnexa_construction.workspace.construction_workspace import sync_constructi
 
 
 def execute():
-	stats = sync_construction_workspace_menu(save=True)
-	frappe.logger("omnexa_construction").info("Construction workspace desk cards: %s", stats)
+	try:
+		stats = sync_construction_workspace_menu(save=True)
+		frappe.logger("omnexa_construction").info("Construction workspace desk cards: %s", stats)
+	except Exception as e:
+		frappe.logger("omnexa_construction").error("Failed to sync workspace: %s", str(e))
+		# Don't fail the patch - workspace sync can be done manually

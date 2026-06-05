@@ -143,17 +143,27 @@ def execute():
 	
 	# Add custom fields
 	for field in iso19650_fields:
-		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
-			frappe.get_doc({
-				"doctype": "Custom Field",
-				**field
-			}).insert()
+		try:
+			if not frappe.db.exists("DocType", field["dt"]):
+				continue
+			if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+				frappe.get_doc({
+					"doctype": "Custom Field",
+					**field
+				}).insert()
+		except Exception as e:
+			frappe.log_error(f"Failed to add field {field['fieldname']}: {str(e)}", "CDE ISO 19650 Enhancement")
 	
 	for field in versioning_fields:
-		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
-			frappe.get_doc({
-				"doctype": "Custom Field",
-				**field
-			}).insert()
+		try:
+			if not frappe.db.exists("DocType", field["dt"]):
+				continue
+			if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+				frappe.get_doc({
+					"doctype": "Custom Field",
+					**field
+				}).insert()
+		except Exception as e:
+			frappe.log_error(f"Failed to add field {field['fieldname']}: {str(e)}", "CDE ISO 19650 Enhancement")
 	
 	frappe.clear_cache()
