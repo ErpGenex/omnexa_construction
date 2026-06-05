@@ -7,8 +7,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-
 import frappe
+from frappe import _
 
 WIZARD_LABEL = "New Project (Wizard)"
 WIZARD_PAGE = "construction-project-wizard"
@@ -524,7 +524,10 @@ def sync_construction_workspace_content(ws) -> int:
 			}
 		)
 		for i, nc in enumerate(ws.number_cards[:12]):
-			nc_label = _row_val(nc, "label") or _row_val(nc, "number_card_name")
+			# Desk EditorJS resolves tiles by Number Card label, not document name.
+			nc_label = _row_val(nc, "label") or frappe.db.get_value(
+				"Number Card", _row_val(nc, "number_card_name"), "label"
+			)
 			if not nc_label:
 				continue
 			blocks.append(
@@ -663,6 +666,142 @@ def export_construction_workspace_fixture(ws=None) -> bool:
 	return True
 
 
+CONSTRUCTION_WORKSPACE_KPIS: list[tuple[str, str, list]] = [
+	("Project contracts", "Project Contract", []),
+	("Active contracts", "Project Contract", [["status", "=", "Active"]]),
+	("Suspended contracts", "Project Contract", [["status", "=", "Suspended"]]),
+	("Closed contracts", "Project Contract", [["status", "=", "Closed"]]),
+	("BOQ lines", "BOQ Item", []),
+	("Site daily reports", "Site Daily Report", []),
+	("Subcontract work orders", "Subcontract Work Order", []),
+	("IPC certificates", "IPC Certificate", []),
+	("Construction claims", "Construction Claim", []),
+	("Open NCRs", "Construction NCR", [["status", "in", ["Open", "Under Review"]]]),
+	(
+		"Open HSE incidents",
+		"Construction HSE Incident",
+		[["status", "in", ["Open", "Reported", "Under Investigation"]]],
+	),
+]
+
+
+def _resolve_number_card_name(name_or_label: str | None) -> str | None:
+	if not name_or_label:
+		return None
+	if frappe.db.exists("Number Card", name_or_label):
+		return name_or_label
+	return frappe.db.get_value("Number Card", {"label": name_or_label}, "name")
+
+
+def _upsert_construction_number_card(label: str, document_type: str, filters: list | None) -> str | None:
+	if not frappe.db.exists("DocType", document_type) or not frappe.db.exists("DocType", "Number Card"):
+		return None
+	from omnexa_construction.utils.number_card_filters import normalize_number_card_filters
+
+	filters_json = json.dumps(
+		normalize_number_card_filters(document_type, filters or []),
+		separators=(",", ":"),
+	)
+	existing = frappe.db.get_value(
+		"Number Card",
+		{"label": label, "document_type": document_type, "function": "Count"},
+		"name",
+	)
+	if existing:
+		frappe.db.set_value("Number Card", existing, "filters_json", filters_json, update_modified=False)
+		return existing
+	doc = frappe.get_doc(
+		{
+			"doctype": "Number Card",
+			"label": label,
+			"type": "Document Type",
+			"document_type": document_type,
+			"function": "Count",
+			"filters_json": filters_json,
+			"module": "Omnexa Construction",
+			"is_public": 1,
+			"show_percentage_stats": 1,
+			"stats_time_interval": "Monthly",
+			"show_full_number": 1,
+		}
+	)
+	doc.insert(ignore_permissions=True)
+	return doc.name
+
+
+def _ensure_construction_workspace_kpis_local(ws) -> None:
+	"""Fallback when omnexa_core workspace tower is unavailable."""
+	card_rows: list[dict[str, str]] = []
+	for label, doctype, filters in CONSTRUCTION_WORKSPACE_KPIS:
+		nm = _upsert_construction_number_card(label, doctype, filters)
+		if nm:
+			card_rows.append({"number_card_name": nm, "label": label})
+	ws.number_cards = []
+	for row in card_rows:
+		ws.append("number_cards", row)
+
+	valid_charts: list[dict[str, str]] = []
+	for row in ws.charts or []:
+		cn = _row_val(row, "chart_name")
+		if cn and frappe.db.exists("Dashboard Chart", cn):
+			valid_charts.append({"chart_name": cn, "label": _row_val(row, "label") or cn})
+	ws.charts = []
+	for row in valid_charts:
+		ws.append("charts", row)
+
+
+def _ensure_construction_workspace_kpis(ws) -> None:
+	"""Create KPI docs and bind workspace child rows to valid Number Card / Chart names."""
+	try:
+		from omnexa_core.omnexa_core.workspace_control_tower import MODULE_SPECS, _apply_kpi_to_workspace
+
+		spec = MODULE_SPECS.get("omnexa_construction")
+		if spec:
+			_apply_kpi_to_workspace(ws, dict(spec), "Construction")
+			return
+	except Exception:
+		frappe.log_error(frappe.get_traceback(), _("Construction workspace KPI sync (omnexa_core)"))
+
+	_ensure_construction_workspace_kpis_local(ws)
+
+
+def _prune_invalid_workspace_kpi_links(ws) -> int:
+	"""Drop workspace KPI rows whose linked Number Card / Chart documents are missing."""
+	kept_nc: list[dict[str, str]] = []
+	for row in ws.number_cards or []:
+		nm = _resolve_number_card_name(_row_val(row, "number_card_name") or _row_val(row, "label"))
+		if nm:
+			kept_nc.append(
+				{
+					"number_card_name": nm,
+					"label": _row_val(row, "label") or nm,
+				}
+			)
+	ws.number_cards = []
+	for row in kept_nc:
+		ws.append("number_cards", row)
+
+	kept_ch: list[dict[str, str]] = []
+	for row in ws.charts or []:
+		cn = _row_val(row, "chart_name")
+		if cn and frappe.db.exists("Dashboard Chart", cn):
+			kept_ch.append({"chart_name": cn, "label": _row_val(row, "label") or cn})
+	ws.charts = []
+	for row in kept_ch:
+		ws.append("charts", row)
+	return len(kept_nc) + len(kept_ch)
+
+
+def _safe_save_construction_workspace(ws) -> None:
+	"""Save workspace; on link validation errors prune stale KPI/chart rows and retry once."""
+	try:
+		ws.save(ignore_permissions=True, ignore_version=True)
+	except frappe.LinkValidationError:
+		_prune_invalid_workspace_kpi_links(ws)
+		ws.content = sync_construction_workspace_content(ws)
+		ws.save(ignore_permissions=True, ignore_version=True)
+
+
 def remove_construction_qhse_workspace() -> bool:
 	"""Remove standalone QHSE workspace; its links live under Construction."""
 	if not frappe.db.exists("Workspace", QHSE_WORKSPACE_NAME):
@@ -749,12 +888,13 @@ def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 		stats["shortcuts"] += 1
 	_reindex_child_rows(ws.shortcuts)
 
+	_ensure_construction_workspace_kpis(ws)
 	stats["content_cards"] = sync_construction_workspace_content(ws)
 
 	remove_construction_qhse_workspace()
 
 	if save:
-		ws.save(ignore_permissions=True, ignore_version=True)
+		_safe_save_construction_workspace(ws)
 		frappe.clear_cache(doctype="Workspace")
 		try:
 			export_construction_workspace_fixture(ws)
