@@ -237,6 +237,18 @@
   },
   {
    "type": "Link",
+   "label": "Import from Primavera XER",
+   "icon": "upload",
+   "hidden": 0,
+   "link_type": "Page",
+   "link_to": "primavera-project-import",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
    "label": "PM WBS Task",
    "icon": "tree",
    "hidden": 0,
@@ -1504,7 +1516,7 @@
    "__unsaved": 1
   }
  ],
- "modified": "2026-06-05 03:55:55.390973",
+ "modified": "2026-06-06 00:17:48.420036",
  "modified_by": "Administrator",
  "module": "Omnexa Construction",
  "name": "Construction",

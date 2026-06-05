@@ -21,10 +21,19 @@ def set_queue_timestamp(doc, method):
 		doc.next_attempt = datetime.now()
 
 
+def _p6_settings():
+	try:
+		return frappe.get_single("Primavera P6 Settings")
+	except frappe.DoesNotExistError:
+		return None
+
+
 def queue_project_sync(doc, method):
 	"""Queue project sync to P6 on save"""
-	settings = frappe.get_single('Primavera P6 Settings')
-	if not settings.enabled or not settings.auto_sync_enabled:
+	if frappe.flags.get("in_primavera_xer_import"):
+		return
+	settings = _p6_settings()
+	if not settings or not settings.enabled or not settings.auto_sync_enabled:
 		return
 	
 	# Check if project should be synced
@@ -39,8 +48,10 @@ def queue_project_sync(doc, method):
 
 def queue_task_sync(doc, method):
 	"""Queue task sync to P6 on save"""
-	settings = frappe.get_single('Primavera P6 Settings')
-	if not settings.enabled or not settings.auto_sync_enabled:
+	if frappe.flags.get("in_primavera_xer_import"):
+		return
+	settings = _p6_settings()
+	if not settings or not settings.enabled or not settings.auto_sync_enabled:
 		return
 	
 	# Check if task should be synced
@@ -55,8 +66,8 @@ def queue_task_sync(doc, method):
 
 def queue_resource_sync(doc, method):
 	"""Queue resource sync to P6 on save"""
-	settings = frappe.get_single('Primavera P6 Settings')
-	if not settings.enabled or not settings.auto_sync_enabled:
+	settings = _p6_settings()
+	if not settings or not settings.enabled or not settings.auto_sync_enabled:
 		return
 	
 	# Check if resource should be synced

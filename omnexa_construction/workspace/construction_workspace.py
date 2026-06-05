@@ -230,6 +230,7 @@ WORKSPACE_SECTIONS: list[tuple[str, list[WorkspaceItem]]] = [
 		[
 			("DocType", "Construction Schedule Baseline", "Schedule Baseline", "calendar", False),
 			("Page", "construction-schedule-gantt", "Schedule Gantt", "bar-chart", False),
+			("Page", "primavera-project-import", "Import from Primavera XER", "upload", False),
 			("DocType", "PM WBS Task", "PM WBS Task", "tree", False),
 			("DocType", "Construction MIDP", "MIDP", "book", False),
 		],
