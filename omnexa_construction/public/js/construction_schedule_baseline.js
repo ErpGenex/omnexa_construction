@@ -26,6 +26,7 @@ frappe.ui.form.on("Construction Schedule Baseline", {
 			});
 		});
 		frm.add_custom_button(__("Open Gantt View"), () => {
+			frappe.route_options = { project_contract: frm.doc.project_contract };
 			frappe.set_route("construction-schedule-gantt");
 		});
 	},

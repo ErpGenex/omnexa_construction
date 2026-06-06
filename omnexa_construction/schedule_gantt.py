@@ -5,27 +5,56 @@ from frappe import _
 from frappe.utils import date_diff, flt, getdate
 
 
+def _resolve_schedule_baseline(project_contract: str) -> dict | None:
+	"""Pick baseline for Gantt: submitted active → submitted → active draft → draft with tasks."""
+	active_submitted = frappe.db.get_value(
+		"Construction Schedule Baseline",
+		{"project_contract": project_contract, "is_active": 1, "docstatus": 1},
+		["name", "planned_start", "planned_completion", "baseline_name", "docstatus"],
+		as_dict=True,
+	)
+	if active_submitted:
+		return active_submitted
+
+	submitted = frappe.get_all(
+		"Construction Schedule Baseline",
+		filters={"project_contract": project_contract, "docstatus": 1},
+		fields=["name", "planned_start", "planned_completion", "baseline_name", "docstatus"],
+		order_by="modified desc",
+		limit_page_length=1,
+	)
+	if submitted:
+		return submitted[0]
+
+	active_draft = frappe.db.get_value(
+		"Construction Schedule Baseline",
+		{"project_contract": project_contract, "is_active": 1, "docstatus": 0},
+		["name", "planned_start", "planned_completion", "baseline_name", "docstatus"],
+		as_dict=True,
+	)
+	if active_draft:
+		return active_draft
+
+	candidates = frappe.get_all(
+		"Construction Schedule Baseline",
+		filters={"project_contract": project_contract, "docstatus": ["<", 2]},
+		fields=["name", "planned_start", "planned_completion", "baseline_name", "docstatus"],
+		order_by="modified desc",
+		limit_page_length=20,
+	)
+	for row in candidates:
+		if frappe.db.count("Construction Schedule Baseline Task", {"parent": row.name}):
+			return row
+	return candidates[0] if candidates else None
+
+
 @frappe.whitelist()
 def get_schedule_gantt_data(project_contract: str) -> dict:
-	"""Gantt payload from active schedule baseline tasks + BOQ progress."""
+	"""Gantt payload from schedule baseline tasks + BOQ progress."""
 	if not project_contract:
 		frappe.throw(_("Project Contract is required."), title=_("Schedule Gantt"))
 
-	baseline = frappe.db.get_value(
-		"Construction Schedule Baseline",
-		{"project_contract": project_contract, "is_active": 1, "docstatus": 1},
-		["name", "planned_start", "planned_completion", "baseline_name"],
-		as_dict=True,
-	)
-	if not baseline:
-		rows = frappe.get_all(
-			"Construction Schedule Baseline",
-			filters={"project_contract": project_contract, "docstatus": 1},
-			fields=["name", "planned_start", "planned_completion", "baseline_name"],
-			order_by="modified desc",
-			limit_page_length=1,
-		)
-		baseline = rows[0] if rows else None
+	baseline = _resolve_schedule_baseline(project_contract)
 
 	tasks = []
 	critical_names: set[str] = set()
@@ -95,6 +124,7 @@ def get_schedule_gantt_data(project_contract: str) -> dict:
 	return {
 		"project_contract": project_contract,
 		"baseline": baseline,
+		"baseline_is_draft": bool(baseline and int(baseline.get("docstatus") or 0) == 0),
 		"tasks": tasks,
 		"critical_path": list(critical_names),
 	}
