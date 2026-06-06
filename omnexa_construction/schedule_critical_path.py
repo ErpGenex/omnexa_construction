@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from frappe.utils import date_diff, flt, getdate
+from frappe.utils import date_diff, getdate
 
 
 def compute_critical_path(tasks: list[dict]) -> list[str]:
@@ -17,49 +17,80 @@ def compute_critical_path(tasks: list[dict]) -> list[str]:
 	if not by_name:
 		return []
 
-	# Build adjacency from predecessor_task field (optional)
 	preds: dict[str, list[str]] = {name: [] for name in by_name}
 	for name, row in by_name.items():
-		pred = (row.get("predecessor_task") or "").strip()
-		if pred and pred in by_name:
-			preds[name].append(pred)
+		for pred in _resolve_predecessors(row.get("predecessor_task"), by_name):
+			if pred not in preds[name]:
+				preds[name].append(pred)
 
-	# Forward pass — early start/finish (days from project start)
-	project_start = min(getdate(t["start_date"]) for t in by_name.values() if t.get("start_date"))
+	dated = [t for t in by_name.values() if t.get("start_date")]
+	if not dated:
+		return list(by_name.keys())
+
+	project_start = min(getdate(t["start_date"]) for t in dated)
 	es: dict[str, int] = {}
 	ef: dict[str, int] = {}
 	for name in _topo_sort(by_name, preds):
 		row = by_name[name]
-		dur = max(1, int(row.get("duration_days") or date_diff(row.get("end_date"), row.get("start_date")) or 1))
-		if preds[name]:
-			es[name] = max(ef[p] for p in preds[name])
+		dur = _task_duration(row)
+		valid_preds = [p for p in preds.get(name, []) if p in ef]
+		if valid_preds:
+			es[name] = max(ef[p] for p in valid_preds)
 		else:
-			es[name] = max(0, date_diff(row.get("start_date"), project_start))
+			es[name] = max(0, date_diff(row.get("start_date"), project_start)) if row.get("start_date") else 0
 		ef[name] = es[name] + dur
 
 	if not ef:
 		return []
 
 	project_end = max(ef.values())
-	# Backward pass
-	lf: dict[str, int] = {}
-	ls: dict[str, int] = {}
 	successors: dict[str, list[str]] = {n: [] for n in by_name}
 	for name, ps in preds.items():
 		for p in ps:
-			successors[p].append(name)
+			if p in successors:
+				successors[p].append(name)
 
+	ls: dict[str, int] = {}
 	for name in reversed(_topo_sort(by_name, preds)):
 		row = by_name[name]
-		dur = max(1, int(row.get("duration_days") or date_diff(row.get("end_date"), row.get("start_date")) or 1))
-		if successors[name]:
-			lf[name] = min(ls[s] for s in successors[name])
+		dur = _task_duration(row)
+		valid_succ = [s for s in successors.get(name, []) if s in ls]
+		if valid_succ:
+			lf = min(ls[s] for s in valid_succ)
 		else:
-			lf[name] = project_end
-		ls[name] = lf[name] - dur
+			lf = project_end
+		ls[name] = lf - dur
 
-	critical = [name for name in by_name if (ls.get(name, 0) - es.get(name, 0)) <= 0]
-	return critical
+	return [name for name in by_name if (ls.get(name, 0) - es.get(name, 0)) <= 0]
+
+
+def _normalize_name(name: str | None) -> str:
+	return " ".join((name or "").split())
+
+
+def _resolve_predecessors(pred_text: str | None, by_name: dict) -> list[str]:
+	"""Map predecessor text to known task names; ignore missing/external refs."""
+	if not pred_text:
+		return []
+	lookup = {_normalize_name(k): k for k in by_name}
+	resolved: list[str] = []
+	for part in str(pred_text).replace(";", ",").split(","):
+		key = _normalize_name(part)
+		if not key:
+			continue
+		match = lookup.get(key) or (key if key in by_name else None)
+		if match and match not in resolved:
+			resolved.append(match)
+	return resolved
+
+
+def _task_duration(row: dict) -> int:
+	dur = row.get("duration_days")
+	if dur:
+		return max(1, int(dur))
+	if row.get("start_date") and row.get("end_date"):
+		return max(1, date_diff(row.get("end_date"), row.get("start_date")) + 1)
+	return 1
 
 
 def _topo_sort(names: dict, preds: dict) -> list[str]:

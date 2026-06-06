@@ -102,7 +102,11 @@ def get_schedule_gantt_data(project_contract: str) -> dict:
 
 		from omnexa_construction.schedule_critical_path import compute_critical_path
 
-		critical_names = set(compute_critical_path(task_rows))
+		try:
+			critical_names = set(compute_critical_path(task_rows))
+		except Exception:
+			frappe.log_error(frappe.get_traceback(), "Schedule Gantt: critical path failed")
+			critical_names = set()
 		for row in task_rows:
 			progress = flt(row.get("progress_percent"))
 			tasks.append(
