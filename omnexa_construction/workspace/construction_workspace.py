@@ -473,7 +473,6 @@ def sync_construction_workspace_content(ws) -> int:
 			"data": {"text": f'<span class="h5"><b>{QUICK_ACTIONS_HEADER}</b></span>', "col": 12},
 		}
 	)
-	quick = 0
 	for row in ws.shortcuts or []:
 		st = _row_val(row, "type")
 		if st == "Report":
@@ -488,9 +487,6 @@ def sync_construction_workspace_content(ws) -> int:
 				"data": {"shortcut_name": label, "col": 4},
 			}
 		)
-		quick += 1
-		if quick >= 15:
-			break
 
 	blocks.append(
 		{
@@ -867,23 +863,24 @@ def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 		ws.append("links", row)
 	_reindex_child_rows(ws.links)
 
-	# Dashboard shortcuts — rebuild from catalog (idempotent)
+	# Dashboard shortcuts — full catalog (sidebar + desk content parity)
+	from omnexa_core.omnexa_core.vertical_workspace_sync import build_shortcuts_from_link_rows
+
 	ws.shortcuts = []
-	for link_type, link_to, label, color, doc_view in DASHBOARD_SHORTCUTS:
-		if not _link_target_exists(link_type, link_to):
+	link_rows_for_sc: list[dict] = []
+	for row in ws.links or []:
+		if _row_val(row, "type") != "Link":
 			continue
-		values = {
-			"label": label,
-			"type": link_type,
-			"link_to": link_to,
-			"color": color,
-		}
-		if doc_view:
-			values["doc_view"] = doc_view
-		if link_type == "Report":
-			ref = frappe.db.get_value("Report", link_to, "ref_doctype")
-			if ref:
-				values["report_ref_doctype"] = ref
+		link_rows_for_sc.append(
+			{
+				"type": "Link",
+				"label": _row_val(row, "label"),
+				"link_type": _row_val(row, "link_type"),
+				"link_to": _row_val(row, "link_to"),
+				"report_ref_doctype": _row_val(row, "report_ref_doctype"),
+			}
+		)
+	for values in build_shortcuts_from_link_rows(link_rows_for_sc):
 		ws.append("shortcuts", values)
 		stats["shortcuts"] += 1
 	_reindex_child_rows(ws.shortcuts)

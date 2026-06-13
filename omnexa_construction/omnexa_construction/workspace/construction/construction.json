@@ -13,7 +13,7 @@
    "label": "Subcontract Work Order Mix"
   }
  ],
- "content": "[{\"id\":\"erpgenex-onboarding\",\"type\":\"onboarding\",\"data\":{\"onboarding_name\":\"ERPGENEX \\u2014 Construction\",\"col\":12}},{\"id\":\"construction-h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Construction</b></span>\",\"col\":12}},{\"id\":\"construction-qa-h-1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"construction-qa-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Project (Wizard)\",\"col\":4}},{\"id\":\"construction-qa-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction Project Setup\",\"col\":4}},{\"id\":\"construction-qa-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Contract\",\"col\":4}},{\"id\":\"construction-qa-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOQ Item\",\"col\":4}},{\"id\":\"construction-qa-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"PM WBS Task\",\"col\":4}},{\"id\":\"construction-qa-7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Schedule Gantt\",\"col\":4}},{\"id\":\"construction-qa-8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Site Daily Report\",\"col\":4}},{\"id\":\"construction-qa-9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Site Mobile Hub\",\"col\":4}},{\"id\":\"construction-qa-10\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Work Order\",\"col\":4}},{\"id\":\"construction-qa-11\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"IPC Certificate\",\"col\":4}},{\"id\":\"construction-qa-12\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Payment\",\"col\":4}},{\"id\":\"construction-qa-13\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Extension of Time (EOT)\",\"col\":4}},{\"id\":\"construction-qa-14\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Change Order\",\"col\":4}},{\"id\":\"construction-qa-15\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction Claim\",\"col\":4}},{\"id\":\"construction-qa-16\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project WIP Snapshot\",\"col\":4}},{\"id\":\"construction-all-h-17\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>All modules & links</b></span>\",\"col\":12}},{\"id\":\"construction-card-18\",\"type\":\"card\",\"data\":{\"card_name\":\"1. Start & Setup\",\"col\":4}},{\"id\":\"construction-card-19\",\"type\":\"card\",\"data\":{\"card_name\":\"2. Contracts & BOQ\",\"col\":4}},{\"id\":\"construction-card-20\",\"type\":\"card\",\"data\":{\"card_name\":\"3. Schedule\",\"col\":4}},{\"id\":\"construction-card-21\",\"type\":\"card\",\"data\":{\"card_name\":\"10. BIM & CDE\",\"col\":4}},{\"id\":\"construction-card-22\",\"type\":\"card\",\"data\":{\"card_name\":\"4. Site & Execution\",\"col\":4}},{\"id\":\"construction-card-23\",\"type\":\"card\",\"data\":{\"card_name\":\"5. Subcontractors\",\"col\":4}},{\"id\":\"construction-card-24\",\"type\":\"card\",\"data\":{\"card_name\":\"6. Changes & Claims (FIDIC)\",\"col\":4}},{\"id\":\"construction-card-25\",\"type\":\"card\",\"data\":{\"card_name\":\"7. NEC4 & Disputes\",\"col\":4}},{\"id\":\"construction-card-26\",\"type\":\"card\",\"data\":{\"card_name\":\"8. Billing & Payment\",\"col\":4}},{\"id\":\"construction-card-27\",\"type\":\"card\",\"data\":{\"card_name\":\"9. Procurement\",\"col\":4}},{\"id\":\"construction-card-28\",\"type\":\"card\",\"data\":{\"card_name\":\"10. Approvals & Forms\",\"col\":4}},{\"id\":\"construction-card-29\",\"type\":\"card\",\"data\":{\"card_name\":\"11. Quality & Safety (QHSE)\",\"col\":4}},{\"id\":\"construction-card-30\",\"type\":\"card\",\"data\":{\"card_name\":\"12. Environment\",\"col\":4}},{\"id\":\"construction-card-31\",\"type\":\"card\",\"data\":{\"card_name\":\"13. Documents & CDE / BIM\",\"col\":4}},{\"id\":\"construction-card-32\",\"type\":\"card\",\"data\":{\"card_name\":\"14. Handover & Warranty\",\"col\":4}},{\"id\":\"construction-card-33\",\"type\":\"card\",\"data\":{\"card_name\":\"15. Reports & Analytics\",\"col\":4}},{\"id\":\"construction-card-34\",\"type\":\"card\",\"data\":{\"card_name\":\"Other\",\"col\":4}},{\"id\":\"construction-kpi-h-35\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>KPIs</b></span>\",\"col\":12}},{\"id\":\"construction-nc-36\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Project contracts\",\"col\":4}},{\"id\":\"construction-nc-37\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active contracts\",\"col\":4}},{\"id\":\"construction-nc-38\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Suspended contracts\",\"col\":4}},{\"id\":\"construction-nc-39\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Closed contracts\",\"col\":4}},{\"id\":\"construction-nc-40\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"BOQ lines\",\"col\":4}},{\"id\":\"construction-nc-41\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Site daily reports\",\"col\":4}},{\"id\":\"construction-nc-42\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Subcontract work orders\",\"col\":4}},{\"id\":\"construction-nc-43\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"IPC certificates\",\"col\":4}},{\"id\":\"construction-nc-44\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Construction claims\",\"col\":4}},{\"id\":\"construction-nc-45\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open NCRs\",\"col\":4}},{\"id\":\"construction-nc-46\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open HSE incidents\",\"col\":4}},{\"id\":\"construction-ch-h-47\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>Charts</b></span>\",\"col\":12}},{\"id\":\"construction-ch-48\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Project Contract Trend\",\"col\":4}},{\"id\":\"construction-ch-49\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Site Daily Report Trend\",\"col\":4}},{\"id\":\"construction-ch-50\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 IPC Certificate Trend\",\"col\":4}},{\"id\":\"construction-ch-51\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Project Contract Vol\",\"col\":4}}]",
+ "content": "[{\"id\":\"erpgenex-onboarding\",\"type\":\"onboarding\",\"data\":{\"onboarding_name\":\"ERPGENEX \\u2014 Construction\",\"col\":12}},{\"id\":\"construction-h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Construction</b></span>\",\"col\":12}},{\"id\":\"construction-qa-h-1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"construction-qa-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Project (Wizard)\",\"col\":4}},{\"id\":\"construction-qa-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Executive Dashboard\",\"col\":4}},{\"id\":\"construction-qa-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Site Mobile Hub\",\"col\":4}},{\"id\":\"construction-qa-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Schedule Gantt\",\"col\":4}},{\"id\":\"construction-qa-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Import from Primavera XER\",\"col\":4}},{\"id\":\"construction-qa-7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"HSE KPI Dashboard\",\"col\":4}},{\"id\":\"construction-qa-8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"IFC Viewer (Lite)\",\"col\":4}},{\"id\":\"construction-qa-9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Executive BI\",\"col\":4}},{\"id\":\"construction-qa-10\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction Project Setup\",\"col\":4}},{\"id\":\"construction-qa-11\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Integration Settings\",\"col\":4}},{\"id\":\"construction-qa-12\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer (project owners)\",\"col\":4}},{\"id\":\"construction-qa-13\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bid Estimate\",\"col\":4}},{\"id\":\"construction-qa-14\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CBS Element\",\"col\":4}},{\"id\":\"construction-qa-15\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Contract\",\"col\":4}},{\"id\":\"construction-qa-16\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOQ Item\",\"col\":4}},{\"id\":\"construction-qa-17\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOQ Template\",\"col\":4}},{\"id\":\"construction-qa-18\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trade Package\",\"col\":4}},{\"id\":\"construction-qa-19\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Regional Cost Factor\",\"col\":4}},{\"id\":\"construction-qa-20\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Schedule Baseline\",\"col\":4}},{\"id\":\"construction-qa-21\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"PM WBS Task\",\"col\":4}},{\"id\":\"construction-qa-22\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"MIDP\",\"col\":4}},{\"id\":\"construction-qa-23\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BIM Model Register\",\"col\":4}},{\"id\":\"construction-qa-24\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BIM Issue\",\"col\":4}},{\"id\":\"construction-qa-25\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CDE Document\",\"col\":4}},{\"id\":\"construction-qa-26\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Document Transmittal\",\"col\":4}},{\"id\":\"construction-qa-27\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Uniclass 2015\",\"col\":4}},{\"id\":\"construction-qa-28\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Site Daily Report\",\"col\":4}},{\"id\":\"construction-qa-29\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timesheet Entry\",\"col\":4}},{\"id\":\"construction-qa-30\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Risk Register\",\"col\":4}},{\"id\":\"construction-qa-31\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Usage\",\"col\":4}},{\"id\":\"construction-qa-32\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Snagging\",\"col\":4}},{\"id\":\"construction-qa-33\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inspection Request\",\"col\":4}},{\"id\":\"construction-qa-34\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"QS Measurement\",\"col\":4}},{\"id\":\"construction-qa-35\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Work Order\",\"col\":4}},{\"id\":\"construction-qa-36\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Payment\",\"col\":4}},{\"id\":\"construction-qa-37\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Retention Release\",\"col\":4}},{\"id\":\"construction-qa-38\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier Prequalification\",\"col\":4}},{\"id\":\"construction-qa-39\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"FIDIC Clause Reference\",\"col\":4}},{\"id\":\"construction-qa-40\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Change Order\",\"col\":4}},{\"id\":\"construction-qa-41\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Extension of Time (EOT)\",\"col\":4}},{\"id\":\"construction-qa-42\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction Claim\",\"col\":4}},{\"id\":\"construction-qa-43\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"FIDIC Notice\",\"col\":4}},{\"id\":\"construction-qa-44\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Work Delay Notice\",\"col\":4}},{\"id\":\"construction-qa-45\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Final Account\",\"col\":4}},{\"id\":\"construction-qa-46\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Retention Release\",\"col\":4}},{\"id\":\"construction-qa-47\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Early Warning (NEC4)\",\"col\":4}},{\"id\":\"construction-qa-48\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Compensation Event\",\"col\":4}},{\"id\":\"construction-qa-49\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dispute Case\",\"col\":4}},{\"id\":\"construction-qa-50\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DAB Referral\",\"col\":4}},{\"id\":\"construction-qa-51\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Settlement\",\"col\":4}},{\"id\":\"construction-qa-52\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"IPC Certificate\",\"col\":4}},{\"id\":\"construction-qa-53\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Contractor Statement\",\"col\":4}},{\"id\":\"construction-qa-54\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Fines Statement\",\"col\":4}},{\"id\":\"construction-qa-55\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project WIP Snapshot\",\"col\":4}},{\"id\":\"construction-qa-56\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction RFQ\",\"col\":4}},{\"id\":\"construction-qa-57\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Request\",\"col\":4}},{\"id\":\"construction-qa-58\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Order\",\"col\":4}},{\"id\":\"construction-qa-59\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":4}},{\"id\":\"construction-qa-60\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"RFI\",\"col\":4}},{\"id\":\"construction-qa-61\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Material Approval\",\"col\":4}},{\"id\":\"construction-qa-62\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Work Approval\",\"col\":4}},{\"id\":\"construction-qa-63\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"NCR\",\"col\":4}},{\"id\":\"construction-qa-64\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CAPA\",\"col\":4}},{\"id\":\"construction-qa-65\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"HSE Incident\",\"col\":4}},{\"id\":\"construction-qa-66\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Permit to Work\",\"col\":4}},{\"id\":\"construction-qa-67\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hazard Register\",\"col\":4}},{\"id\":\"construction-qa-68\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Toolbox Talk\",\"col\":4}},{\"id\":\"construction-qa-69\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Internal Audit\",\"col\":4}},{\"id\":\"construction-qa-70\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Management Review\",\"col\":4}},{\"id\":\"construction-qa-71\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Safety KPI\",\"col\":4}},{\"id\":\"construction-qa-72\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"OSHA Site Checklist\",\"col\":4}},{\"id\":\"construction-qa-73\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User NPS Survey\",\"col\":4}},{\"id\":\"construction-qa-74\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Environmental Aspect\",\"col\":4}},{\"id\":\"construction-qa-75\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Waste Log\",\"col\":4}},{\"id\":\"construction-qa-76\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Environmental Monitoring\",\"col\":4}},{\"id\":\"construction-qa-77\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"CDE Access Log\",\"col\":4}},{\"id\":\"construction-qa-78\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"ITP\",\"col\":4}},{\"id\":\"construction-qa-79\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Engineering Stage\",\"col\":4}},{\"id\":\"construction-qa-80\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Engineering Submittal\",\"col\":4}},{\"id\":\"construction-qa-81\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DLP Record\",\"col\":4}},{\"id\":\"construction-qa-82\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Residential Unit\",\"col\":4}},{\"id\":\"construction-qa-83\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Plot Unit\",\"col\":4}},{\"id\":\"construction-qa-84\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User Branch Access\",\"col\":4}},{\"id\":\"construction-qa-85\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":4}},{\"id\":\"construction-all-h-86\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>All modules & links</b></span>\",\"col\":12}},{\"id\":\"construction-card-87\",\"type\":\"card\",\"data\":{\"card_name\":\"1. Start & Setup\",\"col\":4}},{\"id\":\"construction-card-88\",\"type\":\"card\",\"data\":{\"card_name\":\"2. Contracts & BOQ\",\"col\":4}},{\"id\":\"construction-card-89\",\"type\":\"card\",\"data\":{\"card_name\":\"3. Schedule\",\"col\":4}},{\"id\":\"construction-card-90\",\"type\":\"card\",\"data\":{\"card_name\":\"10. BIM & CDE\",\"col\":4}},{\"id\":\"construction-card-91\",\"type\":\"card\",\"data\":{\"card_name\":\"4. Site & Execution\",\"col\":4}},{\"id\":\"construction-card-92\",\"type\":\"card\",\"data\":{\"card_name\":\"5. Subcontractors\",\"col\":4}},{\"id\":\"construction-card-93\",\"type\":\"card\",\"data\":{\"card_name\":\"6. Changes & Claims (FIDIC)\",\"col\":4}},{\"id\":\"construction-card-94\",\"type\":\"card\",\"data\":{\"card_name\":\"7. NEC4 & Disputes\",\"col\":4}},{\"id\":\"construction-card-95\",\"type\":\"card\",\"data\":{\"card_name\":\"8. Billing & Payment\",\"col\":4}},{\"id\":\"construction-card-96\",\"type\":\"card\",\"data\":{\"card_name\":\"9. Procurement\",\"col\":4}},{\"id\":\"construction-card-97\",\"type\":\"card\",\"data\":{\"card_name\":\"10. Approvals & Forms\",\"col\":4}},{\"id\":\"construction-card-98\",\"type\":\"card\",\"data\":{\"card_name\":\"11. Quality & Safety (QHSE)\",\"col\":4}},{\"id\":\"construction-card-99\",\"type\":\"card\",\"data\":{\"card_name\":\"12. Environment\",\"col\":4}},{\"id\":\"construction-card-100\",\"type\":\"card\",\"data\":{\"card_name\":\"13. Documents & CDE / BIM\",\"col\":4}},{\"id\":\"construction-card-101\",\"type\":\"card\",\"data\":{\"card_name\":\"14. Handover & Warranty\",\"col\":4}},{\"id\":\"construction-card-102\",\"type\":\"card\",\"data\":{\"card_name\":\"15. Reports & Analytics\",\"col\":4}},{\"id\":\"construction-card-103\",\"type\":\"card\",\"data\":{\"card_name\":\"Other\",\"col\":4}},{\"id\":\"construction-kpi-h-104\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>KPIs</b></span>\",\"col\":12}},{\"id\":\"construction-nc-105\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Project contracts\",\"col\":4}},{\"id\":\"construction-nc-106\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active contracts\",\"col\":4}},{\"id\":\"construction-nc-107\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Suspended contracts\",\"col\":4}},{\"id\":\"construction-nc-108\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Closed contracts\",\"col\":4}},{\"id\":\"construction-nc-109\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"BOQ lines\",\"col\":4}},{\"id\":\"construction-nc-110\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Site daily reports\",\"col\":4}},{\"id\":\"construction-nc-111\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Subcontract work orders\",\"col\":4}},{\"id\":\"construction-nc-112\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"IPC certificates\",\"col\":4}},{\"id\":\"construction-nc-113\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Construction claims\",\"col\":4}},{\"id\":\"construction-nc-114\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open NCRs\",\"col\":4}},{\"id\":\"construction-nc-115\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open HSE incidents\",\"col\":4}},{\"id\":\"construction-ch-h-116\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>Charts</b></span>\",\"col\":12}},{\"id\":\"construction-ch-117\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Project Contract Trend\",\"col\":4}},{\"id\":\"construction-ch-118\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Site Daily Report Trend\",\"col\":4}},{\"id\":\"construction-ch-119\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 IPC Certificate Trend\",\"col\":4}},{\"id\":\"construction-ch-120\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Project Contract Vol\",\"col\":4}}]",
  "creation": "2026-04-17 23:42:59.727027",
  "custom_blocks": [],
  "docstatus": 0,
@@ -1516,7 +1516,7 @@
    "__unsaved": 1
   }
  ],
- "modified": "2026-06-10 02:57:09.527932",
+ "modified": "2026-06-13 04:31:12.798740",
  "modified_by": "Administrator",
  "module": "Omnexa Construction",
  "name": "Construction",
@@ -1584,7 +1584,56 @@
    "type": "Page",
    "link_to": "construction-project-wizard",
    "label": "New Project (Wizard)",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "Page",
+   "link_to": "construction-executive-dashboard",
+   "label": "Executive Dashboard",
    "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "Page",
+   "link_to": "construction-site-mobile",
+   "label": "Site Mobile Hub",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "Page",
+   "link_to": "construction-schedule-gantt",
+   "label": "Schedule Gantt",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "Page",
+   "link_to": "primavera-project-import",
+   "label": "Import from Primavera XER",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "Page",
+   "link_to": "construction-hse-dashboard",
+   "label": "HSE KPI Dashboard",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "Page",
+   "link_to": "construction-ifc-viewer",
+   "label": "IFC Viewer (Lite)",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "Page",
+   "link_to": "construction-bi-executive",
+   "label": "Executive BI",
+   "color": "Pink",
    "__unsaved": 1
   },
   {
@@ -1592,7 +1641,39 @@
    "link_to": "Construction Project Setup",
    "doc_view": "List",
    "label": "Construction Project Setup",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Integration Settings",
+   "doc_view": "List",
+   "label": "Integration Settings",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Customer",
+   "doc_view": "List",
+   "label": "Customer (project owners)",
    "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Bid Estimate",
+   "doc_view": "List",
+   "label": "Bid Estimate",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction CBS Element",
+   "doc_view": "List",
+   "label": "CBS Element",
+   "color": "Red",
    "__unsaved": 1
   },
   {
@@ -1608,6 +1689,38 @@
    "link_to": "BOQ Item",
    "doc_view": "List",
    "label": "BOQ Item",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction BOQ Template",
+   "doc_view": "List",
+   "label": "BOQ Template",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Trade Package",
+   "doc_view": "List",
+   "label": "Trade Package",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Regional Cost Factor",
+   "doc_view": "List",
+   "label": "Regional Cost Factor",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Schedule Baseline",
+   "doc_view": "List",
+   "label": "Schedule Baseline",
    "color": "Blue",
    "__unsaved": 1
   },
@@ -1616,14 +1729,55 @@
    "link_to": "PM WBS Task",
    "doc_view": "List",
    "label": "PM WBS Task",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction MIDP",
+   "doc_view": "List",
+   "label": "MIDP",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction BIM Model Register",
+   "doc_view": "List",
+   "label": "BIM Model Register",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction BIM Issue",
+   "doc_view": "List",
+   "label": "BIM Issue",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction CDE Document",
+   "doc_view": "List",
+   "label": "CDE Document",
    "color": "Purple",
    "__unsaved": 1
   },
   {
-   "type": "Page",
-   "link_to": "construction-schedule-gantt",
-   "label": "Schedule Gantt",
-   "color": "Blue",
+   "type": "DocType",
+   "link_to": "Construction Document Transmittal",
+   "doc_view": "List",
+   "label": "Document Transmittal",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Uniclass 2015 Classification",
+   "doc_view": "List",
+   "label": "Uniclass 2015",
+   "color": "Pink",
    "__unsaved": 1
   },
   {
@@ -1631,14 +1785,55 @@
    "link_to": "Site Daily Report",
    "doc_view": "List",
    "label": "Site Daily Report",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Timesheet Entry",
+   "doc_view": "List",
+   "label": "Timesheet Entry",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Project Risk",
+   "doc_view": "List",
+   "label": "Project Risk Register",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Equipment Usage",
+   "doc_view": "List",
+   "label": "Equipment Usage",
    "color": "Orange",
    "__unsaved": 1
   },
   {
-   "type": "Page",
-   "link_to": "construction-site-mobile",
-   "label": "Site Mobile Hub",
-   "color": "Orange",
+   "type": "DocType",
+   "link_to": "Construction Snagging Item",
+   "doc_view": "List",
+   "label": "Snagging",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Inspection Request",
+   "doc_view": "List",
+   "label": "Inspection Request",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction QS Measurement Sheet",
+   "doc_view": "List",
+   "label": "QS Measurement",
+   "color": "Purple",
    "__unsaved": 1
   },
   {
@@ -1646,15 +1841,7 @@
    "link_to": "Subcontract Work Order",
    "doc_view": "List",
    "label": "Subcontract Work Order",
-   "color": "Green",
-   "__unsaved": 1
-  },
-  {
-   "type": "DocType",
-   "link_to": "IPC Certificate",
-   "doc_view": "List",
-   "label": "IPC Certificate",
-   "color": "Cyan",
+   "color": "Teal",
    "__unsaved": 1
   },
   {
@@ -1662,15 +1849,31 @@
    "link_to": "Subcontract Payment Certificate",
    "doc_view": "List",
    "label": "Subcontract Payment",
-   "color": "Cyan",
+   "color": "Pink",
    "__unsaved": 1
   },
   {
    "type": "DocType",
-   "link_to": "Construction Extension of Time",
+   "link_to": "Subcontract Retention Release",
    "doc_view": "List",
-   "label": "Extension of Time (EOT)",
-   "color": "Teal",
+   "label": "Subcontract Retention Release",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Supplier Prequalification",
+   "doc_view": "List",
+   "label": "Supplier Prequalification",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction FIDIC Clause Reference",
+   "doc_view": "List",
+   "label": "FIDIC Clause Reference",
+   "color": "Green",
    "__unsaved": 1
   },
   {
@@ -1678,6 +1881,14 @@
    "link_to": "Construction Change Order",
    "doc_view": "List",
    "label": "Change Order",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Extension of Time",
+   "doc_view": "List",
+   "label": "Extension of Time (EOT)",
    "color": "Red",
    "__unsaved": 1
   },
@@ -1686,6 +1897,102 @@
    "link_to": "Construction Claim",
    "doc_view": "List",
    "label": "Construction Claim",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction FIDIC Notice",
+   "doc_view": "List",
+   "label": "FIDIC Notice",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Work Delay Notice",
+   "doc_view": "List",
+   "label": "Work Delay Notice",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Final Account Statement",
+   "doc_view": "List",
+   "label": "Final Account",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Retention Release",
+   "doc_view": "List",
+   "label": "Retention Release",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Early Warning",
+   "doc_view": "List",
+   "label": "Early Warning (NEC4)",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Compensation Event",
+   "doc_view": "List",
+   "label": "Compensation Event",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Dispute Case",
+   "doc_view": "List",
+   "label": "Dispute Case",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction DAB Referral",
+   "doc_view": "List",
+   "label": "DAB Referral",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Settlement",
+   "doc_view": "List",
+   "label": "Settlement",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "IPC Certificate",
+   "doc_view": "List",
+   "label": "IPC Certificate",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Contractor Account Statement",
+   "doc_view": "List",
+   "label": "Contractor Statement",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Fines Statement",
+   "doc_view": "List",
+   "label": "Fines Statement",
    "color": "Pink",
    "__unsaved": 1
   },
@@ -1694,99 +2001,23 @@
    "link_to": "Project WIP Snapshot",
    "doc_view": "List",
    "label": "Project WIP Snapshot",
-   "color": "Purple",
-   "__unsaved": 1
-  },
-  {
-   "type": "Page",
-   "link_to": "construction-executive-dashboard",
-   "label": "Executive Dashboard",
-   "color": "Purple",
-   "__unsaved": 1
-  },
-  {
-   "type": "Page",
-   "link_to": "construction-bi-executive",
-   "label": "Executive BI",
-   "color": "Purple",
-   "__unsaved": 1
-  },
-  {
-   "type": "Page",
-   "link_to": "construction-hse-dashboard",
-   "label": "HSE KPI Dashboard",
-   "color": "Red",
-   "__unsaved": 1
-  },
-  {
-   "type": "Page",
-   "link_to": "construction-ifc-viewer",
-   "label": "IFC Viewer",
-   "color": "Grey",
-   "__unsaved": 1
-  },
-  {
-   "type": "Report",
-   "link_to": "Construction EVM Dashboard",
-   "label": "EVM Dashboard",
-   "report_ref_doctype": "Project Contract",
-   "color": "Grey",
-   "__unsaved": 1
-  },
-  {
-   "type": "Report",
-   "link_to": "Construction Executive Summary",
-   "label": "Executive Summary",
-   "report_ref_doctype": "Project Contract",
-   "color": "Grey",
-   "__unsaved": 1
-  },
-  {
-   "type": "Report",
-   "link_to": "BOQ Progress",
-   "label": "BOQ Progress",
-   "report_ref_doctype": "BOQ Item",
-   "color": "Red",
+   "color": "Yellow",
    "__unsaved": 1
   },
   {
    "type": "DocType",
-   "link_to": "Construction RFI",
+   "link_to": "Construction RFQ",
    "doc_view": "List",
-   "label": "RFI",
+   "label": "Construction RFQ",
    "color": "Blue",
    "__unsaved": 1
   },
   {
    "type": "DocType",
-   "link_to": "Construction NCR",
+   "link_to": "Purchase Request",
    "doc_view": "List",
-   "label": "NCR",
-   "color": "Orange",
-   "__unsaved": 1
-  },
-  {
-   "type": "DocType",
-   "link_to": "Construction Work Approval Request",
-   "doc_view": "List",
-   "label": "Work Approval",
-   "color": "Blue",
-   "__unsaved": 1
-  },
-  {
-   "type": "DocType",
-   "link_to": "Construction Fines Statement",
-   "doc_view": "List",
-   "label": "Fines Statement",
-   "color": "Red",
-   "__unsaved": 1
-  },
-  {
-   "type": "DocType",
-   "link_to": "Contractor Account Statement",
-   "doc_view": "List",
-   "label": "Contractor Statement",
-   "color": "Blue",
+   "label": "Purchase Request",
+   "color": "Green",
    "__unsaved": 1
   },
   {
@@ -1802,7 +2033,407 @@
    "link_to": "Supplier",
    "doc_view": "List",
    "label": "Supplier",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction RFI",
+   "doc_view": "List",
+   "label": "RFI",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Material Approval Request",
+   "doc_view": "List",
+   "label": "Material Approval",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Work Approval Request",
+   "doc_view": "List",
+   "label": "Work Approval",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction NCR",
+   "doc_view": "List",
+   "label": "NCR",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction CAPA",
+   "doc_view": "List",
+   "label": "CAPA",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction HSE Incident",
+   "doc_view": "List",
+   "label": "HSE Incident",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Permit to Work",
+   "doc_view": "List",
+   "label": "Permit to Work",
    "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Hazard Register",
+   "doc_view": "List",
+   "label": "Hazard Register",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Toolbox Talk",
+   "doc_view": "List",
+   "label": "Toolbox Talk",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Internal Audit",
+   "doc_view": "List",
+   "label": "Internal Audit",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Management Review",
+   "doc_view": "List",
+   "label": "Management Review",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Safety KPI",
+   "doc_view": "List",
+   "label": "Safety KPI",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction OSHA Site Checklist",
+   "doc_view": "List",
+   "label": "OSHA Site Checklist",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction User NPS",
+   "doc_view": "List",
+   "label": "User NPS Survey",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Environmental Aspect",
+   "doc_view": "List",
+   "label": "Environmental Aspect",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Waste Log",
+   "doc_view": "List",
+   "label": "Waste Log",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Environmental Monitoring",
+   "doc_view": "List",
+   "label": "Environmental Monitoring",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction CDE Access Log",
+   "doc_view": "List",
+   "label": "CDE Access Log",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Inspection Test Plan",
+   "doc_view": "List",
+   "label": "ITP",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Engineering Stage",
+   "doc_view": "List",
+   "label": "Engineering Stage",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Engineering Submittal",
+   "doc_view": "List",
+   "label": "Engineering Submittal",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction DLP Record",
+   "doc_view": "List",
+   "label": "DLP Record",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Residential Unit",
+   "doc_view": "List",
+   "label": "Residential Unit",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Plot Unit",
+   "doc_view": "List",
+   "label": "Plot Unit",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "User Branch Access",
+   "doc_view": "List",
+   "label": "User Branch Access",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Journal Entry",
+   "doc_view": "List",
+   "label": "Journal Entry",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "NCR Aging",
+   "label": "NCR Aging",
+   "report_ref_doctype": "Construction NCR",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "PTW Register",
+   "label": "PTW Register",
+   "report_ref_doctype": "Construction Permit to Work",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "HSE Incident Summary",
+   "label": "HSE Summary",
+   "report_ref_doctype": "Construction HSE Incident",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Environmental Compliance",
+   "label": "Environmental Compliance",
+   "report_ref_doctype": "Construction Environmental Aspect",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction World Class Mock Audit",
+   "label": "World Class Mock Audit",
+   "report_ref_doctype": "Project Contract",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Executive Summary",
+   "label": "Executive Summary",
+   "report_ref_doctype": "Project Contract",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction EVM Dashboard",
+   "label": "EVM Dashboard",
+   "report_ref_doctype": "Project Contract",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Earned Value",
+   "label": "Earned Value (EVM)",
+   "report_ref_doctype": "Project Contract",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Contract Control",
+   "label": "Contract Control",
+   "report_ref_doctype": "Project Contract",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction FIDIC Compliance",
+   "label": "FIDIC Compliance",
+   "report_ref_doctype": "Construction FIDIC Notice",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction FIDIC Compliance Checklist",
+   "label": "FIDIC Checklist 100%",
+   "report_ref_doctype": "Construction FIDIC Notice",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Commercial Pipeline",
+   "label": "Commercial Pipeline",
+   "report_ref_doctype": "IPC Certificate",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "BOQ Progress",
+   "label": "BOQ Progress",
+   "report_ref_doctype": "BOQ Item",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "BOQ Commitment vs Actual",
+   "label": "BOQ Commitment vs Actual",
+   "report_ref_doctype": "BOQ Item",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "BOQ Cost Overrun",
+   "label": "BOQ Cost Overrun",
+   "report_ref_doctype": "BOQ Item",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Material Consumption vs BOQ",
+   "label": "Material vs BOQ",
+   "report_ref_doctype": "BOQ Item",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "IPC Certificate Summary",
+   "label": "IPC Summary",
+   "report_ref_doctype": "IPC Certificate",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Project Profitability (Construction)",
+   "label": "Project Profitability",
+   "report_ref_doctype": "Project Contract",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Contract International Summary",
+   "label": "International Summary",
+   "report_ref_doctype": "Project Contract",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Currency Revaluation Exposure",
+   "label": "Currency Exposure",
+   "report_ref_doctype": "IPC Certificate",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "RFQ Bid Tabulation",
+   "label": "RFQ Bid Tabulation",
+   "report_ref_doctype": "Construction RFQ",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Bid Comparison",
+   "label": "Bid Comparison",
+   "report_ref_doctype": "Construction Bid Estimate",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction CBS BOQ Summary",
+   "label": "CBS BOQ Summary",
+   "report_ref_doctype": "BOQ Item",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Snagging Summary",
+   "label": "Snagging Summary",
+   "report_ref_doctype": "Construction Snagging Item",
+   "color": "Yellow",
    "__unsaved": 1
   }
  ],
