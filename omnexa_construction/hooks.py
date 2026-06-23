@@ -17,7 +17,7 @@ required_apps = ["omnexa_core"]
 # 		"name": "omnexa_construction",
 # 		"logo": "/assets/omnexa_construction/logo.png",
 # 		"title": "Omnexa Construction",
-# 		"route": "/omnexa_construction",
+# 		"route": "/app/construction-workcenter",
 # 		"has_permission": "omnexa_construction.api.permission.has_app_permission"
 # 	}
 # ]
