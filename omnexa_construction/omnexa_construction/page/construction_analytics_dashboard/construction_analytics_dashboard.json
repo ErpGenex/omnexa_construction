@@ -1,10 +1,10 @@
 {
 	"doctype": "Page",
 	"module": "Omnexa Construction",
-	"name": "construction-executive-dashboard",
-	"page_name": "construction-executive-dashboard",
+	"name": "construction-analytics-dashboard",
+	"page_name": "construction-analytics-dashboard",
 	"standard": "Yes",
-	"title": "Executive Dashboard",
+	"title": "Analytics Dashboard",
 	"roles": [
 		{
 			"role": "System Manager"

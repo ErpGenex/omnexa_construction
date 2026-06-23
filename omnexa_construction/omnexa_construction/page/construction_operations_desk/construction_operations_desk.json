@@ -1,10 +1,10 @@
 {
 	"doctype": "Page",
 	"module": "Omnexa Construction",
-	"name": "construction-executive-dashboard",
-	"page_name": "construction-executive-dashboard",
+	"name": "construction-operations-desk",
+	"page_name": "construction-operations-desk",
 	"standard": "Yes",
-	"title": "Executive Dashboard",
+	"title": "Operations Desk",
 	"roles": [
 		{
 			"role": "System Manager"

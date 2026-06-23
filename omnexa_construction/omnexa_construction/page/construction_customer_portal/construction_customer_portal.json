@@ -1,10 +1,10 @@
 {
 	"doctype": "Page",
 	"module": "Omnexa Construction",
-	"name": "construction-executive-dashboard",
-	"page_name": "construction-executive-dashboard",
+	"name": "construction-customer-portal",
+	"page_name": "construction-customer-portal",
 	"standard": "Yes",
-	"title": "Executive Dashboard",
+	"title": "Customer Portal",
 	"roles": [
 		{
 			"role": "System Manager"

@@ -1,10 +1,10 @@
 {
 	"doctype": "Page",
 	"module": "Omnexa Construction",
-	"name": "construction-executive-dashboard",
-	"page_name": "construction-executive-dashboard",
+	"name": "construction-finance-desk",
+	"page_name": "construction-finance-desk",
 	"standard": "Yes",
-	"title": "Executive Dashboard",
+	"title": "Finance Desk",
 	"roles": [
 		{
 			"role": "System Manager"
