@@ -5,7 +5,7 @@ import frappe
 from frappe import _
 
 from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
-from frappe.utils import date_diff, getdate, today
+from frappe.utils import date_diff, flt, getdate, today
 from omnexa_core.omnexa_core.branch_access import get_allowed_branches
 
 
@@ -29,8 +29,16 @@ def execute(filters=None):
 
 	rows = frappe.db.sql(
 		f"""
-		SELECT n.name, n.project_contract, n.ncr_date, n.severity, n.status, n.boq_item
+		SELECT
+			n.name,
+			n.project_contract,
+			n.ncr_date,
+			n.severity,
+			n.status,
+			n.boq_item,
+			COALESCE(b.planned_cost, 0) AS cost_exposure
 		FROM `tabConstruction NCR` n
+		LEFT JOIN `tabBOQ Item` b ON b.name = n.boq_item
 		WHERE {' AND '.join(conditions)}
 		ORDER BY n.ncr_date asc
 		LIMIT 5000
@@ -43,7 +51,14 @@ def execute(filters=None):
 	data = []
 	for row in rows:
 		age = date_diff(as_of, getdate(row.ncr_date))
-		data.append({**row, "age_days": age, "overdue": 1 if age > 30 and row.status != "Closed" else 0})
+		data.append(
+			{
+				**row,
+				"age_days": age,
+				"cost_exposure": flt(row.get("cost_exposure")),
+				"overdue": 1 if age > 30 and row.status != "Closed" else 0,
+			}
+		)
 	columns = _columns()
 	chart = auto_chart_for_columns(data, columns)
 	return columns, data, None, chart
@@ -58,5 +73,6 @@ def _columns():
 		{"label": _("Severity"), "fieldname": "severity", "fieldtype": "Data", "width": 80},
 		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100},
 		{"label": _("BOQ Item"), "fieldname": "boq_item", "fieldtype": "Link", "options": "BOQ Item", "width": 110},
+		{"label": _("Cost Exposure"), "fieldname": "cost_exposure", "fieldtype": "Currency", "width": 120},
 		{"label": _("Overdue (>30d)"), "fieldname": "overdue", "fieldtype": "Check", "width": 90},
 	]
