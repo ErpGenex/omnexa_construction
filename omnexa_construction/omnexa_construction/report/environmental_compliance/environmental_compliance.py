@@ -3,6 +3,8 @@
 
 import frappe
 from frappe import _
+
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
 from frappe.utils import date_diff, getdate, today
 from omnexa_core.omnexa_core.branch_access import get_allowed_branches
 
@@ -16,9 +18,9 @@ def execute(filters=None):
 	data = []
 	data.extend(_aspect_rows(filters, as_of))
 	data.extend(_waste_rows(filters, as_of))
-	return _columns(), data
-
-
+	columns = _columns()
+	chart = auto_chart_for_columns(data, columns)
+	return columns, data, None, chart
 def _aspect_rows(filters, as_of):
 	if not frappe.db.exists("DocType", "Construction Environmental Aspect"):
 		return []

@@ -4,6 +4,8 @@
 import frappe
 from frappe import _
 
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
+
 from omnexa_construction.contract_financials import (
 	certified_ipc_net_total,
 	claims_active_count,
@@ -40,8 +42,9 @@ def execute(filters=None):
 		row.ipc_net_certified = certified_ipc_net_total(row.name)
 		row.eot_approved_count = eot_approved_count(row.name)
 		row.claims_active_count = claims_active_count(row.name)
-
-	return _columns(), data
+	columns = _columns()
+	chart = auto_chart_for_columns(data, columns)
+	return columns, data, None, chart
 
 
 def _columns():

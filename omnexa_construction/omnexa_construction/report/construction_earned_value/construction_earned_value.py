@@ -4,6 +4,8 @@
 import frappe
 from frappe import _
 
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
+
 from omnexa_construction.evm_metrics import evm_snapshot
 from omnexa_core.omnexa_core.report_print.report_query_filters import get_all_filters, prepare_filters
 
@@ -18,7 +20,9 @@ def execute(filters=None):
 		limit_page_length=5000,
 	)
 	data = [evm_snapshot(row.name, as_of) for row in contracts]
-	return _columns(), data
+	columns = _columns()
+	chart = auto_chart_for_columns(data, columns)
+	return columns, data, None, chart
 
 
 def _columns():

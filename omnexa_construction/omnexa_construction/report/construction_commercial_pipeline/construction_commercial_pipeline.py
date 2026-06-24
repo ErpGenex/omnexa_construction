@@ -3,6 +3,8 @@
 
 import frappe
 from frappe import _
+
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
 from frappe.utils import flt
 from omnexa_core.omnexa_core.branch_access import get_allowed_branches
 
@@ -23,9 +25,9 @@ def execute(filters=None):
 	data.extend(_eot_rows(filters, allowed))
 	data.extend(_subcontract_cert_rows(filters, allowed))
 	data.sort(key=lambda r: (r.get("project_contract") or "", r.get("document_type") or ""))
-	return _columns(), data
-
-
+	columns = _columns()
+	chart = auto_chart_for_columns(data, columns)
+	return columns, data, None, chart
 def _scope(filters, allowed):
 	conditions = ["company = %(company)s"]
 	if filters.get("branch"):

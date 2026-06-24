@@ -3,6 +3,8 @@
 
 import frappe
 from frappe import _
+
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
 from frappe.utils import date_diff, getdate, today
 from omnexa_core.omnexa_core.branch_access import get_allowed_branches
 
@@ -47,7 +49,9 @@ def execute(filters=None):
 			row.max_age_days = date_diff(as_of, getdate(row.oldest_snag_date))
 		else:
 			row.max_age_days = 0
-	return _columns(), rows
+	columns = _columns()
+	chart = auto_chart_for_columns(rows, columns)
+	return columns, rows, None, chart
 
 
 def _columns():

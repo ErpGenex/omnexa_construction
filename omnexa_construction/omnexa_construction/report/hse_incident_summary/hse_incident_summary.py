@@ -3,6 +3,8 @@
 
 import frappe
 from frappe import _
+
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
 from omnexa_core.omnexa_core.branch_access import get_allowed_branches
 
 
@@ -42,7 +44,9 @@ def execute(filters=None):
 	)
 	for row in rows:
 		row.incident_count = int(row.incident_count or 0)
-	return _columns(), rows
+	columns = _columns()
+	chart = auto_chart_for_columns(rows, columns)
+	return columns, rows, None, chart
 
 
 def _columns():

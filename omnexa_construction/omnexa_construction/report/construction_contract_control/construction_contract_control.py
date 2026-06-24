@@ -3,6 +3,8 @@
 
 import frappe
 from frappe import _
+
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
 from frappe.utils import flt
 
 from omnexa_construction.contract_financials import (
@@ -35,8 +37,9 @@ def execute(filters=None):
 		row.revised_value = revised
 		row.ipc_net = ipc_net
 		row.remaining = flt(revised) - flt(ipc_net)
-
-	return _columns(), data
+	columns = _columns()
+	chart = auto_chart_for_columns(data, columns)
+	return columns, data, None, chart
 
 
 def _columns():
