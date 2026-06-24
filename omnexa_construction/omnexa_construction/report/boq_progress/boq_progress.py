@@ -5,6 +5,8 @@ import frappe
 from frappe.utils import flt
 from frappe import _
 
+from omnexa_core.omnexa_core.utils.report_charts import auto_chart_for_columns
+
 from omnexa_core.omnexa_core.report_print.report_query_filters import (
 	get_all_filters,
 	policy_version_filters,
