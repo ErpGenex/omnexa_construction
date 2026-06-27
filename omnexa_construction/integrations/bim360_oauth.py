@@ -27,19 +27,23 @@ def get_bim360_authorize_url() -> dict:
 	return {"authorize_url": url}
 
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist(allow_guest=True, methods=["GET"])
 def bim360_oauth_callback(code: str | None = None, state: str | None = None):
 	if not code or not state:
 		frappe.respond_as_web_page(_("BIM 360"), _("Authorization failed."), indicator_color="red")
 		return
-	user = frappe.cache.get_value(f"bim360_oauth_state:{state}")
+	cache_key = f"bim360_oauth_state:{state}"
+	user = frappe.cache.get_value(cache_key)
 	if not user:
 		frappe.respond_as_web_page(_("BIM 360"), _("Invalid or expired state."), indicator_color="red")
 		return
+	frappe.cache().delete_value(cache_key)
+	frappe.set_user(user)
 	settings = frappe.get_single("Construction Integration Settings")
 	settings.bim360_access_token = code  # MVP: store code; exchange in production
 	settings.bim360_token_updated = now_datetime()
 	settings.save(ignore_permissions=True)
+	frappe.db.commit()
 	frappe.respond_as_web_page(_("BIM 360"), _("Connected. Return to Desk."), indicator_color="green")
 
 

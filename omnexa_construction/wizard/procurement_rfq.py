@@ -10,6 +10,7 @@ def create_rfq_from_purchase_request(
 	*,
 	supplier_names: list[str] | None = None,
 	auto_quotes: int = 1,
+	project_contract: str | None = None,
 ) -> str:
 	"""Create Construction RFQ from Purchase Request lines."""
 	if not frappe.db.exists("DocType", "Construction RFQ"):
@@ -30,12 +31,15 @@ def create_rfq_from_purchase_request(
 		)
 	if not items:
 		frappe.throw(_("Purchase Request has no items."), title=_("Procurement"))
+	contract = project_contract or pr.get("project_contract")
+	if not contract and frappe.db.has_column("Purchase Request", "project_contract"):
+		contract = frappe.db.get_value("Purchase Request", pr.name, "project_contract")
 	rfq = frappe.get_doc(
 		{
 			"doctype": "Construction RFQ",
 			"company": pr.company,
 			"branch": pr.branch,
-			"project_contract": pr.get("project_contract"),
+			"project_contract": contract,
 			"purchase_request": pr.name,
 			"rfq_date": today(),
 			"required_by": pr.required_by,
@@ -59,13 +63,14 @@ def create_rfq_from_purchase_request(
 	return rfq.name
 
 
-def create_rfqs_for_setup(setup, pr_names: list[str]) -> list[str]:
+def create_rfqs_for_setup(setup, pr_names: list[str], project_contract: str | None = None) -> list[str]:
 	names = []
+	contract = project_contract or getattr(setup, "project_contract", None)
 	for pr in pr_names:
 		if frappe.db.exists("Construction RFQ", {"purchase_request": pr}):
 			names.append(frappe.db.get_value("Construction RFQ", {"purchase_request": pr}, "name"))
 			continue
-		names.append(create_rfq_from_purchase_request(pr))
+		names.append(create_rfq_from_purchase_request(pr, project_contract=contract))
 	return names
 
 

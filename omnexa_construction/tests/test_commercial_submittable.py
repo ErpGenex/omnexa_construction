@@ -2,10 +2,10 @@
 # License: MIT
 
 import frappe
-from frappe.tests import IntegrationTestCase
+from frappe.tests.utils import FrappeTestCase
 
 
-class TestCommercialSubmittable(IntegrationTestCase):
+class TestCommercialSubmittable(FrappeTestCase):
 	def test_ipc_certificate_is_submittable(self):
 		meta = frappe.get_meta("IPC Certificate")
 		self.assertTrue(meta.is_submittable)

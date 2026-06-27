@@ -2,12 +2,12 @@
 # License: MIT
 
 import frappe
-from frappe.tests import IntegrationTestCase
+from frappe.tests.utils import FrappeTestCase
 
 from omnexa_construction.evm_metrics import evm_snapshot, schedule_percent_planned
 
 
-class TestEvmWbsIntegration(IntegrationTestCase):
+class TestEvmWbsIntegration(FrappeTestCase):
 	def test_evm_snapshot_keys(self):
 		contracts = frappe.get_all("Project Contract", limit=1, pluck="name")
 		if not contracts:

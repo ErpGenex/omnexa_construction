@@ -17,6 +17,31 @@ from omnexa_construction.fidic_compliance import (
 
 
 class TestFidicTimeBar(FrappeTestCase):
+	@classmethod
+	def setUpClass(cls):
+		super().setUpClass()
+		if not frappe.db.exists("DocType", "Construction FIDIC Clause Reference"):
+			return
+		ref_name = frappe.db.get_value(
+			"Construction FIDIC Clause Reference",
+			{"display_reference": "FIDIC 20.2.1 — Notice of Claim"},
+			"name",
+		)
+		if ref_name:
+			return
+		payload = {
+			"doctype": "Construction FIDIC Clause Reference",
+			"display_reference": "FIDIC 20.2.1 — Notice of Claim",
+			"clause_code": "20.2.1",
+			"standard_family": "FIDIC",
+			"notice_type": "Claim",
+			"time_bar_days": 28,
+			"title": "Notice of Claim",
+		}
+		if frappe.get_meta("Construction FIDIC Clause Reference").has_field("description"):
+			payload["description"] = "Primary time-bar notice for claims under FIDIC 2017."
+		frappe.get_doc(payload).insert(ignore_permissions=True)
+
 	def test_default_time_bar_days(self):
 		self.assertEqual(time_bar_days_for_contract(""), 28)
 

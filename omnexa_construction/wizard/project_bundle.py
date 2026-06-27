@@ -421,7 +421,7 @@ def _execute_project_bundle(setup) -> dict:
 		pr_names.extend(_create_purchase_requests(setup, contract.name, code_to_boq))
 
 	if frappe.db.exists("DocType", "Construction RFQ") and pr_names:
-		rfq_names = create_rfqs_for_setup(setup, pr_names)
+		rfq_names = create_rfqs_for_setup(setup, pr_names, project_contract=contract.name)
 
 	transmittal = _create_kickoff_transmittal(setup, contract.name)
 	ipc_names = _create_ipc_schedule_drafts(setup, contract.name)

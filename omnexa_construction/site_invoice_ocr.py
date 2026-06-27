@@ -37,10 +37,25 @@ def parse_site_invoice_text(raw_text: str, project_contract: str) -> dict:
 
 
 def match_lines_to_boq(project_contract: str, lines: list[dict]) -> list[dict]:
+	meta = frappe.get_meta("BOQ Item")
+	desc_field = "item_description" if meta.has_field("item_description") else "description"
+	fields = ["name"]
+	if meta.has_field(desc_field):
+		fields.append(desc_field)
+	if meta.has_field("item_code"):
+		fields.append("item_code")
+	if meta.has_field("quantity"):
+		fields.append("quantity")
+	elif meta.has_field("qty"):
+		fields.append("qty")
+	if meta.has_field("unit_cost"):
+		fields.append("unit_cost")
+	elif meta.has_field("rate"):
+		fields.append("rate")
 	boq = frappe.get_all(
 		"BOQ Item",
 		filters={"project_contract": project_contract, "docstatus": ["<", 2]},
-		fields=["name", "description", "item_code", "qty", "rate"],
+		fields=fields,
 		limit=500,
 	)
 	out = []
@@ -49,7 +64,8 @@ def match_lines_to_boq(project_contract: str, lines: list[dict]) -> list[dict]:
 		best = None
 		best_score = 0
 		for item in boq:
-			score = _similarity(desc, (item.description or "").lower())
+			item_desc = (getattr(item, desc_field, None) or "").lower()
+			score = _similarity(desc, item_desc)
 			if score > best_score:
 				best_score = score
 				best = item

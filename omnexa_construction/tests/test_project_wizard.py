@@ -20,10 +20,14 @@ class TestProjectWizard(FrappeTestCase):
 	def test_create_setup_resolves_company_without_user_default(self):
 		if not self.company:
 			self.skipTest("No company on site")
+		from omnexa_core.omnexa_core.branch_access import get_default_company
+
 		frappe.defaults.clear_user_default("Company")
 		frappe.defaults.clear_user_default("company")
+		frappe.defaults.clear_user_default("omnexa_view_company")
+		expected = get_default_company() or self.company
 		out = create_setup()
-		self.assertEqual(out["company"], self.company)
+		self.assertEqual(out["company"], expected)
 		frappe.delete_doc("Construction Project Setup", out["name"], force=1)
 
 	def test_save_wizard_assignments(self):

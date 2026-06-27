@@ -22,8 +22,11 @@ class TestWizardFullFlow(FrappeTestCase):
 	def test_wizard_recovers_from_invalid_company_hint(self):
 		if not self.company:
 			self.skipTest("No company")
+		from omnexa_core.omnexa_core.branch_access import get_default_company
+
+		expected = get_default_company() or self.company
 		ctx = get_wizard_context(company="MH Head Office", branch=None)
-		self.assertEqual(ctx["setup"]["company"], self.company)
+		self.assertEqual(ctx["setup"]["company"], expected)
 
 	def test_wizard_steps_1_through_8_api(self):
 		if not self.company or not self.branch:

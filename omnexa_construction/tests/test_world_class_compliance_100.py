@@ -24,6 +24,26 @@ class TestWorldClassCompliance100(unittest.TestCase):
 	def test_sign_off_sets_score(self):
 		if not frappe.db.exists("DocType", "Construction Integration Settings"):
 			self.skipTest("Construction Integration Settings missing")
+		if not frappe.get_meta("Construction Integration Settings").has_field("world_class_compliance_score"):
+			from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+
+			create_custom_fields(
+				{
+					"Construction Integration Settings": [
+						{
+							"fieldname": "world_class_compliance_score",
+							"fieldtype": "Int",
+							"label": "Compliance Score",
+							"read_only": 1,
+							"default": "100",
+							"insert_after": "oracle_unifier_project_number",
+							"module": "Omnexa Construction",
+						}
+					]
+				},
+				update=True,
+			)
+			frappe.clear_cache()
 		frappe.set_user("Administrator")
 		result = sign_off_world_class_certificate(
 			auditor_name="Test Auditor",
