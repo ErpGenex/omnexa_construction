@@ -1,0 +1,28 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:ENVM-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "monitoring_date", "parameter", "measurement_value", "limit_value", "uom", "location", "compliance_status", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "monitoring_date", "fieldtype": "Date", "label": "Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "parameter", "fieldtype": "Select", "label": "Parameter", "options": "Noise\nDust\nWater Quality\nAir Quality\nVibration\nOther", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "measurement_value", "fieldtype": "Float", "label": "Measured Value", "reqd": 1},
+		{"fieldname": "limit_value", "fieldtype": "Float", "label": "Limit"},
+		{"fieldname": "uom", "fieldtype": "Data", "label": "UOM"},
+		{"fieldname": "location", "fieldtype": "Data", "label": "Location"},
+		{"fieldname": "compliance_status", "fieldtype": "Select", "label": "Compliance", "options": "Compliant\nNon-Compliant\nReview", "default": "Compliant", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Environmental Monitoring",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Construction HSE Officer", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

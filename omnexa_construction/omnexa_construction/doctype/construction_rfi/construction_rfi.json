@@ -1,0 +1,51 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:RFI-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"rfi_date",
+		"subject",
+		"discipline",
+		"column_break_1",
+		"due_date",
+		"status",
+		"section_question",
+		"question",
+		"section_response",
+		"response",
+		"responded_by",
+		"response_date",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "rfi_date", "fieldtype": "Date", "label": "RFI Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "subject", "fieldtype": "Data", "label": "Subject", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "discipline", "fieldtype": "Select", "label": "Discipline", "options": "\nArchitectural\nStructural\nMEP\nCivil\nGeneral", "in_list_view": 1},
+		{"fieldname": "column_break_1", "fieldtype": "Column Break"},
+		{"fieldname": "due_date", "fieldtype": "Date", "label": "Response Due Date"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Open\nAnswered\nClosed\nOverdue", "default": "Open", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "section_question", "fieldtype": "Section Break", "label": "Question"},
+		{"fieldname": "question", "fieldtype": "Text Editor", "label": "Question", "reqd": 1},
+		{"fieldname": "section_response", "fieldtype": "Section Break", "label": "Response"},
+		{"fieldname": "response", "fieldtype": "Text Editor", "label": "Response"},
+		{"fieldname": "responded_by", "fieldtype": "Data", "label": "Responded By"},
+		{"fieldname": "response_date", "fieldtype": "Date", "label": "Response Date"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction RFI",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1},
+		{"role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Construction Document Controller", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

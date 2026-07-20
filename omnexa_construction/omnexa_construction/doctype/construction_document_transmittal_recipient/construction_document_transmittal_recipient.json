@@ -1,0 +1,18 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["recipient_name", "recipient_role", "action_required", "acknowledged"],
+	"fields": [
+		{"fieldname": "recipient_name", "fieldtype": "Data", "label": "Recipient", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "recipient_role", "fieldtype": "Data", "label": "Role / Organization", "in_list_view": 1},
+		{"fieldname": "action_required", "fieldtype": "Select", "label": "Action", "options": "For Review\nFor Approval\nFor Information\nFor Construction", "default": "For Review", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "acknowledged", "fieldtype": "Check", "label": "Acknowledged", "in_list_view": 1}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Document Transmittal Recipient",
+	"permissions": [],
+	"track_changes": 0
+}

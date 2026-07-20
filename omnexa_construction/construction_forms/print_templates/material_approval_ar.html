@@ -1,0 +1,97 @@
+<div class="ar-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">شعار<br>الشركة</div>{% endif %}</td>
+  <td width="58%"><div class="title">طلب اعتماد خامات</div><div class="title-underline"></div></td>
+  <td width="30%" class="header-box">
+    <b class="label">رقم الطلب:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.request_date, {"fieldtype": "Date"}) or "" }}
+  </td>
+</tr></table>
+
+<p><b class="label">إلى:</b> {{ doc.recipient_title or "الاستشاري / المهندس" }}</p>
+<p>تحية طيبة وبعد،،،</p>
+<p class="intro-text"><span class="subject">الموضوع: طلب اعتماد خامات</span><br>
+نرفق لسيادتكم طيه بيانات ومواصفات الخامة المطلوبة بمشروع <b>{{ doc.project_name }}</b>، ونرجو من سيادتكم التكرم بالموافقة والاعتماد.</p>
+
+<div class="section-head">بيانات المشروع</div>
+<table class="project-grid meta">
+  <tr>
+    <td width="50%"><b class="label">اسم المشروع:</b> {{ doc.project_name }}</td>
+    <td width="50%"><b class="label">رقم المشروع:</b> {{ doc.project_number or "" }}</td>
+  </tr>
+  <tr>
+    <td><b class="label">الموقع:</b> {{ doc.site_location or "" }}</td>
+    <td><b class="label">رقم العقد:</b> {{ doc.contract_number or "" }}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b class="label">المقاول:</b> {{ doc.contractor_name or "" }}</td>
+  </tr>
+</table>
+
+<div class="section-head">تفاصيل الخامات</div>
+<table class="grid">
+  <thead><tr>
+    <th width="4%">م</th>
+    <th width="16%">اسم الخامة</th>
+    <th width="14%">المواصفة المطلوبة</th>
+    <th width="12%">الشركة / المصنعة</th>
+    <th width="10%">بلد المنشأ</th>
+    <th width="12%">نموذج / كتالوج</th>
+    <th width="12%">الكمية المقترحة</th>
+    <th width="20%">ملاحظات</th>
+  </tr></thead>
+  <tbody>{% for row in doc.materials %}<tr>
+    <td>{{ row.idx or loop.index }}</td>
+    <td class="desc">{{ row.material_name }}</td>
+    <td>{{ row.required_spec or "" }}</td>
+    <td>{{ row.manufacturer or "" }}</td>
+    <td>{{ row.country_of_origin or "" }}</td>
+    <td>{{ row.model_catalog or "" }}</td>
+    <td>{{ row.suggested_quantity or "" }} {{ row.uom or "" }}</td>
+    <td>{{ row.remarks or "" }}</td>
+  </tr>{% endfor %}{% if doc.materials|length < 5 %}{% for i in range(5 - doc.materials|length) %}<tr><td>{{ doc.materials|length + loop.index }}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>{% endfor %}{% endif %}</tbody>
+</table>
+
+<div class="section-head">المرفقات</div>
+<p class="checkbox-row">
+  {% if doc.attach_quality_certs %}☑{% else %}☐{% endif %} شهادات الجودة &nbsp;&nbsp;
+  {% if doc.attach_data_sheets %}☑{% else %}☐{% endif %} نشرات فنية (Data Sheet) &nbsp;&nbsp;
+  {% if doc.attach_samples %}☑{% else %}☐{% endif %} عينات (إن وجدت) &nbsp;&nbsp;
+  {% if doc.attach_other %}☑{% else %}☐{% endif %} أخرى: _______________
+</p>
+
+<div class="section-head">الاعتماد المطلوب</div>
+<p class="checkbox-row">
+  {% if doc.approve_technical %}☑{% else %}☐{% endif %} اعتماد فني &nbsp;&nbsp;
+  {% if doc.approve_quality %}☑{% else %}☐{% endif %} اعتماد جودة &nbsp;&nbsp;
+  {% if doc.approve_supplier %}☑{% else %}☐{% endif %} اعتماد مورد &nbsp;&nbsp;
+  {% if doc.approve_other %}☑{% else %}☐{% endif %} أخرى: {{ doc.approve_other_specify or "_______________" }}
+</p>
+
+<table class="sig"><tr>
+  <td width="33%">
+    <div class="sig-title">إعداد</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.prepared_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.prepared_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+  </td>
+  <td width="33%">
+    <div class="sig-title">مراجعة</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.reviewed_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.reviewed_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+  </td>
+  <td width="33%">
+    <div class="sig-title">يعتمد من المقاول</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.contractor_approved_by or "_______________" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.contractor_approved_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+  </td>
+</tr></table>
+
+<p class="note"><b>ملاحظة:</b> {{ doc.consultant_note or "لن يتم توريد أو استخدام أي خامات قبل الحصول على الاعتماد الخطي من الاستشاري." }}</p>
+<div class="page-footer">Omnexa Construction — {{ doc.project_name }} — {{ doc.name }}</div>
+</div>

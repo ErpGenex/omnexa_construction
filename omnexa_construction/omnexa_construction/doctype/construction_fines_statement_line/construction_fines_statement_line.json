@@ -1,0 +1,24 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["idx", "description", "fine_reason", "contract_clause", "violation_start", "violation_end", "number_of_days", "daily_fine_amount", "total_fine", "remarks"],
+	"fields": [
+		{"fieldname": "idx", "fieldtype": "Int", "label": "م", "in_list_view": 1},
+		{"fieldname": "description", "fieldtype": "Data", "label": "Description", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "fine_reason", "fieldtype": "Data", "label": "Reason for Fine", "in_list_view": 1},
+		{"fieldname": "contract_clause", "fieldtype": "Data", "label": "Contract Clause"},
+		{"fieldname": "violation_start", "fieldtype": "Date", "label": "Violation Start"},
+		{"fieldname": "violation_end", "fieldtype": "Date", "label": "Violation End"},
+		{"fieldname": "number_of_days", "fieldtype": "Int", "label": "Days", "in_list_view": 1},
+		{"fieldname": "daily_fine_amount", "fieldtype": "Currency", "label": "Daily Fine", "in_list_view": 1},
+		{"fieldname": "total_fine", "fieldtype": "Currency", "label": "Total Fine", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "remarks", "fieldtype": "Small Text", "label": "Remarks"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Fines Statement Line",
+	"permissions": [],
+	"track_changes": 0
+}

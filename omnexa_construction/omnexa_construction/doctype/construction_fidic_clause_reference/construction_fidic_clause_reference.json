@@ -1,0 +1,107 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "field:display_reference",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"display_reference",
+		"clause_code",
+		"standard_family",
+		"notice_type",
+		"time_bar_days",
+		"title",
+		"description",
+		"is_active",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{
+			"fieldname": "display_reference",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Display Reference",
+			"reqd": 1,
+			"unique": 1
+		},
+		{
+			"fieldname": "clause_code",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Clause Code",
+			"reqd": 1
+		},
+		{
+			"default": "FIDIC",
+			"fieldname": "standard_family",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "Standard Family",
+			"options": "FIDIC\nNEC4\nAIA\nOther / Bespoke",
+			"reqd": 1
+		},
+		{
+			"fieldname": "notice_type",
+			"fieldtype": "Select",
+			"in_list_view": 1,
+			"label": "Notice Type",
+			"options": "Claim\nExtension of Time\nVariation\nDefects\nPayment\nTermination\nOther"
+		},
+		{
+			"default": "28",
+			"fieldname": "time_bar_days",
+			"fieldtype": "Int",
+			"label": "Notice Due Date (Time-bar)"
+		},
+		{
+			"fieldname": "title",
+			"fieldtype": "Data",
+			"label": "Title",
+			"reqd": 1
+		},
+		{
+			"fieldname": "description",
+			"fieldtype": "Small Text",
+			"label": "Description"
+		},
+		{
+			"default": "1",
+			"fieldname": "is_active",
+			"fieldtype": "Check",
+			"label": "Active"
+		},
+		{
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"label": "Company",
+			"options": "Company"
+		},
+		{
+			"fieldname": "branch",
+			"fieldtype": "Link",
+			"label": "Branch",
+			"options": "Branch"
+		}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction FIDIC Clause Reference",
+	"permissions": [
+		{
+			"create": 1,
+			"delete": 1,
+			"read": 1,
+			"role": "System Manager",
+			"write": 1
+		},
+		{
+			"create": 1,
+			"read": 1,
+			"role": "Project Manager",
+			"write": 1
+		}
+	],
+	"sort_field": "modified",
+	"sort_order": "DESC",
+	"track_changes": 1
+}

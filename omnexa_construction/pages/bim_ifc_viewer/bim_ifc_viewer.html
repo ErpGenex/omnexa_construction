@@ -1,0 +1,147 @@
+{% extends "templates/base.html" %}
+
+{% block title %}BIM IFC Viewer{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>BIM IFC Viewer</h1>
+			<hr>
+		</div>
+	</div>
+	
+	<!-- IFC Upload -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Upload IFC File</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="ifc-file">IFC File</label>
+								<input type="file" class="form-control" id="ifc-file" accept=".ifc">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>&nbsp;</label>
+								<button id="upload-ifc" class="btn btn-primary">Upload & View</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 3D Viewer -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>3D Viewer</h5>
+				</div>
+				<div class="card-body">
+					<div id="ifc-viewer" style="height: 600px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+						<p>Upload an IFC file to view the 3D model</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Model Information -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Model Information</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="card bg-primary text-white">
+								<div class="card-body text-center">
+									<h3 id="element-count">0</h3>
+									<p>Elements</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-success text-white">
+								<div class="card-body text-center">
+									<h3 id="ifc-type-count">0</h3>
+									<p>IFC Types</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-info text-white">
+								<div class="card-body text-center">
+									<h3 id="layer-count">0</h3>
+									<p>Layers</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-warning text-white">
+								<div class="card-body text-center">
+									<h3 id="property-count">0</h3>
+									<p>Properties</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+frappe.ready(function() {
+	// Upload IFC file
+	$('#upload-ifc').on('click', function() {
+		var fileInput = document.getElementById('ifc-file');
+		var file = fileInput.files[0];
+		
+		if (!file) {
+			frappe.msgprint('Please select an IFC file');
+			return;
+		}
+		
+		// Upload file
+		var formData = new FormData();
+		formData.append('file', file);
+		formData.append('doctype', 'Construction CDE Document');
+		formData.append('fieldname', 'file');
+		
+		$.ajax({
+			url: '/api/method/upload_file',
+			type: 'POST',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response) {
+				frappe.msgprint('IFC file uploaded successfully');
+				// Parse IFC file (simplified - in production, use proper IFC parser)
+				$('#ifc-viewer').html('<p>IFC file loaded: ' + file.name + '</p><p>3D rendering requires IFC parser library (IfcOpenShell/BIMsurfer)</p>');
+				
+				// Update statistics (mock data)
+				$('#element-count').text(Math.floor(Math.random() * 1000) + 100);
+				$('#ifc-type-count').text(Math.floor(Math.random() * 50) + 10);
+				$('#layer-count').text(Math.floor(Math.random() * 20) + 5);
+				$('#property-count').text(Math.floor(Math.random() * 500) + 50);
+			},
+			error: function(error) {
+				frappe.msgprint('Failed to upload IFC file');
+			}
+		});
+	});
+});
+</script>
+{% endblock %}

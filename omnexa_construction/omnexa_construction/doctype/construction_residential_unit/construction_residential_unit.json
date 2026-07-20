@@ -1,0 +1,28 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:UNIT-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "unit_number", "plot_number", "floor_level", "phase_code", "sellable_area_m2", "bedrooms", "unit_status", "boq_cost_code", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "unit_number", "fieldtype": "Data", "label": "Unit Number", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "plot_number", "fieldtype": "Data", "label": "Plot Number", "in_list_view": 1},
+		{"fieldname": "floor_level", "fieldtype": "Int", "label": "Floor", "default": "1"},
+		{"fieldname": "phase_code", "fieldtype": "Data", "label": "Phase Code", "in_list_view": 1},
+		{"fieldname": "sellable_area_m2", "fieldtype": "Float", "label": "Sellable Area (m²)"},
+		{"fieldname": "bedrooms", "fieldtype": "Int", "label": "Bedrooms"},
+		{"fieldname": "unit_status", "fieldtype": "Select", "label": "Status", "options": "Planned\nUnder Construction\nReady\nSold\nHanded Over", "default": "Planned", "reqd": 1},
+		{"fieldname": "boq_cost_code", "fieldtype": "Data", "label": "BOQ Cost Code"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Residential Unit",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

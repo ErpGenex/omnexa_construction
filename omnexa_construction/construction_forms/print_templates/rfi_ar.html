@@ -1,0 +1,31 @@
+<div class="ar-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">شعار<br>الشركة</div>{% endif %}</td>
+  <td width="58%"><div class="title">طلب معلومات (RFI)</div><div class="title-underline"></div></td>
+  <td width="30%" class="header-box">
+    <b class="label">الرقم:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.rfi_date, {"fieldtype": "Date"}) or "" }}
+  </td>
+</tr></table>
+
+<table class="project-grid meta">
+  <tr>
+    <td width="50%"><b class="label">العقد:</b> {{ doc.project_contract }}</td>
+    <td width="50%"><b class="label">التخصص:</b> {{ doc.discipline or "" }}</td>
+  </tr>
+  <tr>
+    <td><b class="label">الموضوع:</b> {{ doc.subject }}</td>
+    <td><b class="label">موعد الرد:</b> {{ frappe.format(doc.due_date, {"fieldtype": "Date"}) or "" }}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b class="label">الحالة:</b> {{ doc.status }}</td>
+  </tr>
+</table>
+
+<div class="section-head">السؤال</div>
+<div class="intro-text">{{ doc.question or "" }}</div>
+
+<div class="section-head">الرد</div>
+<div class="intro-text">{{ doc.response or "—" }}</div>
+<p><b class="label">المُجيب:</b> {{ doc.responded_by or "" }} &nbsp; <b class="label">تاريخ الرد:</b> {{ frappe.format(doc.response_date, {"fieldtype": "Date"}) or "" }}</p>
+</div>

@@ -1,0 +1,16 @@
+{
+	"doctype": "Page",
+	"module": "Omnexa Construction",
+	"name": "construction-workcenter",
+	"page_name": "construction-workcenter",
+	"standard": "Yes",
+	"title": "Construction Workcenter",
+	"roles": [
+		{
+			"role": "System Manager"
+		},
+		{
+			"role": "Company Admin"
+		}
+	]
+}

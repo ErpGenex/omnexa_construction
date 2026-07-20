@@ -1,0 +1,75 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"task_name",
+		"start_date",
+		"end_date",
+		"duration_days",
+		"boq_item",
+		"cost_code",
+		"progress_percent",
+		"is_milestone"
+	],
+	"fields": [
+		{
+			"fieldname": "task_name",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Task Name",
+			"reqd": 1
+		},
+		{
+			"fieldname": "start_date",
+			"fieldtype": "Date",
+			"in_list_view": 1,
+			"label": "Start Date",
+			"reqd": 1
+		},
+		{
+			"fieldname": "end_date",
+			"fieldtype": "Date",
+			"in_list_view": 1,
+			"label": "End Date",
+			"reqd": 1
+		},
+		{
+			"fieldname": "duration_days",
+			"fieldtype": "Int",
+			"label": "Duration (Days)",
+			"read_only": 1
+		},
+		{
+			"fieldname": "boq_item",
+			"fieldtype": "Link",
+			"in_list_view": 1,
+			"label": "BOQ Item",
+			"options": "BOQ Item"
+		},
+		{
+			"fieldname": "cost_code",
+			"fieldtype": "Data",
+			"label": "Cost Code"
+		},
+		{
+			"fieldname": "progress_percent",
+			"fieldtype": "Percent",
+			"in_list_view": 1,
+			"label": "Progress %",
+			"read_only": 1
+		},
+		{
+			"default": "0",
+			"fieldname": "is_milestone",
+			"fieldtype": "Check",
+			"label": "Milestone"
+		}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Schedule Baseline Task",
+	"permissions": [],
+	"track_changes": 0
+}

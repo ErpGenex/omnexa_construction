@@ -1,0 +1,1744 @@
+% of Contract,% من العقد
+% Over planned,% Over planned
+% Planned,% Planned
+1. Identity,1. Identity
+1. Start & Setup,1. البداية والإعداد
+10. Approvals & Forms,10. الاعتمادات والنماذج
+11. Quality & Safety (QHSE),11. الجودة والسلامة (QHSE)
+12. Environment,12. البيئة
+13. Documents & CDE / BIM,13. الوثائق و CDE / BIM
+14. Handover & Warranty,14. التسليم والضمان
+15. Reports & Analytics,15. التقارير والتحليلات
+2. Asset Type,2. Asset نوع
+2. Contracts & BOQ,2. العقود والكميات
+3. Schedule,3. الجدول الزمني
+3. Specifications,3. Specifications
+4. Phases & Delivery,4. Phases & Delivery
+4. Site & Execution,4. الموقع والتنفيذ
+5. BOQ Lines,5. BOQ Lines
+5. Subcontractors,5. مقاولي الباطن
+6. BOQ Detail Pricing,6. BOQ Detail Pricing
+6. Changes & Claims (FIDIC),6. التغييرات والمطالبات (FIDIC)
+7. IPC Schedule,7. IPC Schedule
+7. NEC4 & Disputes,7. NEC4 والنزاعات
+8. Assignments,8. Assignments
+8. Billing & Payment,8. الفوترة والدفع
+9. Outputs,9. Outputs
+9. Procurement,9. المشتريات
+AC,AC
+Acceptance Criteria,Acceptance Criteria
+Accepted,Accepted
+Account Statement,حساب Statement
+Acknowledged,تم الإقرار
+Aconex,Aconex
+Aconex Project ID,معرف مشروع Aconex
+Action,الإجراء
+Action Items,بنود العمل
+Actions,إجراءات
+Active,نشط
+Active Baseline,نشط Baseline
+Active contracts,نشط contracts
+Activity,نشاط
+Actual,الفعلي
+Actual / Expected Finish,Actual Expected Finish
+Actual Close Date,تاريخ الإغلاق الفعلي
+Actual Cost,Actual تكلفة
+Actual cost exceeds planned cost for this BOQ line.,Actual تكلفة exceeds planned تكلفة لـ this BOQ line.
+Add Environmental Aspect register records.,إضافة Environmental Aspect register records.
+Advance Payment,Advance دفعة
+Advance Payment %,Advance دفعة%
+Advance Payment Amount,Advance دفعة مبلغ
+Advance payment guarantee flagged,Advance دفعة guarantee flagged
+Advance payment guarantee required,Advance دفعة guarantee required
+Advance Recovery,Advance Recovery
+Advance Recovery % of Period,Advance Recovery% of Period
+Advance: {0}% / {1},Advance: { 0 }% { 1 }
+Advanced Settings,متقدم إعدادات
+Age (days),Age (days)
+Agenda,جدول الأعمال
+Agreed,Agreed
+AIA / ConsensusDocs,AIA Consensus Docs
+Air,Air
+Air Quality,جودة الهواء
+All connection fields are required when integration is enabled,All connection fields are required when تكامل is enabled
+All modules & links,جميع الوحدات والروابط
+Already imported,Already imported
+Already seeded,Already seeded
+Amended From,Amended From
+Amount,المبلغ
+Amount Certified,مبلغ Certified
+Amount for this BOQ line certified in this IPC period (should sum to Period Gross Amount when lines are used).,مبلغ لـ this BOQ line certified in this IPC period (should sum إلى Period Gross مبلغ when lines are used).
+Amount Paid,مبلغ مدفوع
+Answered,Answered
+Application / notice date,طلب notice تاريخ
+Approval,موافقة
+Approval Notes,موافقة Notes
+Approval Role,موافقة دور
+Approval Status,موافقة حالة
+Approve,Approve
+Approve Project Setup,Approve مشروع إعداد
+Approve Setup,Approve إعداد
+Approved,معتمد
+Approved By,معتمد حسب
+Approved Change Orders,معتمد Change Orders
+Approved Change Orders (value),معتمد Change Orders (value)
+Approved Date,معتمد تاريخ
+Approved Drawings,معتمد Drawings
+Approved On,معتمد On
+Approved Setup Pack,معتمد إعداد Pack
+Approved Setup Pack (Contract Annex),معتمد إعداد Pack (عقد Annex)
+Approved Setup Revision,معتمد إعداد Revision
+Approved Variations,معتمد Variations
+Arabic print formats available,Arabic print formats متاح
+Arbitration,Arbitration
+Arbitration Award,Arbitration Award
+Architectural,Architectural
+Archived,مؤرشف
+As Built,As Built
+as per LOA,as per LOA
+as per particular conditions,as per particular conditions
+As-built Photos,As - built Photos
+Aspect / Waste,Aspect Waste
+Aspect Type,Aspect نوع
+Assigned To,مُسند إلى
+At Risk,معرض للخطر
+At Risk SPI Threshold,At مخاطر SPI Threshold
+At Risk SV Days Threshold,At مخاطر SV Days Threshold
+Attachment,Attachment
+Attachments,Attachments
+Attendees,الحاضرون
+Audit Date,تدقيق تاريخ
+Authorization failed.,Authorization فشل.
+Authorize BIM 360 first.,Authorize BIM 360 first.
+Auto from BOQ/IPC/GL,Auto from BOQ IPC GL
+Auto material package from BOQ,Auto material package from BOQ
+Auto Sync Enabled,Auto Sync Enabled
+Auto-estimate from catalog rates — replace with vendor quote.,Auto - estimate from catalog rates — replace with vendor quote.
+Auto-generated from CDE publish: {0},Auto - generated from CDE publish: { 0 }
+Available,متاح
+Avg CPI,متوسط CPI
+Avg SPI,متوسط SPI
+Avg SV Days,متوسط SV Days
+Awarded,Awarded
+Awarded Supplier,Awarded مورد
+BAC,BAC
+Back-to-Back LD,LD متوازٍ
+Bank Account,بنك حساب
+Base Amount,Base مبلغ
+Base Qty,Base Qty
+Base URL,Base URL
+Baseline Date,Baseline تاريخ
+Baseline Name,Baseline اسم
+Baseline Tasks,Baseline Tasks
+Basement Levels,Basement Levels
+Basements,Basements
+Basis / narrative,Basis narrative
+Batch Size,Batch Size
+Bed Count,Bed عدد
+Bedrooms,Bedrooms
+Beds,Beds
+Bid,Bid
+Bid Comparison,Bid Comparison
+Bid Estimate,تقدير عرض
+Bid Estimate is required.,Bid Estimate is required.
+Bid Package,حزمة العطاء
+Bid Package is required.,Bid Package is required.
+Bill of Quantities — Contract Appendix,Bill of Quantities — عقد Appendix
+Billable Contract Value,Billable عقد Value
+Billing,فوترة
+BIM 360,BIM 360
+BIM 360 sync queued (stub / webhook).,BIM 360 sync queued (stub webhook).
+BIM 360 two-way sync completed.,BIM 360 two - way sync مكتمل.
+BIM Issue,قضية BIM
+BIM Issue created,BIM Issue created
+BIM Issues,BIM Issues
+BIM Model,BIM Model
+BIM model does not belong to this contract.,BIM model does not belong إلى this عقد.
+BIM model not found.,BIM model not found.
+BIM Model Register,سجل نماذج BIM
+BIM Models,نماذج BIM
+Bond / Guarantee Type,نوع الضمان / السند
+Bonds & Guarantees Register,سجل الضمانات والسندات
+Bonds / Guarantees,الضمانات / السندات
+BOQ,BOQ
+BOQ Actual Cost,BOQ Actual تكلفة
+BOQ Applied,تم تطبيق BOQ
+BOQ breakdown,BOQ breakdown
+BOQ Commitment vs Actual,التزامات BOQ مقابل الفعلي
+BOQ Completion % (cumulative),BOQ Completion% (cumulative)
+BOQ Cost Code,BOQ تكلفة كود
+BOQ Cost Code Prefix,BOQ تكلفة كود Prefix
+BOQ Cost Overrun,تجاوز تكلفة BOQ
+BOQ hierarchy is too deep.,BOQ hierarchy is too deep.
+BOQ Item,بند جدول الكميات
+BOQ Item Detail,BOQ صنف Detail
+BOQ Item Details,BOQ صنف تفاصيل
+BOQ Item Details (pricing & LD per detail),BOQ صنف تفاصيل (pricing & LD per detail)
+BOQ item does not belong to this contract.,BOQ صنف does not belong إلى this عقد.
+BOQ item is not on this contract.,BOQ صنف is not on this عقد.
+BOQ Item Material,BOQ صنف Material
+BOQ Item must belong to the same Project Contract.,BOQ صنف must belong إلى the same مشروع عقد.
+BOQ item {0} does not belong to this contract.,BOQ صنف { 0 } does not belong إلى this عقد.
+BOQ Item {0} does not belong to this Project Contract.,BOQ صنف { 0 } does not belong إلى this مشروع عقد.
+BOQ item {0} is not on this contract.,BOQ صنف { 0 } is not on this عقد.
+BOQ Item {0} was not found.,BOQ صنف { 0 } was not found.
+BOQ items updated from change order lines.,BOQ items updated from change order lines.
+BOQ line period values total {0} must match Period Gross Amount {1} (tolerance {2}).,BOQ line period values إجمالي { 0 } must match Period Gross مبلغ { 1 } (tolerance { 2 }).
+BOQ line {0} does not belong to contract {1}.,BOQ line { 0 } does not belong إلى عقد { 1 }.
+BOQ line {0} must belong to this contract.,BOQ line { 0 } must belong إلى this عقد.
+BOQ Lines,BOQ Lines
+BOQ lines,BOQ lines
+BOQ lines are required.,BOQ lines are required.
+BOQ lines assigned to {0} — {1},BOQ lines assigned إلى { 0 } — { 1 }
+BOQ Lines Created,BOQ Lines Created
+BOQ overrun lines,BOQ overrun lines
+BOQ Prefixes,BOQ Prefixes
+BOQ Progress,تقدم BOQ
+BOQ Schedule,BOQ Schedule
+BOQ Section Prefixes,BOQ Section Prefixes
+BOQ Sections,BOQ Sections
+BOQ Template,قالب جدول الكميات
+BOQ Template is required. Choose a building type with a template.,BOQ Template is required. Choose a building نوع with a template.
+BOQ Template Lines,BOQ Template Lines
+BOQ/IPC,BOQ/IPC
+Branch,الفرع
+Branch does not belong to this company.,فرع does not belong إلى this شركة.
+Branch {0} not found,فرع { 0 } not found
+Breakdown,Breakdown
+bridge,bridge
+Building,Building
+Building / Project Type,Building مشروع نوع
+Building / project type is required.,Building مشروع نوع is required.
+Building Type,Building نوع
+Building Type (optional),Building نوع (optional)
+Building type is required.,Building نوع is required.
+Buildings,Buildings
+Calculate Deductions,حساب الخصومات
+Cancelled,ملغى
+Cannot edit an approved setup. Reopen for revision first.,Cannot edit an معتمد إعداد. Reopen لـ revision first.
+Cannot issue stock against a group BOQ line.,Cannot issue stock against a group BOQ line.
+Cannot recalculate deductions on a submitted IPC.,Cannot recalculate deductions on a submitted IPC.
+Cannot regenerate: submitted certificates exist on contract {0}.,Cannot regenerate: submitted certificates exist on عقد { 0 }.
+Cannot reject an approved setup.,Cannot reject an معتمد إعداد.
+Cannot resync BOQ: submitted certificates exist on {0}.,Cannot resync BOQ: submitted certificates exist on { 0 }.
+CAPA,CAPA
+CAPA Date,CAPA تاريخ
+Caption,Caption
+Capture GPS,Capture GPS
+Carrier / Contractor,Carrier Contractor
+Case Date,حالة تاريخ
+Case Title,حالة عنوان
+Category,الفئة
+Cause category,Cause فئة
+CBS,CBS
+CBS BOQ Summary,CBS BOQ ملخص
+CBS Code,CBS كود
+CBS Element,عنصر CBS
+CBS element cannot be its own parent.,CBS element cannot be its own parent.
+CDE,CDE
+CDE access audit trail (GDPR),CDE وصول تدقيق trail (GDPR)
+CDE Access Log,CDE وصول سجل
+CDE Document,CDE مستند
+CDE document not found.,CDE مستند not found.
+CDE Naming,CDE Naming
+CDE Status (ISO 19650),CDE حالة (ISO 19650)
+CDE status cannot move from {0} to {1}. Allowed: {2},CDE حالة cannot move from { 0 } إلى { 1 }. Allowed: { 2 }
+CDE Workflow,CDE سير العمل
+CE / product declaration documents,CE منتج declaration مستندات
+CE Date,CE تاريخ
+CE Number,CE رقم
+Certificate Date,Certificate تاريخ
+Certificate Reference,Certificate Reference
+Certificates,Certificates
+Certified,معتمد
+Certified Amount,Certified مبلغ
+Certified payroll source data (timesheets),Certified payroll source بيانات (timesheets)
+Chairperson,رئيس الاجتماع
+Change Order,أمر تغيير
+Change Order BOQ Line,بند BOQ لأمر التغيير
+Change Order Type,Change Order نوع
+Change orders approved and valued,Change orders معتمد و valued
+Change Ticket,Change Ticket
+Checklist (JSON),قائمة تحقق (JSON)
+Checklist Score,قائمة تحقق درجة
+Circular BOQ parent reference.,Circular BOQ parent reference.
+Civil,Civil
+Claim,مطالبة
+Claim / notice date,Claim notice تاريخ
+Claim Owner,Claim Owner
+Claim reference,Claim reference
+Claim type,Claim نوع
+Claimed amount,Claimed مبلغ
+Claimed Amount,Claimed مبلغ
+Claimed delay (calendar days),Claimed delay (تقويم days)
+Claims active,Claims نشط
+Claims Allowed,Claims Allowed
+Claims linked to contract,Claims linked إلى عقد
+Classification Code,Classification كود
+Classification Name,Classification اسم
+Clause / Ref,Clause Ref
+Clause Code,كود البند
+Clause reference knowledge base in use,Clause reference knowledge base in use
+Clause Text,Clause Text
+Clause Title,Clause عنوان
+Clear signature,Clear signature
+Client,العميل
+Client / contract transmittal reference (ISO 19650).,Client عقد transmittal reference (ISO 19650).
+Closed,مغلق
+Closed contracts,مغلق contracts
+Closed Date,مغلق تاريخ
+Code,كود
+Combined,Combined
+"Comma-separated cost code prefixes (e.g. 01,02,03).","Comma - separated تكلفة كود prefixes (e. g. 01, 02, 03)."
+Commercial,Commercial
+Commercial Pipeline,خط تجاري
+Committed,Committed
+Committed (PO),Committed (PO)
+Committed Cost (PO),Committed تكلفة (PO)
+Company,الشركة
+Company ID,شركة معرف
+Company is required.,شركة is required.
+Company is required. Set a default Company in User Preferences or select one from the desk company/branch switcher.,شركة is required. Set a افتراضي شركة in مستخدم Preferences or select one from the desk شركة فرع switcher.
+Company {0} not found,شركة { 0 } not found
+"Company, Branch, and Client are required.","شركة, فرع, و Client are required."
+"Company, Branch, Client, and XER file are required.","شركة, فرع, Client, و XER file are required."
+Compare Package Bids,مقارنة عطاءات الحزمة
+Compare Transmittals,Compare Transmittals
+Compare with Previous,مقارنة مع السابق
+Compensation Event,حدث تعويض
+Complete project generation before approval.,Complete مشروع generation before موافقة.
+Completed,مكتمل
+Completion %,Completion%
+Compliance,الامتثال
+Compliance %,امتثال%
+Compliance Documents,مستندات الامتثاد
+Compliant,ممتثل
+Conflict Resolution,Conflict Resolution
+Connected. Return to Desk.,Connected. Return إلى Desk.
+Connection failed: {0},Connection فشل: { 0 }
+Connection successful! Found {0} projects in P6,Connection successful ! Found { 0 } مشاريع in P6
+Construction,Construction
+Construction Bid Comparison,مقارنة عطاءات المقاولات
+Construction Bid Estimate,تقدير عرض مقاولات
+Construction Bid Estimate Scenario,Construction Bid Estimate Scenario
+Construction BIM Issue,قضية BIM
+Construction BIM Model Register,سجل نماذج BIM
+Construction BOQ Template,قالب جدول الكميات
+Construction BOQ Template Line,سطر قالب جدول الكميات
+Construction CAPA,إجراء تصحيحي ووقائي
+Construction CBS BOQ Summary,ملخص CBS مقابل BOQ
+Construction CBS Element,عنصر هيكل التكلفة CBS
+Construction CDE Access Log,Construction CDE وصول سجل
+Construction CDE Document,مستند CDE
+Construction Change Order,أمر تغيير
+Construction Change Order BOQ Line,سطر BOQ لأمر تغيير
+Construction Claim,مطالبة مقاولات
+Construction Commercial Manager,مدير تجاري
+Construction Commercial Pipeline,خط أنابيب تجاري
+Construction Compensation Event,حدث تعويض
+Construction Contract Control,ضبط العقد (مقاولات)
+Construction Contract International Summary,ملخص عقد دولي (مقاولات)
+Construction DAB Referral,إحالة هيئة النزاع
+Construction demo,Construction demo
+"Construction demo data already exists for this branch. Reset branch demo data first, or use force=1.","Construction demo بيانات already exists لـ this فرع. Reset فرع demo بيانات first, or use force = 1."
+Construction demo data already exists for this company.,Construction demo بيانات already exists لـ this شركة.
+Construction demo ready,Construction demo ready
+Construction Dispute Case,ملف نزاع
+Construction Dispute Event,حدث نزاع
+Construction DLP Record,سجل فترة الضمان (DLP)
+Construction Document Controller,مسؤول المستندات
+Construction Document Transmittal,إحالة مستندات
+Construction Document Transmittal Item,بند إحالة مستندات
+Construction Document Transmittal Recipient,مستلم إحالة المستندات
+Construction Early Warning,إنذار مبكر
+Construction Earned Value,القيمة المكتسبة (مقاولات)
+Construction Environmental Aspect,جانب/أثر بيئي
+Construction Environmental Monitoring,مراقبة بيئية
+Construction Equipment Usage,استخدام المعدات
+Construction EVM Dashboard,لوحة EVM (مقاولات)
+Construction Executive Dashboard,لوحة تنفيذية للمقاولات
+Construction Executive Summary,ملخص تنفيذي (مقاولات)
+Construction Extension of Time,تمديد زمن (EOT)
+Construction FIDIC Clause Reference,مرجع بنود FIDIC للمقاولات
+Construction FIDIC Compliance,الامتثال لـ FIDIC (مقاولات)
+Construction FIDIC Notice,إشعار FIDIC
+Construction Final Account Line,سطر الحساب الختامي
+Construction Final Account Statement,كشف الحساب الختامي
+Construction Fines Statement,كشف الغرامات
+Construction Fines Statement Line,Construction Fines Statement Line
+Construction Hazard Register,سجل المخاطر
+Construction Hazard Register Line,سطر سجل المخاطر
+Construction HSE Incident,حادث سلامة (HSE)
+Construction HSE Officer,مسؤول HSE
+Construction Inspection Request,طلب فحص
+Construction Inspection Test Plan,خطة الفحص والاختبار (ITP)
+Construction Inspection Test Plan Line,سطر خطة الفحص والاختبار
+Construction Integration Settings,إعدادات التكامل
+Construction Integration Settings is required.,Construction تكامل إعدادات is required.
+Construction Internal Audit,تدقيق داخلي
+Construction Management Review,مراجعة الإدارة
+Construction Material Approval Line,سطر اعتماد خامات
+Construction Material Approval Request,طلب اعتماد خامات
+Construction MIDP,خطة تسليم معلومات المشروع (MIDP)
+Construction MIDP Line,سطر MIDP
+Construction NCR,تقرير عدم مطابقة
+Construction OSHA Site Checklist,Construction OSHA موقع قائمة تحقق
+Construction Permit to Work,تصريح عمل
+Construction Phase,مرحلة مشروع
+Construction Plot Unit,قطعة/وحدة أرض
+Construction Project Risk,مخاطر المشروع (مقاولات)
+Construction Project Setup,إعداد مشروع المقاولات
+Construction Project Setup Assignment,Construction مشروع إعداد Assignment
+Construction Project Setup BOQ Detail,Construction مشروع إعداد BOQ Detail
+Construction Project Setup BOQ Line,Construction مشروع إعداد BOQ Line
+Construction Project Setup Contract Term,Construction مشروع إعداد عقد Term
+Construction Project Setup IPC Plan,Construction مشروع إعداد IPC خطة
+Construction Project Setup IPC Schedule,Construction مشروع إعداد IPC Schedule
+Construction Project Setup Phase,Construction مشروع إعداد Phase
+Construction Project Wizard,معالج مشروع المقاولات
+Construction QA Manager,مدير الجودة
+Construction QS,مسّاح كميات
+Construction QS Measurement Line,سطر قياس حصر كميات
+Construction QS Measurement Sheet,كشف قياس حصر كميات (QS)
+Construction Quality Audit Finding,Construction جودة تدقيق Finding
+Construction Residential Unit,وحدة سكنية
+Construction Retention Release,إفراج احتجاز
+Construction RFI,طلب معلومات
+Construction RFQ,طلب عروض أسعار (RFQ) — مقاولات
+Construction RFQ is not installed.,Construction RFQ is not installed.
+Construction RFQ Item,Construction RFQ صنف
+Construction RFQ Supplier Quote,Construction RFQ مورد Quote
+Construction Safety KPI,Construction Safety KPI
+Construction Schedule Baseline,خط أساس الجدول الزمني
+Construction Schedule Baseline Task,Construction Schedule Baseline مهمة
+Construction Settlement,تسوية نزاع
+Construction Snagging Item,بند قائمة العيوب (Snagging)
+Construction Snagging Summary,ملخص قائمة العيوب
+Construction Supplier Prequalification,تأهيل المورد
+Construction Toolbox Talk,اجتماع/إحاطة سلامة (Toolbox Talk)
+Construction Trade Package,حزمة أعمال (Trade Package)
+Construction User NPS,Construction مستخدم NPS
+Construction User NPS not installed.,Construction مستخدم NPS not installed.
+Construction Waste Log,سجل المخلفات
+Construction Work Approval Line,Construction Work موافقة Line
+Construction Work Approval Request,Construction Work موافقة طلب
+Construction Work Delay Notice,Construction Work Delay Notice
+Construction Workcenter,Construction Workcenter
+Construction workspace KPI sync (omnexa_core),Construction مساحة العمل KPI sync (omnexa أساسي)
+construction-analytics-dashboard,construction - تحليلات - لوحة معلومات
+construction-customer-portal,construction - عميل - بوابة
+construction-executive-dashboard,construction - تنفيذي - لوحة معلومات
+construction-finance-desk,construction - مالية - desk
+construction-operations-desk,construction - عمليات - desk
+Consultant Note,Consultant Note
+Contract,العقد
+Contract Clause,عقد Clause
+Contract clause / variation ref.,عقد clause variation ref.
+Contract Clauses,عقد Clauses
+contract conditions,عقد conditions
+Contract Control,عقد تحكم
+Contract currency,عقد currency
+Contract Documents & Annexes,عقد مستندات & Annexes
+Contract Financials,عقد Financials
+Contract formation / LOA date for programmes and claims (FIDIC-style).,عقد formation LOA تاريخ لـ programmes و claims (FIDIC - style).
+Contract LD / day,عقد LD day
+Contract LD cap %,عقد LD cap%
+Contract No.,عقد No.
+Contract Owner,عقد Owner
+Contract Reference,عقد Reference
+Contract Scope,عقد Scope
+Contract Status,عقد حالة
+Contract Sum,عقد Sum
+Contract Terms,عقد Terms
+Contract Terms & Conditions,عقد Terms & Conditions
+Contract Title,عقد عنوان
+Contract Type,عقد نوع
+Contract Value,عقد Value
+Contract value,عقد value
+Contract value plus approved change order impact (same basis as IPC billable value).,عقد value plus معتمد change order impact (same basis as IPC billable value).
+Contractor,المقاول
+Contractor Account Statement,كشف حساب مقاول
+Contractor Account Statement Line,Contractor حساب Statement Line
+Contractor Approval Date,Contractor موافقة تاريخ
+Contractor Approved By,Contractor معتمد حسب
+Contractor attributable,Contractor attributable
+Contractor delay LD (submitted notices): {0},Contractor delay LD (submitted notices): { 0 }
+Contractor Statement,كشف حساب مقاول
+Contracts,Contracts
+Control Measures,تحكم Measures
+Controls,Controls
+Corrective,Corrective
+Corrective Action,Corrective إجراء
+Corrective Action (CAR),Corrective إجراء (سيارة)
+Cost,تكلفة
+Cost & CDE,تكلفة & CDE
+Cost & Time,تكلفة & Time
+Cost / BOQ code,تكلفة BOQ كود
+Cost / schedule forecast (sample),تكلفة schedule forecast (sample)
+Cost Adjustment %,تعديل التكلفة %
+Cost breakdown structure node for GL alignment and reporting.,تكلفة breakdown structure node لـ GL alignment و reporting.
+Cost Code,تكلفة كود
+Cost code,تكلفة كود
+Cost Controller,مراقب التكلفة
+Cost Exposure,تكلفة Exposure
+Cost Factor,تكلفة Factor
+Cost Impact,تكلفة Impact
+Cost overrun,تكلفة overrun
+Cost Plus,تكلفة Plus
+Cost risk,تكلفة مخاطر
+Cost to Date,تكلفة إلى تاريخ
+Could not load the wizard: {0},Could not load the wizard: { 0 }
+count,عدد
+Count,عدد
+Country of Origin,Country of Origin
+CPI,CPI
+Create all project documents?,Create all مشروع مستندات ?
+Create BIM Issue,Create BIM Issue
+Create Draft Sales Invoice,Create مسودة مبيعات فاتورة
+Create PM WBS Tasks,Create PM WBS Tasks
+Create Project Setup,إنشاء إعداد مشروع
+Create Purchase Order,إنشاء أمر شراء
+"Created {0} construction projects with BOQ, IPC, {1} bilingual material items, QA/HSE, claims, and procurement.","Created { 0 } construction مشاريع with BOQ, IPC, { 1 } bilingual material items, QA HSE, claims, و procurement."
+Credit (Due from Contractor),ائتمان (استحقاق from Contractor)
+Credit — Due from Contractor,ائتمان — استحقاق from Contractor
+Critical,Critical
+Critical path,Critical path
+CSV Rows,صفوف CSV
+Cumulative %,Cumulative%
+Cumulative BOQ completion % ({0}%) cannot be below the last certified IPC ({1}%).,Cumulative BOQ completion% ({ 0 }%) cannot be below the last certified IPC ({ 1 }%).
+Cumulative Completion %,Cumulative Completion%
+Cumulative Value (this cert.),Cumulative Value (this cert.)
+Currency,Currency
+currency,currency
+Currency Exposure,Currency Exposure
+Currency of the contract price (reporting; company default may differ).,Currency of the عقد سعر (reporting; شركة افتراضي may differ).
+Currency Revaluation Exposure,تعرض إعادة تقييم العملات
+Customer,العميل
+Customer (project owners),العميل (مالك المشروع)
+CV,CV
+DAB Decision,DAB قرار
+DAB Referral,إحالة هيئة النزاع
+Daily Fine,يومي Fine
+Daily Quantities,يومي Quantities
+Daily Report,تقرير يومي
+Date,التاريخ
+Days,Days
+Daywork,Daywork
+Debit (Due to Contractor),Debit (استحقاق إلى Contractor)
+Debit — Due to Contractor,Debit — استحقاق إلى Contractor
+Decided,Decided
+Decision,القرار
+Decision Date,قرار تاريخ
+Decision Summary,قرار ملخص
+Decisions,القرارات
+Deductions updated,Deductions updated
+Default Contract Type,افتراضي عقد نوع
+Default for Company,افتراضي لـ شركة
+Default IPC Discount %,افتراضي IPC Discount%
+Default Retention %,افتراضي Retention%
+Default VAT %,افتراضي VAT%
+Default WHT %,افتراضي WHT%
+Defects,Defects
+Defects notification / liability (months),Defects notification liability (months)
+Delay,Delay
+Delay (calendar days approved),Delay (تقويم days معتمد)
+Delay (calendar days claimed),Delay (تقويم days claimed)
+Delay Damages (LD),Delay Damages (LD)
+Delay Days,Delay Days
+Delay Details,Delay تفاصيل
+Delay Notice,Delay Notice
+Delay Reasons,Delay Reasons
+Delayed Contracts,Delayed Contracts
+Delayed Item / Section,Delayed صنف Section
+Delayed SPI Threshold,Delayed SPI Threshold
+Delayed SV Days Threshold,Delayed SV Days Threshold
+Deliverables,Deliverables
+Delivery Model,Delivery Model
+Description,الوصف
+Description (AR),وصف (عربي)
+Design-Bid-Build,Design - Bid - Build
+Design-Build,Design - Build
+Detail,Detail
+Detail Description,Detail وصف
+Detail Finish Date,Detail Finish تاريخ
+Detailed asset type from Construction Project Wizard catalog.,Detailed asset نوع from Construction مشروع Wizard catalog.
+Details,التفاصيل
+Disabled,Disabled
+Discipline,التخصص
+Disclaimer,Disclaimer
+Discount,Discount
+Discount %,Discount%
+Discount % of Period,Discount% of Period
+Discount Amount,Discount مبلغ
+Display Reference,مرجع العرض
+Disposal,Disposal
+Dispute Case,ملف نزاع
+DLP,DLP
+DLP (Months),DLP (Months)
+DLP End Date,DLP نهاية تاريخ
+DLP Record,سجل فترة الضمان (DLP)
+DNP / defects period in months where defined in contract.,DNP defects period in months where defined in عقد.
+Doc No.,Doc No.
+DocType,نوع المستند
+Document,المستند
+Document No.,مستند No.
+Document Number,مستند رقم
+Document number '{0}' does not match naming convention '{1}' (example: PRJ-CTR-DRW-0001-A).,مستند رقم ' { 0 } ' does not match naming convention ' { 1 } ' (example: PRJ - CTR - DRW - 0001 - A).
+Document Pack (ZIP),مستند Pack (ZIP)
+Document Title,مستند عنوان
+Document Transmittal,إحالة مستندات
+Documents,مستندات
+Done.,Done.
+Download Document Pack (ZIP),Download مستند Pack (ZIP)
+Download model file,Download model file
+Draft,مسودة
+draft,مسودة
+Draft Sales Invoice {0} created from IPC.,مسودة مبيعات فاتورة { 0 } created from IPC.
+Draft saved offline,مسودة saved offline
+Draft Stock Entry {0} created from BOQ materials.,مسودة Stock قيد { 0 } created from BOQ materials.
+Drafts are stored locally and synced when online.,Drafts are stored locally و synced when online.
+Driver Formula,Driver Formula
+Due Date,تاريخ الاستحقاق
+Duration (Days),Duration (Days)
+Dust,غبار
+"e.g. FIDIC Sub-Clause 13.3, NEC CE number, employer VO reference.","e. g. FIDIC Sub - Clause 13. 3, NEC CE رقم, employer VO reference."
+"e.g. FIDIC Sub-Clause 14.3 IPC, 14.9 Performance Certificate; Particular Conditions clause numbers.","e. g. FIDIC Sub - Clause 14. 3 IPC, 14. 9 أداء Certificate; Particular Conditions clause numbers."
+e.g. FIDIC Sub-Clause 20.1,e. g. FIDIC Sub - Clause 20. 1
+EAC,EAC
+Early Warning,إنذار مبكر
+Early Warning (NEC4),إنذار مبكر (NEC4)
+Earned Value,القيمة المكتسبة
+Earned Value (EVM),Earned Value (EVM)
+Economy,Economy
+electrical_network,electrical network
+Employer,Employer
+Employer / Engineer,Employer Engineer
+Employer / Engineer certificate ref.,Employer Engineer certificate ref.
+"Employer bill code, CSI, UniClass, or internal WBS cost code for international reporting.","Employer bill كود, CSI, Uni Class, or internal WBS تكلفة كود لـ international reporting."
+Enable feature flag construction_ipc_draft_sales_invoice to create Sales Invoices from IPC.,Enable feature flag construction ipc مسودة مبيعات فاتورة إلى create مبيعات Invoices from IPC.
+Enable Outbound Webhooks,Enable Outbound Webhooks
+Enabled,Enabled
+End,نهاية
+End Date,تاريخ الانتهاء
+Energy,Energy
+Engineer,Engineer
+Engineer Cert. Date,Engineer Cert. تاريخ
+Engineer Certified By,Engineer Certified حسب
+Engineering contract framework,هندسة عقد framework
+Engineering Regulatory Profile,هندسة Regulatory ملف
+Engineering Stage,هندسة Stage
+Engineering Submittal,هندسة Submittal
+Entity,Entity
+Entity ID,Entity معرف
+Entity Type,Entity نوع
+Environmental,Environmental
+Environmental Aspect,جانب/أثر بيئي
+Environmental Compliance,الامتثال البيئي
+Environmental Monitoring,مراقبة بيئية
+EOT,EOT
+EOT approved,EOT معتمد
+EOT records linked to contract,EOT records linked إلى عقد
+EPC / Site,EPC موقع
+EPC Turnkey,EPC Turnkey
+Equipment,Equipment
+Equipment %,Equipment%
+Equipment / unit,Equipment unit
+Equipment Cost,Equipment تكلفة
+Equipment Hours,Equipment Hours
+Equipment Usage,استخدام المعدات
+Error Log,خطأ سجل
+Error Message,خطأ Message
+Escalated,مُصعَّد
+Est. Rate,Est. معدل
+Estimate,Estimate
+Estimate Title,عنوان التقدير
+Estimated Contract Value,Estimated عقد Value
+Estimated Cost,Estimated تكلفة
+Estimated cost exceeds estimated contract value. Confirm pricing assumptions.,Estimated تكلفة exceeds estimated عقد value. Confirm pricing assumptions.
+Estimated LD Amount,Estimated LD مبلغ
+Estimated Total,Estimated إجمالي
+ETC,ETC
+EV,EV
+Evaluate Quotes,تقييم العروض
+Evaluated,Evaluated
+Evaluation,Evaluation
+Evaluation Date,Evaluation تاريخ
+Events,Events
+EVM Dashboard,EVM لوحة معلومات
+Excellent,Excellent
+Exchange Rate,سعر الصرف
+Executed Works,Executed Works
+Execution,Execution
+Executive BI,تنفيذي BI
+Executive Dashboard,لوحة تنفيذية
+Executive Summary,تنفيذي ملخص
+Expand BOQ Details,Expand BOQ تفاصيل
+Expected Award Date,تاريخ الترسية المتوقع
+Expired,منتهي
+Expiring,Expiring
+Expiry Date,Expiry تاريخ
+Expiry date cannot be before evaluation date.,Expiry تاريخ cannot be before evaluation تاريخ.
+Export Document Pack (ZIP),Export مستند Pack (ZIP)
+Export MS Project XML,Export MS مشروع XML
+Extension of Time,تمديد مدة
+Extension of Time (EOT),تمديد زمن (EOT)
+External Reference,External Reference
+factory,factory
+Failed,فشل
+Failed to authenticate with Primavera P6: {0},فشل إلى authenticate with Primavera P6: { 0 }
+Fair,Fair
+Fatality,Fatality
+Feedback,Feedback
+FIDIC,FIDIC
+FIDIC 1999 Suite (Red/Yellow/Silver),FIDIC 1999 Suite (Red Yellow Silver)
+FIDIC 2017 Red Book (Building & Engineering),FIDIC 2017 Red Book (Building & هندسة)
+FIDIC 2017 Silver Book (EPC/Turnkey),FIDIC 2017 Silver Book (EPC Turnkey)
+FIDIC 2017 Yellow Book (M&E Design-Build),FIDIC 2017 Yellow Book (M & E Design - Build)
+FIDIC Checklist 100%,FIDIC قائمة تحقق 100%
+FIDIC checklist below 90% on sample contract.,FIDIC قائمة تحقق below 90% on sample عقد.
+FIDIC Clause Reference,مرجع بند FIDIC
+FIDIC Compliance,FIDIC امتثال
+FIDIC governing standard,FIDIC governing standard
+FIDIC Notice,إشعار FIDIC
+FIDIC notices registered with due dates,FIDIC notices registered with استحقاق dates
+FIDIC Overdue,إشعارات FIDIC متأخرة
+Field capture,Field capture
+File,File
+Filters,Filters
+Final,Final
+Final Account,الحساب الختامي
+Final account statement available,Final حساب statement متاح
+Final Amount Due,Final مبلغ استحقاق
+Finance Manager,مدير مالي
+Financial Approval,مالي موافقة
+Financial Capacity,مالي Capacity
+Finding,Finding
+Findings,Findings
+Fine Lines,Fine Lines
+Fines,Fines
+Fines Statement,كشف الغرامات
+Fines statements: {0},Fines statements: { 0 }
+FIXED,FIXED
+Floor,Floor
+FLOORS,FLOORS
+Floors,Floors
+For Approval,للاعتماد
+For Construction,للتنفيذ
+For Information,للعلم
+For Record,لـ سجل
+For Review,للمراجعة
+For Tender,لـ Tender
+Force majeure,Force majeure
+Forecast Finish,Forecast Finish
+Form Date,نموذج تاريخ
+Format,Format
+FORMULA,FORMULA
+Frequency,Frequency
+From / To,From إلى
+Further,Further
+Gantt Tasks,Gantt Tasks
+Gap,Gap
+Gaps,Gaps
+gas_network,gas network
+GCC / ZATCA,GCC ZATCA
+GCC Package,GCC Package
+GDPR log,GDPR سجل
+General,عام
+Generate Project,Generate مشروع
+Generate the project bundle before submitting for approval.,Generate the مشروع bundle before submitting لـ موافقة.
+Generated from template {0},Generated from template { 0 }
+GFA,GFA
+GL Account,GL حساب
+GL Bridge,GL Bridge
+Good,Good
+Governing contract form,Governing عقد نموذج
+Governing form,Governing نموذج
+Governing Standard,Governing Standard
+GPS Latitude,GPS Latitude
+GPS Longitude,GPS Longitude
+GPS not available on this device.,GPS not متاح on this device.
+Gross Amount,المبلغ الإجمالي
+Gross Final Sum,Gross Final Sum
+Gross Floor Area (m²),Gross Floor Area (m)
+Group,Group
+Group lines roll up planned cost from child BOQ items.,Group lines roll up planned تكلفة from child BOQ items.
+Group multiple estimates for comparison (same tender package).,Group multiple estimates لـ comparison (same tender package).
+Handed Over,Handed Over
+Handover / Delivery Date,Handover Delivery تاريخ
+Handover Date,Handover تاريخ
+Hazard,Hazard
+Hazard Register,سجل المخاطر
+Hazards,Hazards
+Hazards Identified,Hazards Identified
+"Headers: cost_code, measured_qty, description, uom","العناوين: cost_code, measured_qty, description, uom"
+Held,عُقد
+High,High
+High open NCR count: {0},High مفتوح NCR عدد: { 0 }
+High risk (forecast),High مخاطر (forecast)
+"High-level segment for reporting (roads, buildings, industrial EPC, etc.).","High - level segment لـ reporting (roads, buildings, industrial EPC, etc.)."
+highway,highway
+hospital,hospital
+hotel,hotel
+Hotel Keys,Hotel Keys
+Hourly Rate,Hourly معدل
+Hours,Hours
+HSE Incident,حادث سلامة (HSE)
+HSE Incident Summary,ملخص حوادث HSE
+HSE Incidents,HSE Incidents
+HSE KPI Dashboard,HSE KPI لوحة معلومات
+HSE KPI Dashboard (ISO 45001),HSE KPI لوحة معلومات (ISO 45001)
+HSE Rating,HSE Rating
+HSE Summary,ملخص السلامة (HSE)
+IFC,IFC
+"IFC loaded (preview mesh). Full parse: {0}"", [fileUrl.split(""/","IFC loaded (preview mesh). Full parse: { 0 } "", [ file Url. split ("""
+IFC Viewer,IFC Viewer
+IFC Viewer (Lite),IFC Viewer (Lite)
+Impact,Impact
+Impact (1-5),الأثر (1-5)
+Implemented,Implemented
+Import,استيراد
+Import from Primavera XER,Import from Primavera XER
+Import projects from a Primavera P6 XER export file. Each project creates a Project Contract and Schedule Baseline.,Import مشاريع from a Primavera P6 XER export file. Each مشروع creates a مشروع عقد و Schedule Baseline.
+Import Results,Import Results
+Import Selected Projects,Import Selected مشاريع
+Import Takeoff CSV,استيراد CSV حصر كميات
+Import XER,Import XER
+Imported,Imported
+Imported from Primavera XER on {0},Imported from Primavera XER on { 0 }
+Imported Primavera Schedule,Imported Primavera Schedule
+In Progress,قيد التنفيذ
+Incident Date/Time,Incident تاريخ Time
+Incident Type,Incident نوع
+Incineration,Incineration
+Include,Include
+Income account is required for IPC billing item.,دخل حساب is required لـ IPC فوترة صنف.
+index,index
+Indicates which international template the parties largely follow (for audit and reporting).,Indicates which international template the parties largely follow (لـ تدقيق و reporting).
+Industrial EPC,Industrial EPC
+Information Container,Information Container
+Infrastructure,Infrastructure
+Injury,Injury
+Inspection,Inspection
+Inspection Date,Inspection تاريخ
+Inspection Request,طلب فحص
+Inspector,Inspector
+Instruction,Instruction
+Insurance,Insurance
+Insurance programme summary,Insurance programme ملخص
+Integration Settings,إعدادات التكامل
+Integrations,التكاملات
+Interim,Interim
+Interim Payment Certificate,مستخلص مرحلي
+Interim Payment Certificates (IPC),Interim دفعة Certificates (IPC)
+Internal Audit,تدقيق داخلي
+International contract terms (FIDIC / NEC / ISO21500 alignment),International عقد terms (FIDIC NEC ISO21500 alignment)
+International Summary,International ملخص
+Invalid or expired state.,Invalid or expired state.
+Inventory,Inventory
+Investigating,Investigating
+IPC,IPC
+IPC #,IPC #
+IPC #{0}: cumulative % ({1}) cannot be below prior IPC ({2}%).,IPC # { 0 }: cumulative% ({ 1 }) cannot be below prior IPC ({ 2 }%).
+IPC / Payment Certificates Plan,IPC دفعة Certificates خطة
+IPC / Progress,IPC Progress
+IPC at handover of phase {0},IPC at handover of phase { 0 }
+IPC at {0} handover,IPC at { 0 } handover
+IPC billing,IPC فوترة
+IPC BOQ Line,IPC BOQ Line
+IPC Certificate,شهادة مستخلص
+IPC Certificate Summary,IPC Certificate ملخص
+IPC certificates,IPC certificates
+IPC certification workflow active,IPC certification سير العمل نشط
+IPC cumulative completion cannot exceed 100%.,IPC cumulative completion cannot exceed 100%.
+IPC Date,IPC تاريخ
+IPC discount: {0}%,IPC discount: { 0 }%
+IPC Drafts Created,IPC Drafts Created
+IPC net (cert.),IPC net (cert.)
+IPC net amount must be greater than zero.,IPC net مبلغ must be greater than zero.
+IPC Net Billed,IPC Net Billed
+IPC net billed (certified),IPC net billed (certified)
+IPC No. {0},IPC No. { 0 }
+IPC Plan,IPC خطة
+IPC schedule: {0} certificates,IPC schedule: { 0 } certificates
+IPC Summary,IPC ملخص
+IPC {0} net billing,IPC { 0 } net فوترة
+Is Active,Is نشط
+Is Group,Is Group
+ISO 45001 Score,ISO 45001 درجة
+Issue Date,Issue تاريخ
+Issue Description,Issue وصف
+Issue Purpose,Issue Purpose
+Issued,Issued
+Issued By,Issued حسب
+Issuer / Bank,جهة الإصدار / البنك
+Item,صنف
+Item Description,صنف وصف
+Items,Items
+ITP,خطة الفحص والاختبار (ITP)
+ITP Reference,ITP Reference
+JCT,JCT
+Journal Entry,قيد يومية
+Key sub-clauses / appendix refs,مفتاح sub - clauses appendix refs
+KPI,KPI
+KPI Type,KPI نوع
+Labor,Labor
+Labor %,Labor%
+Labor / unit,Labor unit
+Labor Cost,Labor تكلفة
+Labor Count,Labor عدد
+Lagging,تراجعي
+Landfill,Landfill
+Last Attempt,Last Attempt
+Late instructions / variations,Late instructions variations
+Latitude,Latitude
+LD / day,LD day
+LD / Day (Contract),LD Day (عقد)
+LD / day (line),LD day (line)
+LD / day (this detail),LD day (this detail)
+LD Calculation Notes,LD Calculation Notes
+LD cap % of contract price,LD cap% of عقد سعر
+LD cap % of line,LD cap% of line
+LD cap (amount),LD cap (مبلغ)
+LD cap (days),LD cap (days)
+LD cap amount,LD cap مبلغ
+LD per day,LD per day
+Lead Auditor,عميل محتمل Auditor
+Lead Time,عميل محتمل Time
+Lead Time (days),عميل محتمل Time (days)
+Lead Time Score,عميل محتمل Time درجة
+Leading,استباقي
+Letter of Acceptance / signature date,Letter of Acceptance signature تاريخ
+Level,Level
+License,License
+Lien Waiver,تنازل عن حق امتياز
+Lien waiver attachment is required before marking certificate as Paid.,Lien waiver attachment is required before marking certificate as مدفوع.
+Limit,الحد
+Limited CDE document volume.,Limited CDE مستند volume.
+Line Amount,Line مبلغ
+Line BOQ Item must belong to the same Project Contract as the document header.,Line BOQ صنف must belong إلى the same مشروع عقد as the مستند header.
+Line Reference,Line Reference
+Lines,Lines
+Link a RIBA Engineering Stage before final submittal approval.,Link a RIBA هندسة Stage before final submittal موافقة.
+Link the replacing revision in Superseded By.,Link the replacing revision in Superseded حسب.
+Linked Change Order,Linked Change Order
+Linked Claim,Linked Claim
+Linked Engineering Stage not found.,Linked هندسة Stage not found.
+Linked EOT,Linked EOT
+Linked Project Setup,Linked مشروع إعداد
+Linked Records,Linked Records
+Liquidated damages (per day),Liquidated damages (per day)
+Liquidated damages on contract,Liquidated damages on عقد
+Lite viewer: metadata and issues list. Open 3D view loads IFC in-browser when a valid IFC file is attached.,Lite viewer: metadata و issues قائمة. مفتوح 3D view loads IFC in - browser when a valid IFC file is attached.
+Load BOQ Lines,Load BOQ Lines
+Load from BOQ/IPC,Load from BOQ IPC
+Load from IPCs,Load from IPCs
+Load omnexa_core vertical portal desk,Load omnexa أساسي vertical بوابة desk
+Load omnexa_core vertical workcenter kit,Load omnexa أساسي vertical workcenter kit
+Load schedule,Load schedule
+Load Tasks from BOQ,Load Tasks from BOQ
+Loading BI…,Loading BI …
+Loading IFC 3D…,Loading IFC 3D …
+Location,الموقع
+Location / Viewpoint,Location Viewpoint
+Location / Zone,Location Zone
+Location captured,Location captured
+Log issue from viewer,سجل issue from viewer
+Longitude,Longitude
+Low,Low
+Lowest,Lowest
+Lowest Quote,Lowest Quote
+LTIFR est.,LTIFR est.
+Lump Sum,Lump Sum
+Luxury,Luxury
+Major,Major
+mall,mall
+Management Review,مراجعة الإدارة
+Manual,Manual
+Manufacturer,Manufacturer
+Maps BOQ lines where cost_code starts with this prefix (e.g. 03).,Maps BOQ lines where تكلفة كود starts with this prefix (e. g. 03).
+Margin %,Margin%
+Material,Material
+Material %,Material%
+Material / unit,Material unit
+Material Approval,اعتماد خامات
+Material Consumed Cost,Material Consumed تكلفة
+Material Consumption vs BOQ,استهلاك المواد مقابل BOQ
+Material Cost,Material تكلفة
+Material Details,Material تفاصيل
+Material Issue from BOM,Material Issue from BOM
+Material Name,Material اسم
+Material Request,طلب مواد
+Material Request {0} created from approval.,Material طلب { 0 } created from موافقة.
+Material vs BOQ,Material vs BOQ
+Materials,Materials
+Materials for {0},Materials لـ { 0 }
+Materials supply — {0} (sections {1}),Materials supply — { 0 } (sections { 1 })
+Max Age (days),أقصى Age (days)
+Max Retries,أقصى Retries
+Maximum LDs as % of contract (common cap in FIDIC-style contracts).,Maximum LDs as% of عقد (common cap in FIDIC - style contracts).
+Measured Qty,Measured Qty
+Measured Value,القيمة المقاسة
+Measurement Lines,Measurement Lines
+Mediation,Mediation
+Medium,Medium
+Meeting,Meeting
+MEP,MEP
+Metric,المؤشر
+MIDP,خطة تسليم المعلومات
+MIDP Reference,مرجع MIDP
+MIDP Title,MIDP عنوان
+Milestone,Milestone
+Minor,Minor
+Missing required field: {0},Missing required field: { 0 }
+Mitigated,Mitigated
+Mitigation / Controls,Mitigation Controls
+Mitigation Plan,خطة التخفيف
+Mobile / Field,Mobile Field
+Mobile / Geo,Mobile Geo
+Mode of Payment,Mode of دفعة
+Model / Catalog,Model Catalog
+Model File,Model File
+Model Name,Model اسم
+Monetary claim where applicable.,Monetary claim where applicable.
+MSP Export,MSP Export
+Name,الاسم
+Naming Convention,Naming Convention
+Naming Series,Naming Series
+Narrative,Narrative
+Narrative clause; use numeric LD fields below for modelling.,Narrative clause; use numeric LD fields below لـ modelling.
+NCR,NCR
+NCR Aging,تقادم تقارير عدم المطابقة
+NCR Date,NCR تاريخ
+NCR Reference,NCR Reference
+Near Miss,Near Miss
+NEC,NEC
+NEC Programme Status,NEC Programme حالة
+NEC4 ECC,NEC4 ECC
+Negotiated,Negotiated
+Net (FCY),Net (FCY)
+Net After Tax,صافي بعد الضريبة
+Net Amount,صافي المبلغ
+Net Payable,Net Payable
+Net Release,Net Release
+New Project (Wizard),مشروع جديد (المعالج)
+Next Attempt,Next Attempt
+No active Schedule Baseline for this contract.,No نشط Schedule Baseline لـ this عقد.
+No baseline,No baseline
+No baseline tasks to export.,No baseline tasks إلى export.
+"No baseline tasks. Open Schedule Baseline → Load Tasks from BOQ, or import XER.","No baseline tasks. مفتوح Schedule Baseline → Load Tasks from BOQ, or import XER."
+No BIM models for this contract.,No BIM models لـ this عقد.
+No branch found for company {0}. Create a branch first.,No فرع found لـ شركة { 0 }. Create a فرع first.
+No branch is configured for company {0}. Create a Branch or assign User Branch Access.,No فرع is configured لـ شركة { 0 }. Create a فرع or assign مستخدم فرع وصول.
+No building types available.,No building types متاح.
+No contracts,No contracts
+No contracts in scope.,No contracts in scope.
+No importable data in XER file.,No importable بيانات in XER file.
+No issue quantity to process.,No issue quantity إلى process.
+No issues linked to this model.,No issues linked إلى this model.
+No materials on this BOQ item.,No materials on this BOQ صنف.
+No Project Contract linked.,No مشروع عقد linked.
+No PROJECT or TASK data found in XER file.,No مشروع or مهمة بيانات found in XER file.
+No projects found in file.,No مشاريع found in file.
+No PTW records — strengthen ISO 45001 evidence.,No PTW records — strengthen ISO 45001 دليل.
+No revision history.,No revision history.
+No tasks found in XER file.,No tasks found in XER file.
+No template,No template
+Noise,ضوضاء
+Non-Compliant,غير ممتثل
+Non-conformance Description,Non - conformance وصف
+None,None
+Not permitted,Not permitted
+Not permitted to create BIM issues.,Not permitted إلى create BIM issues.
+Not permitted to view BIM models.,Not permitted إلى view BIM models.
+Notes,Notes
+Notice,Notice
+Notice Date,Notice تاريخ
+Notice Due Date (Time-bar),Notice استحقاق تاريخ (Time - bar)
+Notice reference,Notice reference
+Notice Type,نوع الإشعار
+Notified,Notified
+NPS,NPS
+NPS Score (0-10),NPS درجة (0 - 10)
+Number of Floors,رقم of Floors
+NWD,NWD
+Observation,Observation
+Off Track,خارج المسار
+office_tower,office tower
+Oldest Snag,Oldest Snag
+Omnexa Construction,Omnexa Construction
+On Track,على المسار
+Only Awarded/Negotiated bid estimates can be converted to setup.,يمكن تحويل العطاءات بحالة راسٍ/تفاوض فقط إلى إعداد مشروع.
+Only Document Controller / Project Manager can publish CDE documents.,Only مستند Controller مشروع مدير can publish CDE مستندات.
+Only Project Manager can approve setups.,Only مشروع مدير can approve setups.
+Open,مفتوح
+Open 3D view (web-ifc),مفتوح 3D view (web - ifc)
+Open claims,مفتوح claims
+Open Defects,مفتوح Defects
+Open Disputes,نزاعات مفتوحة
+Open FIDIC,مفتوح FIDIC
+Open from a Project Contract or set route_options.project_contract.,مفتوح from a مشروع عقد or set route options. مشروع عقد.
+Open Gantt View,مفتوح Gantt View
+Open HSE incidents,مفتوح HSE incidents
+Open IPC,مستخلصات مفتوحة
+Open NCR,تقارير NCR مفتوحة
+Open NCRs,مفتوح NCRs
+Open PTW,مفتوح PTW
+Open Purchase Order,مفتوح شراء Order
+Open Purchase Request,مفتوح شراء طلب
+Open RFI,طلبات معلومات مفتوحة
+Open Wizard,مفتوح Wizard
+Operations,العمليات
+Operator,Operator
+Optional anchor task linking this contract to the project schedule (Omnexa Projects PM).,Optional anchor مهمة linking this عقد إلى the مشروع schedule (Omnexa مشاريع PM).
+Optional BOQ line this report mainly supports.,Optional BOQ line this تقرير mainly supports.
+Optional draft invoice when construction_ipc_draft_sales_invoice feature flag is enabled.,Optional مسودة فاتورة when construction ipc مسودة مبيعات فاتورة feature flag is enabled.
+"Optional line-level valuation; if filled, period values must sum to Period Gross Amount (within tolerance).","Optional line - level valuation; if filled, period values must sum إلى Period Gross مبلغ (within tolerance)."
+Optional link if EOT tied to a formal variation.,Optional link if EOT tied إلى a formal variation.
+Optional link to a schedule task for earned value / progress alignment.,Optional link إلى a schedule مهمة لـ earned value progress alignment.
+Optional parent line for multi-level BOQ (same project contract).,Optional parent line لـ multi - level BOQ (same مشروع عقد).
+Optional schedule anchor for this certificate period (must belong to the same Project Contract).,Optional schedule anchor لـ this certificate period (must belong إلى the same مشروع عقد).
+Optional schedule task for site-to-schedule traceability.,Optional schedule مهمة لـ موقع - إلى - schedule traceability.
+Order Date,Order تاريخ
+OSHA Checklist,OSHA قائمة تحقق
+OSHA Site Checklist,OSHA موقع قائمة تحقق
+OSHA site checklist records,OSHA موقع قائمة تحقق records
+Other,Other
+Other (specify),Other (specify)
+Other / Bespoke,Other Bespoke
+Other Deductions,Other Deductions
+Other Transmittal,Other Transmittal
+Other UK-backed,Other UK - backed
+Over,Over
+Overall Score,Overall درجة
+Overdue,Overdue
+Overdue (>30d),Overdue (> 30d)
+Overrun,Overrun
+Overview,نظرة عامة
+Owner,Owner
+P6 Entity ID,P6 Entity معرف
+P6 ID,P6 معرف
+Paid,مدفوع
+Parameter,المعامل
+Parent BOQ Item,Parent BOQ صنف
+Parent BOQ Item cannot be this line itself.,Parent BOQ صنف cannot be this line itself.
+Parent BOQ must belong to the same Project Contract.,Parent BOQ must belong إلى the same مشروع عقد.
+Parent CBS,Parent CBS
+Parent Classification,Parent Classification
+Parent Code,Parent كود
+Parent Cost Code,Parent تكلفة كود
+Parse & match BOQ,Parse & match BOQ
+Parsed {0} line(s). Review BOQ matches before posting.,Parsed { 0 } line (s). Review BOQ matches before posting.
+Party,Party
+Pass,Pass
+Passed,Passed
+Password,Password
+Paste invoice lines…,Paste فاتورة lines …
+Payment,دفعة
+Payment Date,دفعة تاريخ
+Payment Entry,دفعة قيد
+Payment Reference,دفعة Reference
+Payment Terms,دفعة Terms
+Penalty / LD Clause (text),Penalty LD Clause (text)
+Penalty Deduction,Penalty Deduction
+Pending,قيد الانتظار
+Performance Bond,أداء Bond
+Performance security % defined,أداء security% defined
+Performance security % of contract,أداء security% of عقد
+Period (YYYY-MM),Period (YYYY - MM)
+Period End,نهاية الفترة
+Period From,Period From
+Period Gross,Period Gross
+Period gross,Period gross
+Period Gross Amount,Period Gross مبلغ
+Period net,Period net
+Period Start,بداية الفترة
+Period To,Period إلى
+Period Value,Period Value
+Permit Date,Permit تاريخ
+Permit to Work,تصريح عمل
+Phase,Phase
+Phase Code,Phase كود
+Phase Name,Phase اسم
+Phase Name (AR),Phase اسم (عربي)
+Phase weights total {0}% (should be 100%).,Phase weights إجمالي { 0 }% (should be 100%).
+Phases,Phases
+Photo,Photo
+Pipe Network (km),Pipe Network (km)
+PIPE_KM,PIPE_KM
+Planned,Planned
+Planned Amount,Planned مبلغ
+Planned Completion,Planned Completion
+Planned Completion cannot be before Planned Start.,Planned Completion cannot be before Planned بداية.
+Planned Cost,Planned تكلفة
+Planned Finish,Planned Finish
+Planned Issue,Planned Issue
+Planned Qty,Planned Qty
+Planned Start,Planned بداية
+Planned Units,Planned Units
+PLOT,PLOT
+Plot / Unit Inventory,Plot Unit Inventory
+Plot Area (m²),Plot Area (m)
+Plot Number,Plot رقم
+Plot Unit,قطعة/وحدة أرض
+PM Risk Register,سجل مخاطر PM
+PM Schedule (Gantt),PM Schedule (Gantt)
+PM WBS Task,PM WBS مهمة
+PO Committed,PO Committed
+Poor,Poor
+Portfolio avg CPI,Portfolio متوسط CPI
+Portfolio BAC,قيمة العقد المرجعية للمحفظة
+Portfolio SPI,Portfolio SPI
+Posted,مُرحّل
+Posting,Posting
+Pre-agreed delay damages rate where applicable.,Pre - agreed delay damages معدل where applicable.
+Premium,Premium
+Prepared By,Prepared حسب
+Prepared Date,Prepared تاريخ
+Prequalification,Prequalification
+Presenter,Presenter
+Preventive,Preventive
+Preventive Action,Preventive إجراء
+Previous Certified (IPC),Previous Certified (IPC)
+Previous Qty,Previous Qty
+Previously Paid,Previously مدفوع
+Price Adjustment %,تعديل السعر %
+Price Score,سعر درجة
+Primary WBS Task,Primary WBS مهمة
+Primavera Import,Primavera Import
+Primavera Import — {0},Primavera Import — { 0 }
+Primavera Integration Log,Primavera تكامل سجل
+Primavera P6 integration is not enabled,Primavera P6 تكامل is not enabled
+Primavera P6 Settings,Primavera P6 إعدادات
+Primavera P6 settings are incomplete,Primavera P6 إعدادات are incomplete
+Primavera Project Import,Primavera مشروع Import
+Primavera Sync Queue,Primavera Sync Queue
+Primavera XER import failed,Primavera XER import فشل
+Print Full Contract,Print Full عقد
+Prior Cumulative Billed,Prior Cumulative Billed
+Prior Payments,Prior Payments
+Priority,Priority
+Probability (1-5),الاحتمالية (1-5)
+Procore,Procore
+Procore Project ID,معرف مشروع Procore
+Procurement,Procurement
+Profit,Profit
+Profit %,Profit%
+Progress,Progress
+Progress %,Progress%
+Progress links,Progress links
+Project Contract,عقد المشروع
+Project Contract Bond,مشروع عقد Bond
+Project Contract client is required for billing.,مشروع عقد client is required لـ فوترة.
+Project Contract is required on baseline.,مشروع عقد is required on baseline.
+Project Contract is required.,مشروع عقد is required.
+Project Contract Mix,مشروع عقد Mix
+Project Contract not found.,مشروع عقد not found.
+Project Contract Summary,مشروع عقد ملخص
+Project Contract Term,مشروع عقد Term
+Project contract value plus approved / implemented change orders.,مشروع عقد value plus معتمد implemented change orders.
+Project Contract {0} already exists. Use force=1 to regenerate.,مشروع عقد { 0 } already exists. Use force = 1 إلى regenerate.
+Project Data,مشروع بيانات
+Project generated — you may edit all fields until manager approval. Sync changes to contract before approving.,مشروع generated — you may edit all fields until مدير موافقة. Sync changes إلى عقد before approving.
+Project kickoff document pack from Construction Project Wizard.,مشروع kickoff مستند pack from Construction مشروع Wizard.
+Project Manager,مدير المشروع
+Project Name,مشروع اسم
+Project No.,مشروع No.
+Project Phases,مشروع Phases
+Project Profitability,مشروع Profitability
+Project Profitability (Construction),مشروع Profitability (Construction)
+Project Risk Register,سجل مخاطر المشروع
+Project risk register maintained,مشروع مخاطر register maintained
+Project Segment,مشروع Segment
+Project Setup {0} created from this bid.,تم إنشاء إعداد المشروع {0} من هذا العطاء.
+Project Title,مشروع عنوان
+Project WIP Snapshot,لقطة أعمال تحت التنفيذ (WIP)
+Projected Margin %,هامش الربح المتوقع %
+Projects in file,مشاريع in file
+Property Damage,Property Damage
+Proposal,Proposal
+Proposal Date,Proposal تاريخ
+PTW,PTW
+PTW Register,سجل تصاريح العمل
+Published,Published
+Purchase Order,أمر شراء
+Purchase Order is not available.,شراء Order is not متاح.
+Purchase Order {0} created.,شراء Order { 0 } created.
+Purchase orders,شراء orders
+Purchase Request,طلب شراء
+Purchase Request has no items.,شراء طلب has no items.
+Purchase Requests Created,شراء طلبات Created
+PV,PV
+QS & Close-out,QS & Close - out
+QS Measurement,حصر كميات (QS)
+Qty,Qty
+Qty Driver,Qty Driver
+Quality,الجودة
+Quality Approval,جودة موافقة
+Quality Certificates,جودة Certificates
+Quality Rating,جودة Rating
+Quality Tier,جودة Tier
+"Quality, ITP, Work & Material Approvals","جودة, ITP, Work & Material موافقات"
+Quantity,الكمية
+Quantity Approval,Quantity موافقة
+Quantity Done,Quantity Done
+Question,السؤال
+Queue empty,Queue empty
+Queue Timestamp,Queue Timestamp
+Queued,Queued
+Quick Actions,إجراءات سريعة
+Quote Ref.,Quote Ref.
+Quoted,Quoted
+Quoted Amount,Quoted مبلغ
+Quoted Total,Quoted إجمالي
+Quotes,Quotes
+Rate,السعر
+Ready,Ready
+Reason,Reason
+Reason for Fine,Reason لـ Fine
+Recalculate,Recalculate
+Recalculate Pricing,Recalculate Pricing
+Recipient,المستلم
+Recipient / Distribution Notes,Recipient Distribution Notes
+Recipients Matrix,مصفوفة المستلمين
+Recommended,Recommended
+Recommended Supplier,Recommended مورد
+Record,سجل
+Recycle,Recycle
+Reference,المرجع
+Reference No.,رقم المرجع
+Referral Date,Referral تاريخ
+Referral Summary,Referral ملخص
+Referred,Referred
+Region Code,Region كود
+Region Name,Region اسم
+Regional Cost Factor,عامل تكلفة إقليمي
+Register Date,Register تاريخ
+Reject,Reject
+Reject Setup,Reject إعداد
+Rejected,مرفوض
+Related change order,Related change order
+Related change order must belong to the same Project Contract.,Related change order must belong إلى the same مشروع عقد.
+Related Change Order must belong to the same Project Contract.,Related Change Order must belong إلى the same مشروع عقد.
+Related Claim,Related Claim
+Related Claim must belong to the same Project Contract.,Related Claim must belong إلى the same مشروع عقد.
+Related EOT,Related EOT
+Related EOT must belong to the same Project Contract.,Related EOT must belong إلى the same مشروع عقد.
+Related IPC,Related IPC
+Related NCR,Related NCR
+Release,Release
+Release %,Release%
+Release Amount,Release مبلغ
+Release amount exceeds retention held on contract ({0}).,Release مبلغ exceeds retention held on عقد ({ 0 }).
+Release Date,Release تاريخ
+Release Retention,Release Retention
+Release Type,Release نوع
+Remaining,Remaining
+Remarks,ملاحظات
+Reopen,Reopen
+Reopen for Revision,Reopen لـ Revision
+Reopen Setup,Reopen إعداد
+Report Date,تقرير تاريخ
+Report Reference,تقرير Reference
+Reported,Reported
+Reports,تقارير
+Request Date,طلب تاريخ
+Require Lien Waiver on Subcontract Payment,Require Lien Waiver on Subcontract دفعة
+Required Approval,Required موافقة
+Required By,Required حسب
+Required Specification,Required Specification
+Requirement,Requirement
+Reserved,Reserved
+Residential,Residential
+Residential Inventory,Residential Inventory
+Residential Unit,وحدة سكنية
+residential_building,residential building
+Resolved,Resolved
+Responded By,Responded حسب
+Response,الرد
+Response Date,Response تاريخ
+Response Due Date,Response استحقاق تاريخ
+Responsible,Responsible
+Responsible Party,Responsible Party
+Retention,Retention
+Retention %,نسبة الضمان
+Retention & Advance Payment,Retention & Advance دفعة
+Retention Amount,Retention مبلغ
+Retention Bank Account,Retention بنك حساب
+Retention Deduction,Retention Deduction
+Retention Held,Retention Held
+Retention held,Retention held
+"Retention held (IPC, to date)","Retention held (IPC, إلى تاريخ)"
+Retention held tracked on contract,Retention held tracked on عقد
+Retention Mode of Payment,Retention Mode of دفعة
+Retention Payment Entry,Retention دفعة قيد
+Retention Release,إفراج احتجاز
+Retention Release Date,Retention Release تاريخ
+Retention Released,Retention Released
+Retention: {0}%,Retention: { 0 }%
+Retry Count,Retry عدد
+Reuse,Reuse
+Rev,Rev
+Revenue Recognized,إيرادات Recognized
+Review,مراجعة
+Review / Log Date,Review سجل تاريخ
+Review Date,Review تاريخ
+Reviewed By,Reviewed حسب
+Reviewed Date,Reviewed تاريخ
+Revised completion date (if granted),Revised completion تاريخ (if granted)
+Revised Contract Value,Revised عقد Value
+Revised value,Revised value
+Revised Value,Revised Value
+Revision,Revision
+Revision Chain,سلسلة المراجعات
+Revision Comparison,Revision Comparison
+Revision of Construction Project Setup approved as contract annex.,Revision of Construction مشروع إعداد معتمد as عقد annex.
+Revision Qty,Revision Qty
+RFI,RFI
+RFI Date,RFI تاريخ
+RFQ,RFQ
+RFQ Bid Tabulation,مقارنة عروض RFQ
+RFQ Date,RFQ تاريخ
+RFQ has no lines to order.,RFQ has no lines إلى order.
+RFQ Lines,RFQ Lines
+RFQ Status,RFQ حالة
+RFQs Created,RFQs Created
+RIBA gate,RIBA gate
+Risk,المخاطر
+Risk Category,فئة الخطر
+Risk Register,مخاطر Register
+Risk Score,درجة الخطر
+Risk Title,عنوان الخطر
+Road Length (m),Road Length (m)
+Road Width (m),Road Width (m)
+ROAD_KM,ROAD_KM
+ROAD_M,ROAD_M
+Roads & Utilities,Roads & Utilities
+Role / Organization,الدور / الجهة
+Root Cause Analysis,Root Cause Analysis
+Run Sensitivity Matrix,تشغيل مصفوفة الحساسية
+RVT,RVT
+S0,S0
+S1,S1
+S2,S2
+S3,S3
+S4,S4
+Safety,Safety
+Safety KPI,مؤشرات السلامة
+Safety Notes,Safety Notes
+Sales Invoice,فاتورة مبيعات
+Sales Invoice is not available on this site.,مبيعات فاتورة is not متاح on this موقع.
+Samples,Samples
+Save Draft Offline,Save مسودة Offline
+Scenario,Scenario
+Scenarios,Scenarios
+Schedule,Schedule
+Schedule (WBS),Schedule (WBS)
+Schedule Baseline,خط أساس الجدول الزمني
+Schedule Gantt,Schedule Gantt
+Schedule Health,Schedule صحة
+Schedule Health Thresholds,Schedule صحة Thresholds
+Schedule Integration,Schedule تكامل
+Schedule risk,Schedule مخاطر
+Schedule Source,Schedule Source
+Schedule Variance Days,Schedule Variance Days
+Schedule variance days above this value (and not delayed) marks schedule as At Risk.,Schedule variance days above this value (و not delayed) marks schedule as At مخاطر.
+Schedule variance days above this value marks schedule as Delayed.,Schedule variance days above this value marks schedule as Delayed.
+Scheduled,Scheduled
+Scheduled Finish,Scheduled Finish
+school,school
+Scope,Scope
+Scope Notes,Scope Notes
+Scope of Work,Scope of Work
+Score,درجة
+Score must be 0–10.,درجة must be 0 – 10.
+Section,Section
+Seed 20 projects (full construction portfolio demo),Seed 20 مشاريع (full construction portfolio demo)
+Seeding construction demo portfolio...,Seeding construction demo portfolio...
+Segment,Segment
+Select a BOQ Template first.,Select a BOQ Template first.
+Select a project contract first.,Select a مشروع عقد first.
+Select a project contract.,Select a مشروع عقد.
+Select at least one project.,Select at least one مشروع.
+Select or award a supplier first.,Select or award a مورد first.
+Sellable Area (m²),Sellable Area (m)
+Selling Price,Selling سعر
+Sensitivity Analysis,Sensitivity Analysis
+Sensitivity Scenarios,سيناريوهات الحساسية
+Sent,Sent
+Set Aconex Project ID in Construction Integration Settings.,Set Aconex مشروع معرف in Construction تكامل إعدادات.
+Set BIM 360 Client ID in Integration Settings.,Set BIM 360 Client معرف in تكامل إعدادات.
+Set BIM 360 Hub ID and Project ID in Construction Integration Settings.,Set BIM 360 Hub معرف و مشروع معرف in Construction تكامل إعدادات.
+Set omnexa_feature_flags.construction_ipc_billing_item or create a non-stock Item for company {0}.,Set omnexa feature flags. construction ipc فوترة صنف or create a non - stock صنف لـ شركة { 0 }.
+Set Procore Project ID in Construction Integration Settings.,Set Procore مشروع معرف in Construction تكامل إعدادات.
+Settled,تمت التسوية
+Settled Amount,Settled مبلغ
+Settlement,تسوية نزاع
+Settlement Date,Settlement تاريخ
+Setup already approved (revision {0}).,إعداد already معتمد (revision { 0 }).
+Setup already completed. Open the Project Contract or use force=1 to regenerate.,إعداد already مكتمل. مفتوح the مشروع عقد or use force = 1 إلى regenerate.
+Setup approved and attached to contract.,إعداد معتمد و attached إلى عقد.
+Setup Locked,إعداد Locked
+Setup {0} is approved and locked. Use «Reopen for Revision» to edit.,إعداد { 0 } is معتمد و locked. Use « Reopen لـ Revision » إلى edit.
+Severity,الخطورة
+sewer_network,sewer network
+Shared,Shared
+Showing draft baseline — submit the baseline to lock it for production reporting.,Showing مسودة baseline — اعتماد the baseline إلى lock it لـ production reporting.
+Signatures,Signatures
+Site / Location,موقع Location
+Site Daily Report,تقرير يومي للموقع
+Site Daily Report Photo,موقع يومي تقرير Photo
+Site Daily Report Quantity,موقع يومي تقرير Quantity
+Site Engineer,مهندس موقع
+Site Forms,موقع Forms
+Site invoice OCR (paste text),موقع فاتورة OCR (paste text)
+Site Location,موقع Location
+site location as per drawings,موقع location as per drawings
+Site Mobile Hub,مركز الموقع المحمول
+"Site name, highway chainage, or plant location.","موقع اسم, highway chainage, or plant location."
+Site Photo,موقع Photo
+Site Photos,موقع Photos
+Site Region Code,موقع Region كود
+Skip already imported projects,Skip already imported مشاريع
+skipped,skipped
+SLA Breached,SLA Breached
+Snag Date,Snag تاريخ
+Snagging,قائمة العيوب
+Snagging Item,بند قائمة العيوب
+Snagging Summary,Snagging ملخص
+Snapshot Date,لقطة تاريخ
+Snapshot Reference,لقطة Reference
+social_housing,social housing
+Soil,Soil
+Sold,Sold
+Sort,Sort
+Source,Source
+Specification,Specification
+SPI,SPI
+SPI below this value (and not delayed) marks schedule as At Risk.,SPI below this value (و not delayed) marks schedule as At مخاطر.
+SPI below this value marks schedule as Delayed.,SPI below this value marks schedule as Delayed.
+Standard,Standard
+Standard Family,عائلة المعيار
+Start,بداية
+Start Date,بداية تاريخ
+Statement Date,Statement تاريخ
+Statement Lines,Statement Lines
+Status,الحالة
+Status Bar,حالة Bar
+Stock Entry,قيد مخزون
+Stock module is not installed.,Stock module is not installed.
+Structural,Structural
+Subcontract certificates (JE),Subcontract certificates (JE)
+Subcontract Compliance Line,Subcontract امتثال Line
+Subcontract Expense Account,Subcontract مصروف حساب
+Subcontract package — {0} (est. {1}),Subcontract package — { 0 } (est. { 1 })
+Subcontract Payable Account,Subcontract Payable حساب
+Subcontract Payment,دفعة مقاول باطن
+Subcontract Payment Certificate,شهادة دفعة مقاول باطن
+Subcontract Retention Release,إطلاق ضمان مقاول الباطن
+Subcontract Scope Sheets,Subcontract Scope Sheets
+Subcontract Work Order,Subcontract Work Order
+Subcontract Work Order Mix,Subcontract Work Order Mix
+Subcontractor,مقاول الباطن
+Subcontractors & Suppliers,Subcontractors & Suppliers
+Subcontracts Created,Subcontracts Created
+Subject,الموضوع
+Submission,Submission
+Submit for Approval,اعتماد لـ موافقة
+Submit Schedule Baseline,اعتماد Schedule Baseline
+Submitted,مُرسَل
+substation,substation
+Suggest Contract Terms,Suggest عقد Terms
+Suggest from BOQ,Suggest from BOQ
+Suggest from Schedule,Suggest from Schedule
+Suggested Qty,Suggested Qty
+Suggested response due by {0}. Review clause {1} before issuing notice.,Suggested response استحقاق حسب { 0 }. Review clause { 1 } before issuing notice.
+Suitability Code,Suitability كود
+Sum of cost impact from Construction Change Order in Approved / Implemented status.,Sum of تكلفة impact from Construction Change Order in معتمد Implemented حالة.
+Sum of retention deducted on Certified / Posted IPC certificates for this contract.,Sum of retention deducted on Certified مرحل IPC certificates لـ this عقد.
+Summary,ملخص
+Superseded,Superseded
+Superseded By,Superseded حسب
+Supplier,المورد
+Supplier Approval,مورد موافقة
+Supplier Prequalification,تأهيل المورد
+Supplier Quotes,مورد Quotes
+Supporting Attachment,Supporting Attachment
+Survey Date,Survey تاريخ
+Surveyor / QS,Surveyor QS
+Suspended,Suspended
+Suspended contracts,Suspended contracts
+SV,SV
+SV Days,SV Days
+Sync,Sync
+Sync Details,Sync تفاصيل
+Sync Direction,Sync Direction
+Sync Interval (minutes),Sync Interval (minutes)
+Sync Queue,Sync Queue
+Sync Settings,Sync إعدادات
+Sync Timestamp,Sync Timestamp
+Sync to BIM 360,Sync إلى BIM 360
+Sync to Contract,Sync إلى عقد
+Sync WBS from BOQ,Sync WBS from BOQ
+Table,Table
+Target,المستهدف
+Target Close Date,تاريخ الإغلاق المستهدف
+Target Date,Target تاريخ
+Target Margin %,هامش الربح المستهدف %
+Task,مهمة
+Task Name,مهمة اسم
+Task {0}: end date before start date.,مهمة { 0 }: نهاية تاريخ before بداية تاريخ.
+Tasks,Tasks
+tasks,tasks
+Tax,Tax
+TCPI,TCPI
+Technical Approval,Technical موافقة
+Technical Data Sheets,Technical بيانات Sheets
+telecom_fiber,telecom fiber
+Template Code,Template كود
+Template Name,Template اسم
+Template Name (AR),Template اسم (عربي)
+Termination,Termination
+Terms,Terms
+Test Activities,Test Activities
+Test Activity,Test نشاط
+Test Connection,Test Connection
+Test Reports,Test تقارير
+"Testing, Commissioning & Handover","Testing, Commissioning & Handover"
+Third party,Third party
+This setup is approved (revision {0}). Reopen for revision to edit.,This إعداد is معتمد (revision { 0 }). Reopen لـ revision إلى edit.
+Time,Time
+Time Barred,Time Barred
+Time Impact (Days),Time Impact (Days)
+Time-bar fields calculated on notices,Time - bar fields calculated on notices
+Timeout (seconds),Timeout (seconds)
+Timesheet Entry,Timesheet قيد
+Timesheet Entry has no project link.,Timesheet قيد has no مشروع link.
+Timesheet Entry not installed.,Timesheet قيد not installed.
+Title,العنوان
+Title required,عنوان required
+To (Consultant / Engineer),إلى (Consultant Engineer)
+To Date,إلى تاريخ
+Toolbox Talk,اجتماع سلامة (Toolbox Talk)
+Topic,Topic
+Total Cost,إجمالي تكلفة
+Total Executed Works,إجمالي Executed Works
+Total Fine,إجمالي Fine
+Total Fines,إجمالي Fines
+Total in Words,إجمالي in Words
+Total Prior Payments,إجمالي Prior Payments
+Total Score,إجمالي درجة
+Trade,Trade
+Trade / Scope,Trade Scope
+Trade Code,Trade كود
+Trade Name,Trade اسم
+Trade Name (AR),Trade اسم (عربي)
+Trade Package,حزمة أعمال
+Trade Package Code,Trade Package كود
+Trade package {0} — {1},Trade package { 0 } — { 1 }
+Transmittal Date,Transmittal تاريخ
+Turnkey (EPC),Turnkey (EPC)
+Type,النوع
+Typical performance bond / guarantee as % of contract price.,Typical أداء bond guarantee as% of عقد سعر.
+Typology,Typology
+Under Construction,Under Construction
+Under Review,قيد المراجعة
+Unforeseeable physical conditions,Unforeseeable physical conditions
+Uniclass 2015,Uniclass 2015
+Uniclass 2015 Classification,Uniclass 2015 Classification
+"Uniclass 2015 code must start with ""Co_""","Uniclass 2015 كود must بداية with "" Co """
+Unit,الوحدة
+Unit Cost,Unit تكلفة
+Unit Cost (base),Unit تكلفة (base)
+Unit Count,Unit عدد
+Unit Number,Unit رقم
+Unit Price,Unit سعر
+Unit Rate,Unit معدل
+Unit Rate (all-in),Unit معدل (all - in)
+UNITS,UNITS
+Units,Units
+university,university
+Unknown DocType,Unknown Doc نوع
+Unknown error,Unknown خطأ
+UOM,UOM
+Update BOQ Quantities on Approve,تحديث BOQ Quantities on Approve
+Upload an XER file first.,Upload an XER file first.
+Upload XER File,Upload XER File
+urban_road,urban road
+Usage Date,Usage تاريخ
+User,المستخدم
+User Branch Access,مستخدم فرع وصول
+User NPS Survey,مستخدم NPS Survey
+Username,Username
+VAC,VAC
+Valid,Valid
+Valid From,Valid From
+Valid To,Valid إلى
+Valid To must be after Valid From.,Valid إلى must be after Valid From.
+Value,Value
+Variance,Variance
+Variance to Lowest,Variance إلى Lowest
+Variation,Variation
+Variations & Change Orders,Variations & Change Orders
+VAT %,ضريبة القيمة المضافة %
+VAT Amount,VAT مبلغ
+Verified,تم التحقق
+Vibration,اهتزاز
+villa,villa
+Violation End,Violation نهاية
+Violation Start,Violation بداية
+warehouse,warehouse
+Waste,Waste
+Waste Log,سجل المخلفات
+Waste Type,Waste نوع
+wastewater_plant,wastewater plant
+Water,Water
+Water Quality,جودة المياه
+water_network,water network
+Weather,Weather
+Webhook Secret Header,Webhook Secret Header
+Webhook URL,Webhook URL
+Weight % of Contract,Weight% of عقد
+WHT %,ضريبة الخصم %
+WHT Amount,WHT مبلغ
+WIP,WIP
+WIP Balance,WIP رصيد
+WIP Snapshot,WIP لقطة
+Withdrawn,Withdrawn
+WIZ-IPC-{0}-{1},WIZ - IPC - { 0 } - { 1 }
+WIZ-{0},WIZ - { 0 }
+Wizard,Wizard
+Wizard draft not found.,Wizard مسودة not found.
+Wizard draft not found. Reload the page.,Wizard مسودة not found. Reload the page.
+Wizard PR Materials — {0},Wizard PR Materials — { 0 }
+Wizard PR — {0},Wizard PR — { 0 }
+Wizard Setup,Wizard إعداد
+Wizard specifications,Wizard specifications
+Wizard Step,Wizard Step
+Work Activity,Work نشاط
+Work Approval,اعتماد أعمال
+Work Delay Notice,إشعار تأخير الأعمال
+Work Description,Work وصف
+Work Details,Work تفاصيل
+Work Location,Work Location
+Work Order Owner,Work Order Owner
+Work Section,Work Section
+Work Summary,Work ملخص
+Workflow State,سير العمل State
+Works,Works
+World Class,World Class
+World Class Mock Audit,World Class Mock تدقيق
+XER file is empty.,XER file is empty.
+XER file is required.,XER file is required.
+XER Import,XER Import
+Yes,Yes
+ZATCA / e-invoice branch configuration,ZATCA e - فاتورة فرع تهيئة
+ZATCA is enabled on branch — link or generate e-invoice for this IPC when posting.,ZATCA is enabled on فرع — link or generate e - فاتورة لـ this IPC when posting.
+{0} documents,{ 0 } مستندات
+{0} log entries,{ 0 } سجل entries
+الكمية المنفذة,الكمية المنفذة
+الموقع / الجزء,الموقع / الجزء
+بيان الأعمال,بيان الأعمال
+تاريخ التنفيذ,تاريخ التنفيذ
+م,م
+ملاحظات,ملاحظات
+وحدة القياس,وحدة القياس

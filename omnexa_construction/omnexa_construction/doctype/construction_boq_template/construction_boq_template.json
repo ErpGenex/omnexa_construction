@@ -1,0 +1,66 @@
+{
+	"actions": [],
+	"allow_rename": 0,
+	"autoname": "field:template_code",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"template_code",
+		"template_name",
+		"template_name_ar",
+		"column_break_1",
+		"building_type",
+		"project_segment",
+		"default_contract_type",
+		"default_governing_standard",
+		"quality_tier",
+		"is_active",
+		"lines_section",
+		"lines"
+	],
+	"fields": [
+		{"fieldname": "template_code", "fieldtype": "Data", "label": "Template Code", "reqd": 1, "unique": 1, "in_list_view": 1},
+		{"fieldname": "template_name", "fieldtype": "Data", "label": "Template Name", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "template_name_ar", "fieldtype": "Data", "label": "Template Name (AR)"},
+		{"fieldname": "column_break_1", "fieldtype": "Column Break"},
+		{
+			"fieldname": "building_type",
+			"fieldtype": "Select",
+			"label": "Building Type",
+			"options": "\nairport_terminal\nbridge\ndata_center\ndistrict_cooling\nelectrical_network\nfactory\ngas_network\nhighway\nhospital\nhotel\nlaboratory\nmall\nmetro_station\nmixed_use\noffice_tower\nparking_structure\npower_plant\nrailway\nresidential_building\nresidential_compound\nschool\nsewer_network\nsocial_housing\nsolar_farm\nstadium\nsubstation\ntelecom_fiber\ntunnel\nuniversity\nurban_road\nvilla\nwarehouse\nwastewater_plant\nwater_network",
+			"reqd": 1
+		},
+		{
+			"fieldname": "project_segment",
+			"fieldtype": "Select",
+			"label": "Project Segment",
+			"options": "Infrastructure\nBuildings\nRoads & Utilities\nIndustrial EPC\nOther",
+			"reqd": 1
+		},
+		{
+			"fieldname": "default_contract_type",
+			"fieldtype": "Select",
+			"label": "Default Contract Type",
+			"options": "Turnkey (EPC)\nLump Sum\nUnit Price\nCost Plus",
+			"default": "Turnkey (EPC)"
+		},
+		{"fieldname": "default_governing_standard", "fieldtype": "Data", "label": "Governing Standard", "default": "FIDIC 2017 Red Book (Building & Engineering)"},
+		{
+			"fieldname": "quality_tier",
+			"fieldtype": "Select",
+			"label": "Quality Tier",
+			"options": "Economy\nStandard\nPremium\nLuxury",
+			"default": "Standard"
+		},
+		{"fieldname": "is_active", "fieldtype": "Check", "label": "Active", "default": "1"},
+		{"fieldname": "lines_section", "fieldtype": "Section Break", "label": "BOQ Template Lines"},
+		{"fieldname": "lines", "fieldtype": "Table", "label": "Lines", "options": "Construction BOQ Template Line", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction BOQ Template",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1},
+		{"role": "Project Manager", "read": 1, "write": 0, "create": 0, "delete": 0, "report": 1, "export": 1}
+	],
+	"track_changes": 1
+}

@@ -1,0 +1,15 @@
+{
+ "content": null,
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "module": "Omnexa Construction",
+ "name": "construction-bi-executive",
+ "page_name": "construction-bi-executive",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"}
+ ],
+ "standard": "Yes",
+ "title": "Executive BI"
+}

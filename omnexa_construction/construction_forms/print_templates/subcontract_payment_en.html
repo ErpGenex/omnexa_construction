@@ -1,0 +1,16 @@
+<div class="en-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+  <td width="58%"><div class="title">Subcontract Payment Certificate</div></td>
+  <td width="30%"><b>No.:</b> {{ doc.name }}<br><b>Date:</b> {{ frappe.format(doc.certificate_date, {"fieldtype": "Date"}) or "" }}</td>
+</tr></table>
+{% set currency = frappe.db.get_value('Project Contract', doc.project_contract, 'contract_currency') or 'EGP' %}
+<p><b>Work Order:</b> {{ doc.subcontract_work_order }} &nbsp; <b>Subcontractor:</b> {{ doc.subcontractor }}<br>
+<b>Contract:</b> {{ doc.project_contract }} &nbsp; <b>Status:</b> {{ doc.status }}</p>
+<table class="grid"><thead><tr><th>Description</th><th>Amount ({{ currency }})</th></tr></thead><tbody>
+  <tr><td>Certified Amount</td><td>{{ frappe.format(doc.certified_amount, {"fieldtype": "Currency"}) }}</td></tr>
+  <tr><td>Previously Paid</td><td>{{ frappe.format(doc.previously_paid, {"fieldtype": "Currency"}) }}</td></tr>
+  <tr><td>Retention ({{ doc.retention_percent or 0 }}%)</td><td>{{ frappe.format(doc.retention_amount, {"fieldtype": "Currency"}) }}</td></tr>
+  <tr><td><b>Net Payable</b></td><td><b>{{ frappe.format(doc.net_payable, {"fieldtype": "Currency"}) }}</b></td></tr>
+</tbody></table>
+</div>

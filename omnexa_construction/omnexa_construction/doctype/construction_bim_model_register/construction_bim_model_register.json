@@ -1,0 +1,37 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:BIM-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"model_name",
+		"model_format",
+		"discipline",
+		"revision",
+		"file_attachment",
+		"status",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "model_name", "fieldtype": "Data", "label": "Model Name", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "model_format", "fieldtype": "Select", "label": "Format", "options": "IFC\nRVT\nNWD\nOther", "default": "IFC", "reqd": 1},
+		{"fieldname": "discipline", "fieldtype": "Select", "label": "Discipline", "options": "\nArchitectural\nStructural\nMEP\nCombined"},
+		{"fieldname": "revision", "fieldtype": "Data", "label": "Revision", "default": "A"},
+		{"fieldname": "file_attachment", "fieldtype": "Attach", "label": "Model File"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "WIP\nShared\nPublished", "default": "WIP", "reqd": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction BIM Model Register",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Construction Document Controller", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

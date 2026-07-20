@@ -1,0 +1,25 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["clause_group", "clause_title", "clause_text", "sort_order"],
+	"fields": [
+		{
+			"fieldname": "clause_group",
+			"fieldtype": "Select",
+			"label": "Group",
+			"options": "Scope\nBOQ & Schedule\nPayment & IPC\nRetention & Advance\nLiquidated Damages\nInsurance & Bonds\nQuality & Approvals\nHandover\nVariations\nOther",
+			"reqd": 1,
+			"in_list_view": 1
+		},
+		{"fieldname": "clause_title", "fieldtype": "Data", "label": "Clause Title", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "clause_text", "fieldtype": "Text Editor", "label": "Clause Text", "reqd": 1},
+		{"fieldname": "sort_order", "fieldtype": "Int", "label": "Sort", "default": "0", "in_list_view": 1}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Project Setup Contract Term",
+	"permissions": [],
+	"track_changes": 0
+}

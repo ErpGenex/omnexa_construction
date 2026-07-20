@@ -1,0 +1,12 @@
+<div class="en-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+  <td width="58%"><div class="title">Non-Conformance Report (NCR)</div></td>
+  <td width="30%"><b>No.:</b> {{ doc.name }}<br><b>Date:</b> {{ frappe.format(doc.ncr_date, {"fieldtype": "Date"}) or "" }}</td>
+</tr></table>
+<p><b>Contract:</b> {{ doc.project_contract }} &nbsp; <b>Severity:</b> {{ doc.severity }} &nbsp; <b>Status:</b> {{ doc.status }}</p>
+<div class="section-head">Description</div>
+<p>{{ doc.description }}</p>
+<div class="section-head">Corrective Action</div>
+<p>{{ doc.corrective_action or "—" }}</p>
+</div>

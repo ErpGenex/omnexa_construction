@@ -1,0 +1,41 @@
+{
+ "allow_roles": [
+  {
+   "role": "Desk User"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "creation": "2026-04-20 00:31:39.949640",
+ "docstatus": 0,
+ "doctype": "Module Onboarding",
+ "documentation_url": "https://frappe.io/framework",
+ "idx": 0,
+ "is_complete": 0,
+ "modified": "2026-07-11 14:37:22.882626",
+ "modified_by": "Administrator",
+ "module": "Omnexa Construction",
+ "name": "ERPGENEX \u2014 Construction",
+ "owner": "Administrator",
+ "steps": [
+  {
+   "step": "ERPGENEX-WS-construction-01-page-construction_project_wizard"
+  },
+  {
+   "step": "ERPGENEX-WS-construction-02-page-construction_executive_dashboard"
+  },
+  {
+   "step": "ERPGENEX-WS-construction-03-page-construction_site_mobile"
+  },
+  {
+   "step": "ERPGENEX-WS-construction-04-page-construction_schedule_gantt"
+  },
+  {
+   "step": "ERPGENEX-WS-construction-home"
+  }
+ ],
+ "subtitle": "Guided setup for this workspace.",
+ "success_message": "You are ready to work in Construction.",
+ "title": "Construction"
+}

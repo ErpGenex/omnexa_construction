@@ -1,0 +1,13 @@
+<div class="en-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+  <td width="58%"><div class="title">Request for Information (RFI)</div></td>
+  <td width="30%"><b>No.:</b> {{ doc.name }}<br><b>Date:</b> {{ frappe.format(doc.rfi_date, {"fieldtype": "Date"}) or "" }}</td>
+</tr></table>
+<p><b>Contract:</b> {{ doc.project_contract }} &nbsp; <b>Discipline:</b> {{ doc.discipline or "" }}</p>
+<p><b>Subject:</b> {{ doc.subject }} &nbsp; <b>Due:</b> {{ frappe.format(doc.due_date, {"fieldtype": "Date"}) or "" }}</p>
+<div class="section-head">Question</div>
+<div>{{ doc.question or "" }}</div>
+<div class="section-head">Response</div>
+<div>{{ doc.response or "—" }}</div>
+</div>

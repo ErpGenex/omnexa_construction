@@ -1,0 +1,47 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"scenario_name",
+		"cost_adjustment_percent",
+		"price_adjustment_percent",
+		"projected_margin_percent"
+	],
+	"fields": [
+		{
+			"fieldname": "scenario_name",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Scenario",
+			"reqd": 1
+		},
+		{
+			"default": "0",
+			"fieldname": "cost_adjustment_percent",
+			"fieldtype": "Percent",
+			"in_list_view": 1,
+			"label": "Cost Adjustment %"
+		},
+		{
+			"default": "0",
+			"fieldname": "price_adjustment_percent",
+			"fieldtype": "Percent",
+			"in_list_view": 1,
+			"label": "Price Adjustment %"
+		},
+		{
+			"fieldname": "projected_margin_percent",
+			"fieldtype": "Percent",
+			"in_list_view": 1,
+			"label": "Projected Margin %",
+			"read_only": 1
+		}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Bid Estimate Scenario",
+	"permissions": [],
+	"track_changes": 0
+}

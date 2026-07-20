@@ -1,0 +1,70 @@
+{% set ctx = frappe.call("omnexa_construction.construction_forms.setup_print.build_setup_print_context", setup_name=doc.name) %}
+<div class="omx-setup ar-form omx-a4-root">
+
+<table class="meta">
+<tr>
+	<td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+	<td width="48%">
+		<b class="label">الشركة:</b> {{ ctx.company_name }}<br>
+		<b class="label">المشروع:</b> {{ ctx.contract_title }}<br>
+		<b class="label">نوع المبنى:</b> {{ ctx.building_type or "—" }}
+	</td>
+	<td width="40%">
+		<div class="doc-title">جدول المراحل والتسليم</div>
+		<div class="doc-subtitle">Phase &amp; Delivery Schedule</div>
+		<b class="label">رقم الإعداد:</b> {{ doc.name }}<br>
+		<b class="label">تاريخ الطباعة:</b> {{ frappe.format(ctx.print_date, {"fieldtype": "Date"}) }}
+	</td>
+</tr>
+</table>
+
+<div class="info-bar">
+	<div class="cell"><b class="label">بداية المشروع:</b> {{ doc.planned_start or "—" }}</div>
+	<div class="cell"><b class="label">الانتهاء المخطط:</b> {{ doc.planned_completion or "—" }}</div>
+	<div class="cell"><b class="label">عدد المراحل:</b> {{ doc.phases | length }}</div>
+</div>
+
+<div class="section-head">مراحل التنفيذ والتسليم</div>
+<table class="grid">
+	<thead>
+		<tr>
+			<th width="8%">المرحلة</th>
+			<th width="22%">الاسم</th>
+			<th width="12%">البداية</th>
+			<th width="12%">الانتهاء</th>
+			<th width="12%">التسليم</th>
+			<th width="10%">الوزن %</th>
+			<th width="24%">بادئات BOQ</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% set ns = namespace(weight=0) %}
+		{% for row in doc.phases %}
+		{% set ns.weight = ns.weight + (row.weight_percent or 0) %}
+		<tr>
+			<td>{{ row.phase_code }}</td>
+			<td class="desc">{{ row.phase_name }}{% if row.phase_name_ar %}<br><small>{{ row.phase_name_ar }}</small>{% endif %}</td>
+			<td>{{ row.planned_start or "—" }}</td>
+			<td>{{ row.planned_finish or "—" }}</td>
+			<td>{{ row.handover_date or "—" }}</td>
+			<td>{{ row.weight_percent or 0 }}%</td>
+			<td class="desc">{{ row.boq_cost_prefixes or "—" }}</td>
+		</tr>
+		{% endfor %}
+		<tr class="total-row">
+			<td colspan="5">إجمالي أوزان المراحل</td>
+			<td colspan="2">{{ ns.weight }}%</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="sig">
+	<tr>
+		<td><div class="sig-title">إعداد</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">مراجعة</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">اعتماد</div><div class="sig-line"></div>الاسم: _______________</td>
+	</tr>
+</table>
+
+<div class="page-footer">Omnexa Construction — {{ ctx.contract_title }} — Phase Schedule — {{ doc.name }}</div>
+</div>

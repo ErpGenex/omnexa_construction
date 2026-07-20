@@ -1,0 +1,101 @@
+{% set currency = frappe.db.get_value("Project Contract", doc.project_contract, "contract_currency") or "EGP" %}
+<div class="ar-form print-format">
+
+<table class="meta"><tr>
+  <td width="38%" class="header-box">
+    <b class="label">اسم المشروع:</b> {{ doc.project_name }}<br>
+    <b class="label">رقم المشروع:</b> {{ doc.project_number or "" }}<br>
+    <b class="label">المقاول:</b> {{ doc.contractor_name or "" }}
+  </td>
+  <td width="34%"><div class="title">كشف حساب مقاول</div></td>
+  <td width="28%" class="header-box">
+    <b class="label">رقم الكشف:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.statement_date, {"fieldtype": "Date"}) or "" }}<br>
+    <b class="label">حتى تاريخ:</b> {{ frappe.format(doc.to_date, {"fieldtype": "Date"}) or "" }}
+  </td>
+</tr></table>
+
+<p class="intro-text">السادة / <b>{{ doc.contractor_name or "................................" }}</b> المقاول المحترمون<br>
+نرفق لسيادتكم كشف حسابكم عن الأعمال المنفذة بالمشروع حتى التاريخ الموضح أعلاه.</p>
+
+<div class="section-head">حركة الحساب</div>
+<table class="grid">
+  <thead><tr>
+    <th width="4%">م</th>
+    <th width="18%">البيان</th>
+    <th width="10%">تاريخ المستخلص</th>
+    <th width="14%">قيمة الأعمال المنفذة ({{ currency }})</th>
+    <th width="14%">المدفوعات السابقة ({{ currency }})</th>
+    <th width="12%">الأرصدة مدينة ({{ currency }})</th>
+    <th width="12%">الأرصدة دائنة ({{ currency }})</th>
+    <th width="16%">ملاحظات</th>
+  </tr></thead>
+  <tbody>{% for row in doc.lines %}<tr>
+    <td>{{ loop.index }}</td>
+    <td class="desc">{{ row.description }}</td>
+    <td>{{ frappe.format(row.ipc_date, {"fieldtype": "Date"}) or "" }}</td>
+    <td>{{ frappe.utils.fmt_money(row.executed_works_value, currency=currency) if row.executed_works_value else "" }}</td>
+    <td>{{ frappe.utils.fmt_money(row.prior_payments, currency=currency) if row.prior_payments else "" }}</td>
+    <td>{{ frappe.utils.fmt_money(row.debit_balance, currency=currency) if row.debit_balance else "" }}</td>
+    <td>{{ frappe.utils.fmt_money(row.credit_balance, currency=currency) if row.credit_balance else "" }}</td>
+    <td>{{ row.remarks or "" }}</td>
+  </tr>{% endfor %}
+  <tr class="total-row">
+    <td colspan="3">الإجمالي</td>
+    <td>{{ frappe.utils.fmt_money(doc.total_executed_works, currency=currency) }}</td>
+    <td>{{ frappe.utils.fmt_money(doc.total_prior_payments, currency=currency) }}</td>
+    <td>{{ frappe.utils.fmt_money(doc.debit_balance_due_contractor, currency=currency) }}</td>
+    <td>{{ frappe.utils.fmt_money(doc.credit_balance_due_from_contractor, currency=currency) if doc.credit_balance_due_from_contractor else "—" }}</td>
+    <td></td>
+  </tr></tbody>
+</table>
+
+<table class="footer-split"><tr>
+  <td width="42%">
+    <table class="summary">
+      <tr><td class="label">إجمالي الأعمال المنفذة</td><td class="val">{{ frappe.utils.fmt_money(doc.total_executed_works, currency=currency) }}</td></tr>
+      <tr><td class="label">إجمالي المدفوعات السابقة</td><td class="val">{{ frappe.utils.fmt_money(doc.total_prior_payments, currency=currency) }}</td></tr>
+      <tr><td class="label">الرصيد مدينة (يستحق للمقاول)</td><td class="val">{{ frappe.utils.fmt_money(doc.debit_balance_due_contractor, currency=currency) }}</td></tr>
+      <tr><td class="label">الرصيد دائنة (يستحق على المقاول)</td><td class="val">{% if doc.credit_balance_due_from_contractor %}{{ frappe.utils.fmt_money(doc.credit_balance_due_from_contractor, currency=currency) }}{% else %}—{% endif %}</td></tr>
+    </table>
+  </td>
+  <td width="58%">
+    <div class="notes-box">
+      <div class="notes-title">ملاحظات:</div>
+      {{ doc.notes or "" }}
+    </div>
+  </td>
+</tr></table>
+
+<table class="sig"><tr>
+  <td width="25%">
+    <div class="sig-title">إعداد</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.prepared_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.prepared_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%">
+    <div class="sig-title">مراجعة</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.reviewed_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.reviewed_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%">
+    <div class="sig-title">اعتماد</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.approved_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.approved_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%"><div class="stamp-square">ختم<br>الشركة</div></td>
+</tr></table>
+
+<p class="note">{{ doc.disclaimer or "ملاحظة: هذا الكشف لا يعد سند صرف." }}</p>
+
+<div class="page-footer">Omnexa Construction — {{ doc.project_name }} — {{ doc.name }}</div>
+</div>

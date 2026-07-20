@@ -1,0 +1,13 @@
+{
+ "doctype": "Page",
+ "name": "primavera-project-import",
+ "module": "Omnexa Construction",
+ "title": "Primavera Project Import",
+ "icon": "upload",
+ "standard": "Yes",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Desk User"}
+ ]
+}

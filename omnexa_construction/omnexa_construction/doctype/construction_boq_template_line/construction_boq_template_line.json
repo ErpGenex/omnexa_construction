@@ -1,0 +1,50 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"section_name",
+		"cost_code",
+		"item_description",
+		"parent_cost_code",
+		"is_group",
+		"unit_of_measure",
+		"base_quantity",
+		"quantity_driver",
+		"driver_formula",
+		"unit_cost_base",
+		"labor_ratio",
+		"material_ratio",
+		"equipment_ratio",
+		"trade_package_code"
+	],
+	"fields": [
+		{"fieldname": "section_name", "fieldtype": "Data", "label": "Section", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "cost_code", "fieldtype": "Data", "label": "Cost Code", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "item_description", "fieldtype": "Data", "label": "Description", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "parent_cost_code", "fieldtype": "Data", "label": "Parent Cost Code", "in_list_view": 1},
+		{"fieldname": "is_group", "fieldtype": "Check", "label": "Is Group", "default": "0", "in_list_view": 1},
+		{"fieldname": "unit_of_measure", "fieldtype": "Data", "label": "UOM", "default": "Nos"},
+		{"fieldname": "base_quantity", "fieldtype": "Float", "label": "Base Qty", "default": "1"},
+		{
+			"fieldname": "quantity_driver",
+			"fieldtype": "Select",
+			"label": "Qty Driver",
+			"options": "FIXED\nGFA\nPLOT\nFLOORS\nUNITS\nROAD_M\nROAD_KM\nPIPE_KM\nFORMULA",
+			"default": "FIXED",
+			"in_list_view": 1
+		},
+		{"fieldname": "driver_formula", "fieldtype": "Data", "label": "Driver Formula"},
+		{"fieldname": "unit_cost_base", "fieldtype": "Currency", "label": "Unit Cost (base)", "default": "0"},
+		{"fieldname": "labor_ratio", "fieldtype": "Percent", "label": "Labor %", "default": "40"},
+		{"fieldname": "material_ratio", "fieldtype": "Percent", "label": "Material %", "default": "50"},
+		{"fieldname": "equipment_ratio", "fieldtype": "Percent", "label": "Equipment %", "default": "10"},
+		{"fieldname": "trade_package_code", "fieldtype": "Data", "label": "Trade Package Code"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction BOQ Template Line",
+	"permissions": [],
+	"track_changes": 0
+}

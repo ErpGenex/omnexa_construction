@@ -1,0 +1,510 @@
+<style>
+@page {
+	size: A4 portrait;
+	margin: 10mm 12mm 14mm 12mm;
+}
+@media print {
+	html, body {
+		width: 210mm;
+		background: #fff !important;
+	}
+	.print-format {
+		box-shadow: none !important;
+	}
+	.omx-no-print {
+		display: none !important;
+	}
+	tr, td, th {
+		page-break-inside: avoid;
+	}
+	thead {
+		display: table-header-group;
+	}
+	tfoot {
+		display: table-footer-group;
+	}
+}
+
+/* Outer Frappe .print-format already has padding — inner content must fill width */
+.print-format > .omx-setup,
+.print-format > .omx-a4,
+.print-format > .ar-form,
+.print-format > .ipc-ar,
+.print-format .omx-setup.omx-a4-root,
+.omx-a4,
+.ar-form,
+.omx-setup,
+.ipc-ar {
+	direction: rtl;
+	font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+	font-size: 10px;
+	color: #1a1a1a;
+	line-height: 1.45;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Legacy templates nested a second .print-format — strip duplicate chrome */
+.print-format .print-format.omx-setup,
+.print-format .print-format.omx-a4,
+.print-format .omx-setup.print-format,
+.print-format .omx-a4.print-format {
+	padding: 0 !important;
+	margin: 0 !important;
+	max-width: 100% !important;
+	min-height: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	border-radius: 0 !important;
+}
+
+.print-format table.grid,
+.print-format table.meta {
+	table-layout: fixed;
+	word-wrap: break-word;
+}
+
+.omx-a4 .doc-title,
+.ar-form .title,
+.omx-setup .doc-title,
+.ipc-ar .title {
+	text-align: center;
+	font-size: 18px;
+	font-weight: 700;
+	color: #1e3a5f;
+	margin: 6px 0 10px;
+	letter-spacing: 0.02em;
+}
+
+.omx-a4 .doc-subtitle,
+.omx-setup .doc-subtitle {
+	text-align: center;
+	font-size: 11px;
+	color: #555;
+	margin-bottom: 10px;
+}
+
+.omx-a4 .logo-box,
+.ar-form .logo-box,
+.omx-setup .logo-box,
+.ipc-ar .logo-box {
+	width: 88px;
+	height: 68px;
+	border: 1px dashed #aab4c4;
+	border-radius: 4px;
+	text-align: center;
+	font-size: 9px;
+	color: #888;
+	padding-top: 22px;
+	background: #fafbfc;
+}
+
+.omx-a4 table.meta,
+.ar-form table.meta,
+.omx-setup table.meta,
+.ipc-ar table.meta {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 8px;
+}
+
+.omx-a4 table.meta td,
+.ar-form table.meta td,
+.omx-setup table.meta td,
+.ipc-ar table.meta td {
+	padding: 4px 8px;
+	vertical-align: top;
+	font-size: 10px;
+	line-height: 1.5;
+}
+
+.omx-a4 b.label,
+.ar-form b.label,
+.omx-setup b.label,
+.ipc-ar b.label,
+.omx-a4 .meta-label,
+.omx-setup .meta-label {
+	color: #1e3a5f;
+	font-weight: 600;
+}
+
+.omx-a4 .section-head,
+.ar-form .section-head,
+.omx-setup .section-head {
+	background: linear-gradient(180deg, #1e3a5f 0%, #152a45 100%);
+	color: #fff;
+	padding: 7px 10px;
+	font-weight: 700;
+	font-size: 11px;
+	margin-top: 12px;
+	border-radius: 3px 3px 0 0;
+}
+
+.omx-a4 table.grid,
+.ar-form table.grid,
+.omx-setup table.grid,
+.ipc-ar table.grid {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+.omx-a4 table.grid th,
+.ar-form table.grid th,
+.omx-setup table.grid th,
+.ipc-ar table.grid th {
+	background: #1e3a5f;
+	color: #fff;
+	border: 1px solid #1e3a5f;
+	padding: 6px 5px;
+	text-align: center;
+	font-size: 9px;
+	font-weight: 600;
+}
+
+.omx-a4 table.grid td,
+.ar-form table.grid td,
+.omx-setup table.grid td,
+.ipc-ar table.grid td {
+	border: 1px solid #b8c4d4;
+	padding: 5px 6px;
+	text-align: center;
+	font-size: 9px;
+	vertical-align: middle;
+}
+
+.omx-a4 table.grid td.desc,
+.ar-form table.grid td.desc,
+.omx-setup table.grid td.desc,
+.ipc-ar table.grid td.desc {
+	text-align: right;
+	padding-right: 8px;
+}
+
+.omx-a4 table.grid tr:nth-child(even) td,
+.omx-setup table.grid tr:nth-child(even) td {
+	background: #f8fafc;
+}
+
+.omx-a4 table.grid tr.total-row td,
+.omx-setup table.grid tr.total-row td,
+.ipc-ar table.grid tr.total-row td {
+	background: #e8eef5;
+	font-weight: 700;
+	color: #1e3a5f;
+}
+
+.omx-a4 .info-bar,
+.omx-setup .info-bar {
+	display: table;
+	width: 100%;
+	margin: 8px 0 10px;
+	border: 1px solid #d1d8e0;
+	border-radius: 4px;
+	background: #f4f7fb;
+}
+
+.omx-a4 .info-bar .cell,
+.omx-setup .info-bar .cell {
+	display: table-cell;
+	padding: 8px 10px;
+	font-size: 10px;
+	border-left: 1px solid #d1d8e0;
+	vertical-align: top;
+}
+
+.omx-a4 .info-bar .cell:last-child,
+.omx-setup .info-bar .cell:last-child {
+	border-left: none;
+}
+
+.omx-a4 table.summary,
+.ipc-ar table.summary,
+.omx-setup table.summary {
+	width: 58%;
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+
+.omx-a4 table.summary td,
+.ipc-ar table.summary td,
+.omx-setup table.summary td {
+	border: 1px solid #b8c4d4;
+	padding: 5px 8px;
+	font-size: 10px;
+}
+
+.omx-a4 table.summary td.label,
+.ipc-ar table.summary td.label,
+.omx-setup table.summary td.label {
+	text-align: right;
+	width: 62%;
+	background: #fafbfc;
+}
+
+.omx-a4 table.summary td.val,
+.ipc-ar table.summary td.val,
+.omx-setup table.summary td.val {
+	text-align: left;
+	font-weight: 700;
+	width: 38%;
+}
+
+.omx-a4 table.sig,
+.ar-form table.sig,
+.omx-setup table.sig,
+.ipc-ar table.sig {
+	width: 100%;
+	margin-top: 18px;
+	border-collapse: collapse;
+}
+
+.omx-a4 table.sig td,
+.ar-form table.sig td,
+.omx-setup table.sig td,
+.ipc-ar table.sig td {
+	text-align: center;
+	vertical-align: top;
+	border: 1px solid #c5ced8;
+	padding: 10px 8px;
+	height: 78px;
+	background: #fafbfc;
+}
+
+.omx-a4 .sig-title,
+.ipc-ar .sig-title,
+.omx-setup .sig-title {
+	font-weight: 700;
+	color: #1e3a5f;
+	margin-bottom: 6px;
+}
+
+.omx-a4 .sig-line,
+.ipc-ar .sig-line,
+.omx-setup .sig-line {
+	border-bottom: 1px dotted #666;
+	margin: 16px 10px 8px;
+	height: 1px;
+}
+
+.omx-a4 .note,
+.ar-form .note,
+.omx-setup .note {
+	margin-top: 10px;
+	font-size: 9px;
+	color: #666;
+	border-top: 1px solid #ddd;
+	padding-top: 8px;
+}
+
+.omx-a4 .page-footer,
+.omx-setup .page-footer,
+.ar-form .page-footer {
+	margin-top: 14px;
+	padding-top: 6px;
+	border-top: 2px solid #1e3a5f;
+	font-size: 8px;
+	color: #777;
+	text-align: center;
+}
+
+.omx-a4 .text-right,
+.omx-setup .text-right {
+	text-align: left;
+}
+.omx-a4 .text-left,
+.omx-setup .text-left {
+	text-align: right;
+}
+
+/* IPC Certificate — specific */
+.ipc-ar .ipc-currency-note {
+	margin: 6px 0 8px;
+	font-size: 9px;
+	color: #444;
+	text-align: left;
+}
+.ipc-ar table.grid td.num,
+.ipc-ar table.grid th.num-col,
+.ipc-ar table.summary td.num,
+.ipc-ar table.summary td.val.num {
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+	direction: ltr;
+	unicode-bidi: embed;
+	text-align: left;
+}
+.ipc-ar table.grid td.pct,
+.ipc-ar table.summary td.pct {
+	direction: ltr;
+	unicode-bidi: embed;
+	text-align: center;
+}
+.ipc-ar .ipc-summary-block {
+	margin-top: 10px;
+	width: 100%;
+}
+.ipc-ar .ipc-summary-block table.summary {
+	width: 55%;
+	max-width: 420px;
+	margin-right: auto;
+	margin-left: 0;
+}
+.ipc-ar .title {
+	text-decoration: underline;
+}
+.ipc-ar table.summary tr.section-head td {
+	background: #1e3a5f;
+	color: #fff;
+	font-weight: 700;
+	text-align: center;
+}
+.ipc-ar table.summary tr.net td {
+	background: #d6e8f7;
+	font-weight: 700;
+	font-size: 11px;
+}
+.ipc-ar table.summary tr.indent td.label {
+	padding-right: 24px;
+}
+.ipc-ar .stamp-box {
+	border: 2px dashed #1e3a5f;
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	font-size: 8px;
+	color: #1e3a5f;
+	padding-top: 28px;
+	line-height: 1.3;
+}
+
+/* Shared Arabic construction form layout */
+.ar-form .title-underline,
+.ipc-ar .title-underline {
+	border-bottom: 3px solid #1e3a5f;
+	margin: 4px auto 8px;
+	width: 70%;
+}
+
+.ar-form .header-box,
+.ipc-ar .header-box {
+	border: 1px solid #b8c4d4;
+	border-radius: 4px;
+	padding: 8px 10px;
+	background: #fafbfc;
+	font-size: 9px;
+	line-height: 1.6;
+}
+
+.ar-form .intro-text,
+.ipc-ar .intro-text {
+	margin: 8px 0 10px;
+	font-size: 10px;
+	line-height: 1.7;
+}
+
+.ar-form .intro-text .subject,
+.ipc-ar .intro-text .subject {
+	text-decoration: underline;
+	font-weight: 700;
+}
+
+.ar-form table.project-grid,
+.ar-form table.project-grid td {
+	border: 1px solid #b8c4d4;
+}
+
+.ar-form table.project-grid td {
+	padding: 6px 8px;
+	background: #fff;
+}
+
+.ar-form .checkbox-row,
+.ipc-ar .checkbox-row {
+	margin: 6px 0;
+	font-size: 10px;
+}
+
+.ar-form .checkbox-row span,
+.ipc-ar .checkbox-row span {
+	margin-left: 14px;
+}
+
+.ar-form .footer-split,
+.ipc-ar .footer-split {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+.ar-form .footer-split td,
+.ipc-ar .footer-split td {
+	vertical-align: top;
+	padding: 0 4px;
+}
+
+.ar-form .notes-box,
+.ipc-ar .notes-box {
+	border: 1px solid #b8c4d4;
+	border-radius: 4px;
+	min-height: 72px;
+	padding: 8px 10px;
+	background: #fff;
+	font-size: 9px;
+}
+
+.ar-form .notes-box .notes-title,
+.ipc-ar .notes-box .notes-title {
+	font-weight: 700;
+	color: #1e3a5f;
+	margin-bottom: 6px;
+}
+
+.ar-form .footer-bottom,
+.ipc-ar .footer-bottom {
+	width: 100%;
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+
+.ar-form .footer-bottom td,
+.ipc-ar .footer-bottom td {
+	vertical-align: bottom;
+}
+
+.ar-form .stamp-square,
+.ipc-ar .stamp-square {
+	width: 72px;
+	height: 72px;
+	border: 1px dashed #1e3a5f;
+	text-align: center;
+	font-size: 8px;
+	color: #1e3a5f;
+	padding-top: 26px;
+	background: #fafbfc;
+}
+
+.ar-form table.sig td .sig-field,
+.ipc-ar table.sig td .sig-field {
+	font-size: 9px;
+	margin-top: 4px;
+	text-align: right;
+	padding: 0 6px;
+}
+
+.ar-form .amount-words,
+.ipc-ar .amount-words {
+	margin: 8px 0;
+	padding: 6px 10px;
+	border: 1px solid #d1d8e0;
+	background: #f4f7fb;
+	font-size: 10px;
+	font-weight: 600;
+}
+
+</style>

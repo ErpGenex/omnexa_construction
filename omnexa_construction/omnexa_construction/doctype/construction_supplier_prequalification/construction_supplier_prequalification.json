@@ -1,0 +1,45 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:SPQ-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"supplier",
+		"evaluation_date",
+		"expiry_date",
+		"overall_score",
+		"status",
+		"trade_scope",
+		"financial_capacity",
+		"hse_rating",
+		"quality_rating",
+		"notes",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "supplier", "fieldtype": "Link", "label": "Supplier", "options": "Supplier", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "evaluation_date", "fieldtype": "Date", "label": "Evaluation Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "expiry_date", "fieldtype": "Date", "label": "Expiry Date", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "overall_score", "fieldtype": "Percent", "label": "Overall Score", "default": "70", "in_list_view": 1},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Pending\nApproved\nRejected\nExpired", "default": "Pending", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "trade_scope", "fieldtype": "Small Text", "label": "Trade / Scope", "reqd": 1},
+		{"fieldname": "financial_capacity", "fieldtype": "Select", "label": "Financial Capacity", "options": "Low\nMedium\nHigh", "default": "Medium"},
+		{"fieldname": "hse_rating", "fieldtype": "Select", "label": "HSE Rating", "options": "Poor\nFair\nGood\nExcellent", "default": "Good"},
+		{"fieldname": "quality_rating", "fieldtype": "Select", "label": "Quality Rating", "options": "Poor\nFair\nGood\nExcellent", "default": "Good"},
+		{"fieldname": "notes", "fieldtype": "Text", "label": "Notes"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Supplier Prequalification",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1},
+		{"role": "Construction Commercial Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Cost Controller", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0}
+	],
+	"track_changes": 1
+}

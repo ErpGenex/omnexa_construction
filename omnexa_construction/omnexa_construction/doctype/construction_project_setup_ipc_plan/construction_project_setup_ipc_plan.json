@@ -1,0 +1,43 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": [
+		"ipc_number",
+		"phase_code",
+		"ipc_date",
+		"period_from",
+		"period_to",
+		"cumulative_completion_percent",
+		"retention_percent",
+		"advance_recovery",
+		"discount_percent",
+		"period_gross",
+		"retention_amount",
+		"discount_amount",
+		"net_amount",
+		"remarks"
+	],
+	"fields": [
+		{"fieldname": "ipc_number", "fieldtype": "Int", "label": "IPC #", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "phase_code", "fieldtype": "Data", "label": "Phase", "in_list_view": 1},
+		{"fieldname": "ipc_date", "fieldtype": "Date", "label": "IPC Date", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "period_from", "fieldtype": "Date", "label": "Period From"},
+		{"fieldname": "period_to", "fieldtype": "Date", "label": "Period To"},
+		{"fieldname": "cumulative_completion_percent", "fieldtype": "Percent", "label": "Cumulative %", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "retention_percent", "fieldtype": "Percent", "label": "Retention %", "default": "5", "in_list_view": 1},
+		{"fieldname": "advance_recovery", "fieldtype": "Currency", "label": "Advance Recovery"},
+		{"fieldname": "discount_percent", "fieldtype": "Percent", "label": "Discount %", "default": "0"},
+		{"fieldname": "period_gross", "fieldtype": "Currency", "label": "Period Gross", "read_only": 1},
+		{"fieldname": "retention_amount", "fieldtype": "Currency", "label": "Retention", "read_only": 1},
+		{"fieldname": "discount_amount", "fieldtype": "Currency", "label": "Discount", "read_only": 1},
+		{"fieldname": "net_amount", "fieldtype": "Currency", "label": "Net Payable", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "remarks", "fieldtype": "Small Text", "label": "Remarks"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Project Setup IPC Plan",
+	"permissions": [],
+	"track_changes": 0
+}

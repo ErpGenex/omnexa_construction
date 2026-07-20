@@ -1,0 +1,13 @@
+{
+ "doctype": "Page",
+ "name": "construction-project-wizard",
+ "module": "Omnexa Construction",
+ "title": "Construction Project Wizard",
+ "icon": "tool",
+ "standard": "Yes",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Desk User"}
+ ]
+}

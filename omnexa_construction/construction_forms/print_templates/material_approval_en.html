@@ -1,0 +1,21 @@
+<div class="en-form print-format">
+<table class="meta"><tr>
+  <td width="12%">{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">LOGO</div>{% endif %}</td>
+  <td width="58%"><div class="title">Material Approval Request</div></td>
+  <td width="30%"><b>No.:</b> {{ doc.name }}<br><b>Date:</b> {{ frappe.format(doc.request_date, {"fieldtype": "Date"}) or "" }}</td>
+</tr></table>
+<p><b>To:</b> {{ doc.recipient_title or "Consultant / Engineer" }}</p>
+<p>Subject: Material approval for project <b>{{ doc.project_name }}</b></p>
+<div class="section-head">Project Details</div>
+<p><b>Project:</b> {{ doc.project_name }} &nbsp; <b>No.:</b> {{ doc.project_number or "" }}<br>
+<b>Site:</b> {{ doc.site_location or "" }} &nbsp; <b>Contract:</b> {{ doc.contract_number or "" }}<br>
+<b>Contractor:</b> {{ doc.contractor_name or "" }}</p>
+<div class="section-head">Materials</div>
+<table class="grid"><thead><tr>
+  <th>#</th><th>Material</th><th>Spec</th><th>Manufacturer</th><th>Origin</th><th>Qty</th><th>Remarks</th>
+</tr></thead><tbody>{% for row in doc.materials %}<tr>
+  <td>{{ row.idx or loop.index }}</td><td>{{ row.material_name }}</td><td>{{ row.required_spec or "" }}</td>
+  <td>{{ row.manufacturer or "" }}</td><td>{{ row.country_of_origin or "" }}</td>
+  <td>{{ row.suggested_quantity or "" }} {{ row.uom or "" }}</td><td>{{ row.remarks or "" }}</td>
+</tr>{% endfor %}</tbody></table>
+</div>

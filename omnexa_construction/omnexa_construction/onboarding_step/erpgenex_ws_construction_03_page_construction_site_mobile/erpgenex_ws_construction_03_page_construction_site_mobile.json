@@ -1,0 +1,21 @@
+{
+ "action": "Go to Page",
+ "action_label": "Open",
+ "creation": "2026-06-13 04:29:04.337216",
+ "description": "Jump to the **Site Mobile Hub** page.",
+ "docstatus": 0,
+ "doctype": "Onboarding Step",
+ "idx": 0,
+ "is_complete": 0,
+ "is_single": 0,
+ "is_skipped": 0,
+ "modified": "2026-07-11 14:37:22.857754",
+ "modified_by": "Administrator",
+ "name": "ERPGENEX-WS-construction-03-page-construction_site_mobile",
+ "owner": "Administrator",
+ "path": "construction-site-mobile",
+ "show_form_tour": 0,
+ "show_full_form": 0,
+ "title": "Open Site Mobile Hub",
+ "validate_action": 1
+}

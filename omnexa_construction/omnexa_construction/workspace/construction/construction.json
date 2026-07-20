@@ -1,0 +1,721 @@
+{
+ "charts": [
+  {
+   "chart_name": "Construction · Status Bar",
+   "label": "Status Bar"
+  },
+  {
+   "chart_name": "Construction · Project Contract Mix",
+   "label": "Project Contract Mix"
+  },
+  {
+   "chart_name": "Construction · Subcontract Work Order Mix",
+   "label": "Subcontract Work Order Mix"
+  }
+ ],
+ "content": "[{\"id\":\"erpgenex-onboarding\",\"type\":\"onboarding\",\"data\":{\"onboarding_name\":\"ERPGENEX \\u2014 Construction\",\"col\":12}},{\"id\":\"construction-h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Construction</b></span>\",\"col\":12}},{\"id\":\"construction-qa-h-1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"construction-qa-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer (project owners)\",\"col\":4}},{\"id\":\"construction-qa-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Contract\",\"col\":4}},{\"id\":\"construction-qa-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"BOQ Item\",\"col\":4}},{\"id\":\"construction-qa-5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"PM WBS Task\",\"col\":4}},{\"id\":\"construction-qa-6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Site Daily Report\",\"col\":4}},{\"id\":\"construction-qa-7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Timesheet Entry\",\"col\":4}},{\"id\":\"construction-qa-8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Work Order\",\"col\":4}},{\"id\":\"construction-qa-9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Subcontract Payment\",\"col\":4}},{\"id\":\"construction-qa-10\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Change Order\",\"col\":4}},{\"id\":\"construction-qa-11\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Extension of Time (EOT)\",\"col\":4}},{\"id\":\"construction-qa-12\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Construction Claim\",\"col\":4}},{\"id\":\"construction-qa-13\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"IPC Certificate\",\"col\":4}},{\"id\":\"construction-qa-14\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project WIP Snapshot\",\"col\":4}},{\"id\":\"construction-qa-15\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Request\",\"col\":4}},{\"id\":\"construction-qa-16\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Order\",\"col\":4}},{\"id\":\"construction-qa-17\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":4}},{\"id\":\"construction-qa-18\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Engineering Stage\",\"col\":4}},{\"id\":\"construction-qa-19\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Engineering Submittal\",\"col\":4}},{\"id\":\"construction-qa-20\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User Branch Access\",\"col\":4}},{\"id\":\"construction-qa-21\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":4}},{\"id\":\"construction-all-h-22\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>All modules & links</b></span>\",\"col\":12}},{\"id\":\"construction-card-23\",\"type\":\"card\",\"data\":{\"card_name\":\"2. Contracts & BOQ\",\"col\":4}},{\"id\":\"construction-card-24\",\"type\":\"card\",\"data\":{\"card_name\":\"3. Schedule\",\"col\":4}},{\"id\":\"construction-card-25\",\"type\":\"card\",\"data\":{\"card_name\":\"4. Site & Execution\",\"col\":4}},{\"id\":\"construction-card-26\",\"type\":\"card\",\"data\":{\"card_name\":\"5. Subcontractors\",\"col\":4}},{\"id\":\"construction-card-27\",\"type\":\"card\",\"data\":{\"card_name\":\"6. Changes & Claims (FIDIC)\",\"col\":4}},{\"id\":\"construction-card-28\",\"type\":\"card\",\"data\":{\"card_name\":\"8. Billing & Payment\",\"col\":4}},{\"id\":\"construction-card-29\",\"type\":\"card\",\"data\":{\"card_name\":\"9. Procurement\",\"col\":4}},{\"id\":\"construction-card-30\",\"type\":\"card\",\"data\":{\"card_name\":\"13. Documents & CDE / BIM\",\"col\":4}},{\"id\":\"construction-card-31\",\"type\":\"card\",\"data\":{\"card_name\":\"15. Reports & Analytics\",\"col\":4}},{\"id\":\"construction-card-32\",\"type\":\"card\",\"data\":{\"card_name\":\"Other\",\"col\":4}},{\"id\":\"construction-kpi-h-33\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>KPIs</b></span>\",\"col\":12}},{\"id\":\"construction-nc-34\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Project contracts\",\"col\":4}},{\"id\":\"construction-nc-35\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active contracts\",\"col\":4}},{\"id\":\"construction-nc-36\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Suspended contracts\",\"col\":4}},{\"id\":\"construction-nc-37\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Closed contracts\",\"col\":4}},{\"id\":\"construction-nc-38\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"BOQ lines\",\"col\":4}},{\"id\":\"construction-nc-39\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Site daily reports\",\"col\":4}},{\"id\":\"construction-nc-40\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Subcontract work orders\",\"col\":4}},{\"id\":\"construction-nc-41\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"IPC certificates\",\"col\":4}},{\"id\":\"construction-nc-42\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Construction claims\",\"col\":4}},{\"id\":\"construction-ch-h-43\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h5\\\"><b>Charts</b></span>\",\"col\":12}},{\"id\":\"construction-ch-44\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Project Contract Trend\",\"col\":4}},{\"id\":\"construction-ch-45\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Site Daily Report Trend\",\"col\":4}},{\"id\":\"construction-ch-46\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 IPC Certificate Trend\",\"col\":4}},{\"id\":\"construction-ch-47\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Construction \\u00b7 Project Contract Vol\",\"col\":4}}]",
+ "creation": "2026-04-17 23:42:59.727027",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "tool",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Construction",
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "2. Contracts & BOQ",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Customer (project owners)",
+   "icon": "users",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Customer",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Project Contract",
+   "icon": "file-text",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Project Contract",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "BOQ Item",
+   "icon": "list",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "BOQ Item",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "3. Schedule",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "PM WBS Task",
+   "icon": "tree",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "PM WBS Task",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "4. Site & Execution",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Site Daily Report",
+   "icon": "clipboard",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Site Daily Report",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Timesheet Entry",
+   "icon": "clock",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Timesheet Entry",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "5. Subcontractors",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Subcontract Work Order",
+   "icon": "users",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Subcontract Work Order",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Subcontract Payment",
+   "icon": "credit-card",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Subcontract Payment Certificate",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "6. Changes & Claims (FIDIC)",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Change Order",
+   "icon": "shuffle",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Construction Change Order",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Extension of Time (EOT)",
+   "icon": "clock",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Construction Extension of Time",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Construction Claim",
+   "icon": "file-warning",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Construction Claim",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "8. Billing & Payment",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "IPC Certificate",
+   "icon": "credit-card",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "IPC Certificate",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Project WIP Snapshot",
+   "icon": "activity",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Project WIP Snapshot",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "9. Procurement",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Purchase Request",
+   "icon": "shopping-bag",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Purchase Request",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Purchase Order",
+   "icon": "shopping-cart",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Purchase Order",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Supplier",
+   "icon": "truck",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Supplier",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "13. Documents & CDE / BIM",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Engineering Stage",
+   "icon": "map",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Engineering Stage",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Engineering Submittal",
+   "icon": "file-text",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Engineering Submittal",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "15. Reports & Analytics",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Contract Control",
+   "icon": "sliders",
+   "hidden": 0,
+   "link_type": "Report",
+   "link_to": "Construction Contract Control",
+   "report_ref_doctype": "Project Contract",
+   "onboard": 0,
+   "is_query_report": 1,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "BOQ Progress",
+   "icon": "bar-chart",
+   "hidden": 0,
+   "link_type": "Report",
+   "link_to": "BOQ Progress",
+   "report_ref_doctype": "BOQ Item",
+   "onboard": 0,
+   "is_query_report": 1,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "BOQ Cost Overrun",
+   "icon": "alert-circle",
+   "hidden": 0,
+   "link_type": "Report",
+   "link_to": "BOQ Cost Overrun",
+   "report_ref_doctype": "BOQ Item",
+   "onboard": 0,
+   "is_query_report": 1,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "IPC Summary",
+   "icon": "file-text",
+   "hidden": 0,
+   "link_type": "Report",
+   "link_to": "IPC Certificate Summary",
+   "report_ref_doctype": "IPC Certificate",
+   "onboard": 0,
+   "is_query_report": 1,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Project Profitability",
+   "icon": "trending-up",
+   "hidden": 0,
+   "link_type": "Report",
+   "link_to": "Project Profitability (Construction)",
+   "report_ref_doctype": "Project Contract",
+   "onboard": 0,
+   "is_query_report": 1,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "International Summary",
+   "icon": "globe",
+   "hidden": 0,
+   "link_type": "Report",
+   "link_to": "Construction Contract International Summary",
+   "report_ref_doctype": "Project Contract",
+   "onboard": 0,
+   "is_query_report": 1,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Card Break",
+   "label": "Other",
+   "hidden": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "User Branch Access",
+   "icon": "es-line-filetype",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "User Branch Access",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  },
+  {
+   "type": "Link",
+   "label": "Journal Entry",
+   "icon": "es-line-filetype",
+   "hidden": 0,
+   "link_type": "DocType",
+   "link_to": "Journal Entry",
+   "onboard": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "__unsaved": 1
+  }
+ ],
+ "modified": "2026-07-20 04:08:34.657038",
+ "modified_by": "Administrator",
+ "module": "Omnexa Construction",
+ "name": "Construction",
+ "number_cards": [
+  {
+   "label": "Project Contract",
+   "number_card_name": "Project Contract"
+  },
+  {
+   "label": "Active contracts",
+   "number_card_name": "Active contracts"
+  },
+  {
+   "label": "Suspended contracts",
+   "number_card_name": "Suspended contracts"
+  },
+  {
+   "label": "Closed contracts",
+   "number_card_name": "Closed contracts"
+  },
+  {
+   "label": "BOQ Item",
+   "number_card_name": "BOQ Item"
+  },
+  {
+   "label": "Site Daily Report",
+   "number_card_name": "Site Daily Report"
+  },
+  {
+   "label": "Subcontract Work Order",
+   "number_card_name": "Subcontract Work Order"
+  },
+  {
+   "label": "Construction Change Order",
+   "number_card_name": "Construction Change Order"
+  },
+  {
+   "label": "Extension of Time (EOT)",
+   "number_card_name": "Extension of Time (EOT)"
+  },
+  {
+   "label": "Construction Claim",
+   "number_card_name": "Construction Claim"
+  },
+  {
+   "label": "IPC Certificate",
+   "number_card_name": "IPC Certificate"
+  },
+  {
+   "label": "Open NCRs",
+   "number_card_name": "Open NCRs"
+  },
+  {
+   "label": "Open HSE incidents",
+   "number_card_name": "Open HSE incidents"
+  }
+ ],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 8.3,
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "link_to": "Customer",
+   "doc_view": "List",
+   "label": "Customer (project owners)",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Project Contract",
+   "doc_view": "List",
+   "label": "Project Contract",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "BOQ Item",
+   "doc_view": "List",
+   "label": "BOQ Item",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "PM WBS Task",
+   "doc_view": "List",
+   "label": "PM WBS Task",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Site Daily Report",
+   "doc_view": "List",
+   "label": "Site Daily Report",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Timesheet Entry",
+   "doc_view": "List",
+   "label": "Timesheet Entry",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Subcontract Work Order",
+   "doc_view": "List",
+   "label": "Subcontract Work Order",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Subcontract Payment Certificate",
+   "doc_view": "List",
+   "label": "Subcontract Payment",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Change Order",
+   "doc_view": "List",
+   "label": "Change Order",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Extension of Time",
+   "doc_view": "List",
+   "label": "Extension of Time (EOT)",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Construction Claim",
+   "doc_view": "List",
+   "label": "Construction Claim",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "IPC Certificate",
+   "doc_view": "List",
+   "label": "IPC Certificate",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Project WIP Snapshot",
+   "doc_view": "List",
+   "label": "Project WIP Snapshot",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Purchase Request",
+   "doc_view": "List",
+   "label": "Purchase Request",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Purchase Order",
+   "doc_view": "List",
+   "label": "Purchase Order",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Supplier",
+   "doc_view": "List",
+   "label": "Supplier",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Engineering Stage",
+   "doc_view": "List",
+   "label": "Engineering Stage",
+   "color": "Pink",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Engineering Submittal",
+   "doc_view": "List",
+   "label": "Engineering Submittal",
+   "color": "Yellow",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "User Branch Access",
+   "doc_view": "List",
+   "label": "User Branch Access",
+   "color": "Blue",
+   "__unsaved": 1
+  },
+  {
+   "type": "DocType",
+   "link_to": "Journal Entry",
+   "doc_view": "List",
+   "label": "Journal Entry",
+   "color": "Green",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Contract Control",
+   "label": "Contract Control",
+   "report_ref_doctype": "Project Contract",
+   "color": "Orange",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "BOQ Progress",
+   "label": "BOQ Progress",
+   "report_ref_doctype": "BOQ Item",
+   "color": "Red",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "BOQ Cost Overrun",
+   "label": "BOQ Cost Overrun",
+   "report_ref_doctype": "BOQ Item",
+   "color": "Cyan",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "IPC Certificate Summary",
+   "label": "IPC Summary",
+   "report_ref_doctype": "IPC Certificate",
+   "color": "Purple",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Project Profitability (Construction)",
+   "label": "Project Profitability",
+   "report_ref_doctype": "Project Contract",
+   "color": "Teal",
+   "__unsaved": 1
+  },
+  {
+   "type": "Report",
+   "link_to": "Construction Contract International Summary",
+   "label": "International Summary",
+   "report_ref_doctype": "Project Contract",
+   "color": "Pink",
+   "__unsaved": 1
+  }
+ ],
+ "title": "Construction"
+}

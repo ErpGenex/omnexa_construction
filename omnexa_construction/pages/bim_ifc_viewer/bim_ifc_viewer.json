@@ -1,0 +1,8 @@
+{
+ "item_code": "bim_ifc_viewer",
+ "item_name": "BIM IFC Viewer",
+ "page_name": "bim_ifc_viewer",
+ "module": "Omnexa Construction",
+ "standard": "Yes",
+ "content": "{% include 'omnexa_construction/pages/bim_ifc_viewer/bim_ifc_viewer.html' %}"
+}

@@ -1,0 +1,361 @@
+{% extends "templates/base.html" %}
+
+{% block title %}Primavera P6 Sync Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Primavera P6 Sync Dashboard</h1>
+			<hr>
+		</div>
+	</div>
+	
+	<!-- Connection Status -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Connection Status</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							<button id="test-connection" class="btn btn-primary">Test Connection</button>
+						</div>
+						<div class="col-md-6">
+							<div id="connection-status" class="alert alert-info">
+								Click "Test Connection" to check P6 connection
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Sync Statistics -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Sync Statistics</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="card bg-primary text-white">
+								<div class="card-body text-center">
+									<h3 id="total-syncs">0</h3>
+									<p>Total Syncs</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-success text-white">
+								<div class="card-body text-center">
+									<h3 id="successful-syncs">0</h3>
+									<p>Successful</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-danger text-white">
+								<div class="card-body text-center">
+									<h3 id="failed-syncs">0</h3>
+									<p>Failed</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card bg-info text-white">
+								<div class="card-body text-center">
+									<h3 id="success-rate">0%</h3>
+									<p>Success Rate</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Sync Queue -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h5>Sync Queue</h5>
+					<button id="refresh-queue" class="btn btn-sm btn-secondary">Refresh</button>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-striped" id="sync-queue-table">
+							<thead>
+								<tr>
+									<th>Entity Type</th>
+									<th>Entity ID</th>
+									<th>Direction</th>
+									<th>Priority</th>
+									<th>Status</th>
+									<th>Retry Count</th>
+									<th>Next Attempt</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody id="sync-queue-body">
+								<tr>
+									<td colspan="8" class="text-center">Loading...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Recent Sync Logs -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h5>Recent Sync Logs</h5>
+					<button id="refresh-logs" class="btn btn-sm btn-secondary">Refresh</button>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-striped" id="sync-logs-table">
+							<thead>
+								<tr>
+									<th>Timestamp</th>
+									<th>Entity Type</th>
+									<th>Entity ID</th>
+									<th>Action</th>
+									<th>Status</th>
+									<th>Error Message</th>
+								</tr>
+							</thead>
+							<tbody id="sync-logs-body">
+								<tr>
+									<td colspan="6" class="text-center">Loading...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Manual Sync -->
+	<div class="row mb-4">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h5>Manual Sync</h5>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="entity-type">Entity Type</label>
+								<select class="form-control" id="entity-type">
+									<option value="">Select Entity Type</option>
+									<option value="project">Project</option>
+									<option value="task">Task</option>
+									<option value="resource">Resource</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="entity-id">Entity ID</label>
+								<input type="text" class="form-control" id="entity-id" placeholder="Enter Entity ID">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>&nbsp;</label>
+								<button id="trigger-sync" class="btn btn-primary">Trigger Sync</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+frappe.ready(function() {
+	// Test Connection
+	$('#test-connection').on('click', function() {
+		$('#connection-status').removeClass('alert-success alert-danger alert-info').addClass('alert-warning').html('Testing connection...');
+		
+		frappe.call({
+			method: 'omnexa_construction.api.primavera.test_connection',
+			callback: function(r) {
+				if (r.message && r.message.status === 'success') {
+					$('#connection-status').removeClass('alert-warning').addClass('alert-success').html(
+						'Connection successful! Found ' + r.message.projects_count + ' projects in P6'
+					);
+				} else {
+					$('#connection-status').removeClass('alert-warning').addClass('alert-danger').html(
+						'Connection failed: ' + (r.message.error || 'Unknown error')
+					);
+				}
+			}
+		});
+	});
+	
+	// Load Sync Statistics
+	function load_sync_statistics() {
+		frappe.call({
+			method: 'omnexa_construction.api.primavera.get_sync_status',
+			callback: function(r) {
+				if (r.message && r.message.status === 'success') {
+					var stats = r.message.statistics;
+					$('#total-syncs').text(stats.total_syncs);
+					$('#successful-syncs').text(stats.successful_syncs);
+					$('#failed-syncs').text(stats.failed_syncs);
+					$('#success-rate').text(stats.success_rate.toFixed(1) + '%');
+				}
+			}
+		});
+	}
+	
+	// Load Sync Queue
+	function load_sync_queue() {
+		frappe.call({
+			method: 'frappe.client.get_list',
+			args: {
+				doctype: 'Primavera Sync Queue',
+				fields: ['name', 'entity_type', 'entity_id', 'sync_direction', 'priority', 'status', 'retry_count', 'next_attempt'],
+				limit: 20,
+				order_by: 'queue_timestamp desc'
+			},
+			callback: function(r) {
+				var tbody = $('#sync-queue-body');
+				tbody.empty();
+				
+				if (r.message && r.message.length > 0) {
+					r.message.forEach(function(item) {
+						var status_class = item.status === 'Completed' ? 'badge-success' : 
+							item.status === 'Failed' ? 'badge-danger' : 
+							item.status === 'In Progress' ? 'badge-warning' : 'badge-secondary';
+						
+						tbody.append(
+							'<tr>' +
+							'<td>' + item.entity_type + '</td>' +
+							'<td>' + item.entity_id + '</td>' +
+							'<td>' + item.sync_direction + '</td>' +
+							'<td>' + item.priority + '</td>' +
+							'<td><span class="badge ' + status_class + '">' + item.status + '</span></td>' +
+							'<td>' + item.retry_count + '</td>' +
+							'<td>' + (item.next_attempt || '-') + '</td>' +
+							'<td><button class="btn btn-sm btn-primary" onclick="process_queue_item(\'' + item.name + '\')">Process</button></td>' +
+							'</tr>'
+						);
+					});
+				} else {
+					tbody.append('<tr><td colspan="8" class="text-center">No items in queue</td></tr>');
+				}
+			}
+		});
+	}
+	
+	// Load Sync Logs
+	function load_sync_logs() {
+		frappe.call({
+			method: 'frappe.client.get_list',
+			args: {
+				doctype: 'Primavera Integration Log',
+				fields: ['name', 'sync_timestamp', 'entity_type', 'entity_id', 'action', 'status', 'error_message'],
+				limit: 20,
+				order_by: 'sync_timestamp desc'
+			},
+			callback: function(r) {
+				var tbody = $('#sync-logs-body');
+				tbody.empty();
+				
+				if (r.message && r.message.length > 0) {
+					r.message.forEach(function(item) {
+						var status_class = item.status === 'Success' ? 'badge-success' : 'badge-danger';
+						
+						tbody.append(
+							'<tr>' +
+							'<td>' + item.sync_timestamp + '</td>' +
+							'<td>' + item.entity_type + '</td>' +
+							'<td>' + item.entity_id + '</td>' +
+							'<td>' + item.action + '</td>' +
+							'<td><span class="badge ' + status_class + '">' + item.status + '</span></td>' +
+							'<td>' + (item.error_message || '-') + '</td>' +
+							'</tr>'
+						);
+					});
+				} else {
+					tbody.append('<tr><td colspan="6" class="text-center">No sync logs</td></tr>');
+				}
+			}
+		});
+	}
+	
+	// Process Queue Item
+	window.process_queue_item = function(queue_name) {
+		frappe.call({
+			method: 'frappe.client.get_value',
+			args: {
+				doctype: 'Primavera Sync Queue',
+				name: queue_name
+			},
+			callback: function(r) {
+				if (r.message) {
+					var doc = frappe.get_doc('Primavera Sync Queue', queue_name);
+					doc.process_sync();
+					load_sync_queue();
+				}
+			}
+		});
+	};
+	
+	// Trigger Manual Sync
+	$('#trigger-sync').on('click', function() {
+		var entity_type = $('#entity-type').val();
+		var entity_id = $('#entity-id').val();
+		
+		if (!entity_type || !entity_id) {
+			frappe.msgprint('Please select entity type and enter entity ID');
+			return;
+		}
+		
+		frappe.call({
+			method: 'omnexa_construction.api.primavera.trigger_manual_sync',
+			args: {
+				entity_type: entity_type,
+				entity_id: entity_id
+			},
+			callback: function(r) {
+				if (r.message && r.message.status === 'success') {
+					frappe.msgprint('Sync triggered successfully');
+					load_sync_queue();
+					load_sync_logs();
+				} else {
+					frappe.msgprint('Sync failed: ' + (r.message.error || 'Unknown error'));
+				}
+			}
+		});
+	});
+	
+	// Refresh buttons
+	$('#refresh-queue').on('click', load_sync_queue);
+	$('#refresh-logs').on('click', load_sync_logs);
+	
+	// Initial load
+	load_sync_statistics();
+	load_sync_queue();
+	load_sync_logs();
+});
+</script>
+{% endblock %}

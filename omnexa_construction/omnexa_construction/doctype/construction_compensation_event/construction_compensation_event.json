@@ -1,0 +1,44 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:CE-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"ce_number",
+		"ce_date",
+		"title",
+		"description",
+		"estimated_cost",
+		"time_impact_days",
+		"status",
+		"early_warning",
+		"change_order",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "ce_number", "fieldtype": "Data", "label": "CE Number", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "ce_date", "fieldtype": "Date", "label": "CE Date", "default": "Today", "reqd": 1},
+		{"fieldname": "title", "fieldtype": "Data", "label": "Title", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "description", "fieldtype": "Text", "label": "Description"},
+		{"fieldname": "estimated_cost", "fieldtype": "Currency", "label": "Estimated Cost"},
+		{"fieldname": "time_impact_days", "fieldtype": "Int", "label": "Time Impact (Days)", "default": "0"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Notified\nQuoted\nImplemented\nRejected", "default": "Notified", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "early_warning", "fieldtype": "Link", "label": "Early Warning", "options": "Construction Early Warning"},
+		{"fieldname": "change_order", "fieldtype": "Link", "label": "Change Order", "options": "Construction Change Order"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Compensation Event",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1},
+		{"role": "Construction Commercial Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

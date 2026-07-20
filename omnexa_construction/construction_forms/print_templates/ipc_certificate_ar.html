@@ -1,0 +1,140 @@
+{% set ctx = frappe.call("omnexa_construction.construction_forms.ipc_print.build_ipc_print_context", ipc_name=doc.name) %}
+{% set cur = ctx.currency_label %}
+<div class="ipc-ar print-format">
+
+<table class="meta">
+<tr>
+	<td width="12%">
+		{% if letter_head %}<div class="logo-box omx-letter-head">{{ letter_head }}</div>{% else %}<div class="logo-box">شعار<br>الشركة</div>{% endif %}
+	</td>
+	<td width="38%">
+		<b class="label">اسم الشركة:</b> {{ ctx.company_name }}<br>
+		<b class="label">المشروع:</b> {{ ctx.contract_title }}<br>
+		<b class="label">رقم العقد:</b> {{ ctx.contract_number }}<br>
+		<b class="label">المقاول:</b> {{ ctx.contractor_name }}
+		{% if ctx.client_name %}<br><b class="label">المالك / العميل:</b> {{ ctx.client_name }}{% endif %}
+	</td>
+	<td width="28%"><div class="title">مستخلص مقاولات</div><div class="title-underline"></div></td>
+	<td width="22%" class="header-box">
+		<b class="label">رقم المستخلص:</b> {{ ctx.certificate_number }}<br>
+		<b class="label">تاريخ المستخلص:</b> {{ frappe.format(ctx.ipc_date, {"fieldtype": "Date"}) }}<br>
+		<b class="label">عن الفترة من:</b> {{ frappe.format(ctx.period_from, {"fieldtype": "Date"}) or "—" }}<br>
+		<b class="label">إلى:</b> {{ frappe.format(ctx.period_to, {"fieldtype": "Date"}) or "—" }}
+	</td>
+</tr>
+</table>
+
+<p class="ipc-currency-note">جميع المبالغ بالعملة: <b>{{ cur }}</b> ({{ ctx.currency }})</p>
+
+<table class="grid ipc-boq-grid">
+	<thead>
+		<tr>
+			<th width="4%">م</th>
+			<th width="28%">بيان الأعمال</th>
+			<th width="14%" class="num-col">قيمة الأعمال<br>طبقاً للعقد</th>
+			<th width="14%" class="num-col">حتى الفترة<br>السابقة</th>
+			<th width="14%" class="num-col">هذا<br>المستخلص</th>
+			<th width="14%" class="num-col">الإجمالي<br>حتى تاريخه</th>
+			<th width="12%" class="num-col">النسبة<br>المنفذة %</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for row in ctx.boq_rows %}
+		<tr>
+			<td>{{ row.idx }}</td>
+			<td class="desc">{{ row.description }}</td>
+			<td class="num">{{ frappe.utils.fmt_money(row.contract_value, currency=None) }}</td>
+			<td class="num">{{ frappe.utils.fmt_money(row.prior_cumulative, currency=None) }}</td>
+			<td class="num">{{ frappe.utils.fmt_money(row.current_ipc, currency=None) }}</td>
+			<td class="num">{{ frappe.utils.fmt_money(row.cumulative_to_date, currency=None) }}</td>
+			<td class="num pct">{{ "%.2f"|format(row.completion_percent) }}%</td>
+		</tr>
+		{% endfor %}
+		<tr class="total-row">
+			<td colspan="2">الإجمالي</td>
+			<td class="num">{{ frappe.utils.fmt_money(ctx.totals.contract_value, currency=None) }}</td>
+			<td class="num">{{ frappe.utils.fmt_money(ctx.totals.prior_cumulative, currency=None) }}</td>
+			<td class="num">{{ frappe.utils.fmt_money(ctx.totals.current_ipc, currency=None) }}</td>
+			<td class="num">{{ frappe.utils.fmt_money(ctx.totals.cumulative_to_date, currency=None) }}</td>
+			<td class="num pct">{{ ctx.totals.completion_percent }}%</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="ipc-summary-block">
+<table class="summary">
+	<tr>
+		<td class="label">إجمالي الأعمال حتى تاريخه</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.cumulative_billed, currency=None) }}</td>
+	</tr>
+	<tr>
+		<td class="label">نسبة الأعمال المنفذة من العقد</td>
+		<td class="val pct">{{ ctx.summary.completion_percent }}%</td>
+	</tr>
+	<tr>
+		<td class="label">قيمة مستحق هذا المستخلص</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.current_ipc_gross, currency=None) }}</td>
+	</tr>
+	<tr class="section-head">
+		<td colspan="2">الخصومات والاستقطاعات</td>
+	</tr>
+	<tr class="indent">
+		<td class="label">تأمينات مستردة</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.retention, currency=None) }}</td>
+	</tr>
+	{% if ctx.summary.advance_recovery %}
+	<tr class="indent">
+		<td class="label">استرداد دفعة مقدمة</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.advance_recovery, currency=None) }}</td>
+	</tr>
+	{% endif %}
+	<tr class="indent">
+		<td class="label">غرامات</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.penalty, currency=None) }}</td>
+	</tr>
+	{% if ctx.summary.discount %}
+	<tr class="indent">
+		<td class="label">خصومات</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.discount, currency=None) }}</td>
+	</tr>
+	{% endif %}
+	<tr class="indent">
+		<td class="label">أخرى</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.other, currency=None) }}</td>
+	</tr>
+	<tr class="net">
+		<td class="label">الصافي المستحق للمقاول</td>
+		<td class="val num">{{ frappe.utils.fmt_money(ctx.summary.net_due, currency=None) }}</td>
+	</tr>
+</table>
+</div>
+
+<table class="sig">
+	<tr>
+		<td>
+			<div class="sig-title">إعداد</div>
+			<div class="sig-line"></div>
+			<div>الاسم: _______________</div>
+			<div>التاريخ: {{ frappe.format(ctx.ipc_date, {"fieldtype": "Date"}) }}</div>
+		</td>
+		<td>
+			<div class="sig-title">مراجعة</div>
+			<div class="sig-line"></div>
+			<div>الاسم: _______________</div>
+			<div>التاريخ: _______________</div>
+		</td>
+		<td>
+			<div class="sig-title">اعتماد</div>
+			<div class="sig-line"></div>
+			<div>الاسم: _______________</div>
+			<div>التاريخ: _______________</div>
+		</td>
+		<td>
+			<div class="stamp-box">ختم<br>الشركة</div>
+		</td>
+	</tr>
+</table>
+
+<div class="page-footer">Omnexa Construction — {{ ctx.contract_title }} — {{ ctx.certificate_number }}</div>
+
+</div>

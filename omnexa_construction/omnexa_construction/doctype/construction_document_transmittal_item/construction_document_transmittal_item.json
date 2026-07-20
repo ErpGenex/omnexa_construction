@@ -1,0 +1,20 @@
+{
+	"allow_rename": 0,
+	"editable_grid": 1,
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["document_title", "document_no", "revision_no", "issue_purpose", "file", "remarks"],
+	"fields": [
+		{"fieldname": "document_title", "fieldtype": "Data", "label": "Document Title", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "document_no", "fieldtype": "Data", "label": "Document No.", "in_list_view": 1},
+		{"fieldname": "revision_no", "fieldtype": "Data", "label": "Revision", "in_list_view": 1},
+		{"fieldname": "issue_purpose", "fieldtype": "Select", "label": "Issue Purpose", "options": "For Review\nFor Construction\nFor Record\nFor Tender\nAs Built\nOther", "default": "For Review", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "file", "fieldtype": "Attach", "label": "File"},
+		{"fieldname": "remarks", "fieldtype": "Small Text", "label": "Remarks"}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Document Transmittal Item",
+	"permissions": [],
+	"track_changes": 0
+}

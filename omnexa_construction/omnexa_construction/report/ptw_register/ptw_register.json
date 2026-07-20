@@ -1,0 +1,23 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "doctype": "Report",
+ "filters": [
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch"},
+  {"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract"},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "\nDraft\nActive\nExpired\nCancelled"}
+ ],
+ "is_standard": "Yes",
+ "module": "Omnexa Construction",
+ "name": "PTW Register",
+ "ref_doctype": "Construction Permit to Work",
+ "report_name": "PTW Register",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Construction HSE Officer"},
+  {"role": "Site Engineer"}
+ ]
+}

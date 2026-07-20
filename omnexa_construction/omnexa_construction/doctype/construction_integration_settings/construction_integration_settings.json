@@ -1,0 +1,32 @@
+{
+ "actions": [],
+ "creation": "2026-06-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "schedule_health_settings_section",
+  "schedule_delayed_spi_threshold",
+  "schedule_delayed_sv_days_threshold",
+  "schedule_at_risk_spi_threshold",
+  "schedule_at_risk_sv_days_threshold",
+  "webhook_url",
+  "webhook_secret",
+  "enable_webhooks"
+ ],
+ "fields": [
+  {"fieldname": "schedule_health_settings_section", "fieldtype": "Section Break", "label": "Schedule Health Thresholds"},
+  {"fieldname": "schedule_delayed_spi_threshold", "fieldtype": "Float", "label": "Delayed SPI Threshold", "default": "0.9", "description": "SPI below this value marks schedule as Delayed."},
+  {"fieldname": "schedule_delayed_sv_days_threshold", "fieldtype": "Int", "label": "Delayed SV Days Threshold", "default": "14", "description": "Schedule variance days above this value marks schedule as Delayed."},
+  {"fieldname": "schedule_at_risk_spi_threshold", "fieldtype": "Float", "label": "At Risk SPI Threshold", "default": "1.0", "description": "SPI below this value (and not delayed) marks schedule as At Risk."},
+  {"fieldname": "schedule_at_risk_sv_days_threshold", "fieldtype": "Int", "label": "At Risk SV Days Threshold", "default": "0", "description": "Schedule variance days above this value (and not delayed) marks schedule as At Risk."},
+  {"fieldname": "enable_webhooks", "fieldtype": "Check", "label": "Enable Outbound Webhooks", "default": "0"},
+  {"fieldname": "webhook_url", "fieldtype": "Data", "label": "Webhook URL", "depends_on": "eval:doc.enable_webhooks"},
+  {"fieldname": "webhook_secret", "fieldtype": "Password", "label": "Webhook Secret Header", "depends_on": "eval:doc.enable_webhooks"}
+ ],
+ "issingle": 1,
+ "module": "Omnexa Construction",
+ "name": "Construction Integration Settings",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1}
+ ]
+}

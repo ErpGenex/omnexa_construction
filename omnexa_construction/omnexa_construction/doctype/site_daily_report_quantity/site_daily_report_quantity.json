@@ -1,0 +1,44 @@
+{
+	"actions": [],
+	"doctype": "DocType",
+	"editable_grid": 1,
+	"engine": "InnoDB",
+	"field_order": ["boq_item", "cost_code", "description", "quantity_done", "unit_of_measure"],
+	"fields": [
+		{
+			"fieldname": "boq_item",
+			"fieldtype": "Link",
+			"in_list_view": 1,
+			"label": "BOQ Item",
+			"options": "BOQ Item"
+		},
+		{
+			"fieldname": "cost_code",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Cost Code"
+		},
+		{
+			"fieldname": "description",
+			"fieldtype": "Data",
+			"label": "Description"
+		},
+		{
+			"fieldname": "quantity_done",
+			"fieldtype": "Float",
+			"in_list_view": 1,
+			"label": "Quantity Done",
+			"reqd": 1
+		},
+		{
+			"fieldname": "unit_of_measure",
+			"fieldtype": "Data",
+			"label": "UOM"
+		}
+	],
+	"istable": 1,
+	"module": "Omnexa Construction",
+	"name": "Site Daily Report Quantity",
+	"permissions": [],
+	"track_changes": 0
+}

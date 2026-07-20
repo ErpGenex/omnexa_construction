@@ -1,0 +1,14 @@
+{
+ "doctype": "Page",
+ "name": "construction-site-mobile",
+ "module": "Omnexa Construction",
+ "title": "Site Mobile Hub",
+ "icon": "mobile",
+ "standard": "Yes",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Project Manager"},
+  {"role": "Site Engineer"},
+  {"role": "Construction HSE Officer"}
+ ]
+}

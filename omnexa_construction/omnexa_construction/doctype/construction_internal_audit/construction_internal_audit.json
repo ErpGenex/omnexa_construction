@@ -1,0 +1,36 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:IAU-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"project_contract",
+		"audit_date",
+		"audit_scope",
+		"auditor",
+		"status",
+		"findings",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "audit_date", "fieldtype": "Date", "label": "Audit Date", "default": "Today", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "audit_scope", "fieldtype": "Small Text", "label": "Scope", "reqd": 1},
+		{"fieldname": "auditor", "fieldtype": "Link", "label": "Lead Auditor", "options": "User"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Planned\nIn Progress\nClosed", "default": "Planned", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "findings", "fieldtype": "Table", "label": "Findings", "options": "Construction Quality Audit Finding"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction Internal Audit",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1},
+		{"role": "Construction QA Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}

@@ -1,0 +1,26 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:PLT-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "plot_number", "plot_area_m2", "phase_code", "plot_status", "unit_typology", "notes", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "plot_number", "fieldtype": "Data", "label": "Plot Number", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "plot_area_m2", "fieldtype": "Float", "label": "Plot Area (m²)", "in_list_view": 1},
+		{"fieldname": "phase_code", "fieldtype": "Data", "label": "Phase Code", "in_list_view": 1},
+		{"fieldname": "plot_status", "fieldtype": "Select", "label": "Status", "options": "Available\nReserved\nUnder Construction\nSold\nHanded Over", "default": "Available", "reqd": 1},
+		{"fieldname": "unit_typology", "fieldtype": "Data", "label": "Typology"},
+		{"fieldname": "notes", "fieldtype": "Small Text", "label": "Notes"},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Plot Unit",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

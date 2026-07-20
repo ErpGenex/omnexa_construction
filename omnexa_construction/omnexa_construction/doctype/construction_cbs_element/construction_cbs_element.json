@@ -1,0 +1,88 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "field:cbs_code",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"cbs_code",
+		"title",
+		"is_group",
+		"parent_cbs_element",
+		"cost_code_prefix",
+		"gl_account",
+		"description"
+	],
+	"fields": [
+		{
+			"fieldname": "cbs_code",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "CBS Code",
+			"reqd": 1,
+			"unique": 1
+		},
+		{
+			"fieldname": "title",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "Title",
+			"reqd": 1
+		},
+		{
+			"default": "0",
+			"fieldname": "is_group",
+			"fieldtype": "Check",
+			"label": "Is Group"
+		},
+		{
+			"fieldname": "parent_cbs_element",
+			"fieldtype": "Link",
+			"label": "Parent CBS",
+			"options": "Construction CBS Element"
+		},
+		{
+			"fieldname": "cost_code_prefix",
+			"fieldtype": "Data",
+			"in_list_view": 1,
+			"label": "BOQ Cost Code Prefix",
+			"description": "Maps BOQ lines where cost_code starts with this prefix (e.g. 03)."
+		},
+		{
+			"fieldname": "gl_account",
+			"fieldtype": "Link",
+			"label": "GL Account",
+			"options": "Account"
+		},
+		{
+			"fieldname": "description",
+			"fieldtype": "Small Text",
+			"label": "Description"
+		}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction CBS Element",
+	"permissions": [
+		{
+			"create": 1,
+			"delete": 1,
+			"read": 1,
+			"role": "System Manager",
+			"write": 1
+		},
+		{
+			"create": 1,
+			"read": 1,
+			"role": "Project Manager",
+			"write": 1
+		},
+		{
+			"read": 1,
+			"role": "Cost Controller",
+			"write": 1
+		}
+	],
+	"sort_field": "cbs_code",
+	"sort_order": "ASC",
+	"track_changes": 1
+}

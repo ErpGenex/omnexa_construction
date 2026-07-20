@@ -1,0 +1,122 @@
+{% set ctx = frappe.call("omnexa_construction.construction_forms.setup_print.build_contract_print_context", contract_name=doc.name) %}
+{% set cur = doc.contract_currency or ctx.currency %}
+<div class="omx-setup ar-form omx-a4-root">
+
+<table class="meta">
+<tr>
+	<td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+	<td width="48%">
+		<b class="label">الشركة:</b> {{ ctx.company_name }}<br>
+		<b class="label">العميل:</b> {{ ctx.client_name or doc.client or "—" }}<br>
+		<b class="label">موقع المشروع:</b> {{ ctx.site_location or doc.site_location or "—" }}
+	</td>
+	<td width="40%">
+		<div class="doc-title">عقد المشروع المتكامل</div>
+		<div class="doc-subtitle">Integrated Project Contract</div>
+		<b class="label">رقم العقد:</b> {{ ctx.contract_number }}<br>
+		<b class="label">مرفق الإعداد:</b> {{ ctx.wizard_setup or "—" }} (Rev {{ ctx.setup_revision }})<br>
+		<b class="label">تاريخ الطباعة:</b> {{ frappe.format(ctx.print_date, {"fieldtype": "Date"}) }}
+	</td>
+</tr>
+</table>
+
+<div class="section-head">1 — بيانات العقد الأساسية</div>
+<table class="grid">
+	<tbody>
+		<tr>
+			<td width="25%"><b class="label">عنوان العقد</b></td>
+			<td class="desc" colspan="3">{{ ctx.contract_title }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">نوع المشروع</b></td>
+			<td>{{ ctx.building_type or doc.building_type or "—" }}</td>
+			<td><b class="label">قيمة العقد</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.contract_value, currency=cur) if doc.contract_value else "—" }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">بداية التنفيذ</b></td>
+			<td>{{ ctx.planned_start or doc.planned_start or "—" }}</td>
+			<td><b class="label">الانتهاء المخطط</b></td>
+			<td>{{ ctx.planned_completion or doc.planned_completion or "—" }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">المعيار الحاكم</b></td>
+			<td colspan="3">{{ ctx.governing_standard or doc.governing_standard or "—" }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="section-head">2 — الشروط والأحكام التعاقدية</div>
+{% if ctx.contract_terms %}
+{% for term in ctx.contract_terms %}
+<div class="clause-block">
+	<div class="clause-title">{{ term.clause_group }} — {{ term.clause_title }}</div>
+	<div class="clause-body">{{ term.clause_text }}</div>
+</div>
+{% endfor %}
+{% else %}
+<p class="note">— لا توجد بنود مسجّلة —</p>
+{% endif %}
+
+<div class="section-head">3 — جدول الكميات (BOQ) — ملحق العقد</div>
+<table class="grid grid-tight">
+	<thead>
+		<tr>
+			<th>كود</th>
+			<th>البند</th>
+			<th>الكمية</th>
+			<th>الوحدة</th>
+			<th>سعر الوحدة</th>
+			<th>القيمة</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for row in ctx.boq_rows %}
+		<tr{% if row.is_group %} class="group-row"{% endif %}>
+			<td>{{ row.cost_code or "" }}</td>
+			<td class="desc">{{ row.item_description or "" }}</td>
+			<td class="num">{% if not row.is_group %}{{ row.quantity or 0 }}{% endif %}</td>
+			<td>{{ row.unit_of_measure or "" }}</td>
+			<td class="num">{% if not row.is_group %}{{ frappe.utils.fmt_money(row.unit_cost, currency=cur) }}{% endif %}</td>
+			<td class="num">{% if not row.is_group %}{{ frappe.utils.fmt_money(row.planned_cost, currency=cur) }}{% endif %}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+<div class="section-head">4 — الشروط المالية</div>
+<table class="grid">
+	<tbody>
+		<tr>
+			<td width="25%"><b class="label">نسبة التأمين</b></td>
+			<td>{{ doc.retention_percent or 0 }}%</td>
+			<td width="25%"><b class="label">الدفعة المقدمة</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.advance_payment, currency=cur) if doc.advance_payment else "—" }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">غرامة التأخير / يوم</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.liquidated_damages_per_day, currency=cur) if doc.liquidated_damages_per_day else "—" }}</td>
+			<td><b class="label">سقف الغرامة</b></td>
+			<td>{{ doc.liquidated_damages_cap_percent or "—" }}%</td>
+		</tr>
+	</tbody>
+</table>
+{% if ctx.payment_terms or doc.payment_terms %}
+<div class="section-head">شروط الدفع</div>
+<p class="note">{{ ctx.payment_terms or doc.payment_terms }}</p>
+{% endif %}
+
+{% if ctx.approved_setup_attachment %}
+<p class="note"><b>مرفق الإعداد المعتمد:</b> {{ ctx.approved_setup_attachment }}</p>
+{% endif %}
+
+<table class="sig">
+	<tr>
+		<td><div class="sig-title">المالك / العميل</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">المقاول</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">مدير المشروع / الاعتماد</div><div class="sig-line"></div>الاسم: _______________</td>
+	</tr>
+</table>
+
+<div class="page-footer">Omnexa Construction — {{ ctx.contract_title }} — {{ doc.name }}</div>
+</div>

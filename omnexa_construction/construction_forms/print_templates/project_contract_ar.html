@@ -1,0 +1,92 @@
+{% set ctx = frappe.call("omnexa_construction.construction_forms.setup_print.build_contract_print_context", contract_name=doc.name) %}
+{% set cur = doc.contract_currency or ctx.currency %}
+<div class="omx-setup ar-form omx-a4-root">
+
+<table class="meta">
+<tr>
+	<td width="12%"><div class="logo-box">شعار<br>الشركة</div></td>
+	<td width="48%">
+		<b class="label">الشركة:</b> {{ ctx.company_name }}<br>
+		<b class="label">العميل:</b> {{ ctx.client_name or doc.client or "—" }}<br>
+		<b class="label">موقع المشروع:</b> {{ ctx.site_location or doc.site_location or "—" }}
+	</td>
+	<td width="40%">
+		<div class="doc-title">ملخص عقد المشروع</div>
+		<div class="doc-subtitle">Project Contract Summary</div>
+		<b class="label">رقم العقد:</b> {{ ctx.contract_number }}<br>
+		<b class="label">تاريخ الطباعة:</b> {{ frappe.format(ctx.print_date, {"fieldtype": "Date"}) }}
+	</td>
+</tr>
+</table>
+
+<div class="section-head">بيانات العقد الأساسية</div>
+<table class="grid">
+	<tbody>
+		<tr>
+			<td width="25%"><b class="label">عنوان العقد</b></td>
+			<td class="desc" colspan="3">{{ ctx.contract_title }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">نوع المبنى</b></td>
+			<td>{{ ctx.building_type or doc.building_type or "—" }}</td>
+			<td><b class="label">المساحة الإجمالية</b></td>
+			<td>{{ doc.gross_floor_area_m2 or "—" }} m²</td>
+		</tr>
+		<tr>
+			<td><b class="label">قيمة العقد</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.contract_value, currency=cur) if doc.contract_value else "—" }}</td>
+			<td><b class="label">العملة</b></td>
+			<td>{{ cur }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">بداية التنفيذ</b></td>
+			<td>{{ ctx.planned_start or doc.planned_start or "—" }}</td>
+			<td><b class="label">الانتهاء المخطط</b></td>
+			<td>{{ ctx.planned_completion or doc.planned_completion or "—" }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">المعيار الحاكم</b></td>
+			<td colspan="3">{{ ctx.governing_standard or doc.governing_standard or "—" }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="section-head">الشروط المالية والتعاقدية</div>
+<table class="grid">
+	<tbody>
+		<tr>
+			<td width="25%"><b class="label">نسبة التأمين</b></td>
+			<td>{{ doc.retention_percent or 0 }}%</td>
+			<td width="25%"><b class="label">الدفعة المقدمة</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.advance_payment, currency=cur) if doc.advance_payment else "—" }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">ضمان الأداء</b></td>
+			<td>{{ doc.performance_security_percent or "—" }}%</td>
+			<td><b class="label">غرامة التأخير / يوم</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.liquidated_damages_per_day, currency=cur) if doc.liquidated_damages_per_day else "—" }}</td>
+		</tr>
+		<tr>
+			<td><b class="label">فترة مسؤولية العيوب</b></td>
+			<td>{{ doc.defects_liability_months or "—" }} شهر</td>
+			<td><b class="label">القيمة المعدّلة</b></td>
+			<td>{{ frappe.utils.fmt_money(doc.revised_contract_value, currency=cur) if doc.revised_contract_value else "—" }}</td>
+		</tr>
+	</tbody>
+</table>
+
+{% if doc.payment_terms %}
+<div class="section-head">شروط الدفع</div>
+<p class="note">{{ doc.payment_terms }}</p>
+{% endif %}
+
+<table class="sig">
+	<tr>
+		<td><div class="sig-title">المالك / العميل</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">المقاول</div><div class="sig-line"></div>الاسم: _______________</td>
+		<td><div class="sig-title">الاستشاري</div><div class="sig-line"></div>الاسم: _______________</td>
+	</tr>
+</table>
+
+<div class="page-footer">Omnexa Construction — {{ ctx.contract_title }} — {{ doc.name }}</div>
+</div>

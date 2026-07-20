@@ -1,0 +1,77 @@
+<div class="ar-form print-format">
+
+<table class="meta"><tr>
+  <td width="38%" class="header-box">
+    <b class="label">اسم المشروع:</b> {{ doc.project_name }}<br>
+    <b class="label">رقم المشروع:</b> {{ doc.project_number or "" }}<br>
+    <b class="label">المقاول:</b> {{ doc.contractor_name or "" }}
+  </td>
+  <td width="34%"><div class="title">نموذج تأخير أعمال</div></td>
+  <td width="28%" class="header-box">
+    <b class="label">رقم النموذج:</b> {{ doc.name }}<br>
+    <b class="label">التاريخ:</b> {{ frappe.format(doc.form_date, {"fieldtype": "Date"}) or "" }}
+  </td>
+</tr></table>
+
+{% if doc.contract_reference %}
+<p class="intro-text">{{ doc.contract_reference }}</p>
+{% else %}
+<p class="intro-text">بخصوص العقد رقم <b>{{ frappe.db.get_value("Project Contract", doc.project_contract, "name") or "____________" }}</b></p>
+{% endif %}
+<p class="intro-text"><span class="subject">الموضوع: تأخير أعمال</span></p>
+
+<div class="section-head">بيانات التأخير</div>
+<table class="grid">
+  <tbody>
+    <tr><td width="28%"><b class="label">البند / الجزء المتأخر</b></td><td class="desc">{{ doc.delayed_item }}</td></tr>
+    <tr><td><b class="label">الوصف</b></td><td class="desc">{{ doc.description or "" }}</td></tr>
+    <tr><td><b class="label">تاريخ البرنامج الزمني المعتمد للانتهاء</b></td><td>{{ frappe.format(doc.scheduled_finish_date, {"fieldtype": "Date"}) or "" }}</td></tr>
+    <tr><td><b class="label">تاريخ الانتهاء الفعلي المتوقع</b></td><td>{{ frappe.format(doc.actual_finish_date, {"fieldtype": "Date"}) or "" }}</td></tr>
+    <tr><td><b class="label">عدد أيام التأخير</b></td><td>{{ doc.delay_days or 0 }}</td></tr>
+    {% if doc.ld_per_day %}<tr><td><b class="label">غرامة التأخير اليومية</b></td><td>{{ frappe.utils.fmt_money(doc.ld_per_day) }}</td></tr>{% endif %}
+    {% if doc.estimated_ld_amount %}<tr><td><b class="label">إجمالي غرامة التأخير المقدرة</b></td><td>{{ frappe.utils.fmt_money(doc.estimated_ld_amount) }}</td></tr>{% endif %}
+  </tbody>
+</table>
+
+<div class="section-head">أسباب التأخير</div>
+<p class="checkbox-row">
+  {% if doc.reason_contractor %}☑{% else %}☐{% endif %} أسباب ترجع للمقاول &nbsp;&nbsp;
+  {% if doc.reason_third_party %}☑{% else %}☐{% endif %} أسباب ترجع لجهات أخرى &nbsp;&nbsp;
+  {% if doc.reason_force_majeure %}☑{% else %}☐{% endif %} قهرية &nbsp;&nbsp;
+  {% if doc.reason_other %}☑{% else %}☐{% endif %} أخرى: {{ doc.reason_other_specify or "_______________" }}
+</p>
+
+{% if doc.notes %}
+<div class="notes-box"><div class="notes-title">الملاحظات:</div>{{ doc.notes }}</div>
+{% endif %}
+
+<table class="sig"><tr>
+  <td width="25%">
+    <div class="sig-title">إعداد</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.prepared_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.prepared_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%">
+    <div class="sig-title">مراجعة</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.reviewed_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.reviewed_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%">
+    <div class="sig-title">اعتماد</div>
+    <div class="sig-line"></div>
+    <div class="sig-field"><b>الاسم:</b> {{ doc.approved_by_name or "_______________" }}</div>
+    <div class="sig-field"><b>الوظيفة:</b> _______________</div>
+    <div class="sig-field"><b>التاريخ:</b> {{ frappe.format(doc.approved_by_date, {"fieldtype": "Date"}) or "___/___/____" }}</div>
+    <div class="sig-field"><b>التوقيع:</b> _______________</div>
+  </td>
+  <td width="25%"><div class="stamp-square">ختم<br>الشركة</div></td>
+</tr></table>
+
+<div class="page-footer">Omnexa Construction — {{ doc.project_name }} — {{ doc.name }}</div>
+</div>

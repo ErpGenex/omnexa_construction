@@ -1,0 +1,29 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:SKPI-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": ["project_contract", "period_start", "period_end", "kpi_type", "metric_name", "target_value", "actual_value", "unit", "status", "company", "branch"],
+	"fields": [
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "period_start", "fieldtype": "Date", "label": "Period Start", "reqd": 1},
+		{"fieldname": "period_end", "fieldtype": "Date", "label": "Period End", "reqd": 1},
+		{"fieldname": "kpi_type", "fieldtype": "Select", "label": "KPI Type", "options": "Leading\nLagging", "default": "Leading", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "metric_name", "fieldtype": "Data", "label": "Metric", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "target_value", "fieldtype": "Float", "label": "Target"},
+		{"fieldname": "actual_value", "fieldtype": "Float", "label": "Actual", "in_list_view": 1},
+		{"fieldname": "unit", "fieldtype": "Data", "label": "Unit", "default": "%"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "On Track\nAt Risk\nOff Track", "default": "On Track", "reqd": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"module": "Omnexa Construction",
+	"name": "Construction Safety KPI",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1},
+		{"role": "Construction HSE Officer", "read": 1, "write": 1, "create": 1, "delete": 0},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0}
+	],
+	"track_changes": 1
+}

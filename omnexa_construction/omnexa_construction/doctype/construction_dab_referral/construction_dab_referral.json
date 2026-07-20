@@ -1,0 +1,38 @@
+{
+	"actions": [],
+	"allow_rename": 1,
+	"autoname": "format:DAB-{YYYY}-{#####}",
+	"doctype": "DocType",
+	"engine": "InnoDB",
+	"field_order": [
+		"dispute_case",
+		"project_contract",
+		"referral_date",
+		"referral_summary",
+		"decision_date",
+		"decision_summary",
+		"status",
+		"company",
+		"branch"
+	],
+	"fields": [
+		{"fieldname": "dispute_case", "fieldtype": "Link", "label": "Dispute Case", "options": "Construction Dispute Case", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "project_contract", "fieldtype": "Link", "label": "Project Contract", "options": "Project Contract", "fetch_from": "dispute_case.project_contract", "read_only": 1, "in_list_view": 1},
+		{"fieldname": "referral_date", "fieldtype": "Date", "label": "Referral Date", "default": "Today", "reqd": 1},
+		{"fieldname": "referral_summary", "fieldtype": "Text", "label": "Referral Summary", "reqd": 1},
+		{"fieldname": "decision_date", "fieldtype": "Date", "label": "Decision Date"},
+		{"fieldname": "decision_summary", "fieldtype": "Text", "label": "Decision Summary"},
+		{"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Referred\nUnder Review\nDecided\nWithdrawn", "default": "Referred", "reqd": 1, "in_list_view": 1},
+		{"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+		{"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+	],
+	"is_submittable": 1,
+	"module": "Omnexa Construction",
+	"name": "Construction DAB Referral",
+	"permissions": [
+		{"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1},
+		{"role": "Construction Commercial Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1},
+		{"role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1}
+	],
+	"track_changes": 1
+}
