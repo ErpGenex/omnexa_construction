@@ -56,8 +56,8 @@ def execute(filters=None):
 				**row,
 				"age_days": age,
 				"cost_exposure": flt(row.get("cost_exposure")),
-				"overdue": 1 if age > 30 and row.status != "Closed" else 0,
-			}
+				"overdue": 1 if age > 30 and row.status != "Closed" else 0
+	}
 		)
 	columns = _columns()
 	chart = auto_chart_for_columns(data, columns)
@@ -66,13 +66,22 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("NCR"), "fieldname": "name", "fieldtype": "Link", "options": "Construction NCR", "width": 110},
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130},
-		{"label": _("Date"), "fieldname": "ncr_date", "fieldtype": "Date", "width": 100},
-		{"label": _("Age (days)"), "fieldname": "age_days", "fieldtype": "Int", "width": 90},
-		{"label": _("Severity"), "fieldname": "severity", "fieldtype": "Data", "width": 80},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100},
-		{"label": _("BOQ Item"), "fieldname": "boq_item", "fieldtype": "Link", "options": "BOQ Item", "width": 110},
-		{"label": _("Cost Exposure"), "fieldname": "cost_exposure", "fieldtype": "Currency", "width": 120},
-		{"label": _("Overdue (>30d)"), "fieldname": "overdue", "fieldtype": "Check", "width": 90},
+		{"label": _("NCR"), "fieldname": "name", "fieldtype": "Link", "options": "Construction NCR", "width": 110
+	},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130
+	},
+		{"label": _("Date"), "fieldname": "ncr_date", "fieldtype": "Date", "width": 100
+	},
+		{"label": _("Age (days)"), "fieldname": "age_days", "fieldtype": "Int", "width": 90
+	},
+		{"label": _("Severity"), "fieldname": "severity", "fieldtype": "Data", "width": 80
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100
+	},
+		{"label": _("BOQ Item"), "fieldname": "boq_item", "fieldtype": "Link", "options": "BOQ Item", "width": 110
+	},
+		{"label": _("Cost Exposure"), "fieldname": "cost_exposure", "fieldtype": "Currency", "width": 120
+	},
+		{"label": _("Overdue (>30d)"), "fieldname": "overdue", "fieldtype": "Check", "width": 90
+	},
 	]

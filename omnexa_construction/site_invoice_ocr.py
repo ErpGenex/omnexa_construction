@@ -25,14 +25,15 @@ def parse_site_invoice_text(raw_text: str, project_contract: str) -> dict:
 		rate = flt(amounts[1]) if len(amounts) > 1 else 0
 		amount = flt(amounts[2]) if len(amounts) > 2 else qty * rate
 		desc = re.sub(r"[\d,\.]+", "", row).strip(" -\t")
-		lines.append({"description": desc, "qty": qty, "rate": rate, "amount": amount})
+		lines.append({"description": desc, "qty": qty, "rate": rate, "amount": amount
+	})
 
 	matches = match_lines_to_boq(project_contract, lines)
 	return {
 		"parsed_lines": lines,
 		"boq_matches": matches,
 		"ocr_mode": "text_fallback",
-		"message": _("Parsed {0} line(s). Review BOQ matches before posting.").format(len(lines)),
+		"message": _("Parsed {0} line(s). Review BOQ matches before posting.").format(len(lines))
 	}
 
 
@@ -73,8 +74,7 @@ def match_lines_to_boq(project_contract: str, lines: list[dict]) -> list[dict]:
 			{
 				"line": line,
 				"boq_item": best.name if best and best_score >= 0.35 else None,
-				"match_score": round(best_score, 2),
-			}
+				"match_score": round(best_score, 2)}
 		)
 	return out
 

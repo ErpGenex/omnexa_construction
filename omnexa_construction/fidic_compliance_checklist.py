@@ -57,7 +57,8 @@ def fidic_checklist_for_contract(project_contract: str) -> list[dict]:
 	)
 	co_count = frappe.db.count(
 		"Construction Change Order",
-		{"project_contract": project_contract, "docstatus": 1},
+		{"project_contract": project_contract, "docstatus": 1
+	},
 	)
 	fa_exists = frappe.db.exists(
 		"Construction Final Account Statement",
@@ -79,11 +80,12 @@ def fidic_checklist_for_contract(project_contract: str) -> list[dict]:
 		"advance_guarantee": bool(contract.get("advance_payment_guarantee")),
 		"variation_orders": co_count > 0,
 		"final_account": bool(fa_exists),
-		"risk_register": risk_count > 0,
+		"risk_register": risk_count > 0
 	}
 
 	out = []
 	for key, label in FIDIC_CHECKLIST:
 		passed = bool(checks.get(key))
-		out.append({"check_id": key, "requirement": label, "passed": passed, "status": _("Pass") if passed else _("Gap")})
+		out.append({"check_id": key, "requirement": label, "passed": passed, "status": _("Pass") if passed else _("Gap")
+	})
 	return out

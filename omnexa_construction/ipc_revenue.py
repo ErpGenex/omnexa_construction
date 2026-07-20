@@ -70,8 +70,8 @@ def create_draft_sales_invoice(ipc_name: str) -> str | None:
 			"description": _("IPC {0} net billing").format(ipc.name),
 			"qty": 1,
 			"rate": flt(ipc.net_amount),
-			"income_account": income_account,
-		},
+			"income_account": income_account
+	},
 	)
 	si.insert(ignore_permissions=True)
 	ipc.db_set("sales_invoice", si.name, update_modified=False)
@@ -120,7 +120,8 @@ def _resolve_ipc_billing_item(company: str) -> str:
 
 	item = frappe.db.get_value(
 		"Item",
-		{"company": company, "disabled": 0, "is_stock_item": 0},
+		{"company": company, "disabled": 0, "is_stock_item": 0
+	},
 		"name",
 		order_by="creation asc",
 	)

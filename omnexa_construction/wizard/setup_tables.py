@@ -41,11 +41,12 @@ def save_wizard_phases(setup_name: str, phases: str | list | None = None) -> dic
 				"handover_date": row.get("handover_date") or None,
 				"weight_percent": flt(row.get("weight_percent")),
 				"boq_cost_prefixes": (row.get("boq_cost_prefixes") or "").strip() or None,
-				"remarks": (row.get("remarks") or "").strip() or None,
-			},
+				"remarks": (row.get("remarks") or "").strip() or None
+	},
 		)
 	save_wizard_setup(setup)
-	return {"phases": [p.as_dict() for p in setup.phases]}
+	return {"phases": [p.as_dict() for p in setup.phases]
+	}
 
 
 def save_wizard_boq_lines(setup_name: str, lines: str | list | None = None) -> dict:
@@ -81,7 +82,7 @@ def save_wizard_boq_lines(setup_name: str, lines: str | list | None = None) -> d
 	save_wizard_setup(setup)
 	return {
 		"boq_lines": [r.as_dict() for r in setup.boq_lines if r.include and not r.is_group],
-		"estimated_contract_value": setup.estimated_contract_value,
+		"estimated_contract_value": setup.estimated_contract_value
 	}
 
 
@@ -122,7 +123,7 @@ def save_wizard_boq_details(setup_name: str, details: str | list | None = None) 
 	save_wizard_setup(setup)
 	return {
 		"boq_details": [d.as_dict() for d in setup.boq_details],
-		"estimated_contract_value": setup.estimated_contract_value,
+		"estimated_contract_value": setup.estimated_contract_value
 	}
 
 
@@ -158,4 +159,5 @@ def save_wizard_assignments_full(
 				row.assigned_party = patch.get("party")
 
 	save_wizard_setup(setup)
-	return {"assignments": [a.as_dict() for a in setup.assignments or []]}
+	return {"assignments": [a.as_dict() for a in setup.assignments or []]
+	}

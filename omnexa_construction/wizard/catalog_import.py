@@ -36,20 +36,23 @@ def _item_has_arabic_name_field() -> bool:
 
 def _ensure_uom(uom_name: str) -> None:
 	if uom_name and not frappe.db.exists("UOM", uom_name):
-		frappe.get_doc({"doctype": "UOM", "uom_name": uom_name}).insert(ignore_permissions=True)
+		frappe.get_doc({"doctype": "UOM", "uom_name": uom_name
+	}).insert(ignore_permissions=True)
 
 
 def import_material_catalog(company: str, *, limit: int = 200) -> dict:
 	"""Idempotent import of construction material Items for a company."""
 	if not frappe.db.exists("DocType", "Item"):
-		return {"created": 0, "skipped": 0, "total": 0}
+		return {"created": 0, "skipped": 0, "total": 0
+	}
 	ensure_construction_uoms()
 	has_ar = _item_has_arabic_name_field()
 	created = skipped = 0
 	for suffix, name_en, name_ar, uom, product_type, classification in full_catalog()[:limit]:
 		_ensure_uom(uom)
 		code = item_code(suffix)
-		if frappe.db.get_value("Item", {"item_code": code, "company": company}, "name"):
+		if frappe.db.get_value("Item", {"item_code": code, "company": company
+	}, "name"):
 			skipped += 1
 			continue
 		payload: dict = {
@@ -62,13 +65,14 @@ def import_material_catalog(company: str, *, limit: int = 200) -> dict:
 			"is_stock_item": 1,
 			"is_purchase_item": 1,
 			"is_sales_item": 0,
-			"classification_code": classification,
-		}
+			"classification_code": classification
+	}
 		if has_ar:
 			payload["item_name_ar"] = name_ar
 		frappe.get_doc(payload).insert(ignore_permissions=True)
 		created += 1
-	return {"created": created, "skipped": skipped, "total": len(full_catalog()[:limit])}
+	return {"created": created, "skipped": skipped, "total": len(full_catalog()[:limit])
+	}
 
 
 def resolve_item_code(
@@ -120,9 +124,11 @@ def resolve_item_code(
 
 
 def _item_exists(code: str, company: str | None) -> bool:
-	if company and frappe.db.get_value("Item", {"item_code": code, "company": company}, "name"):
+	if company and frappe.db.get_value("Item", {"item_code": code, "company": company
+	}, "name"):
 		return True
-	return bool(frappe.db.get_value("Item", {"item_code": code}, "name"))
+	return bool(frappe.db.get_value("Item", {"item_code": code
+	}, "name"))
 
 
 def ensure_catalog_item(suffix: str, company: str) -> str | None:
@@ -147,8 +153,8 @@ def ensure_catalog_item(suffix: str, company: str) -> str | None:
 			"is_stock_item": 1,
 			"is_purchase_item": 1,
 			"is_sales_item": 0,
-			"classification_code": classification,
-		}
+			"classification_code": classification
+	}
 		if has_ar:
 			payload["item_name_ar"] = name_ar
 		frappe.get_doc(payload).insert(ignore_permissions=True)

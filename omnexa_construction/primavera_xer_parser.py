@@ -13,7 +13,8 @@ from frappe.utils import add_days, flt, getdate
 def load_xer_content(file_url: str) -> str:
 	if not file_url:
 		frappe.throw(_("XER file is required."), title=_("Primavera Import"))
-	content = frappe.get_doc("File", {"file_url": file_url}).get_content()
+	content = frappe.get_doc("File", {"file_url": file_url
+	}).get_content()
 	if isinstance(content, bytes):
 		content = content.decode("utf-8", errors="replace")
 	if not content.strip():
@@ -42,7 +43,8 @@ def parse_xer_sections(content: str) -> dict[str, list[dict[str, str]]]:
 			current = parts[1].strip() if len(parts) > 1 else None
 			fields = []
 			if current and current not in sections:
-				sections[current] = {"fields": [], "rows": []}
+				sections[current] = {"fields": [], "rows": []
+	}
 			continue
 		if not current:
 			continue
@@ -113,8 +115,8 @@ def extract_xer_projects(sections: dict[str, list[dict]]) -> list[dict]:
 				"description": (row.get("proj_desc") or row.get("project_desc") or "")[:500],
 				"start_date": start,
 				"end_date": end,
-				"contract_value": cost,
-			}
+				"contract_value": cost
+	}
 		)
 	return projects
 
@@ -187,8 +189,8 @@ def extract_xer_tasks(sections: dict[str, list[dict]], proj_id: str | None = Non
 				"duration_days": duration_days,
 				"predecessor_task": ", ".join(n for n in pred_names if n)[:140] or None,
 				"is_milestone": 1 if (row.get("task_type") or "").upper() in ("TT_MILE", "TT_Mile") else 0,
-				"cost_code": (row.get("task_code") or row.get("wbs_id") or "")[:50] or None,
-			}
+				"cost_code": (row.get("task_code") or row.get("wbs_id") or "")[:50] or None
+	}
 		)
 	return tasks
 

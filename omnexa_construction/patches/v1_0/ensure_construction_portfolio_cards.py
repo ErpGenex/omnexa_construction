@@ -31,7 +31,8 @@ def _upsert_number_card(label: str, document_type: str, filters: list) -> str | 
 	)
 	existing = frappe.db.get_value(
 		"Number Card",
-		{"label": label, "document_type": document_type, "function": "Count"},
+		{"label": label, "document_type": document_type, "function": "Count"
+	},
 		"name",
 	)
 	if existing:
@@ -49,8 +50,8 @@ def _upsert_number_card(label: str, document_type: str, filters: list) -> str | 
 			"is_public": 1,
 			"show_percentage_stats": 1,
 			"stats_time_interval": "Monthly",
-			"show_full_number": 1,
-		}
+			"show_full_number": 1
+	}
 	)
 	doc.insert(ignore_permissions=True)
 	return doc.name
@@ -64,7 +65,8 @@ def _sync_construction_workspace_cards():
 	for label, _, _ in PORTFOLIO_CARDS:
 		if label in labels:
 			continue
-		ws.append("number_cards", {"label": label, "number_card_name": label})
+		ws.append("number_cards", {"label": label, "number_card_name": label
+	})
 		labels.add(label)
 
 	content = json.loads(ws.content or "[]")
@@ -79,8 +81,8 @@ def _sync_construction_workspace_cards():
 			{
 				"id": block_id,
 				"type": "number_card",
-				"data": {"number_card_name": label, "col": 4},
-			},
+				"data": {"number_card_name": label, "col": 4}
+	},
 		)
 	if not any(row.get("id") == "construction-portfolio-h" for row in content if isinstance(row, dict)):
 		content.insert(
@@ -88,8 +90,8 @@ def _sync_construction_workspace_cards():
 			{
 				"id": "construction-portfolio-h",
 				"type": "header",
-				"data": {"text": "<b>Portfolio · Contract status</b>", "col": 12},
-			},
+				"data": {"text": "<b>Portfolio · Contract status</b>", "col": 12}
+	},
 		)
 	ws.content = json.dumps(content, separators=(",", ":"))
 	ws.save(ignore_permissions=True)

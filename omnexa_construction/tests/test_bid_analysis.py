@@ -20,8 +20,8 @@ class TestBidAnalysis(FrappeTestCase):
 				"estimated_contract_value": 1000000,
 				"estimated_cost": 850000,
 				"target_margin_percent": 15,
-				"proposal_date": None,
-			},
+				"proposal_date": None
+	},
 			{
 				"name": "BID-2",
 				"estimate_title": "Alt B",
@@ -30,8 +30,8 @@ class TestBidAnalysis(FrappeTestCase):
 				"estimated_contract_value": 950000,
 				"estimated_cost": 800000,
 				"target_margin_percent": 15,
-				"proposal_date": None,
-			},
+				"proposal_date": None
+	},
 		],
 	)
 	def test_compare_marks_lowest_bid(self, _rows):
@@ -45,7 +45,8 @@ class TestBidAnalysis(FrappeTestCase):
 		return_value=type(
 			"Bid",
 			(),
-			{"estimated_contract_value": 1000, "estimated_cost": 800},
+			{"estimated_contract_value": 1000, "estimated_cost": 800
+	},
 		)(),
 	)
 	def test_sensitivity_returns_matrix(self, _doc):

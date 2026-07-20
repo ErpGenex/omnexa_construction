@@ -56,9 +56,14 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 140},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100},
-		{"label": _("Count"), "fieldname": "snag_count", "fieldtype": "Int", "width": 80},
-		{"label": _("Oldest Snag"), "fieldname": "oldest_snag_date", "fieldtype": "Date", "width": 110},
-		{"label": _("Max Age (days)"), "fieldname": "max_age_days", "fieldtype": "Int", "width": 100},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 140
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100
+	},
+		{"label": _("Count"), "fieldname": "snag_count", "fieldtype": "Int", "width": 80
+	},
+		{"label": _("Oldest Snag"), "fieldname": "oldest_snag_date", "fieldtype": "Date", "width": 110
+	},
+		{"label": _("Max Age (days)"), "fieldname": "max_age_days", "fieldtype": "Int", "width": 100
+	},
 	]

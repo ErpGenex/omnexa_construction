@@ -34,7 +34,8 @@ def execute():
 			frappe.db.set_value(
 				"Construction CBS Element",
 				cbs_code,
-				{"title": title, "cost_code_prefix": prefix},
+				{"title": title, "cost_code_prefix": prefix
+	},
 				update_modified=False,
 			)
 			continue
@@ -44,8 +45,8 @@ def execute():
 				"cbs_code": cbs_code,
 				"title": title,
 				"cost_code_prefix": prefix,
-				"is_group": 0,
-			}
+				"is_group": 0
+	}
 		)
 		doc.insert(ignore_permissions=True)
 	frappe.db.commit()

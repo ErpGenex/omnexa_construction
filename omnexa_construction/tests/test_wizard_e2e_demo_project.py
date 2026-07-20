@@ -13,7 +13,8 @@ from omnexa_construction.wizard.wizard_api import create_setup, save_wizard_step
 class TestWizardE2EDemoProject(FrappeTestCase):
 	def test_full_wizard_creates_demo_project(self):
 		company = frappe.db.get_value("Company", {}, "name")
-		branch = frappe.db.get_value("Branch", {"company": company}, "name") if company else None
+		branch = frappe.db.get_value("Branch", {"company": company
+	}, "name") if company else None
 		customer = frappe.db.get_value("Customer", {}, "name")
 		if not company or not branch:
 			self.skipTest("No company/branch")
@@ -30,8 +31,8 @@ class TestWizardE2EDemoProject(FrappeTestCase):
 				"client": customer,
 				"contract_title": "مشروع تجريبي - معالج الإنشاءات",
 				"contract_type": "Turnkey (EPC)",
-				"site_location": "القاهرة - موقع تجريبي",
-			},
+				"site_location": "القاهرة - موقع تجريبي"
+	},
 		)
 		tpl = select_building_type(setup_name, "villa")
 		self.assertEqual(tpl.get("boq_template"), "VILLA-TURNKEY-STD")
@@ -46,8 +47,8 @@ class TestWizardE2EDemoProject(FrappeTestCase):
 				"plot_area_m2": 600,
 				"number_of_floors": 2,
 				"basement_levels": 0,
-				"unit_count": 1,
-			},
+				"unit_count": 1
+	},
 		)
 		save_wizard_step(
 			setup_name,
@@ -57,8 +58,8 @@ class TestWizardE2EDemoProject(FrappeTestCase):
 				"advance_payment_percent": 10,
 				"default_discount_percent": 0,
 				"liquidated_damages_per_day": 500,
-				"liquidated_damages_cap_percent": 10,
-			},
+				"liquidated_damages_cap_percent": 10
+	},
 		)
 
 		boq = preview_boq(setup_name, save=1)
@@ -84,13 +85,15 @@ class TestWizardE2EDemoProject(FrappeTestCase):
 		self.assertEqual(setup.status, "Completed")
 		self.assertEqual(setup.project_contract, bundle["project_contract"])
 
-		boq_count = frappe.db.count("BOQ Item", {"project_contract": bundle["project_contract"]})
+		boq_count = frappe.db.count("BOQ Item", {"project_contract": bundle["project_contract"]
+	})
 		self.assertGreater(boq_count, 0)
 
 		frappe.db.set_value(
 			"Construction Project Setup",
 			setup_name,
-			{"status": "Draft", "project_contract": None},
+			{"status": "Draft", "project_contract": None
+	},
 			update_modified=False,
 		)
 		frappe.delete_doc("Construction Project Setup", setup_name, force=1)

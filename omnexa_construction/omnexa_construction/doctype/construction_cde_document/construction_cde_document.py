@@ -27,14 +27,14 @@ class ConstructionCDEDocument(Document):
 				"project_contract": self.project_contract,
 				"document_number": self.document_number,
 				"name": ["!=", self.name],
-				"approval_status": ["!=", "Superseded"],
-			},
+				"approval_status": ["!=", "Superseded"]},
 			pluck="name",
 		)
 		for name in previous:
 			frappe.db.set_value(
 				"Construction CDE Document",
 				name,
-				{"approval_status": "Superseded", "superseded_by": self.name, "cde_status": "Archived"},
+				{"approval_status": "Superseded", "superseded_by": self.name, "cde_status": "Archived"
+	},
 				update_modified=True,
 			)

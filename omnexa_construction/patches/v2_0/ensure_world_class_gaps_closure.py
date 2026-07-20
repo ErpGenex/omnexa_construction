@@ -27,8 +27,8 @@ def _add_custom_fields():
 					"fieldtype": "Data",
 					"label": "Predecessor Task",
 					"insert_after": "is_milestone",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction NCR": [
 				{
@@ -36,16 +36,16 @@ def _add_custom_fields():
 					"fieldtype": "Date",
 					"label": "Target Close Date (SLA)",
 					"insert_after": "ncr_date",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "is_sla_breached",
 					"fieldtype": "Check",
 					"label": "SLA Breached",
 					"read_only": 1,
 					"insert_after": "status",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction Integration Settings": [
 				{
@@ -53,47 +53,46 @@ def _add_custom_fields():
 					"fieldtype": "Data",
 					"label": "BIM 360 Client ID",
 					"insert_after": "bim360_project_name",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "bim360_client_secret",
 					"fieldtype": "Password",
 					"label": "BIM 360 Client Secret",
 					"insert_after": "bim360_client_id",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "bim360_access_token",
 					"fieldtype": "Password",
 					"label": "BIM 360 Access Token",
 					"read_only": 1,
 					"insert_after": "bim360_client_secret",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "bim360_token_updated",
 					"fieldtype": "Datetime",
 					"label": "BIM 360 Token Updated",
 					"read_only": 1,
 					"insert_after": "bim360_access_token",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "sap_ps_company_code",
 					"fieldtype": "Data",
 					"label": "SAP PS Company Code",
 					"insert_after": "bim360_token_updated",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "oracle_unifier_project_number",
 					"fieldtype": "Data",
 					"label": "Oracle Unifier Project Number",
 					"insert_after": "sap_ps_company_code",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 

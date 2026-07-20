@@ -44,31 +44,30 @@ def _ensure_integration_bim360_fields():
 					"fieldtype": "Section Break",
 					"label": "Autodesk BIM 360 / ACC",
 					"insert_after": "aconex_project_id",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "bim360_hub_id",
 					"fieldtype": "Data",
 					"label": "BIM 360 Hub ID",
 					"insert_after": "bim360_section",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "bim360_project_id",
 					"fieldtype": "Data",
 					"label": "BIM 360 Project ID",
 					"insert_after": "bim360_hub_id",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "bim360_project_name",
 					"fieldtype": "Data",
 					"label": "BIM 360 Project Name",
 					"insert_after": "bim360_project_id",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 

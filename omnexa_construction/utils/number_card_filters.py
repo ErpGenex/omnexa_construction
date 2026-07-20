@@ -35,7 +35,8 @@ def fix_number_cards_for_doctype(document_type: str) -> int:
 	fixed = 0
 	for row in frappe.get_all(
 		"Number Card",
-		filters={"document_type": document_type, "type": "Document Type"},
+		filters={"document_type": document_type, "type": "Document Type"
+	},
 		fields=["name", "filters_json"],
 	):
 		raw = row.filters_json or "[]"

@@ -30,7 +30,8 @@ def run_mock_audit(company: str, branch: str | None = None) -> dict:
 	domains = []
 	for label, key in AUDIT_DOMAINS:
 		score, findings = _score_domain(key, contracts)
-		domains.append({"domain": label, "key": key, "score": score, "findings": findings})
+		domains.append({"domain": label, "key": key, "score": score, "findings": findings
+	})
 
 	overall = round(sum(d["score"] for d in domains) / max(len(domains), 1), 1)
 	return {
@@ -40,7 +41,7 @@ def run_mock_audit(company: str, branch: str | None = None) -> dict:
 		"domains": domains,
 		"overall_score": overall,
 		"certification_ready": overall >= 85,
-		"audit_type": "mock_internal",
+		"audit_type": "mock_internal"
 	}
 
 

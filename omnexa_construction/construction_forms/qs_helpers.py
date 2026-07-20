@@ -20,7 +20,7 @@ def load_boq_measurement_lines(project_contract: str) -> list[dict]:
 			"description": r.item_description,
 			"unit_of_measure": r.unit_of_measure,
 			"previous_qty": flt(r.quantity),
-			"measured_qty": flt(r.quantity),
-		}
+			"measured_qty": flt(r.quantity)
+	}
 		for r in rows
 	]

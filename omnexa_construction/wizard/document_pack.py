@@ -38,7 +38,8 @@ def export_project_document_pack(setup_name: str, *, include_pdf: int = 1) -> di
 		is_private=1,
 	)
 	frappe.db.set_value("Construction Project Setup", setup.name, "document_pack_file", file_doc.file_url)
-	return {"file_url": file_doc.file_url, "file_name": filename}
+	return {"file_url": file_doc.file_url, "file_name": filename
+	}
 
 
 def _readme(setup) -> str:
@@ -59,7 +60,7 @@ def _summary_dict(setup) -> dict:
 		"estimated_contract_value": setup.estimated_contract_value,
 		"planned_start": str(setup.planned_start or ""),
 		"planned_completion": str(setup.planned_completion or ""),
-		"project_contract": setup.project_contract,
+		"project_contract": setup.project_contract
 	}
 
 

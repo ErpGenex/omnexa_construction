@@ -84,8 +84,8 @@ def _ensure_sidebar_link(ws) -> bool:
 			"icon": SETUP_ICON,
 			"hidden": 0,
 			"is_query_report": 0,
-			"onboard": 0,
-		},
+			"onboard": 0
+	},
 	)
 	if insert_at < len(ws.links) - 1:
 		ws.links.pop()
@@ -111,8 +111,8 @@ def _ensure_shortcut_row(ws) -> bool:
 			"type": "DocType",
 			"link_to": SETUP_DOCTYPE,
 			"doc_view": "List",
-			"color": "Green",
-		},
+			"color": "Green"
+	},
 	)
 	if insert_at < len(ws.shortcuts) - 1:
 		ws.shortcuts.pop()
@@ -140,7 +140,7 @@ def _ensure_content_shortcut(content: list, ws) -> bool:
 		{
 			"id": CONTENT_ID,
 			"type": "shortcut",
-			"data": {"shortcut_name": label, "col": 3},
-		},
+			"data": {"shortcut_name": label, "col": 3}
+	},
 	)
 	return True

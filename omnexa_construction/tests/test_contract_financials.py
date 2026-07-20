@@ -50,7 +50,7 @@ class TestContractFinancials(FrappeTestCase):
 			{
 				"approved_change_orders_value": 200.0,
 				"revised_contract_value": 1200.0,
-				"retention_held_to_date": 75.0,
-			},
+				"retention_held_to_date": 75.0
+	},
 			update_modified=False,
 		)

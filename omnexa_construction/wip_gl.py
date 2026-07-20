@@ -36,11 +36,13 @@ def create_wip_snapshot_from_project(
 
 	existing = frappe.db.exists(
 		"Project WIP Snapshot",
-		{"project_contract": project_contract, "snapshot_date": as_of},
+		{"project_contract": project_contract, "snapshot_date": as_of
+	},
 	)
 	if existing and not int(update_existing):
 		doc = frappe.get_doc("Project WIP Snapshot", existing)
-		return {"name": doc.name, "updated": False, "wip_balance": doc.wip_balance}
+		return {"name": doc.name, "updated": False, "wip_balance": doc.wip_balance
+	}
 
 	payload = {
 		"doctype": "Project WIP Snapshot",
@@ -50,7 +52,7 @@ def create_wip_snapshot_from_project(
 		"revenue_recognized": revenue,
 		"company": contract.company,
 		"branch": contract.branch,
-		"snapshot_reference": _("Auto from BOQ/IPC/GL"),
+		"snapshot_reference": _("Auto from BOQ/IPC/GL")
 	}
 	if existing:
 		doc = frappe.get_doc("Project WIP Snapshot", existing)
@@ -67,7 +69,7 @@ def create_wip_snapshot_from_project(
 		"updated": True,
 		"cost_to_date": cost,
 		"revenue_recognized": revenue,
-		"wip_balance": doc.wip_balance,
+		"wip_balance": doc.wip_balance
 	}
 
 
@@ -80,13 +82,15 @@ def _gl_totals_if_available(project_contract: str, company: str, as_of) -> tuple
 		return 0.0, 0.0
 	cost_accounts = frappe.get_all(
 		"Account",
-		filters={"company": company, "root_type": "Expense", "is_group": 0},
+		filters={"company": company, "root_type": "Expense", "is_group": 0
+	},
 		pluck="name",
 		limit=50,
 	)
 	income_accounts = frappe.get_all(
 		"Account",
-		filters={"company": company, "root_type": "Income", "is_group": 0},
+		filters={"company": company, "root_type": "Income", "is_group": 0
+	},
 		pluck="name",
 		limit=50,
 	)

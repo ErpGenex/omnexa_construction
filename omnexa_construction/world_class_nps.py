@@ -22,22 +22,26 @@ def submit_nps(score: int, feedback: str | None = None) -> dict:
 			"user": frappe.session.user,
 			"score": score,
 			"feedback": feedback,
-			"company": frappe.defaults.get_user_default("Company"),
-		}
+			"company": frappe.defaults.get_user_default("Company")
+	}
 	)
 	doc.insert(ignore_permissions=True)
-	return {"name": doc.name}
+	return {"name": doc.name
+	}
 
 
 @frappe.whitelist()
 def get_nps_summary() -> dict:
 	if not frappe.db.exists("DocType", "Construction User NPS"):
-		return {"nps": None, "responses": 0}
+		return {"nps": None, "responses": 0
+	}
 	rows = frappe.get_all("Construction User NPS", fields=["score"], limit=1000)
 	if not rows:
-		return {"nps": None, "responses": 0}
+		return {"nps": None, "responses": 0
+	}
 	promoters = sum(1 for r in rows if int(r.score) >= 9)
 	detractors = sum(1 for r in rows if int(r.score) <= 6)
 	n = len(rows)
 	nps = round(100 * (promoters - detractors) / n, 1)
-	return {"nps": nps, "responses": n, "target": 70, "meets_target": nps >= 70}
+	return {"nps": nps, "responses": n, "target": 70, "meets_target": nps >= 70
+	}

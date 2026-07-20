@@ -52,8 +52,8 @@ def get_multi_entity_portfolio(companies_json: str | None = None) -> dict:
 				"contract_count": len(contracts),
 				"bac": company_bac,
 				"ev": company_ev,
-				"currencies": sorted(currencies),
-			}
+				"currencies": sorted(currencies)
+	}
 		)
 
 	return {
@@ -61,5 +61,4 @@ def get_multi_entity_portfolio(companies_json: str | None = None) -> dict:
 		"contract_count": contract_count,
 		"total_bac": total_bac,
 		"total_ev": total_ev,
-		"portfolio_spi": round(total_ev / total_bac, 4) if total_bac else 0,
-	}
+		"portfolio_spi": round(total_ev / total_bac, 4) if total_bac else 0}

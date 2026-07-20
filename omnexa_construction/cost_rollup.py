@@ -59,7 +59,7 @@ def boq_actual_cost_breakdown(boq_item: str | None) -> dict:
 		"material": material,
 		"labor": labor,
 		"equipment": equipment,
-		"total": material + labor + equipment,
+		"total": material + labor + equipment
 	}
 
 

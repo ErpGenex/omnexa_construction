@@ -18,8 +18,8 @@ def maybe_create_transmittal_for_published_cde(doc) -> str | None:
 			"transmittal_date": today(),
 			"issued_by": frappe.session.user,
 			"status": "Draft",
-			"recipient_notes": _("Auto-generated from CDE publish: {0}").format(doc.name),
-		}
+			"recipient_notes": _("Auto-generated from CDE publish: {0}").format(doc.name)
+	}
 	)
 	transmittal.append(
 		"items",
@@ -28,8 +28,8 @@ def maybe_create_transmittal_for_published_cde(doc) -> str | None:
 			"document_title": doc.document_title,
 			"revision_no": doc.revision,
 			"issue_purpose": "For Record",
-			"file": doc.file_attachment,
-		},
+			"file": doc.file_attachment
+	},
 	)
 	transmittal.insert(ignore_permissions=True)
 	return transmittal.name

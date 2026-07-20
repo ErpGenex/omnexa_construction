@@ -53,7 +53,7 @@ def ensure_print_format(
 		"custom_format": 1,
 		"print_format_type": "Jinja",
 		"disabled": 0,
-		"standard": standard,
+		"standard": standard
 	}
 	if lang:
 		values["default_print_language"] = lang
@@ -68,8 +68,7 @@ def ensure_print_format(
 				"name": name,
 				"doc_type": doctype,
 				"module": MODULE,
-				**values,
-			}
+				**values}
 		).insert(ignore_permissions=True)
 
 
@@ -79,7 +78,8 @@ def _ensure_print(name: str, doctype: str, html: str, *, lang: str | None = None
 
 def sync_all_a4_print_formats() -> dict:
 	"""Idempotent sync of all construction A4 print formats."""
-	stats = {"updated": 0, "formats": []}
+	stats = {"updated": 0, "formats": []
+	}
 
 	arabic_forms = (
 		("Construction Work Approval — AR", "Construction Work Approval Request", "work_approval_ar.html", "ar"),

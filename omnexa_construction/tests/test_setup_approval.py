@@ -19,8 +19,8 @@ class TestSetupApproval(FrappeTestCase):
 				"contract_currency": "EGP",
 				"building_type": "office_tower",
 				"status": "Draft",
-				"approval_status": "Open",
-			}
+				"approval_status": "Open"
+	}
 		)
 		count = suggest_contract_terms(setup)
 		self.assertGreaterEqual(count, 6)

@@ -28,6 +28,6 @@ class TestBIM360API(FrappeTestCase):
 				"project_contract": contract[0],
 				"model_name": "BIM360 Test",
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		).insert(ignore_permissions=True).name

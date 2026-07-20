@@ -63,8 +63,8 @@ def execute(filters=None):
 				"planned_amount": planned,
 				"actual_cost": actual,
 				"variance": variance,
-				"over_consumed": 1 if variance > 0 and planned > 0 else 0,
-			}
+				"over_consumed": 1 if variance > 0 and planned > 0 else 0
+	}
 		)
 	columns = _columns()
 	chart = auto_chart_for_columns(data, columns)
@@ -73,13 +73,22 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130},
-		{"label": _("BOQ Item"), "fieldname": "boq_item", "fieldtype": "Link", "options": "BOQ Item", "width": 110},
-		{"label": _("Item"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item", "width": 120},
-		{"label": _("Planned Qty"), "fieldname": "planned_qty", "fieldtype": "Float", "width": 90},
-		{"label": _("UOM"), "fieldname": "uom", "fieldtype": "Link", "options": "UOM", "width": 70},
-		{"label": _("Planned Amount"), "fieldname": "planned_amount", "fieldtype": "Currency", "width": 110},
-		{"label": _("BOQ Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 110},
-		{"label": _("Variance"), "fieldname": "variance", "fieldtype": "Currency", "width": 100},
-		{"label": _("Over"), "fieldname": "over_consumed", "fieldtype": "Check", "width": 60},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130
+	},
+		{"label": _("BOQ Item"), "fieldname": "boq_item", "fieldtype": "Link", "options": "BOQ Item", "width": 110
+	},
+		{"label": _("Item"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item", "width": 120
+	},
+		{"label": _("Planned Qty"), "fieldname": "planned_qty", "fieldtype": "Float", "width": 90
+	},
+		{"label": _("UOM"), "fieldname": "uom", "fieldtype": "Link", "options": "UOM", "width": 70
+	},
+		{"label": _("Planned Amount"), "fieldname": "planned_amount", "fieldtype": "Currency", "width": 110
+	},
+		{"label": _("BOQ Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 110
+	},
+		{"label": _("Variance"), "fieldname": "variance", "fieldtype": "Currency", "width": 100
+	},
+		{"label": _("Over"), "fieldname": "over_consumed", "fieldtype": "Check", "width": 60
+	},
 	]

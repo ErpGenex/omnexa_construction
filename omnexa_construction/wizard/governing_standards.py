@@ -29,8 +29,8 @@ _ALIASES: dict[str, str] = {
 	"nec4": GOVERNING_CONTRACT_FORM_OPTIONS[4],
 	"nec4 ecc": GOVERNING_CONTRACT_FORM_OPTIONS[4],
 	"aia": GOVERNING_CONTRACT_FORM_OPTIONS[5],
-	"consensusdocs": GOVERNING_CONTRACT_FORM_OPTIONS[5],
-}
+	"consensusdocs": GOVERNING_CONTRACT_FORM_OPTIONS[5]
+	}
 
 
 def normalize_governing_standard(

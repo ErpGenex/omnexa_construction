@@ -86,8 +86,10 @@ class SubcontractPaymentCertificate(Document):
 			reference=self.name,
 			remarks=f"Subcontract payment accrual {self.name}",
 			lines=[
-				{"account": self.expense_account, "debit": self.net_payable, "credit": 0},
-				{"account": self.payable_account, "debit": 0, "credit": self.net_payable},
+				{"account": self.expense_account, "debit": self.net_payable, "credit": 0
+	},
+				{"account": self.payable_account, "debit": 0, "credit": self.net_payable
+	},
 			],
 		)
 		self.db_set("journal_entry", je, update_modified=False)
@@ -141,13 +143,15 @@ def release_retention(name: str, retention_release_date: str | None = None, rete
 	if doc.status != "Paid":
 		frappe.throw("Retention can be released only after certificate is marked Paid.")
 	if doc.status == "Retention Released":
-		return {"name": doc.name, "status": doc.status, "retention_payment_entry": doc.retention_payment_entry}
+		return {"name": doc.name, "status": doc.status, "retention_payment_entry": doc.retention_payment_entry
+	}
 	doc.retention_release_date = retention_release_date or today()
 	doc.retention_mode_of_payment = retention_mode_of_payment
 	doc.retention_bank_account = retention_bank_account
 	doc.status = "Retention Released"
 	doc.save(ignore_permissions=True)
-	return {"name": doc.name, "status": doc.status, "retention_payment_entry": doc.retention_payment_entry}
+	return {"name": doc.name, "status": doc.status, "retention_payment_entry": doc.retention_payment_entry
+	}
 
 
 def _can_release_retention(user: str) -> bool:

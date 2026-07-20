@@ -34,8 +34,8 @@ def execute():
 					"fieldtype": "Link",
 					"options": "Construction CDE Document",
 					"insert_after": "document_no",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Site Daily Report": [
 				{
@@ -43,25 +43,24 @@ def execute():
 					"label": "Latitude",
 					"fieldtype": "Float",
 					"insert_after": "weather",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "site_longitude",
 					"label": "Longitude",
 					"fieldtype": "Float",
 					"insert_after": "site_latitude",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "site_photos",
 					"label": "Site Photos",
 					"fieldtype": "Table",
 					"options": "Site Daily Report Photo",
 					"insert_after": "safety_notes",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 
@@ -80,10 +79,9 @@ def execute():
 						"options": "Workflow State",
 						"hidden": 1,
 						"insert_after": "status",
-						"module": MODULE,
-					},
-				],
-			},
+						"module": MODULE
+	},
+				]},
 			update=True,
 		)
 
@@ -112,7 +110,8 @@ def _link_workspace():
 	for link_to, label in (("Construction Supplier Prequalification", "Supplier Prequalification"),):
 		if link_to in existing or not frappe.db.exists("DocType", link_to):
 			continue
-		ws.append("shortcuts", {"type": "DocType", "link_to": link_to, "label": label, "color": "Green"})
+		ws.append("shortcuts", {"type": "DocType", "link_to": link_to, "label": label, "color": "Green"
+	})
 		existing.add(link_to)
 	for link_to, label in (
 		("RFQ Bid Tabulation", "RFQ Bid Tabulation"),
@@ -121,6 +120,7 @@ def _link_workspace():
 	):
 		if link_to in existing:
 			continue
-		ws.append("shortcuts", {"type": "Report", "link_to": link_to, "label": label, "color": "Grey"})
+		ws.append("shortcuts", {"type": "Report", "link_to": link_to, "label": label, "color": "Grey"
+	})
 		existing.add(link_to)
 	ws.save(ignore_permissions=True)

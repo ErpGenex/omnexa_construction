@@ -20,7 +20,8 @@ class ConstructionScheduleBaseline(Document):
 		frappe.db.set_value(
 			"Project Contract",
 			self.project_contract,
-			{"planned_start": self.planned_start, "planned_completion": self.planned_completion},
+			{"planned_start": self.planned_start, "planned_completion": self.planned_completion
+	},
 			update_modified=True,
 		)
 		frappe.db.sql(

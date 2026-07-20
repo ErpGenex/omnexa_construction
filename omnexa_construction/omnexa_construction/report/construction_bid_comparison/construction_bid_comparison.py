@@ -20,13 +20,22 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("Bid"), "fieldname": "name", "fieldtype": "Link", "options": "Construction Bid Estimate", "width": 130},
-		{"label": _("Title"), "fieldname": "estimate_title", "fieldtype": "Data", "width": 180},
-		{"label": _("Customer"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 120},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90},
-		{"label": _("Contract Value"), "fieldname": "estimated_contract_value", "fieldtype": "Currency", "width": 120},
-		{"label": _("Cost"), "fieldname": "estimated_cost", "fieldtype": "Currency", "width": 110},
-		{"label": _("Margin %"), "fieldname": "margin_percent", "fieldtype": "Percent", "width": 90},
-		{"label": _("Variance to Lowest"), "fieldname": "variance_to_lowest", "fieldtype": "Currency", "width": 120},
-		{"label": _("Lowest"), "fieldname": "is_lowest", "fieldtype": "Check", "width": 70},
+		{"label": _("Bid"), "fieldname": "name", "fieldtype": "Link", "options": "Construction Bid Estimate", "width": 130
+	},
+		{"label": _("Title"), "fieldname": "estimate_title", "fieldtype": "Data", "width": 180
+	},
+		{"label": _("Customer"), "fieldname": "customer", "fieldtype": "Link", "options": "Customer", "width": 120
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90
+	},
+		{"label": _("Contract Value"), "fieldname": "estimated_contract_value", "fieldtype": "Currency", "width": 120
+	},
+		{"label": _("Cost"), "fieldname": "estimated_cost", "fieldtype": "Currency", "width": 110
+	},
+		{"label": _("Margin %"), "fieldname": "margin_percent", "fieldtype": "Percent", "width": 90
+	},
+		{"label": _("Variance to Lowest"), "fieldname": "variance_to_lowest", "fieldtype": "Currency", "width": 120
+	},
+		{"label": _("Lowest"), "fieldname": "is_lowest", "fieldtype": "Check", "width": 70
+	},
 	]

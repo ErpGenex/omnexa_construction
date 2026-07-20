@@ -16,8 +16,8 @@ TIME_BAR_DAYS = {
 	"FIDIC Silver Book 2017": 28,
 	"FIDIC": 28,
 	"NEC4 ECC": 42,
-	"NEC4": 42,
-}
+	"NEC4": 42
+	}
 
 
 def time_bar_days_for_contract(project_contract: str) -> int:

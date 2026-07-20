@@ -21,8 +21,7 @@ def get_cde_revision_chain(document_name: str) -> list[dict]:
 		filters={
 			"project_contract": doc.project_contract,
 			"document_number": doc.document_number,
-			"docstatus": ["<", 2],
-		},
+			"docstatus": ["<", 2]},
 		fields=[
 			"name",
 			"revision",
@@ -56,7 +55,8 @@ def compare_transmittal_revisions(transmittal_a: str, transmittal_b: str) -> dic
 				{
 					"document": key,
 					"from_revision": ra.revision_no,
-					"to_revision": rb.revision_no,
-				}
+					"to_revision": rb.revision_no
+	}
 			)
-	return {"added": added, "removed": removed, "revised": revised}
+	return {"added": added, "removed": removed, "revised": revised
+	}

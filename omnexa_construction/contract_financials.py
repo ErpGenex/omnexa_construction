@@ -72,8 +72,7 @@ def eot_approved_count(project_contract: str | None) -> int:
 		{
 			"project_contract": project_contract,
 			"status": "Approved",
-			"docstatus": ["<", 2],
-		},
+			"docstatus": ["<", 2]},
 	)
 
 
@@ -85,8 +84,7 @@ def claims_active_count(project_contract: str | None) -> int:
 		{
 			"project_contract": project_contract,
 			"status": ["in", ["Submitted", "Under Review"]],
-			"docstatus": ["<", 2],
-		},
+			"docstatus": ["<", 2]},
 	)
 
 
@@ -102,7 +100,7 @@ def refresh_project_contract_financials(project_contract: str | None) -> None:
 		{
 			"approved_change_orders_value": co,
 			"revised_contract_value": base + co,
-			"retention_held_to_date": retention_held_from_certified_ipc(project_contract),
-		},
+			"retention_held_to_date": retention_held_from_certified_ipc(project_contract)
+	},
 		update_modified=False,
 	)

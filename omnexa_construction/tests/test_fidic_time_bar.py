@@ -24,7 +24,8 @@ class TestFidicTimeBar(FrappeTestCase):
 			return
 		ref_name = frappe.db.get_value(
 			"Construction FIDIC Clause Reference",
-			{"display_reference": "FIDIC 20.2.1 — Notice of Claim"},
+			{"display_reference": "FIDIC 20.2.1 — Notice of Claim"
+	},
 			"name",
 		)
 		if ref_name:
@@ -36,8 +37,8 @@ class TestFidicTimeBar(FrappeTestCase):
 			"standard_family": "FIDIC",
 			"notice_type": "Claim",
 			"time_bar_days": 28,
-			"title": "Notice of Claim",
-		}
+			"title": "Notice of Claim"
+	}
 		if frappe.get_meta("Construction FIDIC Clause Reference").has_field("description"):
 			payload["description"] = "Primary time-bar notice for claims under FIDIC 2017."
 		frappe.get_doc(payload).insert(ignore_permissions=True)
@@ -53,7 +54,8 @@ class TestFidicTimeBar(FrappeTestCase):
 		# Validate Phase 9.4: notice due date should follow clause reference time_bar_days
 		ref_name = frappe.db.get_value(
 			"Construction FIDIC Clause Reference",
-			{"display_reference": "FIDIC 20.2.1 — Notice of Claim"},
+			{"display_reference": "FIDIC 20.2.1 — Notice of Claim"
+	},
 			"name",
 		)
 		self.assertIsNotNone(ref_name)
@@ -61,8 +63,8 @@ class TestFidicTimeBar(FrappeTestCase):
 		doc = {
 			"fidic_clause_reference": ref_name,
 			"project_contract": "",
-			"notice_date": "2026-01-01",
-		}
+			"notice_date": "2026-01-01"
+	}
 		self.assertEqual(time_bar_days_for_notice(doc), 28)
 
 		due = compute_notice_due_date_for_notice(doc)

@@ -16,5 +16,6 @@ def execute():
 	for link_to, label in add:
 		if link_to in existing or not frappe.db.exists("DocType", link_to):
 			continue
-		ws.append("shortcuts", {"type": "DocType", "link_to": link_to, "label": label, "color": "Green"})
+		ws.append("shortcuts", {"type": "DocType", "link_to": link_to, "label": label, "color": "Green"
+	})
 	ws.save(ignore_permissions=True)

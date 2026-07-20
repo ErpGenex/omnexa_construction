@@ -21,7 +21,8 @@ def execute(filters=None):
 	filters = prepare_filters(filters)
 	contracts = frappe.get_all(
 		"Project Contract",
-		filters=get_all_filters(filters, "Project Contract", company=True, branch=True, extra_links={"name": "project_contract"}),
+		filters=get_all_filters(filters, "Project Contract", company=True, branch=True, extra_links={"name": "project_contract"
+	}),
 		fields=["name", "contract_value", "company", "branch"],
 		limit_page_length=1000,
 	)
@@ -44,11 +45,17 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("Contract"), "fieldname": "name", "fieldtype": "Link", "options": "Project Contract", "width": 140},
-		{"label": _("Contract Value"), "fieldname": "contract_value", "fieldtype": "Currency", "width": 130},
-		{"label": _("Revised Value"), "fieldname": "revised_contract_value", "fieldtype": "Currency", "width": 130},
-		{"label": _("Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 130},
-		{"label": _("Profit"), "fieldname": "profit", "fieldtype": "Currency", "width": 120},
-		{"label": _("Profit %"), "fieldname": "profit_percent", "fieldtype": "Percent", "width": 110},
+		{"label": _("Contract"), "fieldname": "name", "fieldtype": "Link", "options": "Project Contract", "width": 140
+	},
+		{"label": _("Contract Value"), "fieldname": "contract_value", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Revised Value"), "fieldname": "revised_contract_value", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Profit"), "fieldname": "profit", "fieldtype": "Currency", "width": 120
+	},
+		{"label": _("Profit %"), "fieldname": "profit_percent", "fieldtype": "Percent", "width": 110
+	},
 	]
 

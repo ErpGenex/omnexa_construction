@@ -55,8 +55,8 @@ def compare_bids_in_package(bid_package: str, company: str | None = None) -> lis
 				**r,
 				"margin_percent": margin,
 				"variance_to_lowest": flt(r.get("estimated_contract_value")) - lowest_value,
-				"is_lowest": 1 if flt(r.get("estimated_contract_value")) == lowest_value else 0,
-			}
+				"is_lowest": 1 if flt(r.get("estimated_contract_value")) == lowest_value else 0
+	}
 		)
 	return out
 
@@ -91,14 +91,14 @@ def run_sensitivity_analysis(
 			margin = _margin_percent(value, cost)
 			matrix.append(
 				{
-					"scenario": f"C{cost_adj:+g}% / P{price_adj:+g}%",
+					"scenario": f"C{cost_adj:+g}% / P{price_adj:+g
+	}%",
 					"cost_adjustment_percent": flt(cost_adj),
 					"price_adjustment_percent": flt(price_adj),
 					"projected_contract_value": round(value, 2),
 					"projected_cost": round(cost, 2),
 					"projected_margin_percent": margin,
-					"margin_delta_vs_base": round(margin - base_margin, 2),
-				}
+					"margin_delta_vs_base": round(margin - base_margin, 2)}
 			)
 	return matrix
 

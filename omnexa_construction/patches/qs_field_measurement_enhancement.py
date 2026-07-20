@@ -78,7 +78,8 @@ def execute():
 	
 	# Add custom fields
 	for field in qs_measurement_fields:
-		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]
+	}):
 			frappe.get_doc({
 				"doctype": "Custom Field",
 				**field

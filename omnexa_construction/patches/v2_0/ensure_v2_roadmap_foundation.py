@@ -40,7 +40,8 @@ def _ensure_roles():
 	for role in SPECIALIST_ROLES:
 		if frappe.db.exists("Role", role):
 			continue
-		frappe.get_doc({"doctype": "Role", "role_name": role, "desk_access": 1}).insert(ignore_permissions=True)
+		frappe.get_doc({"doctype": "Role", "role_name": role, "desk_access": 1
+	}).insert(ignore_permissions=True)
 
 
 def _ensure_custom_fields():
@@ -53,60 +54,60 @@ def _ensure_custom_fields():
 					"fieldtype": "Small Text",
 					"read_only": 1,
 					"insert_after": "other_deductions",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "engineer_certified_by",
 					"label": "Engineer Certified By",
 					"fieldtype": "Data",
 					"insert_after": "employer_certificate_ref",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "engineer_cert_date",
 					"label": "Engineer Cert. Date",
 					"fieldtype": "Date",
 					"insert_after": "engineer_certified_by",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "vat_percent",
 					"label": "VAT %",
 					"fieldtype": "Percent",
 					"insert_after": "net_amount",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "vat_amount",
 					"label": "VAT Amount",
 					"fieldtype": "Currency",
 					"read_only": 1,
 					"insert_after": "vat_percent",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "wht_percent",
 					"label": "WHT %",
 					"fieldtype": "Percent",
 					"insert_after": "vat_amount",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "wht_amount",
 					"label": "WHT Amount",
 					"fieldtype": "Currency",
 					"read_only": 1,
 					"insert_after": "wht_percent",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "net_after_tax",
 					"label": "Net After Tax",
 					"fieldtype": "Currency",
 					"read_only": 1,
 					"insert_after": "wht_amount",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction FIDIC Notice": [
 				{
@@ -114,48 +115,48 @@ def _ensure_custom_fields():
 					"label": "Linked Records",
 					"fieldtype": "Section Break",
 					"insert_after": "description",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "linked_claim",
 					"label": "Linked Claim",
 					"fieldtype": "Link",
 					"options": "Construction Claim",
 					"insert_after": "section_links",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "linked_eot",
 					"label": "Linked EOT",
 					"fieldtype": "Link",
 					"options": "Construction Extension of Time",
 					"insert_after": "linked_claim",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "linked_change_order",
 					"label": "Linked Change Order",
 					"fieldtype": "Link",
 					"options": "Construction Change Order",
 					"insert_after": "linked_eot",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "notice_due_date",
 					"label": "Notice Due Date (Time-bar)",
 					"fieldtype": "Date",
 					"read_only": 1,
 					"insert_after": "response_due_date",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "is_time_barred",
 					"label": "Time Barred",
 					"fieldtype": "Check",
 					"read_only": 1,
 					"insert_after": "notice_due_date",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction Change Order": [
 				{
@@ -165,8 +166,8 @@ def _ensure_custom_fields():
 					"options": "Instruction\nProposal\nDaywork",
 					"default": "Proposal",
 					"insert_after": "title",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Project Contract": [
 				{
@@ -174,17 +175,16 @@ def _ensure_custom_fields():
 					"label": "Default VAT %",
 					"fieldtype": "Percent",
 					"insert_after": "retention_percent",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "default_wht_percent",
 					"label": "Default WHT %",
 					"fieldtype": "Percent",
 					"insert_after": "default_vat_percent",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 

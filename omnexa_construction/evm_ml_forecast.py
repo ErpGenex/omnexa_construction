@@ -42,7 +42,7 @@ def forecast_overrun(project_contract: str) -> dict:
 		"cost_overrun_risk": cost_risk,
 		"schedule_overrun_risk": schedule_risk,
 		"model": "evm_rule_v1",
-		"inputs": {"spi": spi, "cpi": cpi, "bac": bac, "ac": ac, "ev": ev, "pv": pv},
+		"inputs": {"spi": spi, "cpi": cpi, "bac": bac, "ac": ac, "ev": ev, "pv": pv}
 	}
 
 

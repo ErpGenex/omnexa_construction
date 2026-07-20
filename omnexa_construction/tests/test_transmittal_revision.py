@@ -11,12 +11,14 @@ class TestTransmittalRevision(FrappeTestCase):
 		a = type(
 			"T",
 			(),
-			{"items": [type("L", (), {"document_no": "DRW-001", "document_title": "Drawing", "revision_no": "A"})()]},
+			{"items": [type("L", (), {"document_no": "DRW-001", "document_title": "Drawing", "revision_no": "A"})()]
+	},
 		)()
 		b = type(
 			"T",
 			(),
-			{"items": [type("L", (), {"document_no": "DRW-001", "document_title": "Drawing", "revision_no": "B"})()]},
+			{"items": [type("L", (), {"document_no": "DRW-001", "document_title": "Drawing", "revision_no": "B"})()]
+	},
 		)()
 		import omnexa_construction.transmittal_revision as mod
 

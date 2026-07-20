@@ -34,5 +34,5 @@ def compute_ipc_amounts(
 		"prior_cumulative_billed": prior_cum,
 		"gross_amount": period_gross,
 		"retention_deduction": retention,
-		"net_amount": net,
+		"net_amount": net
 	}

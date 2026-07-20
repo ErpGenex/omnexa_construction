@@ -129,7 +129,7 @@ def suggest_contract_terms(setup, *, replace: bool = False) -> int:
 				"clause_group": group,
 				"clause_title": title,
 				"clause_text": text,
-				"sort_order": order,
-			},
+				"sort_order": order
+	},
 		)
 	return len(clauses)

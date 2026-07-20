@@ -64,8 +64,8 @@ def _ensure_sidebar_link(ws) -> bool:
 			"link_to": WIZARD_PAGE,
 			"link_type": "Page",
 			"icon": "add",
-			"hidden": 0,
-		},
+			"hidden": 0
+	},
 	)
 	return True
 
@@ -80,8 +80,8 @@ def _ensure_shortcut_row(ws) -> bool:
 			"label": WIZARD_LABEL,
 			"type": "Page",
 			"link_to": WIZARD_PAGE,
-			"color": "Green",
-		},
+			"color": "Green"
+	},
 	)
 	return True
 
@@ -103,8 +103,8 @@ def _ensure_content_shortcut(content: list) -> bool:
 		{
 			"id": WIZARD_CONTENT_ID,
 			"type": "shortcut",
-			"data": {"shortcut_name": WIZARD_LABEL, "col": 3},
-		},
+			"data": {"shortcut_name": WIZARD_LABEL, "col": 3}
+	},
 	)
 	return True
 

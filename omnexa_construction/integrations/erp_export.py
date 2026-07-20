@@ -29,11 +29,10 @@ def export_wbs_to_sap_ps(project_contract: str) -> dict:
 				"wbs_id": row.cost_code or row.name,
 				"description": row.description,
 				"planned_cost": row.amount,
-				"quantity": row.qty,
-			}
-			for row in boq
-		],
+				"quantity": row.qty
 	}
+			for row in boq
+		]}
 	return {"ok": True, "count": len(boq), "payload": payload, "json": json.dumps(payload, indent=2)}
 
 
@@ -50,6 +49,6 @@ def export_cost_to_oracle_unifier(project_contract: str) -> dict:
 		"ac": snap.get("ac"),
 		"eac": snap.get("eac"),
 		"spi": snap.get("spi"),
-		"cpi": snap.get("cpi"),
+		"cpi": snap.get("cpi")
 	}
 	return {"ok": True, "payload": payload, "json": json.dumps(payload, indent=2)}

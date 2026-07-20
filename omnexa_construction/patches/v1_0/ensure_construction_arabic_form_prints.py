@@ -30,8 +30,10 @@ def execute():
 	create_custom_fields(
 		{
 			"IPC Certificate": [
-				{"fieldname": "penalty_deduction", "label": "Penalty Deduction", "fieldtype": "Currency", "insert_after": "advance_recovery", "module": MODULE},
-				{"fieldname": "other_deductions", "label": "Other Deductions", "fieldtype": "Currency", "insert_after": "penalty_deduction", "module": MODULE},
+				{"fieldname": "penalty_deduction", "label": "Penalty Deduction", "fieldtype": "Currency", "insert_after": "advance_recovery", "module": MODULE
+	},
+				{"fieldname": "other_deductions", "label": "Other Deductions", "fieldtype": "Currency", "insert_after": "penalty_deduction", "module": MODULE
+	},
 			]
 		},
 		update=True,

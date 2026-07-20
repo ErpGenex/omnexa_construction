@@ -8,6 +8,7 @@ class ConstructionSettlement(Document):
 			frappe.db.set_value(
 				"Construction Dispute Case",
 				self.dispute_case,
-				{"status": "Settled", "settled_amount": self.settled_amount},
+				{"status": "Settled", "settled_amount": self.settled_amount
+	},
 				update_modified=True,
 			)

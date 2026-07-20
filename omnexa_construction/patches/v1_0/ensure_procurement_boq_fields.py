@@ -16,8 +16,8 @@ def execute():
 				"fieldtype": "Link",
 				"options": "Project Contract",
 				"insert_after": "branch",
-				"module": "Omnexa Construction",
-			}
+				"module": "Omnexa Construction"
+	}
 		],
 		"Purchase Request Item": [
 			{
@@ -27,8 +27,8 @@ def execute():
 				"options": "BOQ Item",
 				"insert_after": "classification_code",
 				"in_list_view": 1,
-				"module": "Omnexa Construction",
-			},
+				"module": "Omnexa Construction"
+	},
 			{
 				"fieldname": "cost_code",
 				"label": "BOQ Cost Code",
@@ -36,8 +36,8 @@ def execute():
 				"insert_after": "boq_item",
 				"read_only": 1,
 				"in_list_view": 1,
-				"module": "Omnexa Construction",
-			},
+				"module": "Omnexa Construction"
+	},
 		],
 		"Purchase Order": [
 			{
@@ -46,8 +46,8 @@ def execute():
 				"fieldtype": "Link",
 				"options": "Project Contract",
 				"insert_after": "branch",
-				"module": "Omnexa Construction",
-			}
+				"module": "Omnexa Construction"
+	}
 		],
 		"Purchase Order Item": [
 			{
@@ -57,8 +57,8 @@ def execute():
 				"options": "BOQ Item",
 				"insert_after": "external_reference",
 				"in_list_view": 1,
-				"module": "Omnexa Construction",
-			},
+				"module": "Omnexa Construction"
+	},
 			{
 				"fieldname": "cost_code",
 				"label": "BOQ Cost Code",
@@ -66,10 +66,9 @@ def execute():
 				"insert_after": "boq_item",
 				"read_only": 1,
 				"in_list_view": 1,
-				"module": "Omnexa Construction",
-			},
-		],
-	}
+				"module": "Omnexa Construction"
+	},
+		]}
 	create_custom_fields(fields, update=True)
 	frappe.clear_cache(doctype="Purchase Request")
 	frappe.clear_cache(doctype="Purchase Order")

@@ -20,8 +20,8 @@ class TestIpcExchangeRate(FrappeTestCase):
 				"company": company,
 				"ipc_date": None,
 				"meta": type("M", (), {"has_field": lambda _s, f: f == "exchange_rate"})(),
-				"exchange_rate": 0,
-			},
+				"exchange_rate": 0
+	},
 		)()
 		self.assertEqual(_ipc_conversion_rate(ipc, currency), 1.0)
 
@@ -37,7 +37,7 @@ class TestIpcExchangeRate(FrappeTestCase):
 				"company": company,
 				"ipc_date": None,
 				"meta": type("M", (), {"has_field": lambda _s, f: f == "exchange_rate"})(),
-				"exchange_rate": 48.5,
-			},
+				"exchange_rate": 48.5
+	},
 		)()
 		self.assertEqual(_ipc_conversion_rate(ipc, currency), 48.5)

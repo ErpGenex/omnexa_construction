@@ -54,7 +54,8 @@ def _ipc_rows(filters, allowed):
 		filters,
 		as_dict=True,
 	)
-	return [{**r, "document_type": "IPC Certificate", "amount": flt(r.amount)} for r in rows]
+	return [{**r, "document_type": "IPC Certificate", "amount": flt(r.amount)
+	} for r in rows]
 
 
 def _change_order_rows(filters, allowed):
@@ -71,7 +72,8 @@ def _change_order_rows(filters, allowed):
 		filters,
 		as_dict=True,
 	)
-	return [{**r, "document_type": "Construction Change Order", "amount": flt(r.amount)} for r in rows]
+	return [{**r, "document_type": "Construction Change Order", "amount": flt(r.amount)
+	} for r in rows]
 
 
 def _claim_rows(filters, allowed):
@@ -88,7 +90,8 @@ def _claim_rows(filters, allowed):
 		filters,
 		as_dict=True,
 	)
-	return [{**r, "document_type": "Construction Claim", "amount": flt(r.amount)} for r in rows]
+	return [{**r, "document_type": "Construction Claim", "amount": flt(r.amount)
+	} for r in rows]
 
 
 def _eot_rows(filters, allowed):
@@ -105,7 +108,8 @@ def _eot_rows(filters, allowed):
 		filters,
 		as_dict=True,
 	)
-	return [{**r, "document_type": "Construction Extension of Time", "amount": 0} for r in rows]
+	return [{**r, "document_type": "Construction Extension of Time", "amount": 0
+	} for r in rows]
 
 
 def _subcontract_cert_rows(filters, allowed):
@@ -122,15 +126,22 @@ def _subcontract_cert_rows(filters, allowed):
 		filters,
 		as_dict=True,
 	)
-	return [{**r, "document_type": "Subcontract Payment Certificate", "amount": flt(r.amount)} for r in rows]
+	return [{**r, "document_type": "Subcontract Payment Certificate", "amount": flt(r.amount)
+	} for r in rows]
 
 
 def _columns():
 	return [
-		{"label": _("DocType"), "fieldname": "document_type", "fieldtype": "Link", "options": "DocType", "width": 180},
-		{"label": _("Document"), "fieldname": "document", "fieldtype": "Dynamic Link", "options": "document_type", "width": 140},
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100},
-		{"label": _("Amount"), "fieldname": "amount", "fieldtype": "Currency", "width": 110},
-		{"label": _("Date"), "fieldname": "doc_date", "fieldtype": "Date", "width": 100},
+		{"label": _("DocType"), "fieldname": "document_type", "fieldtype": "Link", "options": "DocType", "width": 180
+	},
+		{"label": _("Document"), "fieldname": "document", "fieldtype": "Dynamic Link", "options": "document_type", "width": 140
+	},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100
+	},
+		{"label": _("Amount"), "fieldname": "amount", "fieldtype": "Currency", "width": 110
+	},
+		{"label": _("Date"), "fieldname": "doc_date", "fieldtype": "Date", "width": 100
+	},
 	]

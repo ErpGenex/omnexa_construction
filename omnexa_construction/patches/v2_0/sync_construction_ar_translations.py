@@ -103,8 +103,8 @@ GLOSSARY: dict[str, str] = {
 	"MIDP Reference": "مرجع MIDP",
 	"PM Risk Register": "سجل مخاطر PM",
 	"Back-to-Back LD": "LD متوازٍ",
-	"Recipients Matrix": "مصفوفة المستلمين",
-}
+	"Recipients Matrix": "مصفوفة المستلمين"
+	}
 
 
 def _csv_path() -> Path:
@@ -127,7 +127,8 @@ def _load_existing(path: Path) -> dict[str, str]:
 
 def _collect_labels() -> set[str]:
 	labels: set[str] = set(GLOSSARY.keys())
-	for dt in frappe.get_all("DocType", filters={"module": MODULE}, pluck="name"):
+	for dt in frappe.get_all("DocType", filters={"module": MODULE
+	}, pluck="name"):
 		meta = frappe.get_meta(dt)
 		labels.add(meta.name)
 		for df in meta.fields:
@@ -138,11 +139,13 @@ def _collect_labels() -> set[str]:
 					opt = opt.strip()
 					if opt:
 						labels.add(opt)
-	for report in frappe.get_all("Report", filters={"module": MODULE}, fields=["name", "report_name"]):
+	for report in frappe.get_all("Report", filters={"module": MODULE
+	}, fields=["name", "report_name"]):
 		labels.add(report.name)
 		if report.report_name:
 			labels.add(report.report_name)
-	for page in frappe.get_all("Page", filters={"module": MODULE}, pluck="title"):
+	for page in frappe.get_all("Page", filters={"module": MODULE
+	}, pluck="title"):
 		if page:
 			labels.add(page)
 	return {lbl for lbl in labels if lbl and not lbl.startswith("tab_")}

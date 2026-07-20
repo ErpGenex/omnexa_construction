@@ -38,8 +38,8 @@ def _iso_country_rows() -> tuple[dict, ...]:
 				"region_code": code,
 				"region_name": country_name,
 				"region_name_ar": _arabic_country_name(code, country_name),
-				"source": "country",
-			}
+				"source": "country"
+	}
 		)
 	rows.sort(key=lambda r: r["region_name"])
 	return tuple(rows)
@@ -59,7 +59,8 @@ def get_site_region_options(
 	if company:
 		for row in frappe.get_all(
 			"Regional Cost Factor",
-			filters={"company": company, "disabled": 0},
+			filters={"company": company, "disabled": 0
+	},
 			fields=["region_code", "region_name", "cost_factor", "is_default"],
 			order_by="is_default desc, region_code asc",
 		):
@@ -72,8 +73,8 @@ def get_site_region_options(
 				"region_name_ar": row.region_name or code,
 				"source": "regional",
 				"cost_factor": row.cost_factor,
-				"is_default": row.is_default,
-			}
+				"is_default": row.is_default
+	}
 
 	out = list(merged.values())
 	q = (search or "").strip().lower()

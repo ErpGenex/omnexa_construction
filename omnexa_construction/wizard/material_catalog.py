@@ -76,8 +76,7 @@ TRADE_DEFAULT_ITEMS: dict[str, list[str]] = {
 	"TRD-FIN": ["MAT-TILE-60", "MAT-PAINT-INT", "MAT-GYPSUM"],
 	"TRD-EXT": ["MAT-SAND-FINE", "MAT-TILE-45"],
 	"TRD-ROAD": ["MAT-ASPHALT", "MAT-BASE", "MAT-GEOTEXT"],
-	"TRD-PIPE": ["MAT-PVC-110", "MAT-PVC-160", "MAT-PVC-75"],
-}
+	"TRD-PIPE": ["MAT-PVC-110", "MAT-PVC-160", "MAT-PVC-75"]}
 
 
 def _generated_variants() -> list[tuple[str, str, str, str, str, str]]:

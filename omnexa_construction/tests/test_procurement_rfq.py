@@ -13,8 +13,10 @@ class TestProcurementRfq(FrappeTestCase):
 			(),
 			{
 				"supplier_quotes": [
-					type("Q", (), {"supplier": "SUP-A", "quoted_amount": 1000})(),
-					type("Q", (), {"supplier": "SUP-B", "quoted_amount": 900})(),
+					type("Q", (), {"supplier": "SUP-A", "quoted_amount": 1000
+	})(),
+					type("Q", (), {"supplier": "SUP-B", "quoted_amount": 900
+	})(),
 				]
 			},
 		)()
@@ -22,5 +24,6 @@ class TestProcurementRfq(FrappeTestCase):
 		self.assertEqual(quote.quoted_amount, 900)
 
 	def test_winning_quote_missing_returns_none(self):
-		rfq = type("RFQ", (), {"supplier_quotes": []})()
+		rfq = type("RFQ", (), {"supplier_quotes": []
+	})()
 		self.assertIsNone(_winning_quote(rfq, "NONE"))

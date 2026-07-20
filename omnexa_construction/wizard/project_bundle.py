@@ -56,11 +56,13 @@ def _boq_section_prefixes_for_trade(setup, trade_code: str, default_prefixes: st
 
 def _bundle_has_submitted_documents(contract_name: str) -> bool:
 	if frappe.db.exists("DocType", "IPC Certificate"):
-		if frappe.db.exists("IPC Certificate", {"project_contract": contract_name, "docstatus": 1}):
+		if frappe.db.exists("IPC Certificate", {"project_contract": contract_name, "docstatus": 1
+	}):
 			return True
 	if frappe.db.exists("DocType", "Subcontract Payment Certificate"):
 		if frappe.db.exists(
-			"Subcontract Payment Certificate", {"project_contract": contract_name, "docstatus": 1}
+			"Subcontract Payment Certificate", {"project_contract": contract_name, "docstatus": 1
+	}
 		):
 			return True
 	return False
@@ -85,7 +87,8 @@ def _cleanup_wizard_bundle(contract_name: str) -> None:
 			continue
 		for name in frappe.get_all(doctype, filters={field: contract_name}, pluck="name"):
 			frappe.delete_doc(doctype, name, force=1, ignore_permissions=True)
-	boq_items = frappe.get_all("BOQ Item", filters={"project_contract": contract_name}, pluck="name")
+	boq_items = frappe.get_all("BOQ Item", filters={"project_contract": contract_name
+	}, pluck="name")
 	for name in sorted(boq_items, reverse=True):
 		frappe.delete_doc("BOQ Item", name, force=1, ignore_permissions=True)
 	frappe.delete_doc("Project Contract", contract_name, force=1, ignore_permissions=True)
@@ -122,8 +125,8 @@ def expand_template_to_lines(setup) -> list[dict]:
 				"trade_package_code": row.trade_package_code or "",
 				"labor_cost": labor,
 				"material_cost": material,
-				"equipment_cost": equipment,
-			}
+				"equipment_cost": equipment
+	}
 		)
 	return rollup_setup_boq_lines(lines)
 
@@ -146,12 +149,14 @@ def preview_boq(setup_name: str, save: int | str = 1) -> dict:
 		for row in lines:
 			setup.append("boq_lines", row)
 		apply_template_defaults(setup, force_phases=not setup.phases, force_details=not setup.boq_details)
-		result = {"estimated_contract_value": setup.estimated_contract_value}
+		result = {"estimated_contract_value": setup.estimated_contract_value
+	}
 		total = result["estimated_contract_value"]
 		from omnexa_construction.wizard.persist import save_wizard_setup
 
 		save_wizard_setup(setup)
-	return {"lines": lines, "estimated_contract_value": total, "line_count": len(lines)}
+	return {"lines": lines, "estimated_contract_value": total, "line_count": len(lines)
+	}
 
 
 @frappe.whitelist()
@@ -174,8 +179,7 @@ def suggest_assignments(setup_name: str, save: int | str = 1) -> dict:
 				"trade_package_code": code,
 				"boq_section_codes": prefixes,
 				"retention_percent": retention,
-				"scope_notes": _("Subcontract package — {0} (est. {1})").format(trade_name, value),
-			}
+				"scope_notes": _("Subcontract package — {0} (est. {1})").format(trade_name, value)}
 		)
 		if code in MATERIAL_SUPPLY_TRADES:
 			suggestions.append(
@@ -184,8 +188,7 @@ def suggest_assignments(setup_name: str, save: int | str = 1) -> dict:
 					"trade_package_code": code,
 					"boq_section_codes": prefixes,
 					"retention_percent": 0,
-					"scope_notes": _("Materials supply — {0} (sections {1})").format(trade_name, prefixes),
-				}
+					"scope_notes": _("Materials supply — {0} (sections {1})").format(trade_name, prefixes)}
 			)
 	if cint(save):
 		setup.set("assignments", [])
@@ -194,7 +197,8 @@ def suggest_assignments(setup_name: str, save: int | str = 1) -> dict:
 		from omnexa_construction.wizard.persist import save_wizard_setup
 
 		save_wizard_setup(setup)
-	return {"assignments": suggestions}
+	return {"assignments": suggestions
+	}
 
 
 @frappe.whitelist()
@@ -290,8 +294,8 @@ def _insert_boq_items_from_setup(setup, contract_name: str) -> tuple[list[str], 
 			"material_cost": flt(row.material_cost),
 			"equipment_cost": flt(row.equipment_cost),
 			"company": setup.company,
-			"branch": setup.branch,
-		}
+			"branch": setup.branch
+	}
 		if boq_meta.has_field("planned_start_date") and row.planned_start:
 			payload["planned_start_date"] = row.planned_start
 		if boq_meta.has_field("planned_completion_date") and row.planned_finish:
@@ -320,7 +324,8 @@ def sync_boq_items_from_setup(setup, contract_name: str) -> dict:
 			title=_("Sync"),
 		)
 	for name in sorted(
-		frappe.get_all("BOQ Item", filters={"project_contract": contract_name}, pluck="name"),
+		frappe.get_all("BOQ Item", filters={"project_contract": contract_name
+	}, pluck="name"),
 		reverse=True,
 	):
 		frappe.delete_doc("BOQ Item", name, force=1, ignore_permissions=True)
@@ -329,10 +334,12 @@ def sync_boq_items_from_setup(setup, contract_name: str) -> dict:
 	frappe.db.set_value(
 		"Project Contract",
 		contract_name,
-		{"contract_value": contract_value, "revised_contract_value": contract_value},
+		{"contract_value": contract_value, "revised_contract_value": contract_value
+	},
 		update_modified=True,
 	)
-	return {"boq_items": len(boq_items), "material_bom_lines": bom_count, "contract_value": contract_value}
+	return {"boq_items": len(boq_items), "material_bom_lines": bom_count, "contract_value": contract_value
+	}
 
 
 def _execute_project_bundle(setup) -> dict:
@@ -351,7 +358,8 @@ def _execute_project_bundle(setup) -> dict:
 	frappe.db.set_value(
 		"Project Contract",
 		contract.name,
-		{"contract_value": contract_value, "revised_contract_value": contract_value},
+		{"contract_value": contract_value, "revised_contract_value": contract_value
+	},
 		update_modified=True,
 	)
 
@@ -382,8 +390,8 @@ def _execute_project_bundle(setup) -> dict:
 				"contract_value": scope_value,
 				"status": "Active",
 				"company": setup.company,
-				"branch": setup.branch,
-			}
+				"branch": setup.branch
+	}
 		)
 		scw.insert(ignore_permissions=True)
 		scw_names.append(scw.name)
@@ -410,8 +418,8 @@ def _execute_project_bundle(setup) -> dict:
 				"contract_value": scope_value,
 				"status": "Active",
 				"company": setup.company,
-				"branch": setup.branch,
-			}
+				"branch": setup.branch
+	}
 		)
 		scw.insert(ignore_permissions=True)
 		scw_names.append(scw.name)
@@ -457,7 +465,7 @@ def _execute_project_bundle(setup) -> dict:
 		"ipc": ipc_names,
 		"document_pack": pack,
 		"residential_inventory": inventory,
-		"contract_value": contract_value,
+		"contract_value": contract_value
 	}
 
 
@@ -479,8 +487,8 @@ def _boq_details_for_line(setup, cost_code: str) -> list[dict]:
 				"ld_per_day": flt(d.ld_per_day),
 				"ld_cap_days": d.ld_cap_days,
 				"ld_cap_amount": flt(d.ld_cap_amount),
-				"planned_finish": d.planned_finish,
-			}
+				"planned_finish": d.planned_finish
+	}
 		)
 	return rows
 
@@ -506,8 +514,7 @@ def _create_ipc_schedule_drafts(setup, contract_name: str) -> list[str]:
 				"status": "Draft",
 				"company": setup.company,
 				"branch": setup.branch,
-				"certificate_reference": _("WIZ-IPC-{0}-{1}").format(setup.name, plan.ipc_number),
-			}
+				"certificate_reference": _("WIZ-IPC-{0}-{1}").format(setup.name, plan.ipc_number)}
 		)
 		if ipc.meta.has_field("discount_percent"):
 			ipc.discount_percent = flt(plan.discount_percent)
@@ -572,8 +579,8 @@ def _create_project_contract(setup):
 			"liquidated_damages_cap_percent": flt(setup.liquidated_damages_cap_percent),
 			"status": "Active",
 			"company": setup.company,
-			"branch": setup.branch,
-		}
+			"branch": setup.branch
+	}
 	)
 	doc.insert(ignore_permissions=True)
 	if doc.meta.is_submittable:
@@ -645,8 +652,8 @@ def _create_purchase_requests(setup, contract_name: str, code_to_boq: dict[str, 
 					"qty": bom_qty,
 					"purpose": row.item_description,
 					"boq_item": boq_name,
-					"cost_code": row.cost_code,
-				}
+					"cost_code": row.cost_code
+	}
 			)
 		if not items:
 			continue
@@ -660,8 +667,8 @@ def _create_purchase_requests(setup, contract_name: str, code_to_boq: dict[str, 
 				"requester": frappe.session.user,
 				"reference": _("Wizard PR — {0}").format(setup.name),
 				"remarks": assign.scope_notes or _("Materials for {0}").format(setup.contract_title),
-				"items": items,
-			}
+				"items": items
+	}
 		)
 		pr.insert(ignore_permissions=True)
 		pr_names.append(pr.name)
@@ -685,8 +692,8 @@ def _create_purchase_requests(setup, contract_name: str, code_to_boq: dict[str, 
 					"qty": max(flt(row.quantity) * 0.15, 1),
 					"purpose": row.item_description,
 					"boq_item": boq_name,
-					"cost_code": row.cost_code,
-				}
+					"cost_code": row.cost_code
+	}
 			)
 			if len(items) >= 12:
 				break
@@ -701,8 +708,8 @@ def _create_purchase_requests(setup, contract_name: str, code_to_boq: dict[str, 
 					"requester": frappe.session.user,
 					"reference": _("Wizard PR Materials — {0}").format(setup.name),
 					"remarks": _("Auto material package from BOQ"),
-					"items": items,
-				}
+					"items": items
+	}
 			)
 			pr.insert(ignore_permissions=True)
 			pr_names.append(pr.name)
@@ -718,7 +725,7 @@ def _default_item_for_trade(trade_code: str | None, company: str) -> str | None:
 		"TRD-PIPE": "MAT-PVC-110",
 		"TRD-MEP-P": "MAT-PVC-110",
 		"TRD-MEP-E": "MAT-CABLE-16",
-		"TRD-FIN": "MAT-TILE-60",
+		"TRD-FIN": "MAT-TILE-60"
 	}
 	suffix = candidates.get(trade_code or "", "MAT-RMX-C30")
 	import_material_catalog(company, limit=50)
@@ -748,22 +755,21 @@ def _create_kickoff_transmittal(setup, contract_name: str) -> str | None:
 					"document_no": contract_name,
 					"revision_no": "A",
 					"issue_purpose": "For Record",
-					"remarks": setup.contract_title,
-				},
+					"remarks": setup.contract_title
+	},
 				{
 					"document_title": _("BOQ Schedule"),
 					"document_no": setup.boq_template,
 					"revision_no": "A",
 					"issue_purpose": "For Construction",
-					"remarks": _("Generated from template {0}").format(setup.boq_template),
-				},
+					"remarks": _("Generated from template {0}").format(setup.boq_template)
+	},
 				{
 					"document_title": _("Subcontract Scope Sheets"),
 					"revision_no": "A",
-					"issue_purpose": "For Tender",
-				},
-			],
-		}
+					"issue_purpose": "For Tender"
+	},
+			]}
 	)
 	doc.insert(ignore_permissions=True)
 	return doc.name

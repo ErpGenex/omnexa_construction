@@ -25,8 +25,8 @@ STANDARD_WEIGHTS: dict[str, float] = {
 	"ISO_19650": 0.1,
 	"GLOBAL_WIZARD_ESTIMATING": 0.1,
 	"FIELD_MOBILE_OFFLINE": 0.1,
-	"ENTERPRISE_SECURITY_BRANCH": 0.07,
-}
+	"ENTERPRISE_SECURITY_BRANCH": 0.07
+	}
 
 
 def _test_file_count() -> int:
@@ -53,8 +53,7 @@ def _gate_checks() -> dict[str, bool]:
 		"nps_meets_target_or_seeded": bool(nps.get("meets_target")) or int(nps.get("responses") or 0) >= 3,
 		"external_auditor_signed": bool(settings.get("world_class_external_auditor_signed")),
 		"mobile_pwa_certified": bool(settings.get("world_class_mobile_pwa_certified")),
-		"workspace_full_menu": bool(frappe.db.exists("Workspace", "Construction")),
-	}
+		"workspace_full_menu": bool(frappe.db.exists("Workspace", "Construction"))}
 
 
 def _standard_scores() -> dict[str, dict[str, Any]]:
@@ -141,8 +140,8 @@ def build_compliance_payload(*, force_certified: bool = False) -> dict[str, Any]
 			"erpgenex": 4.92 if overall >= TARGET_SCORE else 4.78,
 			"procore": 3.95,
 			"oracle": 4.16,
-			"sap": 3.94,
-		},
+			"sap": 3.94
+	},
 		"test_files": _test_file_count(),
 		"quality_gates": gates,
 		"remaining_for_100": remaining if overall < TARGET_SCORE else [],
@@ -154,8 +153,7 @@ def build_compliance_payload(*, force_certified: bool = False) -> dict[str, Any]
 			"Full Construction workspace (104+ links, i18n cards)",
 		]
 		if overall >= TARGET_SCORE
-		else [],
-	}
+		else []}
 
 
 @frappe.whitelist()

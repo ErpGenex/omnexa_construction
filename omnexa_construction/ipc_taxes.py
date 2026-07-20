@@ -20,5 +20,5 @@ def compute_ipc_tax_amounts(
 	return {
 		"vat_amount": vat_amount,
 		"wht_amount": wht_amount,
-		"net_after_tax": net_after_tax,
+		"net_after_tax": net_after_tax
 	}

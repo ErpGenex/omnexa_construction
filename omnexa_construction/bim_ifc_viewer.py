@@ -67,8 +67,7 @@ def get_ifc_viewer_context(project_contract: str, bim_model: str | None = None) 
 		"issues": issues,
 		"viewer_note": _(
 			"Lite viewer: metadata and issues list. Open 3D view loads IFC in-browser when a valid IFC file is attached."
-		),
-	}
+		)}
 
 
 @frappe.whitelist()
@@ -99,11 +98,12 @@ def create_bim_issue_from_viewer(
 			"description": description,
 			"location": location,
 			"company": company,
-			"branch": branch,
-		}
+			"branch": branch
+	}
 	)
 	doc.insert()
-	return {"name": doc.name, "ok": True}
+	return {"name": doc.name, "ok": True
+	}
 
 
 def _file_url(file_path: str | None) -> str | None:

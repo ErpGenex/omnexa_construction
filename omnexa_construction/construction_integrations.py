@@ -23,8 +23,7 @@ def dispatch_construction_event(doc, event: str) -> None:
 		"name": doc.name,
 		"project_contract": getattr(doc, "project_contract", None),
 		"company": getattr(doc, "company", None),
-		"status": getattr(doc, "status", None),
-	}
+		"status": getattr(doc, "status", None)}
 	try:
 		frappe.enqueue(
 			"omnexa_construction.construction_integrations._post_webhook",
@@ -61,7 +60,8 @@ def _webhook_url() -> str | None:
 def _post_webhook(url: str, payload: dict) -> None:
 	import requests
 
-	headers = {"Content-Type": "application/json"}
+	headers = {"Content-Type": "application/json"
+	}
 	secret = None
 	if frappe.db.exists("DocType", "Construction Integration Settings"):
 		secret = frappe.db.get_single_value("Construction Integration Settings", "webhook_secret")

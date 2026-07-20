@@ -15,8 +15,8 @@ def post_gl_journal(*, company: str, branch: str | None, posting_date, reference
 			{
 				"account": row["account"],
 				"debit": flt(row.get("debit") or 0),
-				"credit": flt(row.get("credit") or 0),
-			},
+				"credit": flt(row.get("credit") or 0)
+	},
 		)
 	je.insert()
 	je.submit()

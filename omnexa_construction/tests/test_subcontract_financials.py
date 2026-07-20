@@ -34,7 +34,7 @@ class TestSubcontractFinancials(FrappeTestCase):
 			{
 				"amount_certified": 2000.0,
 				"amount_paid": 900.0,
-				"progress_percent": 50.0,
-			},
+				"progress_percent": 50.0
+	},
 			update_modified=False,
 		)

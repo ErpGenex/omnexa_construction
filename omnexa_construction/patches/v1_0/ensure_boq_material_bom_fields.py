@@ -14,8 +14,8 @@ def execute():
 				"fieldtype": "Table",
 				"options": "BOQ Item Material",
 				"insert_after": "boq_item_details",
-				"module": "Omnexa Construction",
-			},
+				"module": "Omnexa Construction"
+	},
 		],
 		"Construction Project Setup": [
 			{
@@ -24,18 +24,17 @@ def execute():
 				"fieldtype": "Int",
 				"insert_after": "generated_pr_count",
 				"read_only": 1,
-				"module": "Omnexa Construction",
-			},
+				"module": "Omnexa Construction"
+	},
 			{
 				"fieldname": "document_pack_file",
 				"label": "Document Pack (ZIP)",
 				"fieldtype": "Attach",
 				"insert_after": "generated_rfq_count",
 				"read_only": 1,
-				"module": "Omnexa Construction",
-			},
-		],
-	}
+				"module": "Omnexa Construction"
+	},
+		]}
 	create_custom_fields(fields, update=True)
 	frappe.clear_cache(doctype="BOQ Item")
 	frappe.clear_cache(doctype="Construction Project Setup")

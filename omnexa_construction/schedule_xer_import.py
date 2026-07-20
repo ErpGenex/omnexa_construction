@@ -37,14 +37,15 @@ def import_xer_to_baseline(baseline_name: str, file_url: str) -> dict:
 			"end_date": end,
 			"duration_days": row.get("duration_days") or date_diff_safe(end, start) + 1,
 			"is_milestone": row.get("is_milestone") or 0,
-			"cost_code": row.get("cost_code"),
-		}
+			"cost_code": row.get("cost_code")
+	}
 		meta = frappe.get_meta("Construction Schedule Baseline Task")
 		if meta.has_field("predecessor_task") and row.get("predecessor_task"):
 			task_row["predecessor_task"] = row["predecessor_task"]
 		baseline.append("tasks", task_row)
 	baseline.save()
-	return {"imported": len(tasks), "baseline": baseline.name}
+	return {"imported": len(tasks), "baseline": baseline.name
+	}
 
 
 def parse_xer_tasks(content: str) -> list[dict]:

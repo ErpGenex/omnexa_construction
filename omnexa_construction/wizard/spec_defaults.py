@@ -19,39 +19,57 @@ SPEC_DEFAULTS_BUILDING = {
 	"gross_floor_area_m2": 450.0,
 	"number_of_floors": 2,
 	"basement_levels": 0,
-	"unit_count": 1,
-}
+	"unit_count": 1
+	}
 
 SPEC_DEFAULTS_ROAD = {
 	"road_length_m": 800.0,
-	"road_width_m": 12.0,
-}
+	"road_width_m": 12.0
+	}
 
 SPEC_DEFAULTS_PIPELINE = {
-	"pipe_network_km": 5.0,
-}
+	"pipe_network_km": 5.0
+	}
 
 TYPE_OVERRIDES: dict[str, dict] = {
-	"hotel": {"key_count": 120, "unit_count": 1},
-	"hospital": {"bed_count": 200, "unit_count": 1},
-	"social_housing": {"plot_area_m2": 4000.0, "gross_floor_area_m2": 3200.0, "unit_count": 80},
-	"office_tower": {"plot_area_m2": 1200.0, "gross_floor_area_m2": 24000.0, "number_of_floors": 25},
-	"warehouse": {"plot_area_m2": 5000.0, "gross_floor_area_m2": 4000.0, "number_of_floors": 1},
-	"factory": {"plot_area_m2": 8000.0, "gross_floor_area_m2": 6000.0, "number_of_floors": 1},
-	"mixed_use": {"plot_area_m2": 1800.0, "gross_floor_area_m2": 42000.0, "number_of_floors": 28, "unit_count": 120},
-	"data_center": {"plot_area_m2": 12000.0, "gross_floor_area_m2": 8000.0, "number_of_floors": 2},
-	"airport_terminal": {"plot_area_m2": 85000.0, "gross_floor_area_m2": 120000.0, "number_of_floors": 3},
-	"stadium": {"plot_area_m2": 45000.0, "gross_floor_area_m2": 28000.0, "unit_count": 40000},
-	"metro_station": {"plot_area_m2": 3200.0, "gross_floor_area_m2": 4800.0, "basement_levels": 2},
-	"residential_compound": {"plot_area_m2": 85000.0, "gross_floor_area_m2": 12000.0, "unit_count": 48},
-	"parking_structure": {"plot_area_m2": 2400.0, "gross_floor_area_m2": 7200.0, "number_of_floors": 6},
-	"laboratory": {"plot_area_m2": 4200.0, "gross_floor_area_m2": 6800.0, "number_of_floors": 3},
-	"tunnel": {"road_length_m": 2400.0, "road_width_m": 12.0},
-	"solar_farm": {"plot_area_m2": 450000.0, "gross_floor_area_m2": 1200.0},
-	"power_plant": {"plot_area_m2": 120000.0, "gross_floor_area_m2": 18000.0},
-	"railway": {"road_length_m": 12000.0, "road_width_m": 8.0},
-	"district_cooling": {"pipe_network_km": 8.0},
-}
+	"hotel": {"key_count": 120, "unit_count": 1
+	},
+	"hospital": {"bed_count": 200, "unit_count": 1
+	},
+	"social_housing": {"plot_area_m2": 4000.0, "gross_floor_area_m2": 3200.0, "unit_count": 80
+	},
+	"office_tower": {"plot_area_m2": 1200.0, "gross_floor_area_m2": 24000.0, "number_of_floors": 25
+	},
+	"warehouse": {"plot_area_m2": 5000.0, "gross_floor_area_m2": 4000.0, "number_of_floors": 1
+	},
+	"factory": {"plot_area_m2": 8000.0, "gross_floor_area_m2": 6000.0, "number_of_floors": 1
+	},
+	"mixed_use": {"plot_area_m2": 1800.0, "gross_floor_area_m2": 42000.0, "number_of_floors": 28, "unit_count": 120
+	},
+	"data_center": {"plot_area_m2": 12000.0, "gross_floor_area_m2": 8000.0, "number_of_floors": 2
+	},
+	"airport_terminal": {"plot_area_m2": 85000.0, "gross_floor_area_m2": 120000.0, "number_of_floors": 3
+	},
+	"stadium": {"plot_area_m2": 45000.0, "gross_floor_area_m2": 28000.0, "unit_count": 40000
+	},
+	"metro_station": {"plot_area_m2": 3200.0, "gross_floor_area_m2": 4800.0, "basement_levels": 2
+	},
+	"residential_compound": {"plot_area_m2": 85000.0, "gross_floor_area_m2": 12000.0, "unit_count": 48
+	},
+	"parking_structure": {"plot_area_m2": 2400.0, "gross_floor_area_m2": 7200.0, "number_of_floors": 6
+	},
+	"laboratory": {"plot_area_m2": 4200.0, "gross_floor_area_m2": 6800.0, "number_of_floors": 3
+	},
+	"tunnel": {"road_length_m": 2400.0, "road_width_m": 12.0
+	},
+	"solar_farm": {"plot_area_m2": 450000.0, "gross_floor_area_m2": 1200.0
+	},
+	"power_plant": {"plot_area_m2": 120000.0, "gross_floor_area_m2": 18000.0
+	},
+	"railway": {"road_length_m": 12000.0, "road_width_m": 8.0
+	},
+	"district_cooling": {"pipe_network_km": 8.0}
+	}
 
 
 def spec_category(building_type: str | None) -> str:

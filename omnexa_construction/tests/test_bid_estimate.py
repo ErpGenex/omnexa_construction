@@ -21,8 +21,8 @@ class TestBidEstimate(FrappeTestCase):
 				"estimated_contract_value": 1000000,
 				"estimated_cost": 850000,
 				"company": "_Test Company",
-				"branch": "_Test Branch",
-			}
+				"branch": "_Test Branch"
+	}
 		)
 		doc.flags.wizard_save = True
 		with patch("omnexa_construction.omnexa_construction.doctype.construction_bid_estimate.construction_bid_estimate.frappe.msgprint"):
@@ -38,8 +38,8 @@ class TestBidEstimate(FrappeTestCase):
 				"estimated_contract_value": 100,
 				"estimated_cost": 120,
 				"company": "_Test Company",
-				"branch": "_Test Branch",
-			}
+				"branch": "_Test Branch"
+	}
 		)
 		doc.flags.wizard_save = True
 		with patch(
@@ -60,10 +60,11 @@ class TestBidEstimate(FrappeTestCase):
 				"estimate_title": "Tower C Bid",
 				"project_segment": "Buildings",
 				"building_type": "residential_building",
-				"expected_award_date": "2026-06-02",
-			}
+				"expected_award_date": "2026-06-02"
+	}
 		)
-		setup = frappe._dict({"name": "CPS-00001"})
+		setup = frappe._dict({"name": "CPS-00001"
+	})
 		setup.flags = frappe._dict()
 		setup.insert = Mock()
 

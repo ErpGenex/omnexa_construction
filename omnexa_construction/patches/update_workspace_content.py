@@ -17,17 +17,20 @@ def execute():
 			{
 				"id": "construction-qa-primavera",
 				"type": "shortcut",
-				"data": {"shortcut_name": "Primavera P6 Sync Dashboard", "col": 4}
+				"data": {"shortcut_name": "Primavera P6 Sync Dashboard", "col": 4
+	}
 			},
 			{
 				"id": "construction-qa-portfolio",
 				"type": "shortcut",
-				"data": {"shortcut_name": "Portfolio Dashboard", "col": 4}
+				"data": {"shortcut_name": "Portfolio Dashboard", "col": 4
+	}
 			},
 			{
 				"id": "construction-qa-bim",
 				"type": "shortcut",
-				"data": {"shortcut_name": "BIM IFC Viewer", "col": 4}
+				"data": {"shortcut_name": "BIM IFC Viewer", "col": 4
+	}
 			}
 		]
 		

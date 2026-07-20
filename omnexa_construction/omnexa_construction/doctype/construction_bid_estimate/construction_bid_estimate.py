@@ -30,7 +30,8 @@ def create_setup_from_bid_estimate(bid_estimate: str) -> dict:
 		frappe.throw(_("Only Awarded/Negotiated bid estimates can be converted to setup."), title=_("Bid Estimate"))
 
 	if bid.linked_project_setup and frappe.db.exists("Construction Project Setup", bid.linked_project_setup):
-		return {"setup_name": bid.linked_project_setup, "already_linked": True}
+		return {"setup_name": bid.linked_project_setup, "already_linked": True
+	}
 
 	currency = frappe.db.get_value("Company", bid.company, "default_currency") or "EGP"
 	planned_start = bid.expected_award_date or now_datetime().date()
@@ -39,7 +40,8 @@ def create_setup_from_bid_estimate(bid_estimate: str) -> dict:
 		options_raw = (
 			frappe.db.get_value(
 				"DocField",
-				{"parent": "Construction Project Setup", "fieldname": "building_type"},
+				{"parent": "Construction Project Setup", "fieldname": "building_type"
+	},
 				"options",
 			)
 			or ""
@@ -60,8 +62,8 @@ def create_setup_from_bid_estimate(bid_estimate: str) -> dict:
 			"planned_start": planned_start,
 			"planned_completion": add_days(planned_start, 180),
 			"status": "Draft",
-			"wizard_step": 1,
-		}
+			"wizard_step": 1
+	}
 	)
 	if building_type:
 		setup.building_type = building_type
@@ -73,9 +75,10 @@ def create_setup_from_bid_estimate(bid_estimate: str) -> dict:
 		bid.name,
 		{
 			"linked_project_setup": setup.name,
-			"status": "Awarded",
-		},
+			"status": "Awarded"
+	},
 		update_modified=True,
 	)
 
-	return {"setup_name": setup.name, "already_linked": False}
+	return {"setup_name": setup.name, "already_linked": False
+	}

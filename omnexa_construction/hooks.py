@@ -62,11 +62,11 @@ doctype_js = {
 	"Site Daily Report": "public/js/site_daily_report.js",
 	"Project WIP Snapshot": "public/js/project_wip_snapshot.js",
 	"PM WBS Task": "public/js/primavera_sync_buttons.js",
-	"Resource": "public/js/primavera_sync_buttons.js",
-}
+	"Resource": "public/js/primavera_sync_buttons.js"
+	}
 doctype_list_js = {
-	"Project Contract": "public/js/project_contract_list.js",
-}
+	"Project Contract": "public/js/project_contract_list.js"
+	}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -197,8 +197,8 @@ permission_query_conditions = {
 	"Construction CBS Element": "omnexa_construction.permissions.construction_cbs_element_query_conditions",
 	"Construction Project Risk": "omnexa_construction.permissions.construction_project_risk_query_conditions",
 	"Primavera Integration Log": "omnexa_construction.permissions.primavera_integration_log_query_conditions",
-	"Primavera Sync Queue": "omnexa_construction.permissions.primavera_sync_queue_query_conditions",
-}
+	"Primavera Sync Queue": "omnexa_construction.permissions.primavera_sync_queue_query_conditions"
+	}
 
 # DocType Class
 # ---------------
@@ -214,8 +214,8 @@ permission_query_conditions = {
 
 _BRANCH_DOC_EVENTS = {
 	"before_validate": "omnexa_construction.permissions.populate_company_branch_from_user_context",
-	"validate": "omnexa_construction.permissions.enforce_branch_access_for_doc",
-}
+	"validate": "omnexa_construction.permissions.enforce_branch_access_for_doc"
+	}
 
 _WORKFLOW_VALIDATE = [
 	"omnexa_construction.permissions.enforce_branch_access_for_doc",
@@ -225,59 +225,55 @@ _WORKFLOW_VALIDATE = [
 _COST_ROLLUP_EVENTS = {
 	"after_insert": "omnexa_construction.cost_rollup.refresh_linked_boq_actual_cost",
 	"on_update": "omnexa_construction.cost_rollup.refresh_linked_boq_actual_cost",
-	"on_trash": "omnexa_construction.cost_rollup.refresh_linked_boq_actual_cost",
-}
+	"on_trash": "omnexa_construction.cost_rollup.refresh_linked_boq_actual_cost"
+	}
 
 _SITE_DAILY_EVENTS = {
 	**_BRANCH_DOC_EVENTS,
 	**_COST_ROLLUP_EVENTS,
-	"on_submit": "omnexa_construction.site_daily_inventory_hooks.maybe_create_material_issue_on_submit",
-}
+	"on_submit": "omnexa_construction.site_daily_inventory_hooks.maybe_create_material_issue_on_submit"
+	}
 
 _EQUIPMENT_USAGE_EVENTS = {
 	**_BRANCH_DOC_EVENTS,
-	**_COST_ROLLUP_EVENTS,
-}
+	**_COST_ROLLUP_EVENTS}
 
 _TIMESHEET_EVENTS = {
 	"validate": "omnexa_construction.timesheet_cost_hooks.timesheet_entry_before_save",
-	**_COST_ROLLUP_EVENTS,
-}
+	**_COST_ROLLUP_EVENTS}
 
 _IPC_EVENTS = {
 	"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
 	"validate": _WORKFLOW_VALIDATE,
 	"on_update": "omnexa_construction.ipc_revenue.maybe_create_draft_sales_invoice",
-	"on_submit": "omnexa_construction.construction_integrations.dispatch_ipc_certified",
-}
+	"on_submit": "omnexa_construction.construction_integrations.dispatch_ipc_certified"
+	}
 
 doc_events = {
 	"Project Contract": {
 		**_BRANCH_DOC_EVENTS,
-		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_project_sync",
+		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_project_sync"
 	},
 	"BOQ Item": _BRANCH_DOC_EVENTS.copy(),
 	"IPC Certificate": {
 		**_IPC_EVENTS,
 		"validate": _WORKFLOW_VALIDATE
-		+ ["omnexa_construction.regional_compliance.zatca_ipc_hook.validate_ipc_zatca_readiness"],
-	},
+		+ ["omnexa_construction.regional_compliance.zatca_ipc_hook.validate_ipc_zatca_readiness"]},
 	"Site Daily Report": _SITE_DAILY_EVENTS,
 	"Subcontract Work Order": {
 		**_BRANCH_DOC_EVENTS,
 		"validate": [
 			_BRANCH_DOC_EVENTS["validate"],
 			"omnexa_construction.subcontract_compliance.refresh_compliance_status",
-		],
-	},
+		]},
 	"Project WIP Snapshot": _BRANCH_DOC_EVENTS.copy(),
 	"Subcontract Payment Certificate": {
 		"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
-		"validate": _WORKFLOW_VALIDATE,
+		"validate": _WORKFLOW_VALIDATE
 	},
 	"Construction Change Order": {
 		"before_validate": _BRANCH_DOC_EVENTS["before_validate"],
-		"validate": _WORKFLOW_VALIDATE,
+		"validate": _WORKFLOW_VALIDATE
 	},
 	"Construction Extension of Time": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Claim": _BRANCH_DOC_EVENTS.copy(),
@@ -287,12 +283,11 @@ doc_events = {
 		"validate": [
 			_BRANCH_DOC_EVENTS["validate"],
 			"omnexa_construction.ncr_sla.apply_ncr_sla",
-		],
-	},
+		]},
 	"Construction HSE Incident": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Document Transmittal": {
 		**_BRANCH_DOC_EVENTS,
-		"on_update": "omnexa_construction.construction_integrations.dispatch_transmittal_issued",
+		"on_update": "omnexa_construction.construction_integrations.dispatch_transmittal_issued"
 	},
 	"Construction Project Setup": _BRANCH_DOC_EVENTS.copy(),
 	"Regional Cost Factor": _BRANCH_DOC_EVENTS.copy(),
@@ -304,8 +299,7 @@ doc_events = {
 		"validate": [
 			_BRANCH_DOC_EVENTS["validate"],
 			"omnexa_construction.fidic_compliance.validate_fidic_notice_doc",
-		],
-	},
+		]},
 	"Construction FIDIC Clause Reference": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Final Account Statement": _BRANCH_DOC_EVENTS.copy(),
 	"Construction DLP Record": _BRANCH_DOC_EVENTS.copy(),
@@ -319,15 +313,15 @@ doc_events = {
 		],
 		"onload": "omnexa_construction.regional_compliance.eu_package.log_cde_access_on_load",
 		"before_submit": "omnexa_construction.cde_versioning.before_submit_cde_document",
-		"on_update": "omnexa_construction.cde_versioning.on_update_cde_document",
+		"on_update": "omnexa_construction.cde_versioning.on_update_cde_document"
 	},
 	"Engineering Submittal": {
-		"validate": "omnexa_construction.riba_submittal_gates.validate_engineering_submittal_riba_gate",
+		"validate": "omnexa_construction.riba_submittal_gates.validate_engineering_submittal_riba_gate"
 	},
 	"Construction Work Delay Notice": _BRANCH_DOC_EVENTS.copy(),
 	"Construction RFI": {
 		**_BRANCH_DOC_EVENTS,
-		"on_submit": "omnexa_construction.construction_integrations.dispatch_rfi_submitted",
+		"on_submit": "omnexa_construction.construction_integrations.dispatch_rfi_submitted"
 	},
 	"Construction Snagging Item": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Retention Release": _BRANCH_DOC_EVENTS.copy(),
@@ -335,12 +329,12 @@ doc_events = {
 	"Construction Permit to Work": _BRANCH_DOC_EVENTS.copy(),
 	"Timesheet Entry": _TIMESHEET_EVENTS,
 	"Purchase Request": {
-		"validate": "omnexa_construction.procurement_hooks.validate_purchase_request_boq_links",
+		"validate": "omnexa_construction.procurement_hooks.validate_purchase_request_boq_links"
 	},
 	"Purchase Order": {
 		"validate": "omnexa_construction.procurement_hooks.validate_purchase_order_boq_links",
 		"on_submit": "omnexa_construction.boq_commitment.on_purchase_order_update",
-		"on_cancel": "omnexa_construction.boq_commitment.on_purchase_order_update",
+		"on_cancel": "omnexa_construction.boq_commitment.on_purchase_order_update"
 	},
 	"Construction Schedule Baseline": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Hazard Register": _BRANCH_DOC_EVENTS.copy(),
@@ -350,7 +344,7 @@ doc_events = {
 	"Construction Toolbox Talk": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Material Approval Request": {
 		**_BRANCH_DOC_EVENTS,
-		"on_update": "omnexa_construction.material_approval_hooks.maybe_create_material_request",
+		"on_update": "omnexa_construction.material_approval_hooks.maybe_create_material_request"
 	},
 	"Construction Early Warning": _BRANCH_DOC_EVENTS.copy(),
 	"Construction Compensation Event": _BRANCH_DOC_EVENTS.copy(),
@@ -370,18 +364,17 @@ doc_events = {
 	"Construction CDE Access Log": _BRANCH_DOC_EVENTS.copy(),
 	"Construction OSHA Site Checklist": _BRANCH_DOC_EVENTS.copy(),
 	"PM WBS Task": {
-		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_task_sync",
+		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_task_sync"
 	},
 	"Resource": {
-		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_resource_sync",
+		"on_update": "omnexa_construction.integrations.primavera_hooks.queue_resource_sync"
 	},
 	"Primavera Integration Log": {
-		"before_insert": "omnexa_construction.integrations.primavera_hooks.set_sync_timestamp",
+		"before_insert": "omnexa_construction.integrations.primavera_hooks.set_sync_timestamp"
 	},
 	"Primavera Sync Queue": {
-		"before_insert": "omnexa_construction.integrations.primavera_hooks.set_queue_timestamp",
-	},
-}
+		"before_insert": "omnexa_construction.integrations.primavera_hooks.set_queue_timestamp"}
+	}
 
 # Scheduled Tasks
 # ---------------
@@ -396,8 +389,7 @@ scheduler_events = {
 	],
 	"hourly": [
 		"omnexa_construction.integrations.primavera_scheduler.process_sync_queue",
-	],
-}
+	]}
 
 # scheduler_events = {
 # 	"all": [
@@ -460,22 +452,22 @@ before_request = ["omnexa_construction.license_gate.before_request"]
 
 # user_data_fields = [
 # 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
+# 		"doctype": "{}",
+# 		"filter_by": "{}",
+# 		"redact_fields": ["{}", "{}"],
 # 		"partial": 1,
 # 	},
 # 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
+# 		"doctype": "{}",
+# 		"filter_by": "{}",
 # 		"partial": 1,
 # 	},
 # 	{
-# 		"doctype": "{doctype_3}",
+# 		"doctype": "{}",
 # 		"strict": False,
 # 	},
 # 	{
-# 		"doctype": "{doctype_4}"
+# 		"doctype": "{}"
 # 	}
 # ]
 

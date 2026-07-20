@@ -43,8 +43,7 @@ def earned_value_from_boq(project_contract: str | None) -> float:
 		filters={
 			"project_contract": project_contract,
 			"is_group": 0,
-			"docstatus": ["<", 2],
-		},
+			"docstatus": ["<", 2]},
 		fields=["planned_cost", "completion_percent"],
 	)
 	return sum(flt(row.get("planned_cost")) * flt(row.get("completion_percent")) / 100.0 for row in rows)
@@ -57,13 +56,15 @@ def earned_value_from_qs(project_contract: str | None) -> float:
 	total = 0.0
 	sheets = frappe.get_all(
 		"Construction QS Measurement Sheet",
-		filters={"project_contract": project_contract, "docstatus": 1},
+		filters={"project_contract": project_contract, "docstatus": 1
+	},
 		pluck="name",
 	)
 	for sheet in sheets:
 		for row in frappe.get_all(
 			"Construction QS Measurement Line",
-			filters={"parent": sheet},
+			filters={"parent": sheet
+	},
 			fields=["boq_item", "measured_qty"],
 		):
 			if not row.boq_item:
@@ -83,8 +84,7 @@ def schedule_percent_from_wbs(project_contract: str | None, as_of_date=None) -> 
 			"project_contract": project_contract,
 			"is_group": 0,
 			"pm_wbs_task": ["is", "set"],
-			"docstatus": ["<", 2],
-		},
+			"docstatus": ["<", 2]},
 		fields=["planned_cost", "pm_wbs_task"],
 	)
 	if not rows:
@@ -152,7 +152,7 @@ def _schedule_health_thresholds() -> dict:
 		"delayed_spi": 0.90,
 		"delayed_sv_days": 14,
 		"at_risk_spi": 1.00,
-		"at_risk_sv_days": 0,
+		"at_risk_sv_days": 0
 	}
 	if not frappe.db.exists("DocType", "Construction Integration Settings"):
 		return defaults
@@ -187,7 +187,7 @@ def _schedule_health_thresholds() -> dict:
 		"delayed_spi": delayed_spi or defaults["delayed_spi"],
 		"delayed_sv_days": delayed_sv_days or defaults["delayed_sv_days"],
 		"at_risk_spi": at_risk_spi or defaults["at_risk_spi"],
-		"at_risk_sv_days": at_risk_sv_days or defaults["at_risk_sv_days"],
+		"at_risk_sv_days": at_risk_sv_days or defaults["at_risk_sv_days"]
 	}
 
 
@@ -278,7 +278,7 @@ def evm_snapshot(project_contract: str, as_of_date=None) -> dict:
 		"planned_completion": planned_completion,
 		"forecast_finish_date": forecast_finish,
 		"schedule_variance_days": schedule_variance_days,
-		"schedule_health_status": schedule_health,
+		"schedule_health_status": schedule_health
 	}
 
 

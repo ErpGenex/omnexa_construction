@@ -26,13 +26,14 @@ def get_contract_ld_rates(project_contract: str) -> dict:
 		as_dict=True,
 	)
 	if not row:
-		return {"ld_per_day": 0.0, "ld_cap": 0.0, "contract_value": 0.0}
+		return {"ld_per_day": 0.0, "ld_cap": 0.0, "contract_value": 0.0
+	}
 	contract_value = flt(row.revised_contract_value) or flt(row.contract_value)
 	cap_pct = flt(row.liquidated_damages_cap_percent) or 10.0
 	return {
 		"ld_per_day": flt(row.liquidated_damages_per_day),
 		"ld_cap": contract_value * cap_pct / 100.0 if contract_value else 0.0,
-		"contract_value": contract_value,
+		"contract_value": contract_value
 	}
 
 
@@ -56,14 +57,14 @@ def calc_ld_amount(
 		"ld_per_day": rates["ld_per_day"],
 		"ld_cap": cap,
 		"raw_amount": raw,
-		"ld_amount": max(0.0, amount),
-	}
+		"ld_amount": max(0.0, amount)}
 
 
 def sum_fines_for_contract(project_contract: str, to_date=None) -> float:
 	if not frappe.db.exists("DocType", "Construction Fines Statement"):
 		return 0.0
-	filters = {"project_contract": project_contract, "docstatus": 1}
+	filters = {"project_contract": project_contract, "docstatus": 1
+	}
 	if to_date:
 		filters["to_date"] = ["<=", to_date]
 	names = frappe.get_all("Construction Fines Statement", filters=filters, pluck="name")
@@ -76,7 +77,8 @@ def sum_fines_for_contract(project_contract: str, to_date=None) -> float:
 			FROM `tabConstruction Fines Statement`
 			WHERE name IN %(names)s
 			""",
-			{"names": names},
+			{"names": names
+	},
 		)[0][0]
 	)
 
@@ -84,7 +86,8 @@ def sum_fines_for_contract(project_contract: str, to_date=None) -> float:
 def sum_delay_ld_for_contract(project_contract: str, *, contractor_attributable_only: bool = True) -> float:
 	if not frappe.db.exists("DocType", "Construction Work Delay Notice"):
 		return 0.0
-	filters = {"project_contract": project_contract, "docstatus": 1}
+	filters = {"project_contract": project_contract, "docstatus": 1
+	}
 	if contractor_attributable_only:
 		filters["reason_contractor"] = 1
 	total = 0.0
@@ -108,16 +111,18 @@ def build_ipc_deduction_summary(ipc_doc) -> dict:
 	suggested_penalty = fines + delay_ld
 	notes = []
 	if fines:
-		notes.append(_("Fines statements: {0}").format(frappe.format(fines, {"fieldtype": "Currency"})))
+		notes.append(_("Fines statements: {0}").format(frappe.format(fines, {"fieldtype": "Currency"
+	})))
 	if delay_ld:
-		notes.append(_("Contractor delay LD (submitted notices): {0}").format(frappe.format(delay_ld, {"fieldtype": "Currency"})))
+		notes.append(_("Contractor delay LD (submitted notices): {0}").format(frappe.format(delay_ld, {"fieldtype": "Currency"
+	})))
 	return {
 		"fines_total": fines,
 		"delay_ld_total": delay_ld,
 		"suggested_penalty": suggested_penalty,
 		"manual_penalty": manual_penalty,
 		"other_deductions": other,
-		"ld_calculation_notes": "\n".join(notes) if notes else "",
+		"ld_calculation_notes": "\n".join(notes) if notes else ""
 	}
 
 

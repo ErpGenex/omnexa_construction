@@ -41,29 +41,30 @@ def preview_primavera_xer_import(file_url: str) -> dict:
 				"description": "",
 				"start_date": start,
 				"end_date": end,
-				"contract_value": 0,
-			}
+				"contract_value": 0
+	}
 		]
 
 	preview = []
 	for project in projects:
 		proj_id = project["proj_id"]
 		tasks = extract_xer_tasks(sections, None if proj_id == "XER-IMPORT" else proj_id)
-		already = frappe.db.exists("Project Contract", {"p6_project_id": proj_id}) if proj_id != "XER-IMPORT" else None
+		already = frappe.db.exists("Project Contract", {"p6_project_id": proj_id
+	}) if proj_id != "XER-IMPORT" else None
 		preview.append(
 			{
 				**project,
 				"start_date": str(project["start_date"]) if project.get("start_date") else None,
 				"end_date": str(project["end_date"]) if project.get("end_date") else None,
 				"task_count": len(tasks),
-				"already_imported": already,
-			}
+				"already_imported": already
+	}
 		)
 
 	return {
 		"projects": preview,
 		"total_projects": len(preview),
-		"total_tasks": sum(p["task_count"] for p in preview),
+		"total_tasks": sum(p["task_count"] for p in preview)
 	}
 
 
@@ -97,8 +98,8 @@ def import_primavera_xer_projects(
 				"description": "",
 				"start_date": start,
 				"end_date": end,
-				"contract_value": 0,
-			}
+				"contract_value": 0
+	}
 		]
 
 	selected_ids: set[str] | None = None
@@ -114,15 +115,16 @@ def import_primavera_xer_projects(
 				continue
 
 			if skip_existing and proj_id != "XER-IMPORT":
-				existing = frappe.db.get_value("Project Contract", {"p6_project_id": proj_id}, "name")
+				existing = frappe.db.get_value("Project Contract", {"p6_project_id": proj_id
+	}, "name")
 				if existing:
 					results.append(
 						{
 							"proj_id": proj_id,
 							"status": "skipped",
 							"project_contract": existing,
-							"message": _("Already imported"),
-						}
+							"message": _("Already imported")
+	}
 					)
 					continue
 
@@ -147,8 +149,8 @@ def import_primavera_xer_projects(
 					{
 						"proj_id": proj_id,
 						"status": "failed",
-						"message": str(exc),
-					}
+						"message": str(exc)
+	}
 				)
 	finally:
 		frappe.flags.in_primavera_xer_import = False
@@ -156,7 +158,7 @@ def import_primavera_xer_projects(
 	imported = sum(1 for r in results if r.get("status") == "success")
 	return {
 		"imported": imported,
-		"results": results,
+		"results": results
 	}
 
 
@@ -187,8 +189,8 @@ def _import_single_project(
 			"contract_value": project.get("contract_value") or 0,
 			"planned_start": start,
 			"planned_completion": end,
-			"site_location": (project.get("description") or "")[:140] or None,
-		}
+			"site_location": (project.get("description") or "")[:140] or None
+	}
 	)
 	if frappe.get_meta("Project Contract").has_field("p6_project_id") and proj_id != "XER-IMPORT":
 		contract.p6_project_id = proj_id
@@ -209,8 +211,8 @@ def _import_single_project(
 			"is_active": 1,
 			"company": company,
 			"branch": branch,
-			"notes": _("Imported from Primavera XER on {0}").format(today()),
-		}
+			"notes": _("Imported from Primavera XER on {0}").format(today())
+	}
 	)
 	for task in tasks:
 		row = {
@@ -219,8 +221,8 @@ def _import_single_project(
 			"end_date": task["end_date"],
 			"duration_days": task["duration_days"],
 			"is_milestone": task.get("is_milestone") or 0,
-			"cost_code": task.get("cost_code"),
-		}
+			"cost_code": task.get("cost_code")
+	}
 		meta = frappe.get_meta("Construction Schedule Baseline Task")
 		if meta.has_field("predecessor_task") and task.get("predecessor_task"):
 			row["predecessor_task"] = task["predecessor_task"]
@@ -240,7 +242,7 @@ def _import_single_project(
 		"project_contract": contract.name,
 		"baseline": baseline.name,
 		"tasks_imported": len(tasks),
-		"wbs_tasks_created": wbs_count,
+		"wbs_tasks_created": wbs_count
 	}
 
 
@@ -257,8 +259,8 @@ def _create_pm_wbs_tasks(project_contract: str, company: str, branch: str, tasks
 			"sequence_no": idx,
 			"status": "Planned",
 			"company": company,
-			"branch": branch,
-		}
+			"branch": branch
+	}
 		if meta.has_field("p6_activity_id") and task.get("task_id"):
 			doc["p6_activity_id"] = task["task_id"]
 		if meta.has_field("p6_sync_status"):

@@ -11,7 +11,8 @@ import frappe
 def _ensure_workflow_state(state: str) -> None:
 	if frappe.db.exists("Workflow State", state):
 		return
-	frappe.get_doc({"doctype": "Workflow State", "workflow_state_name": state, "style": "Primary"}).insert(
+	frappe.get_doc({"doctype": "Workflow State", "workflow_state_name": state, "style": "Primary"
+	}).insert(
 		ignore_permissions=True
 	)
 
@@ -19,7 +20,8 @@ def _ensure_workflow_state(state: str) -> None:
 def _ensure_workflow_action(action: str) -> None:
 	if frappe.db.exists("Workflow Action Master", action):
 		return
-	frappe.get_doc({"doctype": "Workflow Action Master", "workflow_action_name": action}).insert(
+	frappe.get_doc({"doctype": "Workflow Action Master", "workflow_action_name": action
+	}).insert(
 		ignore_permissions=True
 	)
 
@@ -30,7 +32,7 @@ def _state(state, doc_status, *, allow_edit="All", update_field=None, update_val
 		"state": state,
 		"doc_status": str(doc_status),
 		"style": style,
-		"allow_edit": allow_edit,
+		"allow_edit": allow_edit
 	}
 	if update_field:
 		row["update_field"] = update_field
@@ -47,7 +49,7 @@ def _transition(state, action, next_state, allowed="Project Manager"):
 		"action": action,
 		"next_state": next_state,
 		"allowed": allowed,
-		"allow_self_approval": 1,
+		"allow_self_approval": 1
 	}
 
 
@@ -68,8 +70,8 @@ def ensure_workflow(workflow_name: str, document_type: str, states: list, transi
 			"workflow_state_field": "workflow_state",
 			"send_email_alert": 0,
 			"states": states,
-			"transitions": transitions,
-		}
+			"transitions": transitions
+	}
 	)
 	wf.insert(ignore_permissions=True)
 

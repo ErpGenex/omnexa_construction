@@ -24,8 +24,8 @@ class TestBIMIFCViewer(FrappeTestCase):
 				"model_name": "Test IFC",
 				"model_format": "IFC",
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		).insert(ignore_permissions=True)
 		out = create_bim_issue_from_viewer(contract, model.name, "Clash at Level 2")
 		self.assertTrue(out.get("ok"))

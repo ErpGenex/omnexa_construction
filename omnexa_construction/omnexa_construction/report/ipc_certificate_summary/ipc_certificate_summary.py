@@ -61,10 +61,16 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("Project Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 160},
-		{"label": _("Branch"), "fieldname": "branch", "fieldtype": "Link", "options": "Branch", "width": 130},
-		{"label": _("Period (YYYY-MM)"), "fieldname": "period", "fieldtype": "Data", "width": 110},
-		{"label": _("Certificates"), "fieldname": "certificate_count", "fieldtype": "Int", "width": 100},
-		{"label": _("Period gross"), "fieldname": "total_gross", "fieldtype": "Currency", "width": 130},
-		{"label": _("Period net"), "fieldname": "total_net", "fieldtype": "Currency", "width": 130},
+		{"label": _("Project Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 160
+	},
+		{"label": _("Branch"), "fieldname": "branch", "fieldtype": "Link", "options": "Branch", "width": 130
+	},
+		{"label": _("Period (YYYY-MM)"), "fieldname": "period", "fieldtype": "Data", "width": 110
+	},
+		{"label": _("Certificates"), "fieldname": "certificate_count", "fieldtype": "Int", "width": 100
+	},
+		{"label": _("Period gross"), "fieldname": "total_gross", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Period net"), "fieldname": "total_net", "fieldtype": "Currency", "width": 130
+	},
 	]

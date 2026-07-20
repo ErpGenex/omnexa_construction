@@ -42,8 +42,8 @@ def execute():
 					"fieldtype": "Table",
 					"options": "Construction Change Order BOQ Line",
 					"insert_after": "cost_impact",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "boq_applied",
 					"label": "BOQ Applied",
@@ -51,8 +51,8 @@ def execute():
 					"read_only": 1,
 					"default": "0",
 					"insert_after": "boq_lines",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction Document Transmittal": [
 				{
@@ -61,8 +61,8 @@ def execute():
 					"fieldtype": "Table",
 					"options": "Construction Document Transmittal Recipient",
 					"insert_after": "recipient_notes",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction CDE Document": [
 				{
@@ -71,8 +71,8 @@ def execute():
 					"fieldtype": "Link",
 					"options": "Construction MIDP",
 					"insert_after": "information_container",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Project Contract": [
 				{
@@ -81,8 +81,8 @@ def execute():
 					"fieldtype": "Data",
 					"description": "External risk register reference (PM module)",
 					"insert_after": "nec_programme_status",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Subcontract Work Order": [
 				{
@@ -91,10 +91,9 @@ def execute():
 					"fieldtype": "Check",
 					"default": "0",
 					"insert_after": "scope_of_work",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 
@@ -108,17 +107,16 @@ def execute():
 						"label": "Procore Project ID",
 						"fieldtype": "Data",
 						"insert_after": "webhook_secret",
-						"module": MODULE,
-					},
+						"module": MODULE
+	},
 					{
 						"fieldname": "aconex_project_id",
 						"label": "Aconex Project ID",
 						"fieldtype": "Data",
 						"insert_after": "procore_project_id",
-						"module": MODULE,
-					},
-				],
-			},
+						"module": MODULE
+	},
+				]},
 			update=True,
 		)
 

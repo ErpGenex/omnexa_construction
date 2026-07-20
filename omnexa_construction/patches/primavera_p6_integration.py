@@ -144,14 +144,16 @@ def execute():
 	
 	# Add custom fields
 	for field in project_contract_fields:
-		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]
+	}):
 			frappe.get_doc({
 				"doctype": "Custom Field",
 				**field
 			}).insert()
 	
 	for field in task_fields:
-		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]
+	}):
 			frappe.get_doc({
 				"doctype": "Custom Field",
 				**field
@@ -160,7 +162,8 @@ def execute():
 	for field in resource_fields:
 		if not frappe.db.exists("DocType", field["dt"]):
 			continue
-		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+		if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]
+	}):
 			frappe.get_doc({
 				"doctype": "Custom Field",
 				**field

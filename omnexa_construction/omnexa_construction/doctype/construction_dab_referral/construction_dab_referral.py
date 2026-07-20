@@ -8,6 +8,7 @@ class ConstructionDABReferral(Document):
 			frappe.db.set_value(
 				"Construction Dispute Case",
 				self.dispute_case,
-				{"status": "DAB Referral"},
+				{"status": "DAB Referral"
+	},
 				update_modified=True,
 			)

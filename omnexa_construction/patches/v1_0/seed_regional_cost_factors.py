@@ -22,7 +22,8 @@ def execute():
 	for company in frappe.get_all("Company", pluck="name"):
 		default_set = False
 		for code, name, factor, is_default in SEEDS:
-			if frappe.db.exists("Regional Cost Factor", {"region_code": code, "company": company}):
+			if frappe.db.exists("Regional Cost Factor", {"region_code": code, "company": company
+	}):
 				continue
 			use_default = is_default and not default_set
 			frappe.get_doc(
@@ -33,8 +34,8 @@ def execute():
 					"company": company,
 					"cost_factor": factor,
 					"is_default": use_default,
-					"disabled": 0,
-				}
+					"disabled": 0
+	}
 			).insert(ignore_permissions=True)
 			if use_default:
 				default_set = True

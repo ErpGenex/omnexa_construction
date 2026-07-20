@@ -8,7 +8,8 @@ from __future__ import annotations
 import frappe
 from frappe.utils import add_days, getdate
 
-SLA_DAYS = {"Minor": 14, "Major": 7, "Critical": 3}
+SLA_DAYS = {"Minor": 14, "Major": 7, "Critical": 3
+	}
 
 
 def apply_ncr_sla(doc, method=None) -> None:

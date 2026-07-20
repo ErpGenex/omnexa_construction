@@ -18,8 +18,8 @@ class TestScheduleGantt(FrappeTestCase):
 			"planned_start": "2026-01-01",
 			"planned_completion": "2026-12-31",
 			"baseline_name": "BL1",
-			"docstatus": 1,
-		}
+			"docstatus": 1
+	}
 		mock_get_all.return_value = [
 			{
 				"task_name": "Concrete",
@@ -29,8 +29,8 @@ class TestScheduleGantt(FrappeTestCase):
 				"boq_item": "BOQ-1",
 				"cost_code": "03.10",
 				"progress_percent": 40,
-				"is_milestone": 0,
-			}
+				"is_milestone": 0
+	}
 		]
 
 		with patch("omnexa_construction.schedule_gantt.frappe.db.get_value", return_value=55):
@@ -48,8 +48,8 @@ class TestScheduleGantt(FrappeTestCase):
 			"planned_start": "2026-01-01",
 			"planned_completion": "2026-12-31",
 			"baseline_name": "Draft",
-			"docstatus": 0,
-		}
+			"docstatus": 0
+	}
 		mock_get_all.return_value = [
 			{
 				"task_name": "Excavation",
@@ -59,8 +59,8 @@ class TestScheduleGantt(FrappeTestCase):
 				"boq_item": None,
 				"cost_code": "03.10",
 				"progress_percent": 10,
-				"is_milestone": 0,
-			}
+				"is_milestone": 0
+	}
 		]
 
 		out = get_schedule_gantt_data("CTR-DRAFT")

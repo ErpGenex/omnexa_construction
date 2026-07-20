@@ -61,11 +61,18 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("IPC"), "fieldname": "name", "fieldtype": "Link", "options": "IPC Certificate", "width": 120},
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130},
-		{"label": _("Date"), "fieldname": "ipc_date", "fieldtype": "Date", "width": 100},
-		{"label": _("Currency"), "fieldname": "currency", "fieldtype": "Data", "width": 70},
-		{"label": _("Net (FCY)"), "fieldname": "net_amount", "fieldtype": "Currency", "width": 110},
-		{"label": _("Rate"), "fieldname": "exchange_rate", "fieldtype": "Float", "width": 80},
-		{"label": _("Base Amount"), "fieldname": "base_amount", "fieldtype": "Currency", "width": 110},
+		{"label": _("IPC"), "fieldname": "name", "fieldtype": "Link", "options": "IPC Certificate", "width": 120
+	},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130
+	},
+		{"label": _("Date"), "fieldname": "ipc_date", "fieldtype": "Date", "width": 100
+	},
+		{"label": _("Currency"), "fieldname": "currency", "fieldtype": "Data", "width": 70
+	},
+		{"label": _("Net (FCY)"), "fieldname": "net_amount", "fieldtype": "Currency", "width": 110
+	},
+		{"label": _("Rate"), "fieldname": "exchange_rate", "fieldtype": "Float", "width": 80
+	},
+		{"label": _("Base Amount"), "fieldname": "base_amount", "fieldtype": "Currency", "width": 110
+	},
 	]

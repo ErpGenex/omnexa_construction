@@ -9,7 +9,8 @@ def _resolve_schedule_baseline(project_contract: str) -> dict | None:
 	"""Pick baseline for Gantt: submitted active → submitted → active draft → draft with tasks."""
 	active_submitted = frappe.db.get_value(
 		"Construction Schedule Baseline",
-		{"project_contract": project_contract, "is_active": 1, "docstatus": 1},
+		{"project_contract": project_contract, "is_active": 1, "docstatus": 1
+	},
 		["name", "planned_start", "planned_completion", "baseline_name", "docstatus"],
 		as_dict=True,
 	)
@@ -18,7 +19,8 @@ def _resolve_schedule_baseline(project_contract: str) -> dict | None:
 
 	submitted = frappe.get_all(
 		"Construction Schedule Baseline",
-		filters={"project_contract": project_contract, "docstatus": 1},
+		filters={"project_contract": project_contract, "docstatus": 1
+	},
 		fields=["name", "planned_start", "planned_completion", "baseline_name", "docstatus"],
 		order_by="modified desc",
 		limit_page_length=1,
@@ -28,7 +30,8 @@ def _resolve_schedule_baseline(project_contract: str) -> dict | None:
 
 	active_draft = frappe.db.get_value(
 		"Construction Schedule Baseline",
-		{"project_contract": project_contract, "is_active": 1, "docstatus": 0},
+		{"project_contract": project_contract, "is_active": 1, "docstatus": 0
+	},
 		["name", "planned_start", "planned_completion", "baseline_name", "docstatus"],
 		as_dict=True,
 	)
@@ -43,7 +46,8 @@ def _resolve_schedule_baseline(project_contract: str) -> dict | None:
 		limit_page_length=20,
 	)
 	for row in candidates:
-		if frappe.db.count("Construction Schedule Baseline Task", {"parent": row.name}):
+		if frappe.db.count("Construction Schedule Baseline Task", {"parent": row.name
+	}):
 			return row
 	return candidates[0] if candidates else None
 
@@ -75,7 +79,8 @@ def get_schedule_gantt_data(project_contract: str) -> dict:
 			fields.append("predecessor_task")
 		rows = frappe.get_all(
 			"Construction Schedule Baseline Task",
-			filters={"parent": baseline_name},
+			filters={"parent": baseline_name
+	},
 			fields=fields,
 			order_by="start_date asc",
 			limit_page_length=500,
@@ -96,8 +101,8 @@ def get_schedule_gantt_data(project_contract: str) -> dict:
 					"progress_percent": progress,
 					"boq_item": boq_item,
 					"cost_code": row.get("cost_code"),
-					"is_milestone": row.get("is_milestone"),
-				}
+					"is_milestone": row.get("is_milestone")
+	}
 			)
 
 		from omnexa_construction.schedule_critical_path import compute_critical_path
@@ -121,8 +126,8 @@ def get_schedule_gantt_data(project_contract: str) -> dict:
 					"is_milestone": row.get("is_milestone"),
 					"dependencies": row.get("predecessor_task") or "",
 					"is_critical": row.get("task_name") in critical_names,
-					"custom_class": row.get("task_name") in critical_names and "bar-critical" or "",
-				}
+					"custom_class": row.get("task_name") in critical_names and "bar-critical" or ""
+	}
 			)
 
 	return {
@@ -130,7 +135,7 @@ def get_schedule_gantt_data(project_contract: str) -> dict:
 		"baseline": baseline,
 		"baseline_is_draft": bool(baseline and int(baseline.get("docstatus") or 0) == 0),
 		"tasks": tasks,
-		"critical_path": list(critical_names),
+		"critical_path": list(critical_names)
 	}
 
 
@@ -153,7 +158,8 @@ def load_baseline_tasks_from_boq(baseline_name: str) -> dict:
 		limit_page_length=200,
 	)
 	if not boq_lines:
-		return {"added": 0}
+		return {"added": 0
+	}
 
 	baseline.set("tasks", [])
 	span = max(total_days // len(boq_lines), 1)
@@ -171,9 +177,10 @@ def load_baseline_tasks_from_boq(baseline_name: str) -> dict:
 				"duration_days": date_diff(task_end, task_start) + 1,
 				"boq_item": line.name,
 				"cost_code": line.cost_code,
-				"progress_percent": flt(line.completion_percent),
-			},
+				"progress_percent": flt(line.completion_percent)
+	},
 		)
 	baseline.flags.ignore_validate = True
 	baseline.save(ignore_permissions=True)
-	return {"added": len(boq_lines)}
+	return {"added": len(boq_lines)
+	}

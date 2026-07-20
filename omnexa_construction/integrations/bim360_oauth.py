@@ -24,7 +24,8 @@ def get_bim360_authorize_url() -> dict:
 		f"?response_type=code&client_id={client_id}&redirect_uri={redirect}&scope=data:read data:write"
 		f"&state={state}"
 	)
-	return {"authorize_url": url}
+	return {"authorize_url": url
+	}
 
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
@@ -56,8 +57,10 @@ def pull_bim360_models(project_contract: str) -> dict:
 		frappe.throw(_("Authorize BIM 360 first."), title=_("BIM 360"))
 	models = frappe.get_all(
 		"Construction BIM Model Register",
-		filters={"project_contract": project_contract},
+		filters={"project_contract": project_contract
+	},
 		pluck="name",
 	)
 	synced = [sync_bim_model_to_bim360(m)["payload"] for m in models[:20]]
-	return {"synced": len(synced), "models": synced}
+	return {"synced": len(synced), "models": synced
+	}

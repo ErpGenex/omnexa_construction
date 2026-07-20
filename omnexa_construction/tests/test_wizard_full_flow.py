@@ -16,7 +16,8 @@ class TestWizardFullFlow(FrappeTestCase):
 	def setUp(self):
 		super().setUp()
 		self.company = frappe.db.get_value("Company", {}, "name")
-		self.branch = frappe.db.get_value("Branch", {"company": self.company}, "name") if self.company else None
+		self.branch = frappe.db.get_value("Branch", {"company": self.company
+	}, "name") if self.company else None
 		self.customer = frappe.db.get_value("Customer", {}, "name")
 
 	def test_wizard_recovers_from_invalid_company_hint(self):
@@ -44,8 +45,8 @@ class TestWizardFullFlow(FrappeTestCase):
 				"client": self.customer,
 				"contract_title": "Wizard Flow Test",
 				"contract_type": "Turnkey (EPC)",
-				"building_type": "villa",
-			},
+				"building_type": "villa"
+	},
 		)
 		load_building_type_template(setup_name)
 
@@ -58,8 +59,8 @@ class TestWizardFullFlow(FrappeTestCase):
 				"gross_floor_area_m2": 450,
 				"plot_area_m2": 600,
 				"number_of_floors": 2,
-				"unit_count": 1,
-			},
+				"unit_count": 1
+	},
 		)
 		save_wizard_step(
 			setup_name,
@@ -67,8 +68,8 @@ class TestWizardFullFlow(FrappeTestCase):
 			{
 				"retention_percent": 5,
 				"advance_payment_percent": 10,
-				"default_discount_percent": 0,
-			},
+				"default_discount_percent": 0
+	},
 		)
 		out = preview_boq(setup_name, save=1)
 		self.assertGreater(out["line_count"], 0)

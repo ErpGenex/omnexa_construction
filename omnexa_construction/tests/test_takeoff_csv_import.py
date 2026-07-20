@@ -19,8 +19,8 @@ class TestTakeoffCsvImport(FrappeTestCase):
 				"cost_code": "03.10",
 				"item_description": "Concrete Works",
 				"unit_of_measure": "m3",
-				"quantity": 100,
-			}
+				"quantity": 100
+	}
 		],
 	)
 	def test_import_maps_to_existing_boq_item(self, _boq):

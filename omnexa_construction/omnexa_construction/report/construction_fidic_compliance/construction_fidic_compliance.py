@@ -56,13 +56,20 @@ def execute(filters=None):
 
 def _columns(meta=None):
 	cols = [
-		{"label": _("Notice"), "fieldname": "name", "fieldtype": "Link", "options": "Construction FIDIC Notice", "width": 140},
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 160},
-		{"label": _("Type"), "fieldname": "notice_type", "fieldtype": "Data", "width": 120},
-		{"label": _("Notice Date"), "fieldname": "notice_date", "fieldtype": "Date", "width": 100},
-		{"label": _("Due Date"), "fieldname": "response_due_date", "fieldtype": "Date", "width": 100},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90},
+		{"label": _("Notice"), "fieldname": "name", "fieldtype": "Link", "options": "Construction FIDIC Notice", "width": 140
+	},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 160
+	},
+		{"label": _("Type"), "fieldname": "notice_type", "fieldtype": "Data", "width": 120
+	},
+		{"label": _("Notice Date"), "fieldname": "notice_date", "fieldtype": "Date", "width": 100
+	},
+		{"label": _("Due Date"), "fieldname": "response_due_date", "fieldtype": "Date", "width": 100
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90
+	},
 	]
 	if meta and meta.has_field("is_time_barred"):
-		cols.append({"label": _("Time Barred"), "fieldname": "is_time_barred", "fieldtype": "Check", "width": 80})
+		cols.append({"label": _("Time Barred"), "fieldname": "is_time_barred", "fieldtype": "Check", "width": 80
+	})
 	return cols

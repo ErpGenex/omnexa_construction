@@ -45,14 +45,15 @@ def expand_default_boq_details(setup) -> int:
 				"boq_details",
 				{
 					"boq_cost_code": code,
-					"spec_description": f"{row.item_description} — {label}",
+					"spec_description": f"{row.item_description} — {label
+	}",
 					"quantity": qty,
 					"unit_of_measure": row.unit_of_measure,
 					rate_field: money(amount / qty),
 					"ld_per_day": ld_day / 3.0 if ld_day else 0,
 					"ld_cap_days": row.ld_cap_days or 30,
-					"planned_finish": row.planned_finish,
-				},
+					"planned_finish": row.planned_finish
+	},
 			)
 			added += 1
 		existing.add(code)
@@ -112,8 +113,8 @@ def suggest_phases_and_ipc(setup) -> dict:
 				"planned_finish": p_finish,
 				"handover_date": handover,
 				"weight_percent": weight,
-				"boq_cost_prefixes": prefixes,
-			},
+				"boq_cost_prefixes": prefixes
+	},
 		)
 
 	apply_phase_dates_to_boq(setup)
@@ -146,8 +147,9 @@ def suggest_phases_and_ipc(setup) -> dict:
 				"retention_percent": retention,
 				"discount_percent": discount,
 				"advance_recovery": adv_rec,
-				"remarks": _("IPC at handover of phase {0}").format(code),
-			},
+				"remarks": _("IPC at handover of phase {0}").format(code)
+	},
 		)
 
-	return {"phases": len(setup.phases), "ipc_rows": len(setup.ipc_plan)}
+	return {"phases": len(setup.phases), "ipc_rows": len(setup.ipc_plan)
+	}

@@ -35,16 +35,18 @@ def sync_bim_model_to_bim360(bim_model: str) -> dict:
 		"discipline": doc.discipline,
 		"format": doc.model_format,
 		"file": doc.file_attachment,
-		"erp_reference": doc.name,
+		"erp_reference": doc.name
 	}
 	if settings.get("webhook_url") and settings.get("enable_webhooks"):
 		frappe.enqueue(
 			"omnexa_construction.construction_integrations._post_webhook",
 			queue="short",
 			url=settings.webhook_url,
-			payload={**payload, "event": "bim360.sync"},
+			payload={**payload, "event": "bim360.sync"
+	},
 		)
-	return {"ok": True, "payload": payload, "message": _("BIM 360 sync queued (stub / webhook).")}
+	return {"ok": True, "payload": payload, "message": _("BIM 360 sync queued (stub / webhook).")
+	}
 
 
 @frappe.whitelist()
@@ -82,8 +84,8 @@ def sync_bim360_bidirectional(project_contract: str) -> dict:
 			"erp_issue": issue.name,
 			"title": issue.title,
 			"status": issue.status,
-			"project_contract": project_contract,
-		}
+			"project_contract": project_contract
+	}
 		if settings.get("webhook_url") and settings.get("enable_webhooks"):
 			frappe.enqueue(
 				"omnexa_construction.construction_integrations._post_webhook",
@@ -111,7 +113,7 @@ def sync_bim360_bidirectional(project_contract: str) -> dict:
 		"pushed_models": pushed_models,
 		"pushed_issues": pushed_issues,
 		"pulled_updates": pulled_updates,
-		"message": _("BIM 360 two-way sync completed."),
+		"message": _("BIM 360 two-way sync completed.")
 	}
 
 
@@ -126,6 +128,6 @@ def list_bim360_projects() -> list[dict]:
 			"id": settings.bim360_project_id,
 			"hub_id": settings.get("bim360_hub_id"),
 			"name": settings.get("bim360_project_name") or settings.bim360_project_id,
-			"source": "configured",
-		}
+			"source": "configured"
+	}
 	]

@@ -29,12 +29,14 @@ def execute():
 		if frappe.db.exists("Report", link_to):
 			ws.append(
 				"shortcuts",
-				{"type": "Report", "link_to": link_to, "label": label, "color": "Grey"},
+				{"type": "Report", "link_to": link_to, "label": label, "color": "Grey"
+	},
 			)
 		elif frappe.db.exists("DocType", link_to):
 			ws.append(
 				"shortcuts",
-				{"type": "DocType", "link_to": link_to, "label": label, "color": "Blue"},
+				{"type": "DocType", "link_to": link_to, "label": label, "color": "Blue"
+	},
 			)
 		existing.add(link_to)
 	ws.save(ignore_permissions=True)

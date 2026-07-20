@@ -23,8 +23,8 @@ class TestBoqCommitment(FrappeTestCase):
 							"fieldtype": "Currency",
 							"read_only": 1,
 							"insert_after": "actual_cost",
-							"module": "Omnexa Construction",
-						}
+							"module": "Omnexa Construction"
+	}
 					]
 				},
 				update=True,

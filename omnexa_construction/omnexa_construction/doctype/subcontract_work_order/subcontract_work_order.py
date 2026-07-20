@@ -12,7 +12,8 @@ class SubcontractWorkOrder(Document):
 	def validate(self):
 		if self.name and frappe.db.exists(
 			"Subcontract Payment Certificate",
-			{"subcontract_work_order": self.name, "docstatus": 1},
+			{"subcontract_work_order": self.name, "docstatus": 1
+	},
 		):
 			certified = subcontract_certified_total(self.name)
 			paid = subcontract_paid_total(self.name)

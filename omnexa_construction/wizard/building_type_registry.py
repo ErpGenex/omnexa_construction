@@ -43,13 +43,14 @@ def sync_building_type_select_options() -> dict:
 					"fieldname": "building_type",
 					"property": "options",
 					"property_type": "Text",
-					"value": options,
-				},
+					"value": options
+	},
 				ignore_validate=True,
 			)
 		updated.append(dt)
 		frappe.clear_cache(doctype=dt)
-	return {"options_count": len(BUILDING_TYPE_META), "doctypes": updated}
+	return {"options_count": len(BUILDING_TYPE_META), "doctypes": updated
+	}
 
 
 def segment_for_building_type(code: str | None) -> str:
@@ -67,7 +68,7 @@ def list_building_types_for_api() -> list[dict]:
 				"label_ar": meta.get("label_ar", code),
 				"segment": meta.get("segment", "Other"),
 				"template_code": meta.get("template_code"),
-				"has_template": bool(meta.get("template_code")),
-			}
+				"has_template": bool(meta.get("template_code"))
+	}
 		)
 	return out

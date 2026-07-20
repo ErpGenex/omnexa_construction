@@ -14,7 +14,8 @@ from omnexa_construction.utils.cbs_boq import cbs_boq_summary
 class TestCbsBoq(FrappeTestCase):
 	@patch(
 		"omnexa_construction.omnexa_construction.doctype.construction_cbs_element.construction_cbs_element.frappe.get_all",
-		return_value=[{"name": "CBS-03", "cost_code_prefix": "03"}],
+		return_value=[{"name": "CBS-03", "cost_code_prefix": "03"
+	}],
 	)
 	def test_suggest_cbs_from_prefix(self, _rows):
 		self.assertEqual(suggest_cbs_for_cost_code("03.10.20"), "CBS-03")
@@ -22,8 +23,10 @@ class TestCbsBoq(FrappeTestCase):
 	@patch(
 		"omnexa_construction.utils.cbs_boq.frappe.get_all",
 		return_value=[
-			{"cbs_element": "CBS-03", "planned_cost": 100, "actual_cost": 80, "cost_code": "03.10"},
-			{"cbs_element": None, "planned_cost": 50, "actual_cost": 40, "cost_code": "03.20"},
+			{"cbs_element": "CBS-03", "planned_cost": 100, "actual_cost": 80, "cost_code": "03.10"
+	},
+			{"cbs_element": None, "planned_cost": 50, "actual_cost": 40, "cost_code": "03.20"
+	},
 		],
 	)
 	@patch(

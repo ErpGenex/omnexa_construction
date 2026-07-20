@@ -54,8 +54,8 @@ def _aspect_rows(filters, as_of):
 			{
 				**row,
 				"record_type": "Environmental Aspect",
-				"overdue_review": 0,
-			}
+				"overdue_review": 0
+	}
 		)
 	return out
 
@@ -86,17 +86,26 @@ def _waste_rows(filters, as_of):
 		filters,
 		as_dict=True,
 	)
-	return [{**r, "record_type": "Waste Log", "impact_level": "", "overdue_review": 0} for r in rows]
+	return [{**r, "record_type": "Waste Log", "impact_level": "", "overdue_review": 0
+	} for r in rows]
 
 
 def _columns():
 	return [
-		{"label": _("Type"), "fieldname": "record_type", "fieldtype": "Data", "width": 140},
-		{"label": _("Record"), "fieldname": "record", "fieldtype": "Data", "width": 120},
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130},
-		{"label": _("Aspect / Waste"), "fieldname": "aspect", "fieldtype": "Data", "width": 140},
-		{"label": _("Impact"), "fieldname": "impact_level", "fieldtype": "Data", "width": 90},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100},
-		{"label": _("Review / Log Date"), "fieldname": "review_date", "fieldtype": "Date", "width": 110},
-		{"label": _("Overdue"), "fieldname": "overdue_review", "fieldtype": "Check", "width": 70},
+		{"label": _("Type"), "fieldname": "record_type", "fieldtype": "Data", "width": 140
+	},
+		{"label": _("Record"), "fieldname": "record", "fieldtype": "Data", "width": 120
+	},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130
+	},
+		{"label": _("Aspect / Waste"), "fieldname": "aspect", "fieldtype": "Data", "width": 140
+	},
+		{"label": _("Impact"), "fieldname": "impact_level", "fieldtype": "Data", "width": 90
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 100
+	},
+		{"label": _("Review / Log Date"), "fieldname": "review_date", "fieldtype": "Date", "width": 110
+	},
+		{"label": _("Overdue"), "fieldname": "overdue_review", "fieldtype": "Check", "width": 70
+	},
 	]

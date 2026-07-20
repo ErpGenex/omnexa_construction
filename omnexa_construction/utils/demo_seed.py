@@ -46,7 +46,7 @@ _BASE_PROJECT_SPECS: list[dict] = [
 		"contract_type": "Cost Plus",
 		"segment": "Industrial EPC",
 		"governing": "FIDIC 2017 Yellow Book (M&E Design-Build)",
-		"site": "B10 Industrial Zone",
+		"site": "B10 Industrial Zone"
 	},
 	{
 		"code": "05",
@@ -56,26 +56,40 @@ _BASE_PROJECT_SPECS: list[dict] = [
 		"contract_type": "Unit Price",
 		"segment": "Infrastructure",
 		"governing": "FIDIC 2017 Red Book (Building & Engineering)",
-		"site": "Phase 2 network",
+		"site": "Phase 2 network"
 	},
 ]
 
 _EXTRA_PROJECT_SPECS: list[dict] = [
-	{"code": "06", "title_en": "Metro Station — Line 3 Extension", "title_ar": "محطة مترو — امتداد الخط 3", "contract_value": 95_000_000, "contract_type": "Lump Sum", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Attaba interchange"},
-	{"code": "07", "title_en": "Nile Bridge — East Bank Link", "title_ar": "كوبري النيل — الضفة الشرقية", "contract_value": 78_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Rod El Farag corridor"},
-	{"code": "08", "title_en": "Water Treatment Plant — 6th October", "title_ar": "محطة معالجة مياه — 6 أكتوبر", "contract_value": 54_000_000, "contract_type": "Turnkey (EPC)", "segment": "Infrastructure", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "WWTP Zone C"},
-	{"code": "09", "title_en": "132 kV Substation EPC", "title_ar": "محطة كهرباء 132 ك.ف", "contract_value": 41_000_000, "contract_type": "Turnkey (EPC)", "segment": "Industrial EPC", "governing": "FIDIC 2017 Yellow Book (M&E Design-Build)", "site": "Badr City grid node"},
+	{"code": "06", "title_en": "Metro Station — Line 3 Extension", "title_ar": "محطة مترو — امتداد الخط 3", "contract_value": 95_000_000, "contract_type": "Lump Sum", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Attaba interchange"
+	},
+	{"code": "07", "title_en": "Nile Bridge — East Bank Link", "title_ar": "كوبري النيل — الضفة الشرقية", "contract_value": 78_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Rod El Farag corridor"
+	},
+	{"code": "08", "title_en": "Water Treatment Plant — 6th October", "title_ar": "محطة معالجة مياه — 6 أكتوبر", "contract_value": 54_000_000, "contract_type": "Turnkey (EPC)", "segment": "Infrastructure", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "WWTP Zone C"
+	},
+	{"code": "09", "title_en": "132 kV Substation EPC", "title_ar": "محطة كهرباء 132 ك.ف", "contract_value": 41_000_000, "contract_type": "Turnkey (EPC)", "segment": "Industrial EPC", "governing": "FIDIC 2017 Yellow Book (M&E Design-Build)", "site": "Badr City grid node"
+	},
 	{"code": "10", "title_en": "Commercial Mall — Sheikh Zayed", "title_ar": "مول تجاري — الشيخ زايد", "contract_value": 110_000_000, "contract_type": "Lump Sum", "segment": "Buildings", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Plot 44, Arkan"},
-	{"code": "11", "title_en": "Data Center — Smart Village", "title_ar": "مركز بيانات — Smart Village", "contract_value": 67_000_000, "contract_type": "Turnkey (EPC)", "segment": "Industrial EPC", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "Tier III hall build-out"},
-	{"code": "12", "title_en": "Airport Taxiway Rehabilitation", "title_ar": "تأهيل مدارج مطار", "contract_value": 52_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Cairo International — TWY B"},
-	{"code": "13", "title_en": "Social Housing — 3,000 Units", "title_ar": "إسكان اجتماعي — 3000 وحدة", "contract_value": 145_000_000, "contract_type": "Unit Price", "segment": "Buildings", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "New Damietta phases 1–3"},
-	{"code": "14", "title_en": "Refinery Turnaround Package", "title_ar": "حزمة إيقاف تشغيل مصفاة", "contract_value": 88_000_000, "contract_type": "Cost Plus", "segment": "Industrial EPC", "governing": "FIDIC 2017 Yellow Book (M&E Design-Build)", "site": "Mostorod refinery"},
-	{"code": "15", "title_en": "Solar Farm 50 MW", "title_ar": "محطة طاقة شمسية 50 م.و", "contract_value": 73_000_000, "contract_type": "Lump Sum", "segment": "Industrial EPC", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "Benban sector 4"},
-	{"code": "16", "title_en": "Port Berth Extension — East Port Said", "title_ar": "توسعة رصيف ميناء — بورسعيد", "contract_value": 98_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Berth 7 quay wall"},
-	{"code": "17", "title_en": "University Campus Phase 2", "title_ar": "حرم جامعي — المرحلة 2", "contract_value": 56_000_000, "contract_type": "Lump Sum", "segment": "Buildings", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "New Cairo academic zone"},
-	{"code": "18", "title_en": "Hotel & Convention Center", "title_ar": "فندق ومركز مؤتمرات", "contract_value": 132_000_000, "contract_type": "Turnkey (EPC)", "segment": "Buildings", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "North Coast KM 98"},
-	{"code": "19", "title_en": "Railway Electrification Lot 2", "title_ar": "كهربة السكك الحديدية — Lot 2", "contract_value": 64_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Beni Suef–Asyut corridor"},
-	{"code": "20", "title_en": "Wastewater Network Phase 3", "title_ar": "شبكة صرف — المرحلة 3", "contract_value": 47_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "New Administrative Capital utilities"},
+	{"code": "11", "title_en": "Data Center — Smart Village", "title_ar": "مركز بيانات — Smart Village", "contract_value": 67_000_000, "contract_type": "Turnkey (EPC)", "segment": "Industrial EPC", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "Tier III hall build-out"
+	},
+	{"code": "12", "title_en": "Airport Taxiway Rehabilitation", "title_ar": "تأهيل مدارج مطار", "contract_value": 52_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Cairo International — TWY B"
+	},
+	{"code": "13", "title_en": "Social Housing — 3,000 Units", "title_ar": "إسكان اجتماعي — 3000 وحدة", "contract_value": 145_000_000, "contract_type": "Unit Price", "segment": "Buildings", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "New Damietta phases 1–3"
+	},
+	{"code": "14", "title_en": "Refinery Turnaround Package", "title_ar": "حزمة إيقاف تشغيل مصفاة", "contract_value": 88_000_000, "contract_type": "Cost Plus", "segment": "Industrial EPC", "governing": "FIDIC 2017 Yellow Book (M&E Design-Build)", "site": "Mostorod refinery"
+	},
+	{"code": "15", "title_en": "Solar Farm 50 MW", "title_ar": "محطة طاقة شمسية 50 م.و", "contract_value": 73_000_000, "contract_type": "Lump Sum", "segment": "Industrial EPC", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "Benban sector 4"
+	},
+	{"code": "16", "title_en": "Port Berth Extension — East Port Said", "title_ar": "توسعة رصيف ميناء — بورسعيد", "contract_value": 98_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Berth 7 quay wall"
+	},
+	{"code": "17", "title_en": "University Campus Phase 2", "title_ar": "حرم جامعي — المرحلة 2", "contract_value": 56_000_000, "contract_type": "Lump Sum", "segment": "Buildings", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "New Cairo academic zone"
+	},
+	{"code": "18", "title_en": "Hotel & Convention Center", "title_ar": "فندق ومركز مؤتمرات", "contract_value": 132_000_000, "contract_type": "Turnkey (EPC)", "segment": "Buildings", "governing": "FIDIC 2017 Silver Book (EPC/Turnkey)", "site": "North Coast KM 98"
+	},
+	{"code": "19", "title_en": "Railway Electrification Lot 2", "title_ar": "كهربة السكك الحديدية — Lot 2", "contract_value": 64_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "Beni Suef–Asyut corridor"
+	},
+	{"code": "20", "title_en": "Wastewater Network Phase 3", "title_ar": "شبكة صرف — المرحلة 3", "contract_value": 47_000_000, "contract_type": "Unit Price", "segment": "Infrastructure", "governing": "FIDIC 2017 Red Book (Building & Engineering)", "site": "New Administrative Capital utilities"
+	},
 ]
 
 PROJECT_SPECS: list[dict] = (_BASE_PROJECT_SPECS + _EXTRA_PROJECT_SPECS)[:PROJECT_COUNT]
@@ -141,9 +155,11 @@ def _assert_admin() -> None:
 
 
 def _resolve_branch(company: str, branch: str | None) -> str:
-	if branch and frappe.db.exists("Branch", {"name": branch, "company": company}):
+	if branch and frappe.db.exists("Branch", {"name": branch, "company": company
+	}):
 		return branch
-	found = frappe.db.get_value("Branch", {"company": company}, "name", order_by="creation asc")
+	found = frappe.db.get_value("Branch", {"company": company
+	}, "name", order_by="creation asc")
 	if not found:
 		frappe.throw(_("No branch found for company {0}. Create a branch first.").format(company))
 	return found
@@ -174,26 +190,31 @@ def _contract_status(idx: int) -> str:
 
 
 def _ensure_customer(company: str, name: str, display: str) -> str:
-	existing = frappe.db.get_value("Customer", {"customer_name": name, "company": company}, "name")
+	existing = frappe.db.get_value("Customer", {"customer_name": name, "company": company
+	}, "name")
 	if existing:
 		return existing
-	doc = frappe.get_doc({"doctype": "Customer", "customer_name": name, "company": company})
+	doc = frappe.get_doc({"doctype": "Customer", "customer_name": name, "company": company
+	})
 	doc.insert(ignore_permissions=True)
 	return doc.name
 
 
 def _ensure_supplier(company: str, name: str) -> str:
-	existing = frappe.db.get_value("Supplier", {"supplier_name": name, "company": company}, "name")
+	existing = frappe.db.get_value("Supplier", {"supplier_name": name, "company": company
+	}, "name")
 	if existing:
 		return existing
-	doc = frappe.get_doc({"doctype": "Supplier", "supplier_name": name, "company": company})
+	doc = frappe.get_doc({"doctype": "Supplier", "supplier_name": name, "company": company
+	})
 	doc.insert(ignore_permissions=True)
 	return doc.name
 
 
 def _ensure_uom(uom_name: str) -> None:
 	if uom_name and not frappe.db.exists("UOM", uom_name):
-		frappe.get_doc({"doctype": "UOM", "uom_name": uom_name}).insert(ignore_permissions=True)
+		frappe.get_doc({"doctype": "UOM", "uom_name": uom_name
+	}).insert(ignore_permissions=True)
 
 
 def _item_has_arabic_name_field() -> bool:
@@ -212,7 +233,8 @@ def _ensure_construction_material_catalog(company: str) -> list[str]:
 	for suffix, name_en, name_ar, uom, product_type, classification in CONSTRUCTION_MATERIAL_CATALOG:
 		_ensure_uom(uom)
 		code = f"{DEMO_MARKER}{suffix}"
-		existing = frappe.db.get_value("Item", {"item_code": code, "company": company}, "name")
+		existing = frappe.db.get_value("Item", {"item_code": code, "company": company
+	}, "name")
 		if existing:
 			if has_ar:
 				frappe.db.set_value("Item", existing, "item_name_ar", name_ar, update_modified=False)
@@ -228,8 +250,8 @@ def _ensure_construction_material_catalog(company: str) -> list[str]:
 			"is_stock_item": 1,
 			"is_purchase_item": 1,
 			"is_sales_item": 0,
-			"classification_code": classification,
-		}
+			"classification_code": classification
+	}
 		if has_ar:
 			payload["item_name_ar"] = name_ar
 		item = frappe.get_doc(payload)
@@ -240,7 +262,8 @@ def _ensure_construction_material_catalog(company: str) -> list[str]:
 
 def _delete_demo_material_items(company: str, dry_run: bool) -> dict:
 	if not frappe.db.exists("DocType", "Item"):
-		return {"doctype": "Item", "matched": 0, "cancelled": 0, "deleted": 0}
+		return {"doctype": "Item", "matched": 0, "cancelled": 0, "deleted": 0
+	}
 	return _delete_branch_docs(
 		"Item",
 		{"company": company, "item_code": ["like", f"{DEMO_MARKER}MAT-%"]},
@@ -254,7 +277,8 @@ def _contract_title(spec: dict) -> str:
 
 def _already_seeded(company: str, branch: str | None = None) -> bool:
 	title = _contract_title(PROJECT_SPECS[0])
-	filters: dict = {"company": company, "contract_title": title}
+	filters: dict = {"company": company, "contract_title": title
+	}
 	if branch:
 		filters["branch"] = branch
 	return bool(frappe.db.exists("Project Contract", filters))
@@ -262,10 +286,12 @@ def _already_seeded(company: str, branch: str | None = None) -> bool:
 
 def _delete_branch_docs(doctype: str, filters: dict, dry_run: bool) -> dict:
 	if not frappe.db.exists("DocType", doctype):
-		return {"doctype": doctype, "matched": 0, "cancelled": 0, "deleted": 0}
+		return {"doctype": doctype, "matched": 0, "cancelled": 0, "deleted": 0
+	}
 	names = frappe.get_all(doctype, filters=filters, pluck="name", limit=10000)
 	if dry_run:
-		return {"doctype": doctype, "matched": len(names), "cancelled": 0, "deleted": 0}
+		return {"doctype": doctype, "matched": len(names), "cancelled": 0, "deleted": 0
+	}
 	cancelled = 0
 	deleted = 0
 	for name in reversed(names):
@@ -284,12 +310,14 @@ def _delete_branch_docs(doctype: str, filters: dict, dry_run: bool) -> dict:
 			deleted += 1
 		except Exception:
 			pass
-	return {"doctype": doctype, "matched": len(names), "cancelled": cancelled, "deleted": deleted}
+	return {"doctype": doctype, "matched": len(names), "cancelled": cancelled, "deleted": deleted
+	}
 
 
 def _delete_for_contracts(doctype: str, contract_names: list[str], base: dict, dry_run: bool) -> dict:
 	if not contract_names:
-		return {"doctype": doctype, "matched": 0, "cancelled": 0, "deleted": 0}
+		return {"doctype": doctype, "matched": 0, "cancelled": 0, "deleted": 0
+	}
 	return _delete_branch_docs(doctype, {**base, "project_contract": ["in", contract_names]}, dry_run)
 
 
@@ -326,7 +354,8 @@ def reset_construction_demo_for_branch(
 	)
 
 	report: list[dict] = []
-	base = {"company": company, "branch": branch}
+	base = {"company": company, "branch": branch
+	}
 
 	if scw_names:
 		report.append(
@@ -374,7 +403,7 @@ def reset_construction_demo_for_branch(
 		"company": company,
 		"branch": branch,
 		"dry_run": is_dry,
-		"details": report,
+		"details": report
 	}
 
 
@@ -397,15 +426,17 @@ def _seed_qa_hse_docs(
 				"doctype": "Construction NCR",
 				"project_contract": contract.name,
 				"ncr_date": add_days(start, 30 + ncr_i * 12),
-				"ncr_reference": f"{DEMO_MARKER}NCR-{spec['code']}-{ncr_i + 1}",
+				"ncr_reference": f"{DEMO_MARKER}NCR-{spec['code']}-{ncr_i + 1
+	}",
 				"boq_item": boq_ref,
 				"severity": ("Minor", "Major", "Critical")[ncr_i % 3],
-				"description": f"Non-conformance on {spec['title_en']} — hold point {ncr_i + 1}.",
+				"description": f"Non-conformance on {spec['title_en']} — hold point {ncr_i + 1
+	}.",
 				"corrective_action": "CAR issued; rework and re-inspection scheduled.",
 				"status": ncr_statuses[ncr_i % len(ncr_statuses)],
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		)
 		ncr.insert(ignore_permissions=True)
 		summary["ncrs"] = summary.get("ncrs", 0) + 1
@@ -419,11 +450,12 @@ def _seed_qa_hse_docs(
 			"incident_type": hse_types[idx % len(hse_types)],
 			"severity": ("Low", "Medium", "High", "Critical")[idx % 4],
 			"location": spec["site"],
-			"description": f"HSE event logged for demo portfolio — {spec['title_en']}.",
+			"description": f"HSE event logged for demo portfolio — {spec['title_en']
+	}.",
 			"status": ("Reported", "Investigating", "Closed")[idx % 3],
 			"company": company,
-			"branch": branch,
-		}
+			"branch": branch
+	}
 	)
 	hse.insert(ignore_permissions=True)
 	summary["hse_incidents"] = summary.get("hse_incidents", 0) + 1
@@ -435,14 +467,15 @@ def _seed_qa_hse_docs(
 				"doctype": "Construction Inspection Request",
 				"project_contract": contract.name,
 				"inspection_date": add_days(start, 20 + ir_i * 18),
-				"location": f"{spec['site']} — Zone {ir_i + 1}",
+				"location": f"{spec['site']} — Zone {ir_i + 1
+	}",
 				"work_activity": ("Concrete pour", "MEP pressure test", "Steel erection")[ir_i % 3],
 				"boq_item": boq_names[ir_i % len(boq_names)] if boq_names else None,
 				"findings": "Demo inspection record for QA register and site compliance.",
 				"status": ir_statuses[ir_i % len(ir_statuses)],
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		)
 		ir.insert(ignore_permissions=True)
 		summary["inspection_requests"] = summary.get("inspection_requests", 0) + 1
@@ -463,7 +496,8 @@ def _seed_document_transmittal(
 			"doctype": "Construction Document Transmittal",
 			"project_contract": contract.name,
 			"transmittal_date": add_days(start, 40),
-			"reference_no": f"{DEMO_MARKER}CDT-{spec['code']}",
+			"reference_no": f"{DEMO_MARKER}CDT-{spec['code']
+	}",
 			"issued_by": frappe.session.user,
 			"recipient_notes": "Employer / Engineer — ISO 19650 distribution (demo).",
 			"status": ("Issued", "Acknowledged")[int(spec["code"]) % 2],
@@ -475,11 +509,10 @@ def _seed_document_transmittal(
 					"document_no": doc_no,
 					"revision_no": rev,
 					"issue_purpose": purpose,
-					"remarks": "Construction demo transmittal line.",
-				}
+					"remarks": "Construction demo transmittal line."
+	}
 				for title, doc_no, rev, purpose in docs
-			],
-		}
+			]}
 	)
 	tr.insert(ignore_permissions=True)
 	summary["document_transmittals"] = summary.get("document_transmittals", 0) + 1
@@ -505,17 +538,19 @@ def _seed_claims_eot(
 				"doctype": "Construction Extension of Time",
 				"project_contract": contract.name,
 				"application_date": add_days(start, 90),
-				"notice_reference": f"{DEMO_MARKER}EOT-{spec['code']}",
+				"notice_reference": f"{DEMO_MARKER}EOT-{spec['code']
+	}",
 				"cause_category": "Late instructions / variations",
 				"delay_days_claimed": 21 + idx,
 				"delay_days_approved": 14 + (idx % 5),
 				"revised_completion_date": add_days(end, 14),
 				"related_change_order": co_name,
-				"description": f"EOT application — employer delay events on {spec['title_en']}.",
+				"description": f"EOT application — employer delay events on {spec['title_en']
+	}.",
 				"status": "Approved",
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		)
 		eot.insert(ignore_permissions=True)
 		eot_name = eot.name
@@ -527,17 +562,19 @@ def _seed_claims_eot(
 				"doctype": "Construction Claim",
 				"project_contract": contract.name,
 				"claim_date": add_days(start, 100),
-				"claim_reference": f"{DEMO_MARKER}CLM-{spec['code']}",
+				"claim_reference": f"{DEMO_MARKER}CLM-{spec['code']
+	}",
 				"claim_type": ("Cost", "Time", "Cost & Time")[idx % 3],
 				"claimed_amount": flt(spec["contract_value"]) * 0.025,
 				"claimed_delay_days": 10 + idx,
 				"related_extension_of_time": eot_name,
 				"related_change_order": co_name,
-				"description": f"Contractor claim — prolongation and disruption on {spec['title_en']}.",
+				"description": f"Contractor claim — prolongation and disruption on {spec['title_en']
+	}.",
 				"status": ("Submitted", "Under Review", "Accepted")[idx % 3],
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		)
 		claim.insert(ignore_permissions=True)
 		claim_name = claim.name
@@ -576,8 +613,8 @@ def _seed_procurement(
 				"qty": qty,
 				"rate": rate,
 				"boq_item": boq_names[line_i % len(boq_names)],
-				"cost_code": boq_meta[line_i % len(boq_meta)][1] if boq_meta else cost_code,
-			}
+				"cost_code": boq_meta[line_i % len(boq_meta)][1] if boq_meta else cost_code
+	}
 		)
 
 	if frappe.db.exists("DocType", "Purchase Request"):
@@ -590,9 +627,10 @@ def _seed_procurement(
 					"project_contract": contract.name,
 					"required_by": add_days(base_date, 21),
 					"requester": frappe.session.user,
-					"reference": f"{DEMO_MARKER}PR-{spec['code']}",
-					"items": [{"item_code": row["item_code"], "qty": row["qty"], "boq_item": row["boq_item"], "cost_code": row["cost_code"]} for row in line_items],
-				}
+					"reference": f"{DEMO_MARKER}PR-{spec['code']
+	}",
+					"items": [{"item_code": row["item_code"], "qty": row["qty"], "boq_item": row["boq_item"], "cost_code": row["cost_code"]} for row in line_items]
+	}
 			)
 			pr.insert(ignore_permissions=True)
 			summary["purchase_requests"] = summary.get("purchase_requests", 0) + 1
@@ -616,11 +654,10 @@ def _seed_procurement(
 							"qty": row["qty"],
 							"rate": row["rate"],
 							"boq_item": row["boq_item"],
-							"cost_code": row["cost_code"],
-						}
+							"cost_code": row["cost_code"]
+	}
 						for row in line_items
-					],
-				}
+					]}
 			)
 			po.insert(ignore_permissions=True)
 			if po.meta.is_submittable and po.docstatus == 0:
@@ -653,8 +690,7 @@ def seed_construction_portfolio_demo(
 				"Project Contract",
 				filters={"company": company, "branch": branch, "contract_title": ["like", f"{DEMO_MARKER}%"]},
 				pluck="name",
-			),
-		}
+			)}
 
 	summary: dict = {
 		"ok": True,
@@ -681,7 +717,7 @@ def seed_construction_portfolio_demo(
 		"extensions_of_time": 0,
 		"claims": 0,
 		"gl_posted_spc": 0,
-		"material_items": 0,
+		"material_items": 0
 	}
 
 	owners: list[str] = []
@@ -730,8 +766,8 @@ def seed_construction_portfolio_demo(
 				"contract_value": spec["contract_value"],
 				"status": status,
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		)
 		contract.insert(ignore_permissions=True)
 		if contract.meta.is_submittable:
@@ -753,7 +789,8 @@ def seed_construction_portfolio_demo(
 				{
 					"doctype": "BOQ Item",
 					"project_contract": contract.name,
-					"section_name": f"Section {line_idx + 1}",
+					"section_name": f"Section {line_idx + 1
+	}",
 					"cost_code": cost_code,
 					"item_description": desc,
 					"quantity": qty,
@@ -762,8 +799,8 @@ def seed_construction_portfolio_demo(
 					"actual_cost": ac,
 					"completion_percent": min(88, 12 * (line_idx + 1) + idx * 2),
 					"company": company,
-					"branch": branch,
-				}
+					"branch": branch
+	}
 			)
 			boq.insert(ignore_permissions=True)
 			boq_names.append(boq.name)
@@ -775,13 +812,14 @@ def seed_construction_portfolio_demo(
 				"doctype": "Subcontract Work Order",
 				"project_contract": contract.name,
 				"subcontractor": sub,
-				"scope_of_work": f"Subcontract package — {spec['title_en']}",
+				"scope_of_work": f"Subcontract package — {spec['title_en']
+	}",
 				"contract_value": flt(spec["contract_value"]) * 0.35,
 				"progress_percent": IPC_PROGRESS_STEPS[-1],
 				"status": "Active" if status == "Active" else "Closed",
 				"company": company,
-				"branch": branch,
-			}
+				"branch": branch
+	}
 		)
 		scw.insert(ignore_permissions=True)
 		summary["subcontract_work_orders"] += 1
@@ -797,13 +835,14 @@ def seed_construction_portfolio_demo(
 				"ipc_date": ipc_date,
 				"period_from": add_days(ipc_date, -30),
 				"period_to": ipc_date,
-				"employer_certificate_ref": f"ENG/IPC/{spec['code']}/{step_i + 1}",
+				"employer_certificate_ref": f"ENG/IPC/{spec['code']}/{step_i + 1
+	}",
 				"boq_completion_percent": pct,
 				"status": ipc_status,
 				"company": company,
 				"branch": branch,
-				"certificate_reference": f"{DEMO_MARKER}IPC-{spec['code']}-{step_i + 1}",
-			}
+				"certificate_reference": f"{DEMO_MARKER}IPC-{spec['code']}-{step_i + 1}"
+	}
 			ipc = frappe.get_doc(ipc_data)
 			ipc.insert(ignore_permissions=True)
 			last_ipc_name = ipc.name
@@ -826,8 +865,8 @@ def seed_construction_portfolio_demo(
 						"payable_account": payable_gl,
 						"company": company,
 						"branch": branch,
-						"payment_reference": f"{DEMO_MARKER}SPC-{spec['code']}-{cert_i + 1}",
-					}
+						"payment_reference": f"{DEMO_MARKER}SPC-{spec['code']}-{cert_i + 1}"
+	}
 				)
 				spc.insert(ignore_permissions=True)
 				if spc.meta.is_submittable and cert_i < 2:
@@ -846,14 +885,15 @@ def seed_construction_portfolio_demo(
 					"report_date": add_days(base_date, -day_offset - idx),
 					"boq_item": boq_names[0] if boq_names else None,
 					"weather": ("Clear / 28°C", "Windy / 24°C", "Light rain / 22°C")[day_offset % 3],
-					"work_summary": f"Progress on {spec['title_en']} — pour, steel fix, QA hold points.",
+					"work_summary": f"Progress on {spec['title_en']
+	} — pour, steel fix, QA hold points.",
 					"labor_count": 45 + idx * 6,
 					"equipment_hours": 32 + idx * 3,
 					"material_consumed_cost": 125_000 + idx * 12_000,
 					"company": company,
 					"branch": branch,
-					"report_reference": f"{DEMO_MARKER}SDR-{spec['code']}-{day_offset}",
-				}
+					"report_reference": f"{DEMO_MARKER}SDR-{spec['code']}-{day_offset}"
+	}
 			)
 			sdr.insert(ignore_permissions=True)
 			summary["site_daily_reports"] += 1
@@ -865,15 +905,16 @@ def seed_construction_portfolio_demo(
 					"doctype": "Construction Change Order",
 					"project_contract": contract.name,
 					"order_date": add_days(start, 45),
-					"title": f"VO-{spec['code']} — scope adjustment",
+					"title": f"VO-{spec['code']
+	} — scope adjustment",
 					"contract_clause_reference": "Sub-Clause 13.3",
 					"description": "Employer variation — additional MEP scope and revised programme.",
 					"cost_impact": flt(spec["contract_value"]) * 0.03,
 					"time_impact_days": 14 + (idx % 7),
 					"status": "Approved",
 					"company": company,
-					"branch": branch,
-				}
+					"branch": branch
+	}
 			)
 			co.insert(ignore_permissions=True)
 			co_name = co.name
@@ -932,8 +973,8 @@ def seed_construction_portfolio_demo(
 				"revenue_recognized": flt(last_ipc_amount or 0) * 0.85,
 				"company": company,
 				"branch": branch,
-				"snapshot_reference": f"{DEMO_MARKER}WIP-{spec['code']}",
-			}
+				"snapshot_reference": f"{DEMO_MARKER}WIP-{spec['code']}"
+	}
 		)
 		wip.insert(ignore_permissions=True)
 		summary["wip_snapshots"] += 1

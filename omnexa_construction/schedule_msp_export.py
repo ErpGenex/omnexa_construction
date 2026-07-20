@@ -53,8 +53,9 @@ def export_baseline_msp_xml(baseline_name: str) -> dict:
 			"content": xml,
 			"is_private": 1,
 			"attached_to_doctype": "Construction Schedule Baseline",
-			"attached_to_name": baseline.name,
-		}
+			"attached_to_name": baseline.name
+	}
 	)
 	file_doc.insert(ignore_permissions=True)
-	return {"file_url": file_doc.file_url, "file_name": file_name}
+	return {"file_url": file_doc.file_url, "file_name": file_name
+	}

@@ -20,4 +20,5 @@ def export_wh347_payroll(project_contract: str, from_date: str | None = None, to
 			f"ROW,{project_contract},{row.get('employee')},{row.get('employee_name')},"
 			f"{row.get('hours')},{row.get('start_date')},{row.get('end_date')}\n"
 		)
-	return {**base, "wh347_csv": "".join(lines), "format": "WH-347-MVP"}
+	return {**base, "wh347_csv": "".join(lines), "format": "WH-347-MVP"
+	}

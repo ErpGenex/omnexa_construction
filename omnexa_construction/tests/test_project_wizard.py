@@ -15,7 +15,8 @@ class TestProjectWizard(FrappeTestCase):
 	def setUp(self):
 		super().setUp()
 		self.company = frappe.db.get_value("Company", {}, "name")
-		self.branch = frappe.db.get_value("Branch", {"company": self.company}, "name") if self.company else None
+		self.branch = frappe.db.get_value("Branch", {"company": self.company
+	}, "name") if self.company else None
 
 	def test_create_setup_resolves_company_without_user_default(self):
 		if not self.company:
@@ -41,8 +42,8 @@ class TestProjectWizard(FrappeTestCase):
 				"branch": self.branch,
 				"contract_currency": currency,
 				"contract_title": "Assignment Save Test",
-				"building_type": "villa",
-			}
+				"building_type": "villa"
+	}
 		)
 		setup.insert(ignore_permissions=True)
 		setup.append(
@@ -50,8 +51,8 @@ class TestProjectWizard(FrappeTestCase):
 			{
 				"assignment_type": "Subcontractor",
 				"trade_package_code": "CIVIL",
-				"scope_notes": "Test scope",
-			},
+				"scope_notes": "Test scope"
+	},
 		)
 		setup.save(ignore_permissions=True)
 		supplier = frappe.db.get_value("Supplier", {}, "name")
@@ -61,7 +62,8 @@ class TestProjectWizard(FrappeTestCase):
 
 		save_wizard_assignments(
 			setup.name,
-			[{"trade_package_code": "CIVIL", "party": supplier}],
+			[{"trade_package_code": "CIVIL", "party": supplier
+	}],
 		)
 		setup.reload()
 		self.assertEqual(setup.assignments[0].party, supplier)
@@ -89,14 +91,15 @@ class TestProjectWizard(FrappeTestCase):
 				"plot_area_m2": 500,
 				"number_of_floors": 2,
 				"unit_count": 1,
-				"quality_tier": "Standard",
-			}
+				"quality_tier": "Standard"
+	}
 		)
 		setup.insert(ignore_permissions=True)
 		lines = expand_template_to_lines(setup)
 		self.assertGreater(len(lines), 5)
 		line = next(r for r in VILLA_LINES if r["cost_code"] == "03.10")
-		drivers = {"GFA": 400, "PLOT": 500, "FLOORS": 2, "UNITS": 1, "ROAD_M": 0, "ROAD_KM": 0, "PIPE_KM": 0}
+		drivers = {"GFA": 400, "PLOT": 500, "FLOORS": 2, "UNITS": 1, "ROAD_M": 0, "ROAD_KM": 0, "PIPE_KM": 0
+	}
 		base_qty = resolve_quantity(line, drivers, regional_factor=1.0)
 		scaled = resolve_quantity(line, drivers, regional_factor=1.1)
 		self.assertAlmostEqual(scaled / base_qty, 1.1, places=4)
@@ -118,8 +121,8 @@ class TestProjectWizard(FrappeTestCase):
 				"boq_template": "VILLA-TURNKEY-STD",
 				"gross_floor_area_m2": 350,
 				"plot_area_m2": 450,
-				"unit_count": 1,
-			}
+				"unit_count": 1
+	}
 		)
 		setup.insert(ignore_permissions=True)
 		out = preview_boq(setup.name, save=1)
@@ -143,8 +146,8 @@ class TestProjectWizard(FrappeTestCase):
 				"building_type": "villa",
 				"unit_count": 2,
 				"plot_area_m2": 800,
-				"gross_floor_area_m2": 600,
-			}
+				"gross_floor_area_m2": 600
+	}
 		)
 		out = sync_residential_inventory_from_setup(setup, pc)
 		self.assertGreaterEqual(out["plots"] + out["units"], 0)

@@ -20,7 +20,8 @@ def resolve_regional_factor(setup=None, company: str | None = None, branch: str 
 	if company:
 		default = frappe.db.get_value(
 			"Regional Cost Factor",
-			{"company": company, "is_default": 1, "disabled": 0},
+			{"company": company, "is_default": 1, "disabled": 0
+	},
 			"cost_factor",
 		)
 		if default:
@@ -29,7 +30,8 @@ def resolve_regional_factor(setup=None, company: str | None = None, branch: str 
 
 
 def _lookup_factor(company: str | None, branch: str | None, region_code: str) -> float:
-	filters = {"region_code": region_code, "disabled": 0}
+	filters = {"region_code": region_code, "disabled": 0
+	}
 	if company:
 		filters["company"] = company
 	row = frappe.db.get_value(
@@ -43,7 +45,8 @@ def _lookup_factor(company: str | None, branch: str | None, region_code: str) ->
 	if branch and row.branch and row.branch != branch:
 		alt = frappe.db.get_value(
 			"Regional Cost Factor",
-			{**filters, "branch": branch},
+			{**filters, "branch": branch
+	},
 			"cost_factor",
 		)
 		return flt(alt) if alt else flt(row.cost_factor) or 1.0

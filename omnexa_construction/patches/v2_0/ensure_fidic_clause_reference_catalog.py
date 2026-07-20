@@ -13,7 +13,7 @@ SEED_ROWS = [
 		"notice_type": "Claim",
 		"time_bar_days": 28,
 		"title": "Notice of Claim",
-		"description": "Primary time-bar notice for claims under FIDIC 2017.",
+		"description": "Primary time-bar notice for claims under FIDIC 2017."
 	},
 	{
 		"display_reference": "FIDIC 8.4 — Extension of Time for Completion",
@@ -22,7 +22,7 @@ SEED_ROWS = [
 		"notice_type": "Extension of Time",
 		"time_bar_days": 28,
 		"title": "Extension of Time for Completion",
-		"description": "Reference for EOT submissions and responses.",
+		"description": "Reference for EOT submissions and responses."
 	},
 	{
 		"display_reference": "FIDIC 13.1 — Right to Vary",
@@ -31,7 +31,7 @@ SEED_ROWS = [
 		"notice_type": "Variation",
 		"time_bar_days": 28,
 		"title": "Right to Vary",
-		"description": "Variation instruction and valuation reference.",
+		"description": "Variation instruction and valuation reference."
 	},
 	{
 		"display_reference": "FIDIC 11.1 — Completion of Outstanding Work and Remedying Defects",
@@ -40,7 +40,7 @@ SEED_ROWS = [
 		"notice_type": "Defects",
 		"time_bar_days": 28,
 		"title": "Defects and Remedying",
-		"description": "Defect notice and remedial tracking reference.",
+		"description": "Defect notice and remedial tracking reference."
 	},
 	{
 		"display_reference": "FIDIC 14.3 — Application for Interim Payment Certificates",
@@ -49,7 +49,7 @@ SEED_ROWS = [
 		"notice_type": "Payment",
 		"time_bar_days": 28,
 		"title": "Interim Payment Application",
-		"description": "Payment notice and certification cycle reference.",
+		"description": "Payment notice and certification cycle reference."
 	},
 	{
 		"display_reference": "FIDIC 15.2 — Termination by Employer",
@@ -58,7 +58,7 @@ SEED_ROWS = [
 		"notice_type": "Termination",
 		"time_bar_days": 28,
 		"title": "Termination by Employer",
-		"description": "Employer termination notice pathway.",
+		"description": "Employer termination notice pathway."
 	},
 	{
 		"display_reference": "NEC4 61.3 — Notification of Compensation Event",
@@ -67,7 +67,7 @@ SEED_ROWS = [
 		"notice_type": "Claim",
 		"time_bar_days": 56,
 		"title": "Notification of Compensation Event",
-		"description": "NEC4 notification time-bar for compensation events.",
+		"description": "NEC4 notification time-bar for compensation events."
 	},
 	{
 		"display_reference": "NEC4 16.1 — Early Warning",
@@ -76,7 +76,7 @@ SEED_ROWS = [
 		"notice_type": "Other",
 		"time_bar_days": 42,
 		"title": "Early Warning",
-		"description": "NEC4 early warning trigger for risk mitigation.",
+		"description": "NEC4 early warning trigger for risk mitigation."
 	},
 ]
 
@@ -88,7 +88,8 @@ def execute():
 	for row in SEED_ROWS:
 		name = frappe.db.get_value(
 			"Construction FIDIC Clause Reference",
-			{"display_reference": row["display_reference"]},
+			{"display_reference": row["display_reference"]
+	},
 		)
 		if name:
 			doc = frappe.get_doc("Construction FIDIC Clause Reference", name)

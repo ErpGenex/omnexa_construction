@@ -18,7 +18,8 @@ def get_hse_kpi_dashboard(company: str, branch: str | None = None) -> dict:
 	open_ncr = frappe.db.count("Construction NCR", {**filters, "status": ["!=", "Closed"]})
 	ncr_sla_breach = 0
 	if frappe.db.exists("DocType", "Construction NCR") and frappe.get_meta("Construction NCR").has_field("is_sla_breached"):
-		ncr_sla_breach = frappe.db.count("Construction NCR", {**filters, "is_sla_breached": 1})
+		ncr_sla_breach = frappe.db.count("Construction NCR", {**filters, "is_sla_breached": 1
+	})
 
 	hse_incidents = 0
 	if frappe.db.exists("DocType", "Construction HSE Incident"):
@@ -54,7 +55,8 @@ def get_hse_kpi_dashboard(company: str, branch: str | None = None) -> dict:
 				sfields.append(f)
 		safety_kpis = frappe.get_all(
 			"Construction Safety KPI",
-			filters={"company": company} if smeta.has_field("company") else {},
+			filters={"company": company} if smeta.has_field("company") else {
+	},
 			fields=sfields,
 			limit=20,
 		)
@@ -72,14 +74,15 @@ def get_hse_kpi_dashboard(company: str, branch: str | None = None) -> dict:
 		"ltifr_estimate": ltifr,
 		"iso_45001_score": score,
 		"top_risks": risk_rows,
-		"safety_kpis": safety_kpis,
+		"safety_kpis": safety_kpis
 	}
 
 
 def _calc_ltifr(company: str, branch: str | None) -> float:
 	if not frappe.db.exists("DocType", "Construction HSE Incident"):
 		return 0.0
-	filters = {"company": company}
+	filters = {"company": company
+	}
 	if branch:
 		filters["branch"] = branch
 	lost_time = frappe.db.count("Construction HSE Incident", {**filters, "severity": ["in", ["Major", "Critical"]]})

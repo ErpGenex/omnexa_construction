@@ -41,5 +41,5 @@ def get_executive_bi_dashboard(company: str, branch: str | None = None) -> dict:
 		"forecast_sample": forecasts[:10],
 		"high_risk_contracts": high_risk,
 		"open_fidic_notices": fidic_open,
-		"insights_url": "/app/construction-executive-dashboard",
+		"insights_url": "/app/construction-executive-dashboard"
 	}

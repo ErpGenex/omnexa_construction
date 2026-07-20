@@ -45,7 +45,7 @@ def get_setup_print_context(doc) -> dict:
 		"retention_percent": doc.retention_percent,
 		"advance_payment_percent": doc.advance_payment_percent,
 		"print_date": frappe.utils.today(),
-		"regional_cost_factor_label": regional_cost_factor_label,
+		"regional_cost_factor_label": regional_cost_factor_label
 	}
 
 
@@ -64,7 +64,8 @@ def get_contract_print_context(doc) -> dict:
 	setup_revision = getattr(doc, "approved_setup_revision", None)
 	boq_rows = frappe.get_all(
 		"BOQ Item",
-		filters={"project_contract": doc.name},
+		filters={"project_contract": doc.name
+	},
 		fields=[
 			"cost_code",
 			"item_description",
@@ -102,7 +103,7 @@ def get_contract_print_context(doc) -> dict:
 		"payment_terms": doc.payment_terms or "",
 		"boq_rows": boq_rows,
 		"contract_terms": terms,
-		"print_date": frappe.utils.today(),
+		"print_date": frappe.utils.today()
 	}
 
 

@@ -30,12 +30,20 @@ def execute(filters=None):
 		row.cost_variance = flt(row.actual_cost) - flt(row.planned_cost)
 
 	return [
-		{"label": _("Project Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 150},
-				{"label": _("Section"), "fieldname": "section_name", "fieldtype": "Data", "width": 140},
-		{"label": _("Cost code"), "fieldname": "cost_code", "fieldtype": "Data", "width": 100},
-		{"label": _("Item"), "fieldname": "item_description", "fieldtype": "Data", "width": 220},
-		{"label": _("Planned Cost"), "fieldname": "planned_cost", "fieldtype": "Currency", "width": 130},
-		{"label": _("Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 130},
-		{"label": _("Variance"), "fieldname": "cost_variance", "fieldtype": "Currency", "width": 120},
-		{"label": _("Completion %"), "fieldname": "completion_percent", "fieldtype": "Percent", "width": 120},
+		{"label": _("Project Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 150
+	},
+				{"label": _("Section"), "fieldname": "section_name", "fieldtype": "Data", "width": 140
+	},
+		{"label": _("Cost code"), "fieldname": "cost_code", "fieldtype": "Data", "width": 100
+	},
+		{"label": _("Item"), "fieldname": "item_description", "fieldtype": "Data", "width": 220
+	},
+		{"label": _("Planned Cost"), "fieldname": "planned_cost", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 130
+	},
+		{"label": _("Variance"), "fieldname": "cost_variance", "fieldtype": "Currency", "width": 120
+	},
+		{"label": _("Completion %"), "fieldname": "completion_percent", "fieldtype": "Percent", "width": 120
+	},
 	], data

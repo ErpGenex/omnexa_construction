@@ -33,15 +33,15 @@ def execute():
 					"fieldtype": "Link",
 					"options": "Regional Cost Factor",
 					"insert_after": "quality_tier",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "site_region",
 					"label": "Site Region Code",
 					"fieldtype": "Data",
 					"insert_after": "regional_cost_factor",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Project Contract": [
 				{
@@ -50,18 +50,17 @@ def execute():
 					"fieldtype": "Section Break",
 					"insert_after": "wizard_setup",
 					"collapsible": 1,
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "unit_count_planned",
 					"label": "Planned Units",
 					"fieldtype": "Int",
 					"insert_after": "section_residential",
 					"read_only": 1,
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 	for name in DOCTYPES:

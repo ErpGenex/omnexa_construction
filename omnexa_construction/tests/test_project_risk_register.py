@@ -15,8 +15,8 @@ class TestProjectRiskRegister(FrappeTestCase):
 				"probability": 4,
 				"impact": 3,
 				"company": "_Test Company",
-				"branch": "_Test Branch",
-			}
+				"branch": "_Test Branch"
+	}
 		)
 		with patch("omnexa_construction.omnexa_construction.doctype.construction_project_risk.construction_project_risk.frappe.db.get_value", return_value=None):
 			doc.validate()
@@ -30,8 +30,8 @@ class TestProjectRiskRegister(FrappeTestCase):
 				"probability": 99,
 				"impact": 0,
 				"company": "_Test Company",
-				"branch": "_Test Branch",
-			}
+				"branch": "_Test Branch"
+	}
 		)
 		with patch("omnexa_construction.omnexa_construction.doctype.construction_project_risk.construction_project_risk.frappe.db.get_value", return_value=None):
 			doc.validate()

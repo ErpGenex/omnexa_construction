@@ -20,7 +20,8 @@ def _sanitize_company_branch(
 	if branch in ("__ALL__", "ALL", "all"):
 		branch = None
 	if company and not frappe.db.exists("Company", company):
-		branch_guess = frappe.db.get_value("Branch", {"branch_name": company}, "name")
+		branch_guess = frappe.db.get_value("Branch", {"branch_name": company
+	}, "name")
 		if branch_guess:
 			branch = branch or branch_guess
 		company = None
@@ -65,7 +66,8 @@ def _resolve_company_branch(
 		if not branch:
 			branch = frappe.db.get_value(
 				"Branch",
-				{"company": company},
+				{"company": company
+	},
 				"name",
 				order_by="is_head_office desc, creation asc",
 			)
@@ -131,12 +133,13 @@ def create_setup(company: str | None = None, branch: str | None = None) -> dict:
 			"wizard_step": 1,
 			"status": "Draft",
 			"number_of_floors": 1,
-			"basement_levels": 0,
-		}
+			"basement_levels": 0
+	}
 	)
 	doc.flags.wizard_save = True
 	doc.insert(ignore_permissions=True)
-	return {"name": doc.name, "company": company, "branch": branch}
+	return {"name": doc.name, "company": company, "branch": branch
+	}
 
 
 def _setup_dict_for_wizard(setup) -> dict:
@@ -163,8 +166,7 @@ def _find_open_setup(company: str, branch: str | None = None) -> str | None:
 		"company": company,
 		"status": "Draft",
 		"docstatus": 0,
-		"project_contract": ("is", "not set"),
-	}
+		"project_contract": ("is", "not set")}
 	if branch:
 		filters["branch"] = branch
 	return frappe.db.get_value(
@@ -226,8 +228,8 @@ def get_wizard_context(
 		_ensure_setup_company_branch(setup)
 		return {
 			"setup": _setup_dict_for_wizard(setup),
-			"building_types": get_building_types(),
-		}
+			"building_types": get_building_types()
+	}
 	except frappe.ValidationError:
 		raise
 	except Exception as exc:
@@ -245,7 +247,8 @@ def select_building_type(setup_name: str, building_type: str) -> dict:
 		frappe.throw(_("Wizard draft not found. Reload the page."), title=_("Wizard"))
 	if not building_type:
 		frappe.throw(_("Building type is required."), title=_("Wizard"))
-	save_wizard_step(setup_name, 2, {"building_type": building_type})
+	save_wizard_step(setup_name, 2, {"building_type": building_type
+	})
 	result = load_building_type_template(setup_name)
 	result["wizard_step"] = 2
 	return result
@@ -360,7 +363,7 @@ def save_wizard_step(setup_name: str, step: int, data: str | dict | None = None)
 		"name": setup.name,
 		"wizard_step": setup.wizard_step,
 		"status": setup.status,
-		"modified": setup.modified,
+		"modified": setup.modified
 	}
 
 
@@ -387,7 +390,8 @@ def expand_boq_details(setup_name: str, replace: int | str = 0) -> dict:
 		result = apply_template_defaults(setup, force_phases=False, force_details=True)
 	else:
 		added = expand_default_boq_details(setup)
-		result = {**recalculate_setup_pricing(setup), "added": added}
+		result = {**recalculate_setup_pricing(setup), "added": added
+	}
 	from omnexa_construction.wizard.persist import save_wizard_setup
 
 	save_wizard_setup(setup)
@@ -500,7 +504,8 @@ def import_seed_templates(*, sync_all: bool = False) -> dict:
 				created += 1
 			elif action == "updated":
 				updated += 1
-	return {"trade_packages": trades, "templates_created": created, "templates_updated": updated}
+	return {"trade_packages": trades, "templates_created": created, "templates_updated": updated
+	}
 
 
 @frappe.whitelist()
@@ -547,7 +552,8 @@ def load_building_type_template(setup_name: str) -> dict:
 		"project_segment": setup.project_segment,
 		"governing_standard": setup.governing_standard,
 		"quality_tier": setup.quality_tier,
-		"duration_months": (pack or {}).get("duration_months"),
+		"duration_months": (pack or {
+	}).get("duration_months"),
 		"plot_area_m2": setup.plot_area_m2,
 		"gross_floor_area_m2": setup.gross_floor_area_m2,
 		"number_of_floors": setup.number_of_floors,
@@ -557,7 +563,7 @@ def load_building_type_template(setup_name: str) -> dict:
 		"key_count": setup.key_count,
 		"road_length_m": setup.road_length_m,
 		"road_width_m": setup.road_width_m,
-		"pipe_network_km": setup.pipe_network_km,
+		"pipe_network_km": setup.pipe_network_km
 	}
 	return result
 
@@ -570,7 +576,8 @@ def list_regional_cost_options(company: str | None = None) -> list[dict]:
 		return []
 	rows = frappe.get_all(
 		"Regional Cost Factor",
-		filters={"company": company, "disabled": 0},
+		filters={"company": company, "disabled": 0
+	},
 		fields=["name", "region_code", "region_name", "cost_factor", "is_default"],
 		order_by="is_default desc, region_code asc",
 	)
@@ -634,7 +641,7 @@ def prepare_specifications_step(setup_name: str) -> dict:
 		"key_count": setup.key_count,
 		"road_length_m": setup.road_length_m,
 		"road_width_m": setup.road_width_m,
-		"pipe_network_km": setup.pipe_network_km,
+		"pipe_network_km": setup.pipe_network_km
 	}
 
 
@@ -651,7 +658,8 @@ def create_rfq_from_pr(purchase_request: str) -> dict:
 	from omnexa_construction.wizard.procurement_rfq import create_rfq_from_purchase_request
 
 	name = create_rfq_from_purchase_request(purchase_request)
-	return {"rfq": name}
+	return {"rfq": name
+	}
 
 
 @frappe.whitelist()

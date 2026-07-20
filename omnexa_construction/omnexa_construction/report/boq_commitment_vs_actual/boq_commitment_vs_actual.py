@@ -59,18 +59,26 @@ def execute(filters=None):
 
 def _columns(has_committed=True):
 	cols = [
-		{"label": _("BOQ Item"), "fieldname": "boq_item", "fieldtype": "Link", "options": "BOQ Item", "width": 120},
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130},
-		{"label": _("Section"), "fieldname": "section_name", "fieldtype": "Data", "width": 100},
-		{"label": _("Description"), "fieldname": "item_description", "fieldtype": "Data", "width": 180},
-		{"label": _("Planned"), "fieldname": "planned_cost", "fieldtype": "Currency", "width": 110},
+		{"label": _("BOQ Item"), "fieldname": "boq_item", "fieldtype": "Link", "options": "BOQ Item", "width": 120
+	},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130
+	},
+		{"label": _("Section"), "fieldname": "section_name", "fieldtype": "Data", "width": 100
+	},
+		{"label": _("Description"), "fieldname": "item_description", "fieldtype": "Data", "width": 180
+	},
+		{"label": _("Planned"), "fieldname": "planned_cost", "fieldtype": "Currency", "width": 110
+	},
 	]
 	if has_committed:
-		cols.append({"label": _("Committed (PO)"), "fieldname": "committed_cost", "fieldtype": "Currency", "width": 110})
+		cols.append({"label": _("Committed (PO)"), "fieldname": "committed_cost", "fieldtype": "Currency", "width": 110
+	})
 	cols.extend(
 		[
-			{"label": _("Actual"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 110},
-			{"label": _("Remaining"), "fieldname": "remaining_budget", "fieldtype": "Currency", "width": 110},
+			{"label": _("Actual"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 110
+	},
+			{"label": _("Remaining"), "fieldname": "remaining_budget", "fieldtype": "Currency", "width": 110
+	},
 		]
 	)
 	return cols

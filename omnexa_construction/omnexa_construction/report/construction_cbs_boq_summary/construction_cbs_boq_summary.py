@@ -22,14 +22,18 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("CBS Element"), "fieldname": "cbs_element", "fieldtype": "Data", "width": 160},
-		{"label": _("BOQ Lines"), "fieldname": "line_count", "fieldtype": "Int", "width": 90},
-		{"label": _("Planned Cost"), "fieldname": "planned_cost", "fieldtype": "Currency", "width": 120},
-		{"label": _("Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 120},
+		{"label": _("CBS Element"), "fieldname": "cbs_element", "fieldtype": "Data", "width": 160
+	},
+		{"label": _("BOQ Lines"), "fieldname": "line_count", "fieldtype": "Int", "width": 90
+	},
+		{"label": _("Planned Cost"), "fieldname": "planned_cost", "fieldtype": "Currency", "width": 120
+	},
+		{"label": _("Actual Cost"), "fieldname": "actual_cost", "fieldtype": "Currency", "width": 120
+	},
 		{
 			"label": _("Variance"),
 			"fieldname": "variance",
 			"fieldtype": "Currency",
-			"width": 110,
-		},
+			"width": 110
+	},
 	]

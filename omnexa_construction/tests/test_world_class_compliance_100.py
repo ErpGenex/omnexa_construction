@@ -37,8 +37,8 @@ class TestWorldClassCompliance100(unittest.TestCase):
 							"read_only": 1,
 							"default": "100",
 							"insert_after": "oracle_unifier_project_number",
-							"module": "Omnexa Construction",
-						}
+							"module": "Omnexa Construction"
+	}
 					]
 				},
 				update=True,

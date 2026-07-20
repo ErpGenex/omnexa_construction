@@ -36,7 +36,8 @@ def capture_site_payload(
 	if signature_base64:
 		attachments.append(_save_data_url(signature_base64, prefix="site_signature"))
 
-	return {"draft": draft, "attachments": attachments}
+	return {"draft": draft, "attachments": attachments
+	}
 
 
 @frappe.whitelist()
@@ -58,10 +59,12 @@ def _save_data_url(data_url: str, prefix: str) -> dict:
 	file_doc = frappe.get_doc(
 		{
 			"doctype": "File",
-			"file_name": f"{prefix}_{frappe.generate_hash(length=8)}.png",
+			"file_name": f"{prefix}_{frappe.generate_hash(length=8)
+	}.png",
 			"content": content,
-			"is_private": 1,
-		}
+			"is_private": 1
+	}
 	)
 	file_doc.insert(ignore_permissions=True)
-	return {"file_url": file_doc.file_url}
+	return {"file_url": file_doc.file_url
+	}

@@ -41,8 +41,8 @@ def create_purchase_order_from_rfq(rfq_name: str, supplier: str | None = None) -
 			"item_code": row.item_code,
 			"qty": flt(row.quantity),
 			"rate": rate,
-			"uom": row.uom,
-		}
+			"uom": row.uom
+	}
 		if frappe.get_meta("Purchase Order Item").has_field("boq_item"):
 			item_row["boq_item"] = row.boq_item
 		if frappe.get_meta("Purchase Order Item").has_field("cost_code"):
@@ -53,7 +53,8 @@ def create_purchase_order_from_rfq(rfq_name: str, supplier: str | None = None) -
 		frappe.throw(_("RFQ has no lines to order."), title=_("Procurement"))
 
 	po.insert(ignore_permissions=True)
-	updates = {"status": "Awarded", "awarded_supplier": supplier}
+	updates = {"status": "Awarded", "awarded_supplier": supplier
+	}
 	if rfq.meta.has_field("purchase_order"):
 		updates["purchase_order"] = po.name
 	frappe.db.set_value("Construction RFQ", rfq.name, updates, update_modified=True)

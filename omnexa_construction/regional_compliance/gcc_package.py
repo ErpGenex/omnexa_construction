@@ -28,14 +28,14 @@ def get_gcc_compliance_snapshot(project_contract: str) -> dict:
 		{
 			"id": "arabic_forms",
 			"label": _("Arabic print formats available"),
-			"status": "pass" if _has_arabic_prints() else "warn",
-		},
+			"status": "pass" if _has_arabic_prints() else "warn"
+	},
 		{
 			"id": "zatca",
 			"label": _("ZATCA / e-invoice branch configuration"),
 			"status": "pass" if _zatca_ready(contract.branch, country) else "na",
-			"detail": country or "",
-		},
+			"detail": country or ""
+	},
 		{
 			"id": "ld",
 			"label": _("Liquidated damages on contract"),
@@ -44,8 +44,8 @@ def get_gcc_compliance_snapshot(project_contract: str) -> dict:
 		{
 			"id": "fidic",
 			"label": _("FIDIC governing standard"),
-			"status": "pass" if "fidic" in (contract.governing_standard or "").lower() else "info",
-		},
+			"status": "pass" if "fidic" in (contract.governing_standard or "").lower() else "info"
+	},
 	]
 	passed = sum(1 for c in checks if c["status"] == "pass")
 	return {
@@ -53,8 +53,7 @@ def get_gcc_compliance_snapshot(project_contract: str) -> dict:
 		"project_contract": project_contract,
 		"country": country,
 		"checks": checks,
-		"score_percent": round(100 * passed / max(len(checks), 1), 1),
-	}
+		"score_percent": round(100 * passed / max(len(checks), 1), 1)}
 
 
 def _branch_country(branch: str | None) -> str | None:
@@ -84,6 +83,7 @@ def _has_arabic_prints() -> bool:
 	return bool(
 		frappe.db.count(
 			"Print Format",
-			{"module": "Omnexa Construction", "disabled": 0},
+			{"module": "Omnexa Construction", "disabled": 0
+	},
 		)
 	)

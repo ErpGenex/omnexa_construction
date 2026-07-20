@@ -22,7 +22,8 @@ def suggest_cbs_for_cost_code(cost_code: str | None) -> str | None:
 		return None
 	rows = frappe.get_all(
 		"Construction CBS Element",
-		filters={"cost_code_prefix": prefix},
+		filters={"cost_code_prefix": prefix
+	},
 		fields=["name", "cost_code_prefix"],
 		limit_page_length=20,
 	)

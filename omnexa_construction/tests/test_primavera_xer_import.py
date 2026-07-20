@@ -51,7 +51,8 @@ class TestPrimaveraXerImport(FrappeTestCase):
 		company = frappe.db.get_value("Company", {}, "name")
 		if not company:
 			self.skipTest("No company")
-		branch = frappe.db.get_value("Branch", {"company": company}, "name")
+		branch = frappe.db.get_value("Branch", {"company": company
+	}, "name")
 		if not branch:
 			self.skipTest("No branch")
 		client = frappe.db.get_value("Customer", {}, "name")
@@ -63,8 +64,8 @@ class TestPrimaveraXerImport(FrappeTestCase):
 				"doctype": "File",
 				"file_name": "test_import.xer",
 				"content": SAMPLE_XER,
-				"is_private": 1,
-			}
+				"is_private": 1
+	}
 		).insert(ignore_permissions=True)
 
 		preview = preview_primavera_xer_import(file_doc.file_url)
@@ -87,11 +88,14 @@ class TestPrimaveraXerImport(FrappeTestCase):
 		self.assertEqual(frappe.db.get_value("Project Contract", contract_name, "p6_project_id"), "1001")
 		baseline = frappe.db.get_value(
 			"Construction Schedule Baseline",
-			{"project_contract": contract_name},
+			{"project_contract": contract_name
+	},
 			"name",
 		)
 		self.assertTrue(baseline)
-		task_count = frappe.db.count("Construction Schedule Baseline Task", {"parent": baseline})
+		task_count = frappe.db.count("Construction Schedule Baseline Task", {"parent": baseline
+	})
 		self.assertEqual(task_count, 2)
-		wbs_count = frappe.db.count("PM WBS Task", {"project": contract_name})
+		wbs_count = frappe.db.count("PM WBS Task", {"project": contract_name
+	})
 		self.assertEqual(wbs_count, 2)

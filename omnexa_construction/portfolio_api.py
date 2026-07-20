@@ -89,12 +89,13 @@ def get_portfolio_dashboard(company: str, branch: str | None = None) -> dict:
 				"spi": flt(snap.get("spi")),
 				"schedule_variance_days": sv_days,
 				"schedule_health_status": health,
-				"status": snap.get("status"),
-			}
+				"status": snap.get("status")
+	}
 		)
 
 	# Prioritize delayed contracts in executive dashboard table.
-	health_rank = {"Delayed": 0, "At Risk": 1, "On Track": 2}
+	health_rank = {"Delayed": 0, "At Risk": 1, "On Track": 2
+	}
 	contract_rows.sort(
 		key=lambda row: (
 			health_rank.get(row.get("schedule_health_status") or "On Track", 2),
@@ -117,5 +118,5 @@ def get_portfolio_dashboard(company: str, branch: str | None = None) -> dict:
 		"fidic_overdue": fidic_overdue,
 		"open_disputes": open_disputes,
 		"open_early_warnings": open_early_warnings,
-		"contracts": contract_rows,
+		"contracts": contract_rows
 	}

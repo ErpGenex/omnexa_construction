@@ -14,17 +14,20 @@ def audit_workspace_catalog():
 		for lt, lto, label, icon, is_r in items:
 			catalog.add((lt, lto))
 			if not _link_target_exists(lt, lto):
-				missing_db.append({"section": section, "type": lt, "link_to": lto, "label": label})
+				missing_db.append({"section": section, "type": lt, "link_to": lto, "label": label
+	})
 
 	dts = frappe.get_all(
 		"DocType",
-		filters={"module": "Omnexa Construction", "istable": 0},
+		filters={"module": "Omnexa Construction", "istable": 0
+	},
 		pluck="name",
 	)
 	skip = {"Construction Integration Settings"}
 	not_in_catalog = [d for d in sorted(dts) if ("DocType", d) not in catalog and d not in skip]
 
-	reports = frappe.get_all("Report", filters={"module": "Omnexa Construction"}, pluck="name")
+	reports = frappe.get_all("Report", filters={"module": "Omnexa Construction"
+	}, pluck="name")
 	reports_not_in = [r for r in sorted(reports) if ("Report", r) not in catalog]
 
 	pages = [
@@ -43,5 +46,5 @@ def audit_workspace_catalog():
 		"doctypes_not_in_catalog": not_in_catalog,
 		"reports_not_in_catalog": reports_not_in,
 		"pages_not_in_catalog": pages_not_in,
-		"catalog_link_count": len(catalog),
+		"catalog_link_count": len(catalog)
 	}

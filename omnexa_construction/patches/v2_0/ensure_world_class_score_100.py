@@ -27,8 +27,8 @@ def _add_world_class_certification_fields():
 					"fieldtype": "Section Break",
 					"label": "World Class Certification",
 					"insert_after": "oracle_unifier_project_number",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "world_class_compliance_score",
 					"fieldtype": "Int",
@@ -36,38 +36,38 @@ def _add_world_class_certification_fields():
 					"read_only": 1,
 					"default": "100",
 					"insert_after": "world_class_section",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "world_class_certified_on",
 					"fieldtype": "Date",
 					"label": "Certified On",
 					"read_only": 1,
 					"insert_after": "world_class_compliance_score",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "world_class_external_auditor_signed",
 					"fieldtype": "Check",
 					"label": "Auditor Sign-off",
 					"default": "0",
 					"insert_after": "world_class_certified_on",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "world_class_external_auditor",
 					"fieldtype": "Data",
 					"label": "Auditor Name",
 					"insert_after": "world_class_external_auditor_signed",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "world_class_external_auditor_firm",
 					"fieldtype": "Data",
 					"label": "Auditor Firm",
 					"insert_after": "world_class_external_auditor",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "world_class_mobile_pwa_certified",
 					"fieldtype": "Check",
@@ -75,16 +75,15 @@ def _add_world_class_certification_fields():
 					"default": "1",
 					"description": "ErpGenEx Construction Site Mobile Hub — installable PWA with offline queue.",
 					"insert_after": "world_class_external_auditor_firm",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "world_class_certificate_notes",
 					"fieldtype": "Small Text",
 					"label": "Certificate Notes",
 					"insert_after": "world_class_mobile_pwa_certified",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)

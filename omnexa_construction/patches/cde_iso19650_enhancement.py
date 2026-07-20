@@ -146,7 +146,8 @@ def execute():
 		try:
 			if not frappe.db.exists("DocType", field["dt"]):
 				continue
-			if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+			if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]
+	}):
 				frappe.get_doc({
 					"doctype": "Custom Field",
 					**field
@@ -158,7 +159,8 @@ def execute():
 		try:
 			if not frappe.db.exists("DocType", field["dt"]):
 				continue
-			if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]}):
+			if not frappe.db.exists("Custom Field", {"dt": field["dt"], "fieldname": field["fieldname"]
+	}):
 				frappe.get_doc({
 					"doctype": "Custom Field",
 					**field

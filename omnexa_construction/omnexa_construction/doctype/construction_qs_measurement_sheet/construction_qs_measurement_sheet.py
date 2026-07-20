@@ -89,7 +89,7 @@ def import_takeoff_csv(project_contract: str, csv_text: str) -> list[dict]:
 				"unit_of_measure": uom or (boq.get("unit_of_measure") if boq else ""),
 				"previous_qty": flt(boq.get("quantity")) if boq else 0,
 				"measured_qty": measured_qty,
-				"revision_qty": measured_qty - (flt(boq.get("quantity")) if boq else 0),
-			}
+				"revision_qty": measured_qty - (flt(boq.get("quantity")) if boq else 0)
+	}
 		)
 	return out

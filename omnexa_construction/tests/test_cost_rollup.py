@@ -39,7 +39,8 @@ class TestCostRollup(FrappeTestCase):
 		self.assertEqual(breakdown["equipment"], 50.0)
 		self.assertEqual(breakdown["total"], 350.0)
 
-	@patch("omnexa_construction.cost_rollup.boq_actual_cost_breakdown", return_value={"total": 500.0})
+	@patch("omnexa_construction.cost_rollup.boq_actual_cost_breakdown", return_value={"total": 500.0
+	})
 	@patch("omnexa_construction.cost_rollup.frappe.db.exists", return_value=True)
 	@patch("omnexa_construction.cost_rollup.frappe.db.set_value")
 	def test_recompute_boq_actual_cost(self, set_value, _exists, _breakdown):

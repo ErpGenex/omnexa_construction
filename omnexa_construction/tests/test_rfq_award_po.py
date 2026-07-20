@@ -13,8 +13,10 @@ class TestRfqAwardPo(FrappeTestCase):
 			(),
 			{
 				"supplier_quotes": [
-					type("Q", (), {"supplier": "SUP-A", "quoted_amount": 1000})(),
-					type("Q", (), {"supplier": "SUP-B", "quoted_amount": 900})(),
+					type("Q", (), {"supplier": "SUP-A", "quoted_amount": 1000
+	})(),
+					type("Q", (), {"supplier": "SUP-B", "quoted_amount": 900
+	})(),
 				]
 			},
 		)()
@@ -23,7 +25,8 @@ class TestRfqAwardPo(FrappeTestCase):
 		self.assertEqual(quote.quoted_amount, 900)
 
 	def test_winning_quote_missing_supplier(self):
-		rfq = type("RFQ", (), {"supplier_quotes": []})()
+		rfq = type("RFQ", (), {"supplier_quotes": []
+	})()
 		self.assertIsNone(_winning_quote(rfq, "SUP-X"))
 
 	def test_proportional_rate_from_quote(self):
@@ -32,9 +35,10 @@ class TestRfqAwardPo(FrappeTestCase):
 			(),
 			{
 				"estimated_total": 1000,
-				"items": [type("I", (), {"amount": 400, "quantity": 4, "estimated_rate": 100})()],
-				"supplier_quotes": [type("Q", (), {"supplier": "SUP-A", "quoted_amount": 800})()],
-			},
+				"items": [type("I", (), {"amount": 400, "quantity": 4, "estimated_rate": 100
+	})()],
+				"supplier_quotes": [type("Q", (), {"supplier": "SUP-A", "quoted_amount": 800})()]
+	},
 		)()
 		quote = _winning_quote(rfq, "SUP-A")
 		share = rfq.items[0].amount / rfq.estimated_total

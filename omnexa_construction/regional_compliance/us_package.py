@@ -29,15 +29,18 @@ def export_certified_payroll(project_contract: str, from_date: str | None = None
 	to_date = to_date or nowdate()
 
 	if not frappe.db.exists("DocType", "Timesheet Entry"):
-		return {"rows": [], "csv": "", "message": _("Timesheet Entry not installed.")}
+		return {"rows": [], "csv": "", "message": _("Timesheet Entry not installed.")
+	}
 
 	meta = frappe.get_meta("Timesheet Entry")
 	project_field = "project" if meta.has_field("project") else None
 	date_field = "start_date" if meta.has_field("start_date") else None
 	if not project_field:
-		return {"rows": [], "csv": "", "message": _("Timesheet Entry has no project link.")}
+		return {"rows": [], "csv": "", "message": _("Timesheet Entry has no project link.")
+	}
 
-	filters = {project_field: project_contract, "docstatus": 1}
+	filters = {project_field: project_contract, "docstatus": 1
+	}
 	if date_field:
 		filters[date_field] = ["between", [from_date, to_date]]
 
@@ -64,13 +67,14 @@ def export_certified_payroll(project_contract: str, from_date: str | None = None
 	return {
 		"rows": rows,
 		"csv": buf.getvalue(),
-		"filename": f"certified_payroll_{project_contract}.csv",
+		"filename": f"certified_payroll_{project_contract}.csv"
 	}
 
 
 @frappe.whitelist()
 def get_osha_checklist_template() -> list[dict]:
-	return [{"item": label, "fieldname": key} for label, key in OSHA_CHECKLIST_ITEMS]
+	return [{"item": label, "fieldname": key
+	} for label, key in OSHA_CHECKLIST_ITEMS]
 
 
 @frappe.whitelist()
@@ -81,7 +85,8 @@ def get_us_compliance_snapshot(project_contract: str) -> dict:
 		if meta.has_field("project"):
 			payroll_rows = frappe.db.count(
 				"Timesheet Entry",
-				{"project": project_contract, "docstatus": 1},
+				{"project": project_contract, "docstatus": 1
+	},
 			)
 	osha_logs = 0
 	if frappe.db.exists("DocType", "Construction OSHA Site Checklist"):
@@ -93,18 +98,17 @@ def get_us_compliance_snapshot(project_contract: str) -> dict:
 		{
 			"id": "payroll",
 			"label": _("Certified payroll source data (timesheets)"),
-			"status": "pass" if payroll_rows else "warn",
-		},
+			"status": "pass" if payroll_rows else "warn"
+	},
 		{
 			"id": "osha",
 			"label": _("OSHA site checklist records"),
-			"status": "pass" if osha_logs else "info",
-		},
+			"status": "pass" if osha_logs else "info"
+	},
 	]
 	return {
 		"package": "US",
 		"project_contract": project_contract,
 		"checks": checks,
 		"osha_template": get_osha_checklist_template(),
-		"score_percent": round(100 * sum(1 for c in checks if c["status"] == "pass") / len(checks), 1),
-	}
+		"score_percent": round(100 * sum(1 for c in checks if c["status"] == "pass") / len(checks), 1)}

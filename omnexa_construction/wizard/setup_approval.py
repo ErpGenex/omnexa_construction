@@ -35,7 +35,8 @@ def submit_setup_for_approval(setup_name: str) -> dict:
 	recalculate_setup_pricing(setup)
 	setup.approval_status = "Pending Approval"
 	save_wizard_setup(setup)
-	return {"approval_status": setup.approval_status}
+	return {"approval_status": setup.approval_status
+	}
 
 
 @frappe.whitelist()
@@ -77,7 +78,7 @@ def approve_project_setup(setup_name: str, notes: str | None = None, resync_boq:
 		"setup_revision": setup.setup_revision,
 		"project_contract": contract_name,
 		"document_pack_file": setup.document_pack_file,
-		"resync": resync_result,
+		"resync": resync_result
 	}
 
 
@@ -91,7 +92,8 @@ def reject_project_setup(setup_name: str, notes: str | None = None) -> dict:
 	setup.approval_notes = (notes or "").strip() or None
 	setup.flags.approval_unlock = True
 	save_wizard_setup(setup)
-	return {"approval_status": setup.approval_status}
+	return {"approval_status": setup.approval_status
+	}
 
 
 @frappe.whitelist()
@@ -108,7 +110,8 @@ def reopen_setup_for_revision(setup_name: str, reason: str | None = None) -> dic
 	setup.approval_notes = (reason or "").strip() or setup.approval_notes
 	setup.flags.approval_unlock = True
 	save_wizard_setup(setup)
-	return {"approval_status": setup.approval_status, "setup_revision": setup.setup_revision}
+	return {"approval_status": setup.approval_status, "setup_revision": setup.setup_revision
+	}
 
 
 @frappe.whitelist()
@@ -116,7 +119,8 @@ def suggest_setup_contract_terms(setup_name: str, replace: int | str = 0) -> dic
 	setup = ensure_setup_editable(setup_name)
 	count = suggest_contract_terms(setup, replace=cint(replace))
 	save_wizard_setup(setup)
-	return {"terms": len(setup.contract_terms or []), "added": count}
+	return {"terms": len(setup.contract_terms or []), "added": count
+	}
 
 
 @frappe.whitelist()
@@ -129,7 +133,8 @@ def resync_contract_from_setup(setup_name: str) -> dict:
 	contract_name = setup.project_contract
 	_sync_contract_header_from_setup(setup, contract_name)
 	_copy_terms_to_contract(setup, contract_name)
-	result = {"contract": contract_name, "boq_resync": {}}
+	result = {"contract": contract_name, "boq_resync": {}
+	}
 	if not _bundle_has_submitted_documents(contract_name):
 		result["boq_resync"] = sync_boq_items_from_setup(setup, contract_name)
 	save_wizard_setup(setup)
@@ -170,7 +175,7 @@ def _sync_contract_header_from_setup(setup, contract_name: str) -> None:
 		"liquidated_damages_cap_percent": flt(setup.liquidated_damages_cap_percent),
 		"payment_terms": payment_terms,
 		"wizard_setup": setup.name,
-		"approved_setup_revision": cint(setup.setup_revision) or 1,
+		"approved_setup_revision": cint(setup.setup_revision) or 1
 	}
 	frappe.db.set_value("Project Contract", contract_name, updates, update_modified=True)
 
@@ -202,8 +207,8 @@ def _copy_terms_to_contract(setup, contract_name: str) -> None:
 				"clause_group": row.clause_group,
 				"clause_title": row.clause_title,
 				"clause_text": row.clause_text,
-				"sort_order": row.sort_order,
-			},
+				"sort_order": row.sort_order
+	},
 		)
 	contract.flags.ignore_permissions = True
 	if contract.docstatus == 1:

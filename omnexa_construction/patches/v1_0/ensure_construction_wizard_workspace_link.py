@@ -17,7 +17,7 @@ def execute():
 			"label": "New Project (Wizard)",
 			"type": "Page",
 			"link_to": "construction-project-wizard",
-			"color": "Green",
-		},
+			"color": "Green"
+	},
 	)
 	ws.save(ignore_permissions=True)

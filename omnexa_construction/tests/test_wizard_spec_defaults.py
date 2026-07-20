@@ -11,8 +11,8 @@ class TestWizardSpecDefaults(FrappeTestCase):
 				"doctype": "Construction Project Setup",
 				"building_type": "residential_building",
 				"plot_area_m2": 0,
-				"gross_floor_area_m2": 0,
-			}
+				"gross_floor_area_m2": 0
+	}
 		)
 		apply_wizard_spec_defaults(setup)
 		self.assertGreater(setup.plot_area_m2, 0)

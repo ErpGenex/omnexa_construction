@@ -28,8 +28,7 @@ def export_to_procore(doctype: str, name: str) -> dict:
 		"name": name,
 		"project_contract": getattr(doc, "project_contract", None),
 		"subject": getattr(doc, "subject", None) or getattr(doc, "title", None),
-		"status": getattr(doc, "status", None),
-	}
+		"status": getattr(doc, "status", None)}
 	if settings.get("webhook_url") and settings.get("enable_webhooks"):
 		from omnexa_construction.construction_integrations import _post_webhook
 
@@ -37,9 +36,11 @@ def export_to_procore(doctype: str, name: str) -> dict:
 			"omnexa_construction.construction_integrations._post_webhook",
 			queue="short",
 			url=settings.webhook_url,
-			payload={**payload, "event": "procore.export"},
+			payload={**payload, "event": "procore.export"
+	},
 		)
-	return {"ok": True, "payload": payload}
+	return {"ok": True, "payload": payload
+	}
 
 
 @frappe.whitelist()
@@ -54,8 +55,7 @@ def export_to_aconex(doctype: str, name: str) -> dict:
 		"doctype": doctype,
 		"name": name,
 		"project_contract": getattr(doc, "project_contract", None),
-		"reference": getattr(doc, "reference_no", None) or name,
-	}
+		"reference": getattr(doc, "reference_no", None) or name}
 	if settings.get("webhook_url") and settings.get("enable_webhooks"):
 		from omnexa_construction.construction_integrations import _post_webhook
 
@@ -63,6 +63,8 @@ def export_to_aconex(doctype: str, name: str) -> dict:
 			"omnexa_construction.construction_integrations._post_webhook",
 			queue="short",
 			url=settings.webhook_url,
-			payload={**payload, "event": "aconex.export"},
+			payload={**payload, "event": "aconex.export"
+	},
 		)
-	return {"ok": True, "payload": payload}
+	return {"ok": True, "payload": payload
+	}

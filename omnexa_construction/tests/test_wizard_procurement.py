@@ -24,7 +24,8 @@ class TestWizardProcurement(FrappeTestCase):
 		out = import_material_catalog(self.company)
 		self.assertGreater(out["total"], 50)
 		code = item_code("MAT-RMX-C30")
-		self.assertTrue(frappe.db.exists("Item", {"item_code": code, "company": self.company}))
+		self.assertTrue(frappe.db.exists("Item", {"item_code": code, "company": self.company
+	}))
 
 	def test_material_bom_uom_maps_lump_sum_to_stock_uom(self):
 		if not self.company:
@@ -43,7 +44,8 @@ class TestWizardProcurement(FrappeTestCase):
 			self.skipTest("No company")
 		pr = frappe.db.get_value(
 			"Purchase Request",
-			{"company": self.company},
+			{"company": self.company
+	},
 			"name",
 			order_by="creation desc",
 		)

@@ -114,8 +114,8 @@ def _ensure_sidebar_link(
 			"icon": icon,
 			"hidden": 0,
 			"is_query_report": 0,
-			"onboard": 0,
-		},
+			"onboard": 0
+	},
 	)
 	if insert_at < len(ws.links) - 1:
 		ws.links.pop()
@@ -141,7 +141,7 @@ def _ensure_shortcut(
 		"label": label,
 		"type": link_type,
 		"link_to": link_to,
-		"color": color,
+		"color": color
 	}
 	if doc_view:
 		values["doc_view"] = doc_view
@@ -176,7 +176,8 @@ def _ensure_content_shortcut(
 			if not isinstance(row, dict):
 				continue
 			if row.get("type") == "header":
-				text = (row.get("data") or {}).get("text") or ""
+				text = (row.get("data") or {
+	}).get("text") or ""
 				if any(token in text for token in ("Quick Actions", "Operations", "Construction")):
 					insert_at = i + 1
 					break
@@ -186,8 +187,8 @@ def _ensure_content_shortcut(
 		{
 			"id": block_id,
 			"type": "shortcut",
-			"data": {"shortcut_name": shortcut_name, "col": 3},
-		},
+			"data": {"shortcut_name": shortcut_name, "col": 3}
+	},
 	)
 	return True
 
@@ -460,18 +461,20 @@ def sync_construction_workspace_content(ws) -> int:
 
 	blocks.append(
 		{
-			"id": f"{CONTENT_SLUG}-h",
+			"id": f"{CONTENT_SLUG
+	}-h",
 			"type": "header",
-			"data": {"text": '<span class="h4"><b>Construction</b></span>', "col": 12},
-		}
+			"data": {"text": '<span class="h4"><b>Construction</b></span>', "col": 12}
+	}
 	)
 
 	blocks.append(
 		{
 			"id": _nid("qa-h"),
 			"type": "header",
-			"data": {"text": f'<span class="h5"><b>{QUICK_ACTIONS_HEADER}</b></span>', "col": 12},
-		}
+			"data": {"text": f'<span class="h5"><b>{QUICK_ACTIONS_HEADER
+	}</b></span>', "col": 12}
+	}
 	)
 	for row in ws.shortcuts or []:
 		st = _row_val(row, "type")
@@ -484,16 +487,17 @@ def sync_construction_workspace_content(ws) -> int:
 			{
 				"id": _nid("qa"),
 				"type": "shortcut",
-				"data": {"shortcut_name": label, "col": 4},
-			}
+				"data": {"shortcut_name": label, "col": 4}
+	}
 		)
 
 	blocks.append(
 		{
 			"id": _nid("all-h"),
 			"type": "header",
-			"data": {"text": f'<span class="h5"><b>{ALL_MODULES_HEADER}</b></span>', "col": 12},
-		}
+			"data": {"text": f'<span class="h5"><b>{ALL_MODULES_HEADER
+	}</b></span>', "col": 12}
+	}
 	)
 	cards = 0
 	for row in ws.links or []:
@@ -506,8 +510,8 @@ def sync_construction_workspace_content(ws) -> int:
 			{
 				"id": _nid("card"),
 				"type": "card",
-				"data": {"card_name": label, "col": 4},
-			}
+				"data": {"card_name": label, "col": 4}
+	}
 		)
 		cards += 1
 
@@ -516,8 +520,8 @@ def sync_construction_workspace_content(ws) -> int:
 			{
 				"id": _nid("kpi-h"),
 				"type": "header",
-				"data": {"text": '<span class="h5"><b>KPIs</b></span>', "col": 12},
-			}
+				"data": {"text": '<span class="h5"><b>KPIs</b></span>', "col": 12}
+	}
 		)
 		for i, nc in enumerate(ws.number_cards[:12]):
 			# Desk EditorJS resolves tiles by Number Card label, not document name.
@@ -530,8 +534,8 @@ def sync_construction_workspace_content(ws) -> int:
 				{
 					"id": _nid("nc"),
 					"type": "number_card",
-					"data": {"number_card_name": nc_label, "col": 4},
-				}
+					"data": {"number_card_name": nc_label, "col": 4}
+	}
 			)
 
 	if ws.charts:
@@ -539,8 +543,8 @@ def sync_construction_workspace_content(ws) -> int:
 			{
 				"id": _nid("ch-h"),
 				"type": "header",
-				"data": {"text": '<span class="h5"><b>Charts</b></span>', "col": 12},
-			}
+				"data": {"text": '<span class="h5"><b>Charts</b></span>', "col": 12}
+	}
 		)
 		for ch in ws.charts[:9]:
 			ch_label = _row_val(ch, "label") or _row_val(ch, "chart_name")
@@ -550,8 +554,8 @@ def sync_construction_workspace_content(ws) -> int:
 				{
 					"id": _nid("ch"),
 					"type": "chart",
-					"data": {"chart_name": ch_label, "col": 4},
-				}
+					"data": {"chart_name": ch_label, "col": 4}
+	}
 			)
 
 	ws.content = json.dumps(blocks, separators=(",", ":"))
@@ -575,7 +579,7 @@ def _card_break(label: str) -> dict:
 		"hidden": 0,
 		"is_query_report": 0,
 		"link_count": 0,
-		"onboard": 0,
+		"onboard": 0
 	}
 
 
@@ -596,7 +600,7 @@ def _sidebar_link(
 		"hidden": 0,
 		"is_query_report": 1 if is_query_report else 0,
 		"link_count": 0,
-		"onboard": 0,
+		"onboard": 0
 	}
 	if is_query_report and link_type == "Report":
 		ref = frappe.db.get_value("Report", link_to, "ref_doctype")
@@ -686,7 +690,8 @@ def _resolve_number_card_name(name_or_label: str | None) -> str | None:
 		return None
 	if frappe.db.exists("Number Card", name_or_label):
 		return name_or_label
-	return frappe.db.get_value("Number Card", {"label": name_or_label}, "name")
+	return frappe.db.get_value("Number Card", {"label": name_or_label
+	}, "name")
 
 
 def _upsert_construction_number_card(label: str, document_type: str, filters: list | None) -> str | None:
@@ -700,7 +705,8 @@ def _upsert_construction_number_card(label: str, document_type: str, filters: li
 	)
 	existing = frappe.db.get_value(
 		"Number Card",
-		{"label": label, "document_type": document_type, "function": "Count"},
+		{"label": label, "document_type": document_type, "function": "Count"
+	},
 		"name",
 	)
 	if existing:
@@ -718,8 +724,8 @@ def _upsert_construction_number_card(label: str, document_type: str, filters: li
 			"is_public": 1,
 			"show_percentage_stats": 1,
 			"stats_time_interval": "Monthly",
-			"show_full_number": 1,
-		}
+			"show_full_number": 1
+	}
 	)
 	doc.insert(ignore_permissions=True)
 	return doc.name
@@ -731,7 +737,8 @@ def _ensure_construction_workspace_kpis_local(ws) -> None:
 	for label, doctype, filters in CONSTRUCTION_WORKSPACE_KPIS:
 		nm = _upsert_construction_number_card(label, doctype, filters)
 		if nm:
-			card_rows.append({"number_card_name": nm, "label": label})
+			card_rows.append({"number_card_name": nm, "label": label
+	})
 	ws.number_cards = []
 	for row in card_rows:
 		ws.append("number_cards", row)
@@ -770,8 +777,7 @@ def _prune_invalid_workspace_kpi_links(ws) -> int:
 			kept_nc.append(
 				{
 					"number_card_name": nm,
-					"label": _row_val(row, "label") or nm,
-				}
+					"label": _row_val(row, "label") or nm}
 			)
 	ws.number_cards = []
 	for row in kept_nc:
@@ -812,7 +818,8 @@ def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 
 	Preserves custom links not in the catalog under «Other».
 	"""
-	stats = {"sections": 0, "links": 0, "preserved": 0, "shortcuts": 0, "content_cards": 0}
+	stats = {"sections": 0, "links": 0, "preserved": 0, "shortcuts": 0, "content_cards": 0
+	}
 	if not frappe.db.exists("Workspace", "Construction"):
 		return stats
 
@@ -877,8 +884,7 @@ def sync_construction_workspace_menu(*, save: bool = True) -> dict:
 				"label": _row_val(row, "label"),
 				"link_type": _row_val(row, "link_type"),
 				"link_to": _row_val(row, "link_to"),
-				"report_ref_doctype": _row_val(row, "report_ref_doctype"),
-			}
+				"report_ref_doctype": _row_val(row, "report_ref_doctype")}
 		)
 	for values in build_shortcuts_from_link_rows(link_rows_for_sc):
 		ws.append("shortcuts", values)

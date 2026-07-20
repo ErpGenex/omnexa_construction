@@ -24,7 +24,8 @@ def cbs_boq_summary(project_contract: str) -> list[dict]:
 
 	lines = frappe.get_all(
 		"BOQ Item",
-		filters={"project_contract": project_contract, "docstatus": ["!=", 2], "is_group": 0},
+		filters={"project_contract": project_contract, "docstatus": ["!=", 2], "is_group": 0
+	},
 		fields=["cbs_element", "planned_cost", "actual_cost", "cost_code"],
 		limit_page_length=10000,
 	)
@@ -33,7 +34,8 @@ def cbs_boq_summary(project_contract: str) -> list[dict]:
 		cbs = row.get("cbs_element") or suggest_cbs_for_cost_code(row.get("cost_code")) or "Unmapped"
 		bucket = totals.setdefault(
 			cbs,
-			{"cbs_element": cbs, "planned_cost": 0.0, "actual_cost": 0.0, "line_count": 0},
+			{"cbs_element": cbs, "planned_cost": 0.0, "actual_cost": 0.0, "line_count": 0
+	},
 		)
 		bucket["planned_cost"] += flt(row.get("planned_cost"))
 		bucket["actual_cost"] += flt(row.get("actual_cost"))

@@ -60,12 +60,20 @@ def execute(filters=None):
 
 def _columns():
 	return [
-		{"label": _("PTW"), "fieldname": "name", "fieldtype": "Link", "options": "Construction Permit to Work", "width": 110},
-		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130},
-		{"label": _("Location"), "fieldname": "work_location", "fieldtype": "Data", "width": 120},
-		{"label": _("Valid From"), "fieldname": "valid_from", "fieldtype": "Datetime", "width": 140},
-		{"label": _("Valid To"), "fieldname": "valid_to", "fieldtype": "Datetime", "width": 140},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90},
-		{"label": _("Expired"), "fieldname": "is_expired", "fieldtype": "Check", "width": 70},
-		{"label": _("Issued By"), "fieldname": "issued_by", "fieldtype": "Link", "options": "User", "width": 110},
+		{"label": _("PTW"), "fieldname": "name", "fieldtype": "Link", "options": "Construction Permit to Work", "width": 110
+	},
+		{"label": _("Contract"), "fieldname": "project_contract", "fieldtype": "Link", "options": "Project Contract", "width": 130
+	},
+		{"label": _("Location"), "fieldname": "work_location", "fieldtype": "Data", "width": 120
+	},
+		{"label": _("Valid From"), "fieldname": "valid_from", "fieldtype": "Datetime", "width": 140
+	},
+		{"label": _("Valid To"), "fieldname": "valid_to", "fieldtype": "Datetime", "width": 140
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 90
+	},
+		{"label": _("Expired"), "fieldname": "is_expired", "fieldtype": "Check", "width": 70
+	},
+		{"label": _("Issued By"), "fieldname": "issued_by", "fieldtype": "Link", "options": "User", "width": 110
+	},
 	]

@@ -12,6 +12,7 @@ def execute():
 	existing = {row.role for row in (page.roles or [])}
 	for role in ("System Manager", "Project Manager", "Desk User"):
 		if role not in existing:
-			page.append("roles", {"role": role})
+			page.append("roles", {"role": role
+	})
 	page.save(ignore_permissions=True)
 	frappe.clear_cache(doctype="Page")

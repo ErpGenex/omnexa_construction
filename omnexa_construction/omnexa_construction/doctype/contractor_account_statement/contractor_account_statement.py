@@ -36,8 +36,7 @@ def load_lines_from_ipc(statement_name: str) -> dict:
 		filters={
 			"project_contract": doc.project_contract,
 			"status": ["in", ["Certified", "Posted"]],
-			"docstatus": ["<", 2],
-		},
+			"docstatus": ["<", 2]},
 		fields=["name", "ipc_date", "cumulative_value_billed", "net_amount", "certificate_reference"],
 		order_by="ipc_date asc, creation asc",
 	)
@@ -58,10 +57,11 @@ def load_lines_from_ipc(statement_name: str) -> dict:
 				"prior_payments": running_paid,
 				"debit_balance": net,
 				"credit_balance": 0,
-				"remarks": ipc.certificate_reference or "",
-			},
+				"remarks": ipc.certificate_reference or ""
+	},
 		)
 		running_paid += net
 	doc.flags.ignore_permissions = True
 	doc.save()
-	return {"lines": len(doc.lines)}
+	return {"lines": len(doc.lines)
+	}

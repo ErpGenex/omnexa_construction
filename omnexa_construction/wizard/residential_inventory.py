@@ -16,9 +16,11 @@ RESIDENTIAL_BUILDING_TYPES = frozenset(
 def sync_residential_inventory_from_setup(setup, project_contract: str) -> dict:
 	"""Create plot + unit inventory rows for residential developer projects."""
 	if setup.building_type not in RESIDENTIAL_BUILDING_TYPES:
-		return {"plots": 0, "units": 0}
+		return {"plots": 0, "units": 0
+	}
 	if not frappe.db.exists("DocType", "Construction Plot Unit"):
-		return {"plots": 0, "units": 0}
+		return {"plots": 0, "units": 0
+	}
 
 	plots = units = 0
 	unit_count = max(cint(setup.unit_count) or 1, 1)
@@ -30,7 +32,8 @@ def sync_residential_inventory_from_setup(setup, project_contract: str) -> dict:
 		plot_no = f"P-{i:03d}"
 		if not frappe.db.exists(
 			"Construction Plot Unit",
-			{"project_contract": project_contract, "plot_number": plot_no},
+			{"project_contract": project_contract, "plot_number": plot_no
+	},
 		):
 			frappe.get_doc(
 				{
@@ -42,8 +45,8 @@ def sync_residential_inventory_from_setup(setup, project_contract: str) -> dict:
 					"plot_status": "Available",
 					"unit_typology": setup.building_type,
 					"company": setup.company,
-					"branch": setup.branch,
-				}
+					"branch": setup.branch
+	}
 			).insert(ignore_permissions=True)
 			plots += 1
 
@@ -52,7 +55,8 @@ def sync_residential_inventory_from_setup(setup, project_contract: str) -> dict:
 			"DocType", "Construction Residential Unit"
 		) and not frappe.db.exists(
 			"Construction Residential Unit",
-			{"project_contract": project_contract, "unit_number": unit_no},
+			{"project_contract": project_contract, "unit_number": unit_no
+	},
 		):
 			gfa = flt(setup.gross_floor_area_m2)
 			sellable = gfa / unit_count if gfa else 0
@@ -67,9 +71,10 @@ def sync_residential_inventory_from_setup(setup, project_contract: str) -> dict:
 					"sellable_area_m2": sellable,
 					"unit_status": "Planned",
 					"company": setup.company,
-					"branch": setup.branch,
-				}
+					"branch": setup.branch
+	}
 			).insert(ignore_permissions=True)
 			units += 1
 
-	return {"plots": plots, "units": units}
+	return {"plots": plots, "units": units
+	}

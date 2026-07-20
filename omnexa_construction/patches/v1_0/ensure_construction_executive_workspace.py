@@ -44,8 +44,8 @@ def _add_shortcut(ws, label: str, link_type: str, link_to: str, report_ref: str 
 			"type": link_type,
 			"link_to": link_to,
 			"report_ref_doctype": report_ref,
-			"color": color,
-		},
+			"color": color
+	},
 	)
 
 
@@ -53,7 +53,8 @@ def _add_number_card(ws, number_card_name: str):
 	for row in ws.number_cards or []:
 		if row.number_card_name == number_card_name or row.label == number_card_name:
 			return
-	ws.append("number_cards", {"label": number_card_name, "number_card_name": number_card_name})
+	ws.append("number_cards", {"label": number_card_name, "number_card_name": number_card_name
+	})
 
 
 def _shortcut_label(ws, link_to: str, fallback: str) -> str:
@@ -75,16 +76,18 @@ def _merge_content_blocks(ws):
 		("construction-sc-ctrl", "Construction Contract Control", "Contract control"),
 	]
 	extra = [
-		{"id": "construction-nc-open-ncr", "type": "number_card", "data": {"number_card_name": "Open NCRs", "col": 4}},
-		{"id": "construction-nc-open-hse", "type": "number_card", "data": {"number_card_name": "Open HSE incidents", "col": 4}},
+		{"id": "construction-nc-open-ncr", "type": "number_card", "data": {"number_card_name": "Open NCRs", "col": 4}
+	},
+		{"id": "construction-nc-open-hse", "type": "number_card", "data": {"number_card_name": "Open HSE incidents", "col": 4}
+	},
 	]
 	for block_id, link_to, fallback in report_shortcuts:
 		extra.append(
 			{
 				"id": block_id,
 				"type": "shortcut",
-				"data": {"shortcut_name": _shortcut_label(ws, link_to, fallback), "col": 3},
-			}
+				"data": {"shortcut_name": _shortcut_label(ws, link_to, fallback), "col": 3}
+	}
 		)
 	insert_at = 0
 	for i, block in enumerate(content):
@@ -123,7 +126,8 @@ def _upsert_number_card(label: str, document_type: str, filters: list) -> None:
 	filters_json = json.dumps(filters, separators=(",", ":"))
 	existing = frappe.db.get_value(
 		"Number Card",
-		{"label": label, "document_type": document_type, "function": "Count"},
+		{"label": label, "document_type": document_type, "function": "Count"
+	},
 		"name",
 	)
 	if existing:
@@ -141,7 +145,7 @@ def _upsert_number_card(label: str, document_type: str, filters: list) -> None:
 			"is_public": 1,
 			"show_percentage_stats": 1,
 			"stats_time_interval": "Monthly",
-			"show_full_number": 1,
-		}
+			"show_full_number": 1
+	}
 	)
 	doc.insert(ignore_permissions=True)

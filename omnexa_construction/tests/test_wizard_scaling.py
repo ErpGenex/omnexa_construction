@@ -15,8 +15,8 @@ class TestWizardScaling(FrappeTestCase):
 			"PLOT": 600,
 			"plot_area_m2": 600,
 			"FLOORS": 2,
-			"ROAD_M": 0,
-		}
+			"ROAD_M": 0
+	}
 		line = next(r for r in VILLA_LINES if r["cost_code"] == "03.10")
 		qty = resolve_quantity(line, drivers)
 		self.assertEqual(qty, 450 * 0.42)
@@ -42,7 +42,8 @@ class TestWizardScaling(FrappeTestCase):
 		line = {
 			"quantity_driver": "GFA",
 			"base_quantity": 1,
-			"unit_of_measure": "ls",
-		}
-		drivers = {"GFA": 5000}
+			"unit_of_measure": "ls"
+	}
+		drivers = {"GFA": 5000
+	}
 		self.assertEqual(resolve_quantity(line, drivers), 1)

@@ -38,8 +38,8 @@ def maybe_create_material_request(doc, method=None) -> None:
 			"item_code": item_code,
 			"qty": flt(row.suggested_quantity) or 1,
 			"uom": row.uom or frappe.db.get_value("Item", item_code, "stock_uom"),
-			"description": row.material_name,
-		}
+			"description": row.material_name
+	}
 		if frappe.get_meta("Material Request Item").has_field("project_contract"):
 			line["project_contract"] = doc.project_contract
 		mr.append("items", line)
@@ -48,7 +48,8 @@ def maybe_create_material_request(doc, method=None) -> None:
 		return
 
 	mr.insert(ignore_permissions=True)
-	updates = {"material_request": mr.name}
+	updates = {"material_request": mr.name
+	}
 	if doc.meta.has_field("status"):
 		pass
 	frappe.db.set_value(doc.doctype, doc.name, updates, update_modified=True)
@@ -65,7 +66,9 @@ def _resolve_item_code(row) -> str | None:
 	name = (row.material_name or "").strip()
 	if not name:
 		return None
-	item = frappe.db.get_value("Item", {"item_name": name, "disabled": 0}, "name")
+	item = frappe.db.get_value("Item", {"item_name": name, "disabled": 0
+	}, "name")
 	if item:
 		return item
-	return frappe.db.get_value("Item", {"item_code": name, "disabled": 0}, "name")
+	return frappe.db.get_value("Item", {"item_code": name, "disabled": 0
+	}, "name")

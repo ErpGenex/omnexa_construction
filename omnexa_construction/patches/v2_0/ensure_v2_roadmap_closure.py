@@ -48,6 +48,7 @@ def _add_evm_dashboard_shortcut():
 		return
 	ws.append(
 		"shortcuts",
-		{"type": "Report", "link_to": "Construction EVM Dashboard", "label": "EVM Dashboard", "color": "Blue"},
+		{"type": "Report", "link_to": "Construction EVM Dashboard", "label": "EVM Dashboard", "color": "Blue"
+	},
 	)
 	ws.save(ignore_permissions=True)

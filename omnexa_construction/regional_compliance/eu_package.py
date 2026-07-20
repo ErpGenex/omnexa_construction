@@ -56,7 +56,8 @@ def log_cde_access_on_load(doc, method=None) -> None:
 @frappe.whitelist()
 def log_cde_document_access(cde_document: str, action: str = "view") -> dict:
 	if not frappe.db.exists("DocType", "Construction CDE Access Log"):
-		return {"logged": False, "reason": "doctype_missing"}
+		return {"logged": False, "reason": "doctype_missing"
+	}
 	if not frappe.db.exists("Construction CDE Document", cde_document):
 		frappe.throw(_("CDE document not found."), title=_("GDPR log"))
 
@@ -69,11 +70,12 @@ def log_cde_document_access(cde_document: str, action: str = "view") -> dict:
 			"user": frappe.session.user,
 			"action": action,
 			"company": doc.company,
-			"branch": doc.branch,
-		}
+			"branch": doc.branch
+	}
 	)
 	log.insert(ignore_permissions=True)
-	return {"logged": True, "name": log.name}
+	return {"logged": True, "name": log.name
+	}
 
 
 @frappe.whitelist()
@@ -81,7 +83,8 @@ def get_eu_compliance_snapshot(project_contract: str) -> dict:
 	access_logs = 0
 	if frappe.db.exists("DocType", "Construction CDE Access Log"):
 		access_logs = frappe.db.count(
-			"Construction CDE Access Log", {"project_contract": project_contract}
+			"Construction CDE Access Log", {"project_contract": project_contract
+	}
 		)
 	cde_count = frappe.db.count(
 		"Construction CDE Document",
@@ -97,18 +100,17 @@ def get_eu_compliance_snapshot(project_contract: str) -> dict:
 			"id": "gdpr_log",
 			"label": _("CDE access audit trail (GDPR)"),
 			"status": "pass" if access_logs or not cde_count else "warn",
-			"detail": _("{0} log entries").format(access_logs),
-		},
+			"detail": _("{0} log entries").format(access_logs)
+	},
 		{
 			"id": "ce_refs",
 			"label": _("CE / product declaration documents"),
 			"status": "pass" if ce_refs else "info",
-			"detail": _("{0} documents").format(ce_refs),
-		},
+			"detail": _("{0} documents").format(ce_refs)
+	},
 	]
 	return {
 		"package": "EU",
 		"project_contract": project_contract,
 		"checks": checks,
-		"score_percent": round(100 * sum(1 for c in checks if c["status"] == "pass") / len(checks), 1),
-	}
+		"score_percent": round(100 * sum(1 for c in checks if c["status"] == "pass") / len(checks), 1)}

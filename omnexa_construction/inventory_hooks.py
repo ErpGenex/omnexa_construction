@@ -37,8 +37,8 @@ def create_material_issue_from_boq(boq_item: str, qty: float | None = None) -> s
 				"item_code": row.item_code,
 				"qty": issue_qty,
 				"uom": row.uom,
-				"s_warehouse": _default_issue_warehouse(boq.company),
-			},
+				"s_warehouse": _default_issue_warehouse(boq.company)
+	},
 		)
 	if not se.items:
 		frappe.throw(_("No issue quantity to process."), title=_("Inventory"))
@@ -47,6 +47,7 @@ def create_material_issue_from_boq(boq_item: str, qty: float | None = None) -> s
 
 
 def _default_issue_warehouse(company: str) -> str | None:
-	for wh in frappe.get_all("Warehouse", filters={"company": company, "is_group": 0}, pluck="name", limit=1):
+	for wh in frappe.get_all("Warehouse", filters={"company": company, "is_group": 0
+	}, pluck="name", limit=1):
 		return wh
 	return None

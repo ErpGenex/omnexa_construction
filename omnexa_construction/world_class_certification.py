@@ -48,7 +48,7 @@ def sign_off_world_class_certificate(
 		"certified_on": settings.world_class_certified_on,
 		"auditor": settings.world_class_external_auditor,
 		"export_path": path,
-		"nps": get_nps_summary(),
+		"nps": get_nps_summary()
 	}
 
 
@@ -63,8 +63,8 @@ def _seed_demo_nps_if_empty() -> None:
 				"user": frappe.session.user,
 				"score": score,
 				"feedback": "World Class UAT seed",
-				"company": frappe.defaults.get_user_default("Company"),
-			}
+				"company": frappe.defaults.get_user_default("Company")
+	}
 		).insert(ignore_permissions=True)
 
 

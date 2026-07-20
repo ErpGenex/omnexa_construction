@@ -62,8 +62,8 @@ def execute():
 					"options": "Purchase Order",
 					"read_only": 1,
 					"insert_after": "awarded_supplier",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"IPC Certificate": [
 				{
@@ -72,8 +72,8 @@ def execute():
 					"fieldtype": "Float",
 					"default": "1",
 					"insert_after": "net_after_tax",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction Material Approval Request": [
 				{
@@ -83,8 +83,8 @@ def execute():
 					"options": "Material Request",
 					"read_only": 1,
 					"insert_after": "status",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction Material Approval Line": [
 				{
@@ -93,10 +93,9 @@ def execute():
 					"fieldtype": "Link",
 					"options": "Item",
 					"insert_after": "material_name",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 
@@ -120,7 +119,8 @@ def execute():
 				continue
 			ws.append(
 				"shortcuts",
-				{"type": "DocType", "link_to": link_to, "label": label, "color": "Green"},
+				{"type": "DocType", "link_to": link_to, "label": label, "color": "Green"
+	},
 			)
 		ws.save(ignore_permissions=True)
 

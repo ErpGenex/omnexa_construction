@@ -14,7 +14,7 @@ def currency_display_label(currency: str | None) -> str:
 		"AED": "د.إ",
 		"USD": "USD",
 		"EUR": "EUR",
-		"GBP": "GBP",
+		"GBP": "GBP"
 	}
 	if currency in labels:
 		return labels[currency]
@@ -75,8 +75,8 @@ def get_ipc_print_context(doc) -> dict:
 				"prior_cumulative": prior,
 				"current_ipc": current,
 				"cumulative_to_date": cumulative,
-				"completion_percent": exec_pct,
-			}
+				"completion_percent": exec_pct
+	}
 		)
 		total_contract += contract_val
 		total_prior += prior
@@ -109,8 +109,7 @@ def get_ipc_print_context(doc) -> dict:
 			"prior_cumulative": total_prior or flt(doc.prior_cumulative_billed),
 			"current_ipc": total_current or flt(doc.gross_amount),
 			"cumulative_to_date": total_cumulative or cumulative_billed,
-			"completion_percent": round(completion_pct, 2),
-		},
+			"completion_percent": round(completion_pct, 2)},
 		"summary": {
 			"cumulative_billed": cumulative_billed,
 			"completion_percent": round(completion_pct, 2),
@@ -120,12 +119,12 @@ def get_ipc_print_context(doc) -> dict:
 			"penalty": penalty,
 			"discount": discount,
 			"other": other_ded,
-			"net_due": net_due,
-		},
+			"net_due": net_due
+	},
 		"certificate_number": cert_number,
 		"ipc_date": doc.ipc_date,
 		"period_from": doc.period_from,
-		"period_to": doc.period_to,
+		"period_to": doc.period_to
 	}
 
 

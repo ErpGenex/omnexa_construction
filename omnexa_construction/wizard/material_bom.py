@@ -64,8 +64,8 @@ def build_material_bom_rows(setup, cost_code: str, trade_code: str | None = None
 				"uom": material_row_uom(item, d.unit_of_measure),
 				"rate": rate,
 				"amount": money(qty * rate) if rate else mat_amt,
-				"spec_description": d.spec_description,
-			}
+				"spec_description": d.spec_description
+	}
 		)
 	if rows:
 		return rows
@@ -92,8 +92,8 @@ def build_material_bom_rows(setup, cost_code: str, trade_code: str | None = None
 				"uom": material_row_uom(code, boq_row.unit_of_measure),
 				"rate": rate,
 				"amount": money(qty * rate),
-				"spec_description": boq_row.item_description,
-			}
+				"spec_description": boq_row.item_description
+	}
 		)
 	return rows
 

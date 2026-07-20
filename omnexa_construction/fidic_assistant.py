@@ -18,7 +18,8 @@ def suggest_fidic_clause(
 	notice_type: str | None = None,
 	keywords: str | None = None,
 ) -> list[dict]:
-	filters = {"is_active": 1}
+	filters = {"is_active": 1
+	}
 	if notice_type:
 		filters["notice_type"] = notice_type
 	rows = frappe.get_all(
@@ -73,8 +74,8 @@ def draft_fidic_notice_suggestion(
 			"notice_date": notice_date,
 			"status": "Open",
 			"company": company,
-			"branch": branch,
-		}
+			"branch": branch
+	}
 	)
 	due = compute_notice_due_date_for_notice(draft)
 	clause_label = None
@@ -91,9 +92,8 @@ def draft_fidic_notice_suggestion(
 			"fidic_clause_reference": fidic_clause_reference,
 			"clause_reference": clause_label,
 			"notice_date": notice_date,
-			"response_due_date": str(due) if due else None,
-		},
+			"response_due_date": str(due) if due else None
+	},
 		"assistant_message": _(
 			"Suggested response due by {0}. Review clause {1} before issuing notice."
-		).format(due or "—", clause_label or fidic_clause_reference or "—"),
-	}
+		).format(due or "—", clause_label or fidic_clause_reference or "—")}

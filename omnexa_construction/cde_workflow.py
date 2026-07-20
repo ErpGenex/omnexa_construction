@@ -6,9 +6,10 @@ from frappe import _
 CDE_TRANSITIONS = {
 	"WIP": {"Shared", "Archived"},
 	"Shared": {"Published", "WIP", "Archived"},
-	"Published": {"Archived"},
-	"Archived": set(),
-}
+	"Published": {"Archived"
+	},
+	"Archived": set()
+	}
 
 
 def validate_cde_status_transition(old_status: str | None, new_status: str) -> None:

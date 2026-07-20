@@ -26,8 +26,8 @@ def create_rfq_from_purchase_request(
 				"uom": row.get("uom") or frappe.db.get_value("Item", row.item_code, "stock_uom"),
 				"boq_item": row.get("boq_item"),
 				"cost_code": row.get("cost_code"),
-				"estimated_rate": rate,
-			}
+				"estimated_rate": rate
+	}
 		)
 	if not items:
 		frappe.throw(_("Purchase Request has no items."), title=_("Procurement"))
@@ -44,8 +44,8 @@ def create_rfq_from_purchase_request(
 			"rfq_date": today(),
 			"required_by": pr.required_by,
 			"status": "Draft",
-			"items": items,
-		}
+			"items": items
+	}
 	)
 	if auto_quotes:
 		for supplier in _pick_suppliers(pr.company, supplier_names, limit=3):
@@ -56,8 +56,8 @@ def create_rfq_from_purchase_request(
 					"quoted_amount": _estimate_quote_total(items, supplier),
 					"lead_time_days": 14 + len(rfq.supplier_quotes) * 3,
 					"compliance_score": 85 - len(rfq.supplier_quotes) * 5,
-					"remarks": _("Auto-estimate from catalog rates — replace with vendor quote."),
-				},
+					"remarks": _("Auto-estimate from catalog rates — replace with vendor quote.")
+	},
 			)
 	rfq.insert(ignore_permissions=True)
 	return rfq.name
@@ -67,8 +67,10 @@ def create_rfqs_for_setup(setup, pr_names: list[str], project_contract: str | No
 	names = []
 	contract = project_contract or getattr(setup, "project_contract", None)
 	for pr in pr_names:
-		if frappe.db.exists("Construction RFQ", {"purchase_request": pr}):
-			names.append(frappe.db.get_value("Construction RFQ", {"purchase_request": pr}, "name"))
+		if frappe.db.exists("Construction RFQ", {"purchase_request": pr
+	}):
+			names.append(frappe.db.get_value("Construction RFQ", {"purchase_request": pr
+	}, "name"))
 			continue
 		names.append(create_rfq_from_purchase_request(pr, project_contract=contract))
 	return names
@@ -86,11 +88,10 @@ def evaluate_rfq(rfq_name: str) -> dict:
 				"supplier": q.supplier,
 				"quoted_amount": q.quoted_amount,
 				"total_score": q.total_score,
-				"is_recommended": q.is_recommended,
-			}
-			for q in rfq.supplier_quotes or []
-		],
+				"is_recommended": q.is_recommended
 	}
+			for q in rfq.supplier_quotes or []
+		]}
 
 
 def _pick_suppliers(company: str, names: list[str] | None, limit: int = 3) -> list[str]:
@@ -98,7 +99,8 @@ def _pick_suppliers(company: str, names: list[str] | None, limit: int = 3) -> li
 		return [n for n in names if frappe.db.exists("Supplier", n)][:limit]
 	return frappe.get_all(
 		"Supplier",
-		filters={"company": company},
+		filters={"company": company
+	},
 		pluck="name",
 		limit=limit,
 		order_by="modified desc",

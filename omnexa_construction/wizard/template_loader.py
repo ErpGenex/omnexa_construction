@@ -3,17 +3,28 @@ from __future__ import annotations
 """Seed data for Construction BOQ templates and trade packages (Phase 4 MVP)."""
 
 TRADE_PACKAGES: list[dict] = [
-	{"trade_code": "TRD-EARTH", "trade_name": "Earthworks & Site", "trade_name_ar": "ترابيات وموقع", "boq_section_prefixes": "01", "default_retention_percent": 5},
-	{"trade_code": "TRD-SUB", "trade_name": "Substructure / Piling", "trade_name_ar": "أساسات", "boq_section_prefixes": "02", "default_retention_percent": 5},
-	{"trade_code": "TRD-CONC", "trade_name": "Concrete & Structure", "trade_name_ar": "خرسانة وهيكل", "boq_section_prefixes": "03", "default_retention_percent": 5},
-	{"trade_code": "TRD-FACADE", "trade_name": "Facade & Envelope", "trade_name_ar": "واجهات", "boq_section_prefixes": "05", "default_retention_percent": 5},
-	{"trade_code": "TRD-MEP-P", "trade_name": "Plumbing & Drainage", "trade_name_ar": "سباكة وصرف", "boq_section_prefixes": "09", "default_retention_percent": 5},
-	{"trade_code": "TRD-MEP-H", "trade_name": "HVAC", "trade_name_ar": "تكييف", "boq_section_prefixes": "10", "default_retention_percent": 5},
-	{"trade_code": "TRD-MEP-E", "trade_name": "Electrical & ELV", "trade_name_ar": "كهرباء", "boq_section_prefixes": "11", "default_retention_percent": 5},
-	{"trade_code": "TRD-FIN", "trade_name": "Finishes & Joinery", "trade_name_ar": "تشطيبات", "boq_section_prefixes": "07,08", "default_retention_percent": 5},
-	{"trade_code": "TRD-EXT", "trade_name": "External Works", "trade_name_ar": "أعمال خارجية", "boq_section_prefixes": "13,14", "default_retention_percent": 5},
-	{"trade_code": "TRD-ROAD", "trade_name": "Roads & Pavement", "trade_name_ar": "طرق ورصف", "boq_section_prefixes": "02,03", "default_retention_percent": 5},
-	{"trade_code": "TRD-PIPE", "trade_name": "Pipeline Installation", "trade_name_ar": "شبكات", "boq_section_prefixes": "07,08", "default_retention_percent": 5},
+	{"trade_code": "TRD-EARTH", "trade_name": "Earthworks & Site", "trade_name_ar": "ترابيات وموقع", "boq_section_prefixes": "01", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-SUB", "trade_name": "Substructure / Piling", "trade_name_ar": "أساسات", "boq_section_prefixes": "02", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-CONC", "trade_name": "Concrete & Structure", "trade_name_ar": "خرسانة وهيكل", "boq_section_prefixes": "03", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-FACADE", "trade_name": "Facade & Envelope", "trade_name_ar": "واجهات", "boq_section_prefixes": "05", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-MEP-P", "trade_name": "Plumbing & Drainage", "trade_name_ar": "سباكة وصرف", "boq_section_prefixes": "09", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-MEP-H", "trade_name": "HVAC", "trade_name_ar": "تكييف", "boq_section_prefixes": "10", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-MEP-E", "trade_name": "Electrical & ELV", "trade_name_ar": "كهرباء", "boq_section_prefixes": "11", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-FIN", "trade_name": "Finishes & Joinery", "trade_name_ar": "تشطيبات", "boq_section_prefixes": "07,08", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-EXT", "trade_name": "External Works", "trade_name_ar": "أعمال خارجية", "boq_section_prefixes": "13,14", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-ROAD", "trade_name": "Roads & Pavement", "trade_name_ar": "طرق ورصف", "boq_section_prefixes": "02,03", "default_retention_percent": 5
+	},
+	{"trade_code": "TRD-PIPE", "trade_name": "Pipeline Installation", "trade_name_ar": "شبكات", "boq_section_prefixes": "07,08", "default_retention_percent": 5
+	},
 ]
 
 def _line(
@@ -47,7 +58,7 @@ def _line(
 		"labor_ratio": labor,
 		"material_ratio": material,
 		"equipment_ratio": equipment,
-		"trade_package_code": trade,
+		"trade_package_code": trade
 	}
 
 

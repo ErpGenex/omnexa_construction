@@ -12,7 +12,8 @@ def apply_template_defaults(setup, *, force_phases: bool = False, force_details:
 	"""Apply phases, BOQ detail pricing, line LD/dates from template pack."""
 	pack = get_template_pack(setup.boq_template, setup.building_type)
 	if not pack:
-		return {"applied": False}
+		return {"applied": False
+	}
 
 	if not setup.planned_completion and setup.planned_start:
 		setup.planned_completion = add_months(getdate(setup.planned_start), pack.get("duration_months", 18))
@@ -57,8 +58,8 @@ def _apply_phases(setup, pack: dict) -> None:
 				"planned_finish": p_finish,
 				"handover_date": p_finish,
 				"weight_percent": weight,
-				"boq_cost_prefixes": prefixes,
-			},
+				"boq_cost_prefixes": prefixes
+	},
 		)
 
 	setup.set("ipc_plan", [])
@@ -86,8 +87,8 @@ def _apply_phases(setup, pack: dict) -> None:
 				"retention_percent": retention,
 				"discount_percent": discount,
 				"advance_recovery": adv_rec,
-				"remarks": _("IPC at {0} handover").format(phase.phase_name),
-			},
+				"remarks": _("IPC at {0} handover").format(phase.phase_name)
+	},
 		)
 
 
@@ -136,7 +137,8 @@ def _apply_details(setup, pack: dict) -> None:
 				"boq_details",
 				{
 					"boq_cost_code": code,
-					"spec_description": f"{row.item_description} — {spec_name}",
+					"spec_description": f"{row.item_description} — {spec_name
+	}",
 					"quantity": qty,
 					"unit_of_measure": row.unit_of_measure or "Nos",
 					"labor_rate": money(amount * labor_pct / qty),
@@ -144,8 +146,8 @@ def _apply_details(setup, pack: dict) -> None:
 					"equipment_rate": money(amount * equip_pct / qty),
 					"ld_per_day": money(contract_ld_day * 0.12 / max(len(specs), 1)),
 					"ld_cap_days": row.ld_cap_days or 30,
-					"planned_finish": row.planned_finish,
-				},
+					"planned_finish": row.planned_finish
+	},
 			)
 		for d in setup.boq_details:
 			if d.boq_cost_code == code:

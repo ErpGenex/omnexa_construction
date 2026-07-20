@@ -42,7 +42,8 @@ class TestIpcScheduleSuggestion(FrappeTestCase):
 	)
 	@patch(
 		"omnexa_construction.omnexa_construction.doctype.ipc_certificate.ipc_certificate.frappe.db.get_value",
-		return_value={"planned_start": "2026-01-01", "planned_completion": "2026-12-31"},
+		return_value={"planned_start": "2026-01-01", "planned_completion": "2026-12-31"
+	},
 	)
 	@patch(
 		"omnexa_construction.omnexa_construction.doctype.ipc_certificate.ipc_certificate.frappe.db.exists",

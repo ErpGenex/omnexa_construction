@@ -53,7 +53,6 @@ def refresh_subcontract_work_order_amounts(subcontract_work_order: str | None) -
 		{
 			"amount_certified": certified,
 			"amount_paid": paid,
-			"progress_percent": round(progress, 2),
-		},
+			"progress_percent": round(progress, 2)},
 		update_modified=False,
 	)

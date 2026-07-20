@@ -41,8 +41,8 @@ def execute():
 					"options": "\nSubmitted\nAccepted\nRejected",
 					"insert_after": "governing_standard",
 					"depends_on": "eval:doc.governing_standard=='NEC4 ECC'",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Site Daily Report": [
 				{
@@ -52,10 +52,9 @@ def execute():
 					"options": "Stock Entry",
 					"read_only": 1,
 					"insert_after": "material_consumed_cost",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 
@@ -74,10 +73,9 @@ def execute():
 						"options": "Workflow State",
 						"hidden": 1,
 						"insert_after": "status",
-						"module": MODULE,
-					},
-				],
-			},
+						"module": MODULE
+	},
+				]},
 			update=True,
 		)
 
@@ -110,7 +108,8 @@ def _ensure_exec_number_cards():
 		filters_json = json.dumps(filters, separators=(",", ":"))
 		existing = frappe.db.get_value(
 			"Number Card",
-			{"label": label, "document_type": doctype, "function": "Count"},
+			{"label": label, "document_type": doctype, "function": "Count"
+	},
 			"name",
 		)
 		if existing:
@@ -126,8 +125,8 @@ def _ensure_exec_number_cards():
 				"filters_json": filters_json,
 				"module": MODULE,
 				"is_public": 1,
-				"show_full_number": 1,
-			}
+				"show_full_number": 1
+	}
 		).insert(ignore_permissions=True)
 
 
@@ -143,11 +142,12 @@ def _link_executive_dashboard():
 				"type": "Page",
 				"link_to": "construction-executive-dashboard",
 				"label": "Executive Dashboard",
-				"color": "Blue",
-			},
+				"color": "Blue"
+	},
 		)
 	for label, doctype, _ in EXEC_CARDS:
 		if label in labels or not frappe.db.exists("DocType", doctype):
 			continue
-		ws.append("number_cards", {"label": label, "number_card_name": label})
+		ws.append("number_cards", {"label": label, "number_card_name": label
+	})
 	ws.save(ignore_permissions=True)

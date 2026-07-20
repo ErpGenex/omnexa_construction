@@ -11,8 +11,8 @@ QUALITY_MULTIPLIERS = {
 	"Economy": 0.85,
 	"Standard": 1.0,
 	"Premium": 1.18,
-	"Luxury": 1.35,
-}
+	"Luxury": 1.35
+	}
 
 LUMP_SUM_UOMS = frozenset({"ls", "lot", "item", "no", "l.s.", "lump sum"})
 AREA_DRIVERS = frozenset({"GFA", "PLOT", "FLOORS", "UNITS"})
@@ -23,8 +23,7 @@ _ALLOWED_OPS = {
 	ast.Mult: op.mul,
 	ast.Div: op.truediv,
 	ast.Pow: op.pow,
-	ast.USub: op.neg,
-}
+	ast.USub: op.neg}
 
 
 def quality_multiplier(tier: str | None) -> float:
@@ -61,7 +60,7 @@ def build_drivers(setup) -> dict[str, float]:
 		"ROAD_KM": road_km,
 		"pipe_network_km": pipe_km,
 		"PIPE_KM": pipe_km,
-		"basement_levels": flt(setup.basement_levels),
+		"basement_levels": flt(setup.basement_levels)
 	}
 
 

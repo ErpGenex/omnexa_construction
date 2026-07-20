@@ -32,16 +32,16 @@ def execute():
 					"fieldtype": "Currency",
 					"read_only": 1,
 					"insert_after": "actual_cost",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "po_committed",
 					"label": "PO Committed",
 					"fieldtype": "Currency",
 					"read_only": 1,
 					"insert_after": "committed_cost",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Construction CDE Document": [
 				{
@@ -49,25 +49,24 @@ def execute():
 					"label": "Naming Convention",
 					"fieldtype": "Data",
 					"insert_after": "document_number",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "suitability_code",
 					"label": "Suitability Code",
 					"fieldtype": "Select",
 					"options": "S0\nS1\nS2\nS3\nS4",
 					"insert_after": "revision",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 				{
 					"fieldname": "information_container",
 					"label": "Information Container",
 					"fieldtype": "Data",
 					"insert_after": "suitability_code",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 

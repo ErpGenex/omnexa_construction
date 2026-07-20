@@ -27,7 +27,8 @@ def suggest_boq_completion_percent(project_contract: str) -> float:
 def suggest_completion_percent_from_schedule(project_contract: str, pm_wbs_task: str | None = None) -> dict:
 	"""Suggest IPC completion % using schedule progress (PM WBS) with BOQ fallback context."""
 	if not project_contract:
-		return {"suggested_percent": 0.0, "source": "none", "boq_percent": 0.0, "schedule_percent": 0.0}
+		return {"suggested_percent": 0.0, "source": "none", "boq_percent": 0.0, "schedule_percent": 0.0
+	}
 
 	boq_percent = suggest_boq_completion_percent(project_contract)
 	schedule_percent = 0.0
@@ -70,8 +71,7 @@ def suggest_completion_percent_from_schedule(project_contract: str, pm_wbs_task:
 		"suggested_percent": round(suggested, 2),
 		"source": source,
 		"boq_percent": round(boq_percent, 2),
-		"schedule_percent": round(schedule_percent, 2),
-	}
+		"schedule_percent": round(schedule_percent, 2)}
 
 
 def _prior_certified_completion_percent(

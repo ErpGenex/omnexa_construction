@@ -41,8 +41,8 @@ def execute():
 					"fieldtype": "Table",
 					"options": "Subcontract Compliance Line",
 					"insert_after": "scope_of_work",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Subcontract Payment Certificate": [
 				{
@@ -50,8 +50,8 @@ def execute():
 					"label": "Lien Waiver",
 					"fieldtype": "Attach",
 					"insert_after": "payment_reference",
-					"module": MODULE,
-				},
+					"module": MODULE
+	},
 			],
 			"Project Contract": [
 				{
@@ -60,10 +60,9 @@ def execute():
 					"fieldtype": "Check",
 					"default": "0",
 					"insert_after": "default_wht_percent",
-					"module": MODULE,
-				},
-			],
-		},
+					"module": MODULE
+	},
+			]},
 		update=True,
 	)
 
@@ -104,6 +103,7 @@ def _link_workspace():
 			continue
 		if typ == "DocType" and not frappe.db.exists("DocType", link_to):
 			continue
-		ws.append("shortcuts", {"type": typ, "link_to": link_to, "label": label, "color": "Grey"})
+		ws.append("shortcuts", {"type": typ, "link_to": link_to, "label": label, "color": "Grey"
+	})
 		existing.add(link_to)
 	ws.save(ignore_permissions=True)

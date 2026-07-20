@@ -56,7 +56,7 @@ def rollup_boq_line_from_details(setup, cost_code: str) -> dict | None:
 		"planned_cost": total,
 		"labor_cost": money(sum(flt(d.quantity) * flt(d.labor_rate) for d in details)),
 		"material_cost": money(sum(flt(d.quantity) * flt(d.material_rate) for d in details)),
-		"equipment_cost": money(sum(flt(d.quantity) * flt(d.equipment_rate) for d in details)),
+		"equipment_cost": money(sum(flt(d.quantity) * flt(d.equipment_rate) for d in details))
 	}
 
 
@@ -103,7 +103,8 @@ def recalculate_ipc_plan(setup, contract_value: float, default_retention: float)
 		row.discount_amount = out.get("discount_amount", 0)
 		row.net_amount = out["net_amount"]
 		prior_pct = cur_pct
-		summary.append({"ipc_number": row.ipc_number, "period_gross": row.period_gross, "net_amount": row.net_amount})
+		summary.append({"ipc_number": row.ipc_number, "period_gross": row.period_gross, "net_amount": row.net_amount
+	})
 	return summary
 
 
@@ -158,5 +159,5 @@ def recalculate_setup_pricing(setup) -> dict:
 		"estimated_contract_value": contract_value,
 		"boq_line_count": len([r for r in (setup.boq_lines or []) if r.include and not r.is_group]),
 		"detail_count": len(setup.boq_details or []),
-		"ipc_plan": ipc_summary,
+		"ipc_plan": ipc_summary
 	}

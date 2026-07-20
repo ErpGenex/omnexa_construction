@@ -19,7 +19,8 @@ def execute(filters=None):
 	if not contracts:
 		return _columns(), []
 
-	active = frappe.db.count("Project Contract", {**base, "status": "Active"})
+	active = frappe.db.count("Project Contract", {**base, "status": "Active"
+	})
 	claim_filters = {"docstatus": ["<", 2], "status": ["in", ["Submitted", "Under Review"]]}
 	if filters.get("company"):
 		claim_filters["company"] = filters.company
@@ -52,28 +53,28 @@ def execute(filters=None):
 		{
 			"kpi": _("Active contracts"),
 			"value": active,
-			"unit": _("count"),
-		},
+			"unit": _("count")
+	},
 		{
 			"kpi": _("Open claims"),
 			"value": claims,
-			"unit": _("count"),
-		},
+			"unit": _("count")
+	},
 		{
 			"kpi": _("BOQ overrun lines"),
 			"value": overrun_lines,
-			"unit": _("count"),
-		},
+			"unit": _("count")
+	},
 		{
 			"kpi": _("Portfolio avg CPI"),
 			"value": round(avg_cpi, 2),
-			"unit": _("index"),
-		},
+			"unit": _("index")
+	},
 		{
 			"kpi": _("IPC net billed (certified)"),
 			"value": ipc_billed,
-			"unit": _("currency"),
-		},
+			"unit": _("currency")
+	},
 	]
 	columns = _columns()
 	chart = auto_chart_for_columns(data, columns)
@@ -98,7 +99,10 @@ def _boq_scope_params(filters) -> dict:
 
 def _columns():
 	return [
-		{"label": _("KPI"), "fieldname": "kpi", "fieldtype": "Data", "width": 220},
-		{"label": _("Value"), "fieldname": "value", "fieldtype": "Float", "width": 140},
-		{"label": _("Unit"), "fieldname": "unit", "fieldtype": "Data", "width": 100},
+		{"label": _("KPI"), "fieldname": "kpi", "fieldtype": "Data", "width": 220
+	},
+		{"label": _("Value"), "fieldname": "value", "fieldtype": "Float", "width": 140
+	},
+		{"label": _("Unit"), "fieldname": "unit", "fieldtype": "Data", "width": 100
+	},
 	]

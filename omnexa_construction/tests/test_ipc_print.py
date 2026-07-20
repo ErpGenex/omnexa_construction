@@ -28,8 +28,8 @@ class TestIpcPrint(FrappeTestCase):
 				"boq_completion_percent": 40,
 				"gross_amount": 730000,
 				"retention_deduction": 50000,
-				"net_amount": 680000,
-			}
+				"net_amount": 680000
+	}
 		)
 		with patch.object(ipc, "boq_lines", []):
 			ctx = get_ipc_print_context(ipc)

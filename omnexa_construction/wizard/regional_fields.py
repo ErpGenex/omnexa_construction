@@ -25,7 +25,8 @@ def resolve_regional_cost_factor_name(
 			return raw
 		by_code = frappe.db.get_value(
 			"Regional Cost Factor",
-			{"region_code": raw.upper(), "disabled": 0, **({"company": company} if company else {})},
+			{"region_code": raw.upper(), "disabled": 0, **({"company": company} if company else {})
+	},
 			"name",
 		)
 		if by_code:
@@ -36,7 +37,8 @@ def resolve_regional_cost_factor_name(
 
 	region = (site_region or "").strip().upper()
 	if region:
-		filters: dict = {"region_code": region, "disabled": 0}
+		filters: dict = {"region_code": region, "disabled": 0
+	}
 		if company:
 			filters["company"] = company
 		name = frappe.db.get_value("Regional Cost Factor", filters, "name")

@@ -16,16 +16,23 @@ def execute(filters=None):
 	passed = sum(1 for r in rows if r.get("passed"))
 	total = len(rows) or 1
 	report_summary = [
-		{"label": _("Checklist Score"), "value": f"{int(passed / total * 100)}%", "indicator": "Blue"},
-		{"label": _("Passed"), "value": passed, "indicator": "Green"},
-		{"label": _("Gaps"), "value": total - passed, "indicator": "Red"},
+		{"label": _("Checklist Score"), "value": f"{int(passed / total * 100)
+	}%", "indicator": "Blue"
+	},
+		{"label": _("Passed"), "value": passed, "indicator": "Green"
+	},
+		{"label": _("Gaps"), "value": total - passed, "indicator": "Red"
+	},
 	]
 	return _columns(), rows, None, None, report_summary
 
 
 def _columns():
 	return [
-		{"label": _("Requirement"), "fieldname": "requirement", "fieldtype": "Data", "width": 320},
-		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 80},
-		{"label": _("Pass"), "fieldname": "passed", "fieldtype": "Check", "width": 60},
+		{"label": _("Requirement"), "fieldname": "requirement", "fieldtype": "Data", "width": 320
+	},
+		{"label": _("Status"), "fieldname": "status", "fieldtype": "Data", "width": 80
+	},
+		{"label": _("Pass"), "fieldname": "passed", "fieldtype": "Check", "width": 60
+	},
 	]
