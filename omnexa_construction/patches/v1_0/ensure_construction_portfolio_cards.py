@@ -14,12 +14,31 @@ PORTFOLIO_CARDS = [
 	("Closed contracts", "Project Contract", [["status", "=", "Closed"]]),
 ]
 
+# Additional Number Cards required by Workspace
+ADDITIONAL_CARDS = [
+	("Project Contract", "Project Contract", []),
+	("BOQ Item", "BOQ Item", []),
+	("Site Daily Report", "Site Daily Report", []),
+	("Subcontract Work Order", "Subcontract Work Order", []),
+	("Extension of Time (EOT)", "Construction Extension of Time", []),
+	("Construction Claim", "Construction Claim", []),
+	("IPC Certificate", "IPC Certificate", []),
+	("Open NCRs", "Construction NCR", [["status", "in", ["Open", "Under Review"]]]),
+	("Open HSE incidents", "Construction HSE Incident", [["status", "in", ["Open", "Reported", "Under Investigation"]]]),
+]
+
 
 def execute():
 	if not frappe.db.exists("DocType", "Number Card"):
 		return
 	for label, doctype, filters in PORTFOLIO_CARDS:
-		_upsert_number_card(label, doctype, filters)
+		if frappe.db.exists("DocType", doctype):
+			_upsert_number_card(label, doctype, filters)
+	for label, doctype, filters in ADDITIONAL_CARDS:
+		if frappe.db.exists("DocType", doctype):
+			_upsert_number_card(label, doctype, filters)
+	# Prune non-existent charts BEFORE syncing workspace to prevent LinkValidationError
+	_prune_nonexistent_charts()
 	_sync_construction_workspace_cards()
 	frappe.db.commit()
 
@@ -94,4 +113,20 @@ def _sync_construction_workspace_cards():
 	},
 		)
 	ws.content = json.dumps(content, separators=(",", ":"))
+	ws.save(ignore_permissions=True)
+
+
+def _prune_nonexistent_charts():
+	"""Remove Dashboard Chart references from Workspace if the charts don't exist."""
+	if not frappe.db.exists("Workspace", "Construction"):
+		return
+	ws = frappe.get_doc("Workspace", "Construction")
+	valid_charts = []
+	for row in ws.charts or []:
+		chart_name = row.get("chart_name") or row.get("label")
+		if chart_name and frappe.db.exists("Dashboard Chart", chart_name):
+			valid_charts.append({"chart_name": chart_name, "label": row.get("label") or chart_name})
+	ws.charts = []
+	for row in valid_charts:
+		ws.append("charts", row)
 	ws.save(ignore_permissions=True)

@@ -59,29 +59,6 @@ def execute():
 					"collapsible": 1,
 					"module": MODULE
 	},
-				{
-					"fieldname": "latitude",
-					"label": "Latitude",
-					"fieldtype": "Float",
-					"insert_after": "section_mobile",
-					"precision": "6",
-					"module": MODULE
-	},
-				{
-					"fieldname": "longitude",
-					"label": "Longitude",
-					"fieldtype": "Float",
-					"insert_after": "latitude",
-					"precision": "6",
-					"module": MODULE
-	},
-				{
-					"fieldname": "site_photo",
-					"label": "Site Photo",
-					"fieldtype": "Attach Image",
-					"insert_after": "longitude",
-					"module": MODULE
-	},
 			],
 			"Construction Work Delay Notice": [
 				{
