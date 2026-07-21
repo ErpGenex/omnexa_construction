@@ -1,0 +1,43 @@
+---
+no_breadcrumbs: 1
+full_width: 1
+no_header: 1
+---
+
+{% extends "templates/web.html" %}
+
+{% block head_include %}
+{{ super() }}
+{% endblock %}
+
+{% block title %}Omnexa Construction Programs | البرامج الإنشائية{% endblock %}
+
+{% block page_content %}
+<div class="const-site" data-page="programs">
+  <header class="const-header" id="const-header"></header>
+  <section class="const-page-hero">
+    <div class="const-wrap">
+      <span class="const-eyebrow const-eyebrow-light">Construction Excellence</span>
+      <h1>البرامج الإنشائية</h1>
+      <p>استكشف مسارات الإنشاء وإدارة المشاريع والهندسة المدنية والسلامة المهنية</p>
+    </div>
+  </section>
+  <section class="const-section">
+    <div class="const-wrap">
+      <div class="const-filter-bar" id="const-program-filters"></div>
+      <div id="const-programs-list"></div>
+    </div>
+  </section>
+  <footer class="const-footer" id="const-footer"></footer>
+</div>
+<script>
+  (function () {
+    function boot() {
+      if (window.ConstSite) window.ConstSite.init("programs");
+    }
+    if (typeof frappe !== "undefined" && frappe.ready) frappe.ready(boot);
+    else if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+    else boot();
+  })();
+</script>
+{% endblock %}

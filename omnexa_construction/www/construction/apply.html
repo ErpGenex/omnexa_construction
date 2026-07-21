@@ -1,0 +1,44 @@
+---
+no_breadcrumbs: 1
+full_width: 1
+no_header: 1
+redirect_on_login: false
+---
+
+{% extends "templates/web.html" %}
+
+{% block head_include %}
+{{ super() }}
+{% endblock %}
+
+{% block title %}Omnexa Construction Apply | التقديم الإنشائي{% endblock %}
+
+{% block page_content %}
+<div class="const-site" data-page="apply">
+  <header class="const-header" id="const-header"></header>
+  <section class="const-page-hero const-page-hero-compact">
+    <div class="const-wrap">
+      <span class="const-eyebrow const-eyebrow-light">Admissions</span>
+      <h1>التقديم الإنشائي</h1>
+      <p>ابدأ رحلتك مع برامج الإنشاء والبنية التحتية وإدارة المواقع من خلال بوابة واحدة</p>
+    </div>
+  </section>
+  <section class="const-section">
+    <div class="const-wrap const-apply-layout">
+      <aside class="const-apply-aside" id="const-apply-aside"></aside>
+      <div class="const-apply-box" id="const-apply-form-host"></div>
+    </div>
+  </section>
+  <footer class="const-footer" id="const-footer"></footer>
+</div>
+<script>
+  (function () {
+    function boot() {
+      if (window.ConstSite) window.ConstSite.init("apply");
+    }
+    if (typeof frappe !== "undefined" && frappe.ready) frappe.ready(boot);
+    else if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+    else boot();
+  })();
+</script>
+{% endblock %}

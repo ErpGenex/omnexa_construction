@@ -1,0 +1,60 @@
+---
+no_breadcrumbs: 1
+full_width: 1
+no_header: 1
+---
+
+{% extends "templates/web.html" %}
+
+{% block head_include %}
+{{ super() }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% endblock %}
+
+{% block title %}Omnexa Construction | المقاولات والبناء{% endblock %}
+
+{% block page_content %}
+<div class="const-site const-premium" data-page="home">
+  <header class="const-header" id="const-header"></header>
+  <section class="const-hero const-hero-premium" id="const-hero"></section>
+  <div class="const-value-bar" id="const-trust-strip"></div>
+  <section class="const-section const-reveal" id="const-services-section"></section>
+  <section class="const-section const-section-alt const-reveal" id="const-projects-section">
+    <div class="const-wrap">
+      <div class="const-section-title">
+        <span class="const-eyebrow">Our Projects</span>
+        <h2>مشاريعنا</h2>
+        <p>مشاريع بناء وتشييد ناجحة في مختلف القطاعات</p>
+      </div>
+      <div id="const-projects"></div>
+    </div>
+  </section>
+  <section class="const-section const-reveal" id="const-capabilities-section"></section>
+  <section class="const-stats const-reveal" id="const-stats"></section>
+  <section class="const-section const-section-alt const-reveal" id="const-process-section"></section>
+  <section class="const-section const-reveal" id="const-safety-section"></section>
+  <section class="const-section const-section-alt const-reveal">
+    <div class="const-wrap">
+      <div class="const-section-title">
+        <span class="const-eyebrow">Submit Your Project</span>
+        <h2>قدم مشروعك</h2>
+        <p>استقبل عروض المقاولات وابدأ مشروعك معنا</p>
+      </div>
+      <div id="const-submit"></div>
+    </div>
+  </section>
+  <section class="const-cta-band const-reveal" id="const-cta-band"></section>
+  <footer class="const-footer" id="const-footer"></footer>
+</div>
+<script>
+  (function () {
+    function boot() {
+      if (window.ConstSite) window.ConstSite.init("home");
+    }
+    if (typeof frappe !== "undefined" && frappe.ready) frappe.ready(boot);
+    else if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+    else boot();
+  })();
+</script>
+{% endblock %}

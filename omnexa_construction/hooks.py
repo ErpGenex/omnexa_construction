@@ -30,8 +30,34 @@ app_include_css = "/assets/omnexa_construction/css/construction_gantt_critical.c
 # app_include_js = "/assets/omnexa_construction/js/omnexa_construction.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/omnexa_construction/css/omnexa_construction.css"
-# web_include_js = "/assets/omnexa_construction/js/omnexa_construction.js"
+web_include_css = "/assets/omnexa_construction/css/const_website.css"
+web_include_js = "/assets/omnexa_construction/js/const_website.js"
+
+# Public website routes
+website_route_rules = [
+	{"from_route": "/construction", "to_route": "construction/index"}
+]
+
+# Desk portal users must land on /app/* after website login (not public marketing pages).
+get_website_user_home_page = "omnexa_construction.api.public_construction_site.get_website_user_home_page"
+
+# Registered with omnexa_experience activity website framework
+activity_website_packs = [
+	{
+		"business_activity": "Construction",
+		"app": "omnexa_construction",
+		"base_path": "/construction",
+		"site_config_api": "omnexa_construction.api.public_construction_site.get_site_config",
+		"seed_demo_method": "omnexa_construction.construction_demo.construction_demo_seed.seed_construction_demo",
+		"nav": [
+			{"key": "home", "ar": "الرئيسية", "en": "Home", "href": "/construction"
+		},
+			{"key": "services", "ar": "الخدمات", "en": "Services", "href": "/construction/services"
+		},
+			{"key": "contact", "ar": "اتصل بنا", "en": "Contact", "href": "/construction/contact", "cta": True
+		},
+		]}
+]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "omnexa_construction/public/scss/website"
@@ -42,6 +68,16 @@ app_include_css = "/assets/omnexa_construction/css/construction_gantt_critical.c
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
+
+# Website Assets
+# --------------
+web_include_css = [
+	"/assets/omnexa_construction/css/const_website.css",
+]
+
+web_include_js = [
+	"/assets/omnexa_construction/js/const_website.js",
+]
 
 # include js in doctype views
 # Company demo buttons: omnexa_core/public/js/company_demo_data_hub.js
@@ -473,6 +509,8 @@ before_request = ["omnexa_construction.license_gate.before_request"]
 
 # Authentication and authorization
 # --------------------------------
+
+extend_bootinfo = ["omnexa_construction.portal_guard.extend_bootinfo"]
 
 # auth_hooks = [
 # 	"omnexa_construction.auth.validate"
