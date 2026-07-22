@@ -39,7 +39,7 @@ website_route_rules = [
 ]
 
 # Desk portal users must land on /app/* after website login (not public marketing pages).
-get_website_user_home_page = "omnexa_construction.api.public_construction_site.get_website_user_home_page"
+# get_website_user_home_page = "omnexa_construction.api.public_construction_site.get_website_user_home_page"
 
 # Registered with omnexa_experience activity website framework
 activity_website_packs = [
@@ -47,7 +47,7 @@ activity_website_packs = [
 		"business_activity": "Construction",
 		"app": "omnexa_construction",
 		"base_path": "/construction",
-		"site_config_api": "omnexa_construction.api.public_construction_site.get_site_config",
+		# "site_config_api": "omnexa_construction.api.public_construction_site.get_site_config",
 		"seed_demo_method": "omnexa_construction.construction_demo.construction_demo_seed.seed_construction_demo",
 		"nav": [
 			{"key": "home", "ar": "الرئيسية", "en": "Home", "href": "/construction"
